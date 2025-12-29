@@ -126,7 +126,7 @@ typedef enum mtlTerritories {
     TERRITORY_MAX
 } mtlTerritories;
 
-#define MTL_TERRITORY_DEFAULT                (TERRITORY_KOREA)
+#define MTL_TERRITORY_DEFAULT                (TERRITORY_RUSSIA)
 #define MTL_TERRITORY_CURRENCY_LEN           (10)
 #define MTL_TERRITORY_NUMERIC_CHAR_LEN       (2)
 #define MTL_TERRITORY_ISO_LEN                (3)
