@@ -238,7 +238,7 @@ typedef struct iduMemClientInfo
     do {                                                                    \
         idlOS::sleep(sInterval);                                            \
         sRC = aSentence;                                                    \
-        if ( (sRC == IDE_FAILURE) && (sTimeOut > 0) ) {                     \
+        if ( (sRC == IDE_FAILURE) && (sTimeOut != NULL) ) {                 \
             sTimeOut -= sInterval; }                                        \
         else { }                                                            \
     } while( (sRC == IDE_FAILURE) && (sTimeOut < sInterval) );              \
@@ -274,7 +274,7 @@ typedef struct iduMemClientInfo
     do {                                                                    \
         idlOS::sleep(sInterval);                                            \
         sRC = aSentence;                                                    \
-        if ( (sRC == IDE_FAILURE) && (sTimeOut > 0) ) {                     \
+        if ( (sRC == IDE_FAILURE) && (sTimeOut != NULL) ) {                 \
             sTimeOut -= sInterval; }                                        \
         else { }                                                            \
     } while( (sRC == IDE_FAILURE) && (sTimeOut < sInterval) );              \
