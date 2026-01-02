@@ -12,6 +12,7 @@
 
 #include <idl.h>
 #include <ide.h>
+#include <idtContainer.h>
 
 #define IDU_DUMPSTACKS_PREFIX           "[DUMPSTACKS]"
 #define IDU_DUMPSTACKS_PREFIX_LEN       idlOS::strlen(IDU_DUMPSTACKS_PREFIX)
@@ -96,7 +97,7 @@ private:
     static PGET_MODULE_BASE_ROUTINE64           mGetModuleFunc;
 #else
 
-    static IDTHREAD SChar                       mSigAltStack[SIGSTKSZ];
+    static IDTHREAD SChar                       mSigAltStack[SIGALTSTK_SIZE];
 
 # if defined(ALTI_CFG_OS_SOLARIS)
     static int walker(uintptr_t, int, void*);
