@@ -37,7 +37,7 @@ HMODULE                             iduStack::mHModule          = NULL;
 
 #else
 
-IDTHREAD SChar                      iduStack::mSigAltStack[SIGSTKSZ];
+IDTHREAD SChar                      iduStack::mSigAltStack[SIGALTSTK_SIZE];
 
 # if defined(ALTI_CFG_OS_HPUX)
 IDL_EXTERN_C void U_STACK_TRACE(void);
