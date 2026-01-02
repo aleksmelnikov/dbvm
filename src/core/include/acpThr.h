@@ -286,7 +286,7 @@ ACP_INLINE void acpThrExit(acp_sint32_t aExitCode)
 ACP_INLINE void acpThrYield(void)
 {
 #if defined(ALTI_CFG_OS_LINUX)
-    (void)pthread_yield();
+    (void)sched_yield();
 #elif defined(ALTI_CFG_OS_TRU64)
     (void)pthread_yield_np();
 #elif defined(ALTI_CFG_OS_WINDOWS)
