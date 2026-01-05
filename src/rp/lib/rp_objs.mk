@@ -32,7 +32,7 @@ RPD_SRCS = $(RP_DIR)/rpd/rpdLogAnalyzer.cpp \
            $(RP_DIR)/rpd/rpdXLogfileFlusher.cpp \
            $(RP_DIR)/rpd/rpdXLogfileCreater.cpp 	\
 		   $(RP_DIR)/rpd/rpdLockTableManager.cpp	\
-		   ${RP_DIR}/rpd/rpdStatistics.cpp
+		   $(RP_DIR)/rpd/rpdStatistics.cpp
 
 RPS_SRCS = $(RP_DIR)/rps/rpsSmExecutor.cpp		\
 		   $(RP_DIR)/rps/rpsSQLExecutor.cpp
