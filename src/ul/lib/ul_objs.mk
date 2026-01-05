@@ -272,7 +272,7 @@ ACS_SHLIB_PATH     = $(ALTI_HOME)/lib/$(LIBPRE)acs_sl.$(SOEXT)
 #####################
 
 # LIBRARY Source File Specify
-BASE_SRCS       = $(CM_CLIEINT_SRCS)
+BASE_SRCS       = $(CM_CLIENT_SRCS)
 
 ODBCCLI_SRCS    = $(BASE_SRCS) $(UL_SRCS_CLI)
 SHARDCLI_SRCS   = $(BASE_SRCS) $(UL_SRCS_SD_CLI)
