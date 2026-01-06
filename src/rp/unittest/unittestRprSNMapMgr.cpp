@@ -28,12 +28,13 @@ acp_sint32_t main( void )
     rpdRecoveryInfo sInfo;
     acp_uint32_t    sCount;
     idBool          sIsExist;
+    idBool          aNeedLock = ID_FALSE;
 
     ACT_TEST_BEGIN();
 
     iduMutexMgr::initializeStatic( IDU_CLIENT_TYPE );
 
-    sSNMapMgr.initialize( "REP_NAME" );
+    sSNMapMgr.initialize( "REP_NAME", aNeedLock );
 
     for ( sCount = 0; sCount < 4; sCount ++ )
     {

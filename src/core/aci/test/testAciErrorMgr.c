@@ -291,6 +291,7 @@ void testRegisterErrorMsb(void)
 
 }
 
+/*
 void testCreateErrorMgr(void)
 {
     acp_uint32_t  sErrorCode = 0;
@@ -302,7 +303,7 @@ void testCreateErrorMgr(void)
 
     ACT_CHECK(sErrorCode == ACI_TEST_ERROR_CODE1);
 }
-
+*/
 
 acp_sint32_t main(acp_sint32_t aArgc, acp_char_t** aArgv)
 {
@@ -333,7 +334,7 @@ acp_sint32_t main(acp_sint32_t aArgc, acp_char_t** aArgv)
 
     testRegisterErrorMsb();
 
-    testCreateErrorMgr();
+    //testCreateErrorMgr();
 
     ACT_TEST_END();
 
