@@ -9,12 +9,11 @@ BLD_DIR = sd/unittest
 
 include $(ALTIDEV_HOME)/unittest.mk
 
-UNITTEST_TARGETS = sdSample
+UNITTEST_TARGETS = unittestsdSample
 
-sdSample_NAME = unittesdSdSample
-sdSample_SRCS = unittesdSdSample.cpp
-sdSample_LIBS = id pd
-sdSample_SHLIBS = alticore altictest
+unittestsdSample_NAME = unittestSdSample
+unittestsdSample_SRCS = unittestSdSample.cpp
+unittestsdSample_SHLIBS = alticore altictest
 
 # Run unittests one by one.
 .NOTPARALLEL: unittest_content

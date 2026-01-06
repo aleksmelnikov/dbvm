@@ -35,6 +35,7 @@ acp_sint32_t main( void )
     rpdXLog    * sPopXLog;
     smSN         sSN;
     acp_uint32_t sCount;
+    UInt         aTimeoutSec = 0;
 
     ACT_TEST_BEGIN();
 
@@ -47,7 +48,7 @@ acp_sint32_t main( void )
      */
     for ( sCount = 0; sCount < 3; sCount ++ )
     {
-        ACT_CHECK( sQueue.allocXLog( &sPushXLog[sCount] ) == ACP_RC_SUCCESS );
+        ACT_CHECK( sQueue.allocXLog( &sPushXLog[sCount], NULL ) == ACP_RC_SUCCESS );
         setXLog( sPushXLog[sCount], ( sCount+1 ) * 100 );
         sQueue.write( sPushXLog[sCount] );
     }
@@ -57,7 +58,7 @@ acp_sint32_t main( void )
     ACT_CHECK( 100 == sPopXLog->mColCnt );
 
     /* read(rpdXLog, smSN) function returns first poped XLog and last XLog's SN */
-    sQueue.read( &sPopXLog, &sSN );
+    sQueue.read( &sPopXLog, aTimeoutSec );
     ACT_CHECK( ( 200 == sPopXLog->mColCnt ) && ( 301 == sSN ) );
 
     /* XLog's free is run inside destroy function. */

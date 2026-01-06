@@ -11,10 +11,10 @@ BLD_DIR = ut/unittest
 
 include $(ALTIDEV_HOME)/unittest.mk
 
-INCLUDES += $(foreach i, isql iloader3 utm audit util, $(ALTIDEV_HOME)/ut/$(i)/include)
-INCLUDES += $(ALTIDEV_HOME)/ut/lib
+INCLUDES += $(foreach i, isql iloader3 utm audit util, -I$(ALTIDEV_HOME)/ut/$(i)/include)
+#INCLUDES += $(ALTIDEV_HOME)/ut/lib
 
-ISQL_UNITTEST_TARGETS = 
+ISQL_UNITTEST_TARGETS =
 
 ILOADER_UNITTEST_TARGETS =  utIloCommandLexer \
 							utIloCommandCompiler
@@ -34,7 +34,7 @@ utSample_SHLIBS = alticore altictest id_so pd_so
 
 utUtString_NAME = unittestUtUtString
 utUtString_SRCS = unittestUtUtString.cpp
-utUtString_SHLIBS = alticore altictest ispapi_sl odbccli_sl altiutil_sl id_so pd_so
+utUtString_SHLIBS = alticore altictest odbccli_sl altiutil_sl id_so pd_so
 
 utIloCommandLexer_NAME = unittestUtIloCommandLexer
 utIloCommandLexer_SRCS = unittestUtIloCommandLexer.cpp

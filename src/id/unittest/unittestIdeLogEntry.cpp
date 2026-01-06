@@ -31,6 +31,10 @@
 #include <idu.h>
 #include <idp.h>
 
+typedef idBool ideMsgLogStrategy;
+#define IDE_MSGLOG_STRATEGY_LOCK_FREE ID_TRUE
+#define IDE_MSGLOG_STRATEGY_APPEND ID_TRUE
+
 const acp_char_t * const TEST_FILE_NAME = "unittestIdeLogEntry.log";
 const acp_size_t         TEST_LARGE_MESSAGE_SIZE = 30 * 1024 + 17;
 
@@ -68,7 +72,7 @@ void unittestIdeSetupLog()
     ACT_CHECK( ACP_RC_IS_SUCCESS(sRC) || ACP_RC_IS_ENOENT(sRC) );
 
     /* Use a bit of short-cut to initialise the IDE_SERVER log */
-    ACT_ASSERT( IDE_SUCCESS == ideLog::getMsgLog(IDE_SERVER)->initialize(1,
+    ACT_ASSERT( IDE_SUCCESS == ideLog::getMsgLog(IDE_SERVER)->initialize(ideLogModule::IDE_SERVER /* the old value was: 1 */,
                                                                          TEST_FILE_NAME,
                                                                          1024 * 1024,
                                                                          20,

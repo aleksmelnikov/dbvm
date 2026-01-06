@@ -443,7 +443,7 @@ build: alemon
 	$(MAKE) $(S) $(DIRS) SUBDIR_TARGET=$(S)
 	$(MAKE) -C $(SM_DIR)/util all_after
 	$(MAKE) -C $(ID_DIR)/util 
-# Link shared libs after all other modules bulid
+# Link shared libs after all other modules build
 # Build shared libs only if unittesting enabled.
 ifeq ($(DO_UNITTEST), yes)
 	$(MAKE) $(S) $(SODIRS) SUBDIR_TARGET="-s link_solib"

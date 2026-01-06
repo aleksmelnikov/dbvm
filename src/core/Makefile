@@ -27,3 +27,5 @@ clean:
 		$(ALTI_HOME)/bin/utilUserName
 
 include $(MAKEFILES_DIR)/rule.mk
+
+link_solib:

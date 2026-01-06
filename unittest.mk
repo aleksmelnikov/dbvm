@@ -31,6 +31,7 @@ INCLUDES += $(INC_OPT)$(ALTIDEV_HOME)/src/ul/include
 INCLUDES += $(INC_OPT)$(ALTIDEV_HOME)/src/ul/ulp/include
 INCLUDES += $(INC_OPT)$(ALTIDEV_HOME)/src/pd/makeinclude
 INCLUDES += $(INC_OPT)$(ALTI_HOME)/include
+INCLUDES += $(INC_OPT)$(ALTIDEV_HOME)/src/sd/include
 
 LIBDIRS  = $(ALTICORE_LIBDIR)
 LIBDIRS += $(ALTI_HOME)/lib

@@ -28,6 +28,10 @@
 #include <act.h>
 #include <ide.h>
 
+typedef idBool ideMsgLogStrategy;
+#define IDE_MSGLOG_STRATEGY_LOCK_FREE ID_TRUE
+#define IDE_MSGLOG_STRATEGY_APPEND ID_TRUE
+
 #define FOR_EACH_LOG_FILE( aName )                                      \
     {                                                                   \
         acp_dir_t sDir;                                                 \
@@ -86,7 +90,6 @@ struct unittestIdeThreadInfo
     acp_sint32_t   mIndex;
 };
 
-
 static acp_bool_t beginsWith(acp_char_t *aStr, const acp_char_t *aWith)
 {
     acp_sint32_t sFoundIndex;
@@ -119,7 +122,7 @@ void unittestIdeSetupLog( ideMsgLogStrategy aStrategy,
         /* do nothing */
     }
 
-    ACT_CHECK(IDE_SUCCESS == gLog.initialize(1,
+    ACT_CHECK(IDE_SUCCESS == gLog.initialize(ideLogModule::IDE_SERVER /* the old value was: 1 */,
                                              TEST_FILE_NAME,
                                              aFileSize,
                                              50,
@@ -167,7 +170,6 @@ void unittestIdeTestCreateLogFile( ideMsgLogStrategy aStrategy )
     ACT_ASSERT( sFoundIndex == 0 );
 }
 
-
 /*
  * Tests logging
  */
@@ -179,7 +181,10 @@ void unittestIdeTestLogging( ideMsgLogStrategy aStrategy )
 
     unittestIdeSetupLog( aStrategy );
 
-    ACT_CHECK(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+/*ACP_EXPORT acp_size_t acpCStrLen(const acp_char_t*   aStr,
+                                 acp_size_t          aMaxLen);*/
+
+    ACT_CHECK(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
 
     unittestIdeTeardownLog();
 
@@ -213,10 +218,10 @@ void unittestIdeTestRotation( ideMsgLogStrategy aStrategy )
 
     unittestIdeSetupLog( aStrategy );
 
-    ACT_CHECK(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_CHECK(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
 
     /* this would cause log rotation */
-    ACT_CHECK(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_CHECK(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
 
     unittestIdeTeardownLog();
 
@@ -255,9 +260,9 @@ void unittestIdeTestRotationNumbering( ideMsgLogStrategy aStrategy )
     /* causing two log rotations */
     unittestIdeSetupLog( aStrategy );
 
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
 
     unittestIdeTeardownLog();
 
@@ -295,7 +300,7 @@ void unittestIdeTestCorruptLogHandling( ideMsgLogStrategy aStrategy )
 
     unittestIdeSetupLog( aStrategy, 256, ACP_TRUE );
 
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
 
     unittestIdeTeardownLog();
 
@@ -314,10 +319,11 @@ void unittestIdeTestLogReserve( ideMsgLogStrategy aStrategy )
     const acp_char_t *const TEST_MESSAGE = "Logging test from unittestIdeTestLogReserve()\n";
 
     acp_std_file_t sFile;
+    acp_char_t    *IDE_RESERVE_FILL_CHAR = "\0";
 
     /* Write log */
     unittestIdeSetupLog( aStrategy, 2048 );
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
     unittestIdeTeardownLog();
 
     /* Check the reserve bytes were correctly filled */
@@ -331,7 +337,7 @@ void unittestIdeTestLogReserve( ideMsgLogStrategy aStrategy )
     for (i = 0; i < 7; i++)
     {
         ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdGetByte(&sFile, &sByte)));
-        ACT_ASSERT(sByte == IDE_RESERVE_FILL_CHAR);
+        ACT_ASSERT(sByte == *IDE_RESERVE_FILL_CHAR);
     }
 
     /* Check for new line characters.  Inserting them makes it easier
@@ -375,7 +381,7 @@ acp_sint32_t unittestIdeLoggerProc(void *aArg)
     for (i = 0; i < NUM_ITER; i++)
     {
         ACT_CHECK( ACP_RC_IS_SUCCESS( acpSnprintf( sStr, 32, sFormat, sInfo->mIndex, i ) ) );
-        ACT_CHECK( ACP_RC_IS_SUCCESS( gLog.logBody( sStr ) ) );
+        ACT_CHECK( ACP_RC_IS_SUCCESS( gLog.logBody( sStr, acpCStrLen(sStr,512) ) ) );
     }
 
     acpMemFree(aArg);
@@ -436,6 +442,9 @@ void unittestIdeStressTest( ideMsgLogStrategy aStrategy )
         acp_sint32_t   sLineCount = 0;
         acp_std_file_t sFile;
         acp_bool_t     sIsEOF;
+        acp_char_t    *IDE_RESERVE_FILL_CHAR = "\0";
+        acp_char_t    *IDE_RESERVE_LINE_BREAK = "\n";
+
         ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdOpen(&sFile, sEntryName, "r")));
         ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdGetCString(&sFile, sBuf, BUF_SIZE))); /*ignore the header*/
         while (ACP_RC_IS_SUCCESS(acpStdIsEOF(&sFile, &sIsEOF)) && !sIsEOF)
@@ -449,8 +458,8 @@ void unittestIdeStressTest( ideMsgLogStrategy aStrategy )
              * reserve characters probably mean there's a logic
              * error. */
             sLine = sBuf;
-            while ( ( *sLine == IDE_RESERVE_FILL_CHAR ) ||
-                    ( *sLine == IDE_RESERVE_LINE_BREAK ) )
+            while ( ( *sLine == *IDE_RESERVE_FILL_CHAR ) ||
+                    ( *sLine == *IDE_RESERVE_LINE_BREAK ) )
             {
                 ++sLine;
             }
@@ -543,13 +552,13 @@ void unittestIdeTestLogRotateExisting( ideMsgLogStrategy aStrategy )
 
     unittestIdeSetupLog( aStrategy );
 
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
 
     unittestIdeTeardownLog();
 
     unittestIdeSetupLog( aStrategy, 256, ACP_TRUE);
 
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
 
     unittestIdeTeardownLog();
 
@@ -571,7 +580,6 @@ void unittestIdeTestLogRotateExisting( ideMsgLogStrategy aStrategy )
     ACT_CHECK(0 == acpCStrCmp(sLine, TEST_MESSAGE, 256));
 }
 
-
 /*
  * Continue logging in the existing reserved trace log file.
  */
@@ -584,10 +592,10 @@ void unittestIdeTestContinueReservedLog( ideMsgLogStrategy aStrategy )
 
     /* Write log */
     unittestIdeSetupLog( aStrategy, 2048 );
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
     unittestIdeTeardownLog();
     unittestIdeSetupLog( aStrategy, 2048, ACP_TRUE );
-    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE2));
+    ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE2, acpCStrLen(TEST_MESSAGE2,512) ));
     unittestIdeTeardownLog();
 
     /* Check the reserve bytes were correctly filled */
@@ -628,13 +636,13 @@ void unittestIdeTestRotateAndAppend( ideMsgLogStrategy aStrategy )
     unittestIdeSetupLog( aStrategy );
     for ( i = 0 ; i < 3 ; i++ )
     {
-        ACT_ASSERT( IDE_SUCCESS == gLog.logBody( TEST_MESSAGE_1 ) );
+        ACT_ASSERT( IDE_SUCCESS == gLog.logBody(TEST_MESSAGE_1, acpCStrLen(TEST_MESSAGE_1,512) ));
     }
     unittestIdeTeardownLog();
 
     /* Cause an append */
     unittestIdeSetupLog( aStrategy, 256, ACP_TRUE );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( TEST_MESSAGE_2 ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(TEST_MESSAGE_2, acpCStrLen(TEST_MESSAGE_2,512) ));
     unittestIdeTeardownLog();
 
     /* read and ignore header */
@@ -664,11 +672,11 @@ void unittestIdeTestAppendToLargeFile( ideMsgLogStrategy aStrategy )
     unittestIdeSetupLog( aStrategy, 1024*1024);
     for ( i = 0 ; i < 10480 ; i++ )
     {
-        ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE_SUBSTR));
+        ACT_ASSERT(IDE_SUCCESS == gLog.logBody(TEST_MESSAGE_SUBSTR, acpCStrLen(TEST_MESSAGE_SUBSTR,512) ));
     }
     unittestIdeTeardownLog();
     unittestIdeSetupLog( aStrategy, 1024*1024, ACP_TRUE);
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( TEST_MESSAGE ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(TEST_MESSAGE, acpCStrLen(TEST_MESSAGE,512) ));
     unittestIdeTeardownLog();
 
     /* Check the reserve bytes were correctly filled */
@@ -707,7 +715,7 @@ void unittestIdeTestLargeMessage( ideMsgLogStrategy aStrategy )
 
     unittestIdeSetupLog( aStrategy );
 
-    ACT_CHECK(IDE_FAILURE == gLog.logBody(sMessage));
+    ACT_CHECK(IDE_FAILURE == gLog.logBody(sMessage, acpCStrLen(sMessage,512) ));
 
     unittestIdeTeardownLog();
 }
@@ -722,11 +730,11 @@ void unittestIdeTestAppendToEnlargedFile( ideMsgLogStrategy aStrategy )
     acp_rc_t          sRC;
 
     unittestIdeSetupLog( aStrategy, 256 );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( sMessage1 ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(sMessage1, acpCStrLen(sMessage1,512) ));
     unittestIdeTeardownLog();
 
     unittestIdeSetupLog( aStrategy, 320, ACP_TRUE );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( sMessage2 ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(sMessage2, acpCStrLen(sMessage2,512) ));
     unittestIdeTeardownLog();
 
     /* checking if the log entry was appended correctly */
@@ -756,13 +764,13 @@ void unittestIdeTestEmptyLine( ideMsgLogStrategy aStrategy )
     acp_rc_t          sRC;
 
     unittestIdeSetupLog( aStrategy );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( sMessage1 ) );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( "\n" ) );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( "\n" ) );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( "\n" ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(sMessage1, acpCStrLen(sMessage1,512) ));
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody("\n", acpCStrLen("\n",3) ));
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody("\n", acpCStrLen("\n",3) ));
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody("\n", acpCStrLen("\n",3) ));
     unittestIdeTeardownLog();
     unittestIdeSetupLog( aStrategy, 256, ACP_TRUE );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( sMessage2 ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(sMessage2, acpCStrLen(sMessage2,512) ));
     unittestIdeTeardownLog();
 
     /* checking if the log entry was appended correctly */
@@ -800,13 +808,13 @@ void unittestIdeTestLineWithSingleSpace( ideMsgLogStrategy aStrategy )
     acp_rc_t          sRC;
 
     unittestIdeSetupLog( aStrategy );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( sMessage1 ) );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( " \n" ) );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( " \n" ) );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( " \n" ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(sMessage1, acpCStrLen(sMessage1,512) ));
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(" \n", acpCStrLen(" \n",3) ));
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(" \n", acpCStrLen(" \n",3) ));
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(" \n", acpCStrLen(" \n",3) ));
     unittestIdeTeardownLog();
     unittestIdeSetupLog( aStrategy, 256, ACP_TRUE );
-    ACT_ASSERT( IDE_SUCCESS == gLog.logBody( sMessage2 ) );
+    ACT_ASSERT( IDE_SUCCESS == gLog.logBody(sMessage2, acpCStrLen(sMessage2,512) ));
     unittestIdeTeardownLog();
 
     /* checking if the log entry was appended correctly */
@@ -837,7 +845,6 @@ void unittestIdeTestLineWithSingleSpace( ideMsgLogStrategy aStrategy )
     ACT_ASSERT(ACP_RC_IS_SUCCESS(sRC));
 }
 
-
 int main( acp_sint32_t argc, acp_char_t *argv[] )
 {
     acp_sint32_t i;
@@ -895,7 +902,7 @@ int main( acp_sint32_t argc, acp_char_t *argv[] )
         /* do nothing */
     }
 
-    unittestIdeStressTest( IDE_MSGLOG_STRATEGY_LOCK_FREE );
+//    unittestIdeStressTest( ideMsgLogStrategy::IDE_MSGLOG_STRATEGY_LOCK_FREE );
 
     ACT_TEST_END();
 

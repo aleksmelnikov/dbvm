@@ -19,7 +19,7 @@ DEFINES         += ACP_CFG_DL_EXPORT
 
 # ACI does not follow ALINT coding-rule.
 ALINT_IGNORES    = aciConv.c             	\
-                   aciaciErrorMgr.c     	\
+                   aciErrorMgr.c     	\
                    aciConvEuckr.c 			\
                    aciConvSjis.c 			\
                    aciMsgLog.c 				\
