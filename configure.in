@@ -676,7 +676,7 @@ AC_ARG_VAR([JAVA_HOME], [location of JDK (required)])
 
 # Check Java version
 AC_MSG_CHECKING([Java version])
-JAVA_VERSION=[`$JAVA_HOME/bin/java -version 2>&1 | head -n1 | sed 's%java version "\(.*\)"%\1%'`]
+JAVA_VERSION=[`$JAVA_HOME/bin/java -version 2>&1 | awk -F '"' '/version/ {print $2}'`]
 JAVA_VERSION_MAJOR=[`echo $JAVA_VERSION | cut -f1 -d'.'`]
 JAVA_VERSION_MINOR=[`echo $JAVA_VERSION | cut -f2 -d'.'`]
 AC_MSG_RESULT([$JAVA_VERSION])
@@ -684,8 +684,8 @@ AC_MSG_RESULT([$JAVA_VERSION])
 if test "$POWERPC64LE" = "1"; then
     AC_MSG_WARN("WARNING!!!!! Passing Java version check in PowerPC64 Little Endian Linux!!")
 else
-  if test \( "$JAVA_VERSION_MAJOR" -eq "1" -a "$JAVA_VERSION_MINOR" -lt "4" \) \
-    -o "$JAVA_VERSION_MINOR" -gt "5"; then
+  if test \( "$JAVA_VERSION_MAJOR" -eq "1" -a "$JAVA_VERSION_MINOR" -lt "8" \) \
+    -o "$JAVA_VERSION_MINOR" -gt "8"; then
     AC_MSG_ERROR([the version of Java in $JAVA_HOME is unsupported])
   fi
 fi
