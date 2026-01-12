@@ -421,11 +421,11 @@ SECTION = 7
 
 165, cmERR_ABORT_SSL_WRITE = SSL write failed. SSL error: <0%s>
 # *Cause: SSL write failed. 
-# *Action: Refer to the altobase_boot.log file for further information about the failure.
+# *Action: Refer to the altibase_boot.log file for further information about the failure.
 
 166, cmERR_ABORT_SSL_SHUTDOWN = SSL shutdown failed. SSL error: <0%s>
 # *Cause: SSL shutdown failed. 
-# *Action: Refer to the altobase_boot.log file for further information about the failure.
+# *Action: Refer to the altibase_boot.log file for further information about the failure.
 
 167, cmERR_ABORT_INVALID_VERIFY_LOCATION = Failed to load trusted certificates from the specified location(s). SSL error: <0%s>
 # *Cause: Failed to load trusted certificates from the specified location(s).
