@@ -104,7 +104,7 @@ ZKCResult aclZKC_connect( aclZK_Handler ** aZKHandler,   /* zookeeper handler */
              * 이런 경우를 대비해 접속에 성공했는지 테스트 해본다. */
             sResult = zoo_get( zh,
                                sTestPath,
-                               NULL,
+                               (int)NULL,
                                sTestBuffer,
                                &sTestBufferLen,
                                NULL );
@@ -210,7 +210,7 @@ ZKCResult aclZKC_getInfo( aclZK_Handler * aZKHandler,   /* zookeeper handler */
 
     sResult = zoo_get( aZKHandler,   /* zookeeper handler */
                        aPath,        /* 데이터를 가져올 path */
-                       NULL,         /* watch */
+                       (int)NULL,         /* watch */
                        aBuffer,      /* 가져올 데이터를 저장할 버퍼 */
                        aDataLen,     /* 가져온 데이터의 길이 */
                        NULL );       /* 통계 */
@@ -234,7 +234,7 @@ ZKCResult aclZKC_getChildren( aclZK_Handler * aZKHandler, /* zookeeper handler *
 
     sResult = zoo_get_children( aZKHandler, /* zookeeper handler */
                                 aPath,      /* 자식 노드를 가져올 노드의 path */
-                                NULL,       /* watch */
+                                (int)NULL,       /* watch */
                                 aBuffer );  /* 가져온 자식을 보관할 공간(string vector) */ 
 
     return aclZKC_result( sResult );
