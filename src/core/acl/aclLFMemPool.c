@@ -456,7 +456,7 @@ ACP_INLINE acp_rc_t aclLFMemPoolChunkFreeSegment(void* aChunk)
 
 ACP_EXPORT acp_rc_t aclLFMemPoolCreate(acl_lockfree_mempool_t *aMemPool,
                                        aclLFMemPoolTypes      aType,
-                                       acp_uint32_t           aBlockSize,
+                                       acp_size_t             aBlockSize,
                                        acp_uint32_t           aEmptyHighLimit,
                                        acp_uint32_t           aEmptyLowLimit,
                                        acp_uint32_t           aSegmentChunks)

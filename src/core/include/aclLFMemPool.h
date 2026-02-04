@@ -24,6 +24,8 @@
 #include <acp.h>
 #include <aclSafeList.h>
 
+ACP_EXTERN_C_BEGIN
+
 #define ACL_LOCKFREE_MEMPOOL_FULLCHUNK      acpByteOrderTON8(0xFFFFFFFFFFFFFFFF)
 #define ACL_LOCKFREE_MEMPOOL_ONELSB         acpByteOrderTON8(0x0000000000000001)
 #define ACL_LOCKFREE_MEMPOOL_EMPTYCHUNK     acpByteOrderTON8(0x8000000000000000)
@@ -66,5 +68,20 @@ typedef enum aclLFMemPoolAllocResults {
     ACL_LOCKFREE_MEMPOOL_FULL,
     ACL_LOCKFREE_MEMPOOL_EMPTY
 } aclLFMemPoolAllocResults;
+
+ACP_EXPORT acp_rc_t aclLFMemPoolCreate(acl_lockfree_mempool_t *aMemPool,
+                                       aclLFMemPoolTypes      aType,
+                                       acp_size_t             aBlockSize,
+                                       acp_uint32_t           aEmptyHighLimit,
+                                       acp_uint32_t           aEmptyLowLimit,
+                                       acp_uint32_t           aSegmentChunks);
+
+ACP_EXPORT acp_rc_t aclLFMemPoolFree(acl_lockfree_mempool_t *aMemPool, void *aPtr);
+
+ACP_EXPORT acp_rc_t aclLFMemPoolAlloc(acl_lockfree_mempool_t *aMemPool, void **aPtr);
+
+ACP_EXPORT acp_rc_t aclLFMemPoolDestroy(acl_lockfree_mempool_t *aMemPool);
+
+ACP_EXTERN_C_END
 
 #endif //_O_ACL_LFMEMPOOL_H_
