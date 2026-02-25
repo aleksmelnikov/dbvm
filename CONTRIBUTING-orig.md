@@ -1,3 +1,5 @@
+**FORK NOTICE (DBVM Project): This file is preserved for historical purposes only. The original Altibase policies (including geographic or commercial restrictions) are INCONSISTENT with Sections 7 and 10 of the GNU AGPLv3. Therefore, they are NOT APPLICABLE to the DBVM project, which is governed strictly by the standard GNU AGPLv3 / LGPLv3 licenses.**
+
 # Altibase OPEN SOURCE COMMUNITY
 
 We welcome your participation in our open source community.

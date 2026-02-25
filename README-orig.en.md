@@ -1,6 +1,4 @@
-[English](README.md) | [Russian](README.ru.md)
-
-[English-orig](README-orig.en.md)
+**FORK NOTICE (DBVM PROJECT): This file is preserved for historical purposes only.**
 
 ### Altibase: Enterprise grade High performance Relational DBMS
 - Enterprise grade: 20 years of experience in servicing over 600 global enterprise clients including Samsung, HP, E-Trade, China Mobile and more. (Ref: http://altibase.com/product/enterprise-grade-database/ )
