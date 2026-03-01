@@ -640,7 +640,7 @@ PKG_NATC_MAP=pkg_natc.map
 PKG_EXE="$(TOOL_DIR)/altipkg/altipkg$(BINEXT)"
 VALUEPACK_NAME=Altibase_Client_$(PKG_VERSION_INFO)_Value_Package
 INSTALLBUILDER_DIR=$(DEV_DIR)/ut/Installer
-ALTI_PKG_IB_XML_NAME_VP=clientValuepack.xml
+ALTI_PKG_IB_XML_NAME_VP=./ut/Installer/clientValuepack.xml
 
 # ifeq ($(CROSS_COMPILE),)
 # PKG_VERSION_INFO=$(shell $(GENERRMSG) -k)
@@ -938,32 +938,32 @@ unoff_pkg_client: altibase_env.mk manual
 	$(MAKE) -f Makefile pkgcreat ALTI_PKG_TYPE="CLIENT" ALTI_PKG_NAME="$(UNOFFICIAL_CLIENT_DIST_NAME)" WORK_DIR=$(CLIENT_DIST_DIR)
 
 diag_pkg_server_ib:
-	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=serverPatchInstall.xml BUILD_MODE_DIAG=DIAGNOSTIC PKG_TAGSET_NAME=$(PGM_TAGSET_VER) PKG_TAG_NAME=$(PGM_TAG_VER)
+	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=./ut/Installer/serverPatchInstall.xml BUILD_MODE_DIAG=DIAGNOSTIC PKG_TAGSET_NAME=$(PGM_TAGSET_VER) PKG_TAG_NAME=$(PGM_TAG_VER)
 
 diag_pkg_client_ib:
-	$(MAKE) pkg_client_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=clientPatchInstall.xml BUILD_MODE_DIAG=DIAGNOSTIC PKG_TAGSET_NAME=$(PGM_TAGSET_VER) PKG_TAG_NAME=$(PGM_TAG_VER)
+	$(MAKE) pkg_client_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=./ut/Installer/clientPatchInstall.xml BUILD_MODE_DIAG=DIAGNOSTIC PKG_TAGSET_NAME=$(PGM_TAGSET_VER) PKG_TAG_NAME=$(PGM_TAG_VER)
 
 pkg_server_ib:
-	$(MAKE) pkg_server ALTI_PKG_IB=yes  ALTI_PKG_IB_XML_NAME=serverInstall.xml
+	$(MAKE) pkg_server ALTI_PKG_IB=yes  ALTI_PKG_IB_XML_NAME=./ut/Installer/serverInstall.xml
 
 
 pkg_client_ib: 
-	$(MAKE) pkg_client ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=clientInstall.xml
+	$(MAKE) pkg_client ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=./ut/Installer/clientInstall.xml
 
 pkg_server_patch_ib:  
-	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=serverPatchInstall.xml
+	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=./ut/Installer/serverPatchInstall.xml
 	$(MAKE) -f Makefile additional_files_checksum CHECKSUM_FILE_NAME="$(OFFICIAL_SERVER_DIST_NAME)"
 
 pkg_client_patch_ib: 
-	$(MAKE) pkg_client_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=clientPatchInstall.xml
+	$(MAKE) pkg_client_patch ALTI_PKG_IB=yes ALTI_PKG_IB_XML_NAME=./ut/Installer/clientPatchInstall.xml
 	$(MAKE) -f Makefile additional_files_checksum CHECKSUM_FILE_NAME="$(OFFICIAL_CLIENT_DIST_NAME)"
 
 pkg_server_community_edition_ib:
-	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_CFG_EDITION=COMMUNITY ALTI_PKG_IB_XML_NAME=serverCommunityEditionInstall.xml
+	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_CFG_EDITION=COMMUNITY ALTI_PKG_IB_XML_NAME=./ut/Installer/serverCommunityEditionInstall.xml
 	$(MAKE) -f Makefile additional_files_checksum CHECKSUM_FILE_NAME="$(COMMUNITY_SERVER_DIST_NAME)"
 
 pkg_server_open_edition_ib:
-	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_CFG_EDITION=OPEN ALTI_PKG_IB_XML_NAME=serverOpenEditionInstall.xml
+	$(MAKE) pkg_server_patch ALTI_PKG_IB=yes ALTI_CFG_EDITION=OPEN ALTI_PKG_IB_XML_NAME=./ut/Installer/serverOpenEditionInstall.xml
 	$(MAKE) -f Makefile additional_files_checksum CHECKSUM_FILE_NAME="$(OPEN_SERVER_DIST_NAME)"
 
 pkg_valuepack: altibase_env.mk
