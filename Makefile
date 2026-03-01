@@ -1021,7 +1021,8 @@ pktest:
 	@echo $(RELEASE_CLIENT_DIST_NAME);
 
 betarelease:
-	sh add_revisioninfo.sh
+	@# Generate build-specific version info from Git
+	@./Makefile.git_version.sh
 	$(Q) cd $(DEV_DIR); $(CONFIGURE)  --with-build_mode=release
 	$(MAKE) build_all
 
