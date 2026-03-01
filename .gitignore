@@ -1,1 +1,12 @@
-/ut/adapter/src/lib/powerlinux64_lib/libociei.so
+target/
+
+*.o
+*.obj
+*.so
+*.a
+*.lib
+*.dll
+*.dylib
+
+.vscode/
+.idea/
