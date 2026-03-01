@@ -28,4 +28,6 @@ Key features of DBVM (Altibase CE):
 
     > While the project's source code is available under the licenses listed above, ready-to-use binary distributions are provided on a paid basis. Please contact us via email to inquire about terms and conditions.
 
-**Note**: Original and deprecated documentation has been relocated to `*-orig*` files for historical reference.
+--
+
+*Note: Historical README from the original project can be found in [README-orig.md](docs/legacy/README-orig.md) for reference only.*
