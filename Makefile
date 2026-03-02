@@ -668,7 +668,10 @@ PKG_VERSION_INFO="$(PGM_MAJOR_VER).$(PGM_MINOR_VER).$(PGM_TERM_VER)"
 PKG_VERSION_INFO_PKGNAME="$(PGM_MAJOR_VER)_$(PGM_MINOR_VER)_$(PGM_TERM_VER)"
 PKG_FULL_VERSION_INFO="$(PKG_VERSION_INFO).$(PGM_TAGSET_VER).$(PGM_TAG_VER)"
 
-SVN_REPOSITORY=$(shell svn info | grep URL |awk -F'/' '{print "/"$$4"/"$$5"/"$$6}')
+# Get the remote Git repository URL with standard locale
+GIT_REPOSITORY=$(shell LC_ALL=C git remote get-url github 2>/dev/null || echo "unknown")
+# Get the short hash and check for uncommitted changes (-dirty flag)
+GIT_REV=$(shell LC_ALL=C git describe --always --dirty 2>/dev/null || echo "unknown")
 
 ifeq "$(OS_TARGET)" "POWERPC64LE_LINUX"
     ALTI_CFG_CPU:="$(ALTI_CFG_CPU)LE"
@@ -712,7 +715,7 @@ SERVER_DIST_DIR_PATCH=$(SERVER_DIST_DIR)_patch
 CLIENT_DIST_DIR_PATCH=$(CLIENT_DIST_DIR)_patch
 
 PATCH_DIR=$(WORK_DIR)/APatch
-PATCH_SVN_BUGINFO_FILE=$(PATCH_DIR)/pkg_patch_$(FROM_PKG_TAGSET_NAME)_$(FROM_PKG_TAG_NAME)_$(PKG_TAGSET_NAME)_$(PKG_TAG_NAME).txt
+PATCH_GIT_BUGINFO_FILE=$(PATCH_DIR)/pkg_patch_$(FROM_PKG_TAGSET_NAME)_$(FROM_PKG_TAG_NAME)_$(PKG_TAGSET_NAME)_$(PKG_TAG_NAME).txt
 
 INSTALL_BUILDER=builder
 
@@ -749,9 +752,11 @@ pkgdist:
 # bug-24436: add .net driver to package when vc >= 8(MSC_VER:14)
 	"$(TOOL_DIR)/altipkg/altipkg$(BINEXT)" -m "$(PKG_MAP)" -r "$(WORK_DIR)" -d $(DIST_ALL_ARG)
 
-	echo "Repository: $(SVN_REPOSITORY)" >$(PATCH_SVN_BUGINFO_FILE) 
-	echo $(PKG_REVISION_INFO) >>$(PATCH_SVN_BUGINFO_FILE);
-	LC_ALL=C svn info | grep "Last Changed Rev" >>$(PATCH_SVN_BUGINFO_FILE);
+	@mkdir -p $(PATCH_DIR)
+	@echo "Repository: $(GIT_REPOSITORY)" > $(PATCH_GIT_BUGINFO_FILE)
+	@echo "$(PKG_REVISION_INFO)" >> $(PATCH_GIT_BUGINFO_FILE)
+	@echo "Revision: $(GIT_REV)" >> $(PATCH_GIT_BUGINFO_FILE)
+	@echo "Info saved to $(PATCH_GIT_BUGINFO_FILE)"
 
 	$(MAKE) patch_Info;
 	$(MAKE) platform_Info
@@ -761,9 +766,11 @@ pkgdist_patch:
 
 	"$(TOOL_DIR)/altipkg/altipkg$(BINEXT)" -m "$(PKG_MAP)" -r "$(WORK_DIR)" -d $(DIST_ALL_ARG)
 
-	echo "Repository: $(SVN_REPOSITORY)" >$(PATCH_SVN_BUGINFO_FILE)
-	echo $(PKG_REVISION_INFO) >>$(PATCH_SVN_BUGINFO_FILE);
-	LC_ALL=C svn info | grep "Last Changed Rev" >>$(PATCH_SVN_BUGINFO_FILE);
+	@mkdir -p $(PATCH_DIR)
+	@echo "Repository: $(GIT_REPOSITORY)" > $(PATCH_GIT_BUGINFO_FILE)
+	@echo "$(PKG_REVISION_INFO)" >> $(PATCH_GIT_BUGINFO_FILE)
+	@echo "Revision: $(GIT_REV)" >> $(PATCH_GIT_BUGINFO_FILE)
+	@echo "Info saved to $(PATCH_GIT_BUGINFO_FILE)"
 
 	$(MAKE) patch_Info
 	$(MAKE) platform_Info
