@@ -471,6 +471,7 @@ clean:
 	$(MAKE) $(S) $(DIRS) SUBDIR_TARGET=clean
 	$(RM) $(ALTI_HOME)/lib/*.$(LIBEXT)
 	$(RM) $(ALTI_HOME)/lib/*.$(SOEXT)
+	$(RM) $(ALTI_HOME)/lib/*.$(OBJEXT)
 	$(RM) $(ALTI_HOME)/lib/*.jar
 	$(RM) $(ALTI_HOME)/msg/*.msb
 	$(RM) $(ALTI_HOME)/msg/*.ban
