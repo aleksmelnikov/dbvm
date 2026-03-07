@@ -1,4 +1,6 @@
-target/
+/target/
+/altibase_home/bin/
+/altibase_home/lib/
 
 *.o
 *.obj
