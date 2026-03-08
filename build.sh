@@ -37,7 +37,7 @@ export CPATH=${dep_install_directory}/include:${CPATH}
 
 # Database build environment (Java check)
 command -v javac >/dev/null 2>&1 || { echo "Error: javac not found in PATH"; exit 1; }
-export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(command -v javac))))
 export ADAPTER_JAVA_HOME=${JAVA_HOME}
 export ALTIDEV_HOME=${current_directory}
 export ALTIBASE_DEV=${ALTIDEV_HOME}
