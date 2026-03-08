@@ -1,27 +1,27 @@
 # Commit Message Convention
 
-Follow this format for all commit messages:
+Сommit message format:
 `<type>(<scope>): <subject> -- <file_or_folder>`
 
 ### Types
+- **build**: Changes that affect the build system or external deps.
+- **chore**: Routine tasks, maintenance, or tool updates.
+- **ci**: Changes to CI configuration files and scripts.
+- **docs**: Documentation only changes.
 - **feat**: A new feature for the user.
 - **fix**: A bug fix or resource leak fix.
-- **refact**: Code change that neither fixes a bug nor adds a feature.
-- **chore**: Routine tasks, maintenance, or tool updates.
-- **docs**: Documentation only changes.
-- **style**: Changes that do not affect the meaning of the code.
+- **init**: Initial commit or project initialization.
 - **perf**: A code change that improves performance or memory usage.
-- **test**: Adding missing tests or correcting existing tests.
-- **build**: Changes that affect the build system or external deps.
-- **ci**: Changes to CI configuration files and scripts.
+- **refact**: Code change that neither fixes a bug nor adds a feature.
 - **revert**: Reverts a previous commit.
 - **sec**: Security-related fixes or improvements.
-- **init**: Initial commit or project initialization.
+- **style**: Changes that do not affect the meaning of the code.
+- **test**: Adding missing tests or correcting existing tests.
 
 ### Formatting Rules
 - **Scope** (optional): Logical module or area (e.g., `network`, `api`).
 - **Subject**: Brief description of the changes in imperative mood.
-- **File/Folder** (optional): Names of the 1 or 2 most important files or the directory name after ` -- `.
+- **File/Folder** (optional): Mention 1-2 key files or the folder name after ` -- `.
 
 ### Examples
 - `feat: add command line arguments support -- main.cpp`
