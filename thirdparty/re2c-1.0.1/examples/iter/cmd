@@ -1,0 +1,1 @@
+./re2c -iT iter_prefix_tree.re -o iter.c -W && g++ iter.c -O2 -Wall -o iter && ./iter "a=b;c=;d=eeeee;"
