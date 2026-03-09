@@ -13,6 +13,12 @@ DBVM - это универсальная реляционная СУБД, соз
 
 > Донаты приветствуются на ETH `0x176080a4074AAf0792d32cA8eE94777070668C7E`, BTC `bc1qlk93dac9q23uk09vzmfa5204a5jc3wdcy6cf3k`, SOL `8dXF6kNCWf4KPSP3J49i4KNz4SgypPJ4Zbmd1xrxq3xN`.
 
+
+Установка из исходного кода
+===========================
+* **Fedora**: Инструкция по сборке в файле [INSTALL.Fedora.md](INSTALL.Fedora.md).
+
+
 Лицензия
 ========
 
