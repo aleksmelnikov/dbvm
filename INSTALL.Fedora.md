@@ -52,7 +52,7 @@ Build artifacts will be located in the `dbvm/altibase_home` directory.
 Running the Database
 --------------------
 
-Setup up the environment:
+Set up the environment:
 ```bash
 source ./dbenv.sh
 ```
