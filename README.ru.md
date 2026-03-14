@@ -1,7 +1,10 @@
-[English](README.md) | [Russian](README.ru.md)
+<p align="center">
+  <img src="docs/dbvm-logo.png" alt="Logo">
+</p>
 
-dbvm
-====
+> ⭐ Звёзды = мотивация делать больше и лучше. Спасибо!
+
+На других языках: [English](README.md) | [Russian](README.ru.md)
 
 DBVM - это универсальная реляционная СУБД, созданная как полноценная замена Altibase Community Edition. Проект сочетает в себе проверенную временем архитектуру с современными улучшениями.
 

@@ -1,7 +1,10 @@
-[English](README.md) | [Russian](README.ru.md)
+<p align="center">
+  <img src="docs/dbvm-logo.png" alt="Logo">
+</p>
 
-dbvm
-====
+> ⭐ Stars = motivation to do more and better. Thank you!
+
+Other languages: [English](README.md) | [Russian](README.ru.md)
 
 DBVM is a general-purpose relational DBMS designed as a drop-in-replacement for Altibase Community Edition. The project combines a reliable architecture with modern improvements.
 
