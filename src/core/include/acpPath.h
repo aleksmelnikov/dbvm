@@ -110,7 +110,7 @@ ACP_INLINE acp_char_t *acpPathMake(acp_char_t      *aStr,
                                    acp_sint32_t     aLength,
                                    acp_bool_t       aChangeDirSep)
 {
-    if ((aStr[aLocation + aLength] == '\0')
+    if (aStr[aLocation + aLength] == '\0'
 #if defined(ALTI_CFG_OS_WINDOWS)
         && (aChangeDirSep == ACP_FALSE)
 #endif
@@ -150,7 +150,9 @@ ACP_INLINE acp_char_t *acpPathMake(acp_char_t      *aStr,
                 /* do nothing */
             }
 #else
-            aChangeDirSep = aChangeDirSep;
+            /* This parameter is used only on Windows for directory separator conversion.
+               Cast to void to suppress 'unused parameter' and 'self-assign' warnings on other OS. */
+            (void)aChangeDirSep;
 #endif
         }
         else
