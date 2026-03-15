@@ -1962,7 +1962,7 @@ IDE_RC mtf::checkNeedFilter4Like( mtcTemplate * aTmplate,
         else
         {
             // escape 문자를 지정하지 않은 경우
-            sEscape = '\0';
+            sEscape = NULL;
 
             sNullEscape = ID_TRUE;
         }

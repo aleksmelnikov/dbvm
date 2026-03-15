@@ -13755,7 +13755,7 @@ IDE_RC mtfLikeCalculate4EcharMBNormal( mtcNode*     aNode,
     UChar           * sFormatPrev = NULL;
     UChar           * sFormatIntermediate;
     UChar           * sFormatFence;
-    UChar           * sEscape = '\0';
+    UChar           * sEscape = NULL;
     idBool            sNullEscape;
     idBool            sEqual;
     idBool            sEqual1;
