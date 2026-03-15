@@ -339,7 +339,7 @@ IDE_RC  sdpstSH::addNewExtDirPage( sdrMtx    * aMtx,
 
     IDE_ASSERT( aMtx              != NULL );
     IDE_ASSERT( aSegHdrPagePtr    != NULL );
-    IDE_ASSERT( aNewExtDirPagePtr != SD_NULL_PID );
+    IDE_ASSERT( aNewExtDirPagePtr != NULL );
 
     sSegHdr     = getHdrPtr( aSegHdrPagePtr );
     sPhyPageHdr = sdpPhyPage::getHdr( aNewExtDirPagePtr );
