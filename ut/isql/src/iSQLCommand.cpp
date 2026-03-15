@@ -492,8 +492,8 @@ void
 iSQLCommand::SetChangeCommand( SChar * a_ChangeCommand )
 {
     SChar  tmp[WORD_LEN];
-    SChar *pos1 = '\0';
-    SChar *pos2 = '\0';
+    SChar *pos1 = NULL;
+    SChar *pos2 = NULL;
 
     idlOS::strcpy(tmp, a_ChangeCommand);
     pos1 = idlOS::strchr(tmp, '/');
