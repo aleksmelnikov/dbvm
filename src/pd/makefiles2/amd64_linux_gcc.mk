@@ -72,7 +72,7 @@ EOPT		= -E -D_POSIX_PTHREAD_SEMANTICS
 SOPT		= -S -D_POSIX_PTHREAD_SEMANTICS 
 
 # add --no-as-needed if gcc above 4.6
-LOPT = -Wl,-relax $(GCC_LD_OPTIONS) -L. 
+LOPT = -Wl,--relax $(GCC_LD_OPTIONS) -L.
 
 AOPT            =
 DEFINES		= -D_REENTRANT
