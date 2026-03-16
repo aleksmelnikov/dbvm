@@ -28,7 +28,7 @@ CFLAGS  += -W -Wall -pipe \
            -D_POSIX_PTHREAD_SEMANTICS -D_POSIX_THREADS -D_POSIX_THREAD_SAFE_FUNCTIONS -D_REENTRANT \
            $(PLATFORM_AIO_SUPPORT)
 CFLAGS  += -m64 -mtune=k8 -Wno-implicit-fallthrough
-CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated -Wno-narrowing -fpermissive -Wno-deprecated-declarations -Wno-reserved-user-defined-literal
+CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated -Wno-narrowing -fpermissive -Wno-deprecated-declarations -Wno-reserved-user-defined-literal -Wno-register
 DCFLAGS += -g -DDEBUG
 DCCFLAGS += -g -DDEBUG
 BCFLAGS += -g
