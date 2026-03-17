@@ -9459,7 +9459,12 @@ PDL_OS::write (PDL_HANDLE handle, const void *buf, size_t nbyte,
                PDL_OVERLAPPED *overlapped)
 {
   PDL_TRACE ("PDL_OS::write");
-  overlapped = overlapped;
+
+  /* This parameter is used only on Windows.
+     Cast to void to suppress 'unused parameter' and 'self-assign' warnings
+     on other platforms. */
+  /* overlapped = overlapped; */
+  (void)overlapped;
 
 #if defined (PDL_WIN32)
   DWORD bytes_written; // This is set to 0 byte WriteFile.
@@ -9538,7 +9543,13 @@ PDL_OS::read (PDL_HANDLE handle, void *buf, size_t len,
               PDL_OVERLAPPED *overlapped)
 {
     PDL_TRACE ("PDL_OS::read");
-    overlapped = overlapped;
+
+    /* This parameter is used only on Windows.
+     Cast to void to suppress 'unused parameter' and 'self-assign' warnings
+     on other platforms. */
+    /* overlapped = overlapped; */
+    (void)overlapped;
+
 #if defined (PDL_WIN32)
     DWORD ok_len;
     DWORD short_len = PDL_static_cast (DWORD, len);
