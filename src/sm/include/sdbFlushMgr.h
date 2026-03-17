@@ -42,9 +42,9 @@ typedef enum
     SDB_FLUSH_JOB_DBOBJECT_FLUSH
 } sdbFlushJobType;
 
-typedef struct sdbLRUList sdbLRUList;
-typedef struct sdbFlushList sdbFlushList;
-typedef struct sdbCPListSet sdbCPListSet;
+class sdbLRUList;
+class sdbFlushList;
+class sdbCPListSet;
 
 // replace flush를 위해 필요한 자료구조
 typedef struct sdbReplaceFlushJobParam
