@@ -24,7 +24,7 @@
 #include <mmcDef.h>
 #include <sdi.h>
 
-class mmcTransObj;
+struct mmcTransObj;
 class mmcSession;
 
 class mmcTransManager

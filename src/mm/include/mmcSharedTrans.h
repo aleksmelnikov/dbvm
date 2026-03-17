@@ -23,7 +23,7 @@
 #include <iduLatch.h>
 #include <iduList.h>
 
-class mmcTransObj;
+struct mmcTransObj;
 class mmcSession;
 class mmcTransPrivateInfo;
 

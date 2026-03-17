@@ -21,7 +21,7 @@
 #include <ide.h>
 #include <idu.h>
 
-class mmcTransObj;
+struct mmcTransObj;
 class mmcSession;
 
 class mmcNonSharedTrans
