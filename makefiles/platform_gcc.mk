@@ -291,7 +291,7 @@ else ifeq ($(ALTI_CFG_OS),HPUX)
 else ifeq ($(ALTI_CFG_OS),LINUX)
   DEFINES_M32 += _FILE_OFFSET_BITS=64
   DEFINES     += _GNU_SOURCE
-  CC_FLAGS	  += -rdynamic
+  CC_FLAGS    +=
   SO_FLAGS    += -rdynamic
   LD_LIBS     += -lpthread -ldl -rdynamic
   SO_LIBS     += -lpthread -ldl
@@ -299,7 +299,7 @@ else ifeq ($(ALTI_CFG_OS),LINUX)
 else ifeq ($(ALTI_CFG_OS),FREEBSD)   
   DEFINES_M32 += _FILE_OFFSET_BITS=64
   DEFINES     += _GNU_SOURCE
-  CC_FLAGS        += -rdynamic
+  CC_FLAGS    +=
   SO_FLAGS    += -rdynamic
   LD_LIBS     += -lpthread -rdynamic
   SO_LIBS     += -lpthread        
@@ -308,7 +308,7 @@ else ifeq ($(ALTI_CFG_OS),FREEBSD)
 ################ MAX ####################
 else ifeq ($(ALTI_CFG_OS),DARWIN)
   DEFINES     += _XOPEN_SOURCE
-  CC_FLAGS    += -rdynamic
+  CC_FLAGS    +=
   # TASK-5309
   # flat_namespace option makes linker resolve symols dynamically
   SO_FLAGS    += -dynamiclib -static-libgcc -flat_namespace

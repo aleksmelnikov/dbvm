@@ -235,7 +235,7 @@ ifeq ($(ALTI_CFG_OS),AIX)
 else ifeq ($(ALTI_CFG_OS),LINUX)
   DEFINES_M32 += _FILE_OFFSET_BITS=64
   DEFINES     += _GNU_SOURCE
-  CC_FLAGS	  += -rdynamic
+  CC_FLAGS    +=
   SO_FLAGS    += -rdynamic
   LD_LIBS     += -lpthread -ldl -rdynamic
   SO_LIBS     += -lpthread -ldl
