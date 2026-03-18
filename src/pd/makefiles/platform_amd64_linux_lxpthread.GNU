@@ -27,8 +27,30 @@ CXX     = g++
 CFLAGS  += -W -Wall -pipe \
            -D_POSIX_PTHREAD_SEMANTICS -D_POSIX_THREADS -D_POSIX_THREAD_SAFE_FUNCTIONS -D_REENTRANT \
            $(PLATFORM_AIO_SUPPORT)
-CFLAGS  += -m64 -mtune=k8 -Wno-implicit-fallthrough
-CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated -Wno-narrowing -fpermissive -Wno-deprecated-declarations -Wno-reserved-user-defined-literal -Wno-register
+CFLAGS  += -m64 -mtune=k8
+CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES)
+
+###  Backward compatibility flags for new C/C++ compiler stardards ###
+C_BACKWARD_FLAGS = -Wno-implicit-fallthrough
+CXX_BACKWARD_FLAGS = -Wno-deprecated \
+                     -Wno-narrowing \
+                     -fpermissive \
+                     -Wno-deprecated-declarations \
+                     -Wno-register
+# Set compiler-specific flag for literal suffixes
+COMPILER := $(shell $(CXX) --version | grep --ignore-case --quiet clang && echo clang || echo gcc)
+ifeq ($(COMPILER),gcc)
+    # for GCC
+    CXX_BACKWARD_FLAGS += -Wno-literal-suffix
+else
+    # for Clang
+    CXX_BACKWARD_FLAGS += -Wno-reserved-user-defined-literal
+endif
+
+CFLAGS  += $(C_BACKWARD_FLAGS)
+CCFLAGS += $(CXX_BACKWARD_FLAGS)
+###  Backward compatibility flags for new C/C++ compiler stardards ###
+
 DCFLAGS += -g -DDEBUG
 DCCFLAGS += -g -DDEBUG
 BCFLAGS += -g
