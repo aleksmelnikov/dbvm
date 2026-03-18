@@ -30,7 +30,7 @@ CFLAGS  += -W -Wall -pipe \
 CFLAGS  += -m64 -mtune=k8
 CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES)
 
-###  Backward compatibility flags for new C/C++ compiler stardards ###
+###  Backward compatibility flags for new C/C++ compiler standards ###
 C_BACKWARD_FLAGS = -Wno-implicit-fallthrough
 CXX_BACKWARD_FLAGS = -Wno-deprecated \
                      -Wno-narrowing \
@@ -49,7 +49,7 @@ endif
 
 CFLAGS  += $(C_BACKWARD_FLAGS)
 CCFLAGS += $(CXX_BACKWARD_FLAGS)
-###  Backward compatibility flags for new C/C++ compiler stardards ###
+###  Backward compatibility flags for new C/C++ compiler standards ###
 
 DCFLAGS += -g -DDEBUG
 DCCFLAGS += -g -DDEBUG
