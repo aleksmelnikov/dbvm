@@ -501,19 +501,25 @@ iSQLCommand::SetChangeCommand( SChar * a_ChangeCommand )
     {
         *pos1 = '\0';
         SetChangeNo(tmp);
-        pos2 = idlOS::strchr(pos1+1, '/');
-    }
 
-    if (pos2 != NULL)
-    {
-        *pos2 = '\0';
-        SetNewStr(pos2+1);
-        SetOldStr(pos1+1);
+        pos2 = idlOS::strchr(pos1+1, '/');
+        if (pos2 != NULL)
+        {
+            *pos2 = '\0';
+            SetOldStr(pos1+1);
+            SetNewStr(pos2+1);
+        }
+        else
+        {
+            SetOldStr(pos1+1);
+            SetNewStr(NULL);
+        }
     }
     else
     {
-        SetNewStr(pos2);
-        SetOldStr(pos1+1);
+        SetChangeNo(tmp);
+        SetOldStr(NULL);
+        SetNewStr(NULL);
     }
 }
 
