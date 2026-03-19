@@ -16,7 +16,7 @@
 #include <idp.h>
 #include <idtContainer.h>
 
-class idvSQL;
+struct idvSQL;
 
 /* ------------------------------------------------
  *  Fixed Table Define for  MemoryMgr

@@ -41,7 +41,7 @@ typedef struct iduMemPoolInfo
     SChar                mName[IDU_MEM_POOL_NAME_LEN];
 }iduMemPoolInfo;
 
-class idvSQL;
+struct idvSQL;
 
 class iduMemPoolMgr
 {

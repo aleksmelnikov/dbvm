@@ -15,7 +15,7 @@
 #include <iduMutexMgr.h>
 #include <idp.h>
 
-class idvSQL;
+struct idvSQL;
 
 /* ------------------------------------------------
  *  Fixed Table Define for  MemoryMgr

@@ -10,7 +10,7 @@
 #include <idu.h>
 #include <idx.h>
 
-class idvSQL;
+struct idvSQL;
 
 static iduFixedTableColDesc gAgentProcColDesc[] =
 {

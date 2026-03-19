@@ -97,7 +97,7 @@
         }                                       \
     }
 
-class idvSQL;
+struct idvSQL;
 
 #define IDT_THREAD_MAX_SLEEP_SEC (10)
 

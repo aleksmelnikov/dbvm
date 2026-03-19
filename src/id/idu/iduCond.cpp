@@ -36,7 +36,7 @@ idBool              iduCond::mUsePool;
 #define IDU_COND_TIMEDWAIT      3
 #define IDU_COND_IDLE           4
 
-class idvSQL;
+struct idvSQL;
 
 static SChar* gConditionVariableStatus[] = 
 {
