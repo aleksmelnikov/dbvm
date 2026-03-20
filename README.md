@@ -6,7 +6,7 @@
 
 Other languages: [English](README.md) | [Russian](README.ru.md)
 
-DBVM is a general-purpose relational DBMS designed as a drop-in-replacement for Altibase Community Edition. The project combines a reliable architecture with modern improvements.
+DBVM is a general-purpose relational DBMS built on the foundation of Altibase Community Edition. The project combines a reliable architecture with modern improvements.
 
 Key features of DBVM (Altibase CE):
 - supports both disk-based and in-memory data storage,
