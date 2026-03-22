@@ -37,6 +37,10 @@
 # $make -f Makefile -f helper.mak printvalue-SOURCE_FILES
 # Output: main.c utils.c (Clean output, useful if you need to pipe the result into another script).
 
-print-% : ; @echo $* = $($*)
+# v1
+# print-% : ; @echo $* = $($*)
+# printvalue-% : ; @echo $($*)
 
-printvalue-% : ; @echo $($*)
+# v2
+print-% : ; @echo '$* = $($*) $(if $($*_HELP),# $($*_HELP))'
+printvalue-% : ; @echo '$($*)'
