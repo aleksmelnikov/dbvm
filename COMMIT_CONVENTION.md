@@ -13,6 +13,7 @@
 - **init**: Initial commit or project initialization.
 - **perf**: A code change that improves performance or memory usage.
 - **refact**: Code change that neither fixes a bug nor adds a feature.
+- **research**: Technical research, experiments, investigating new approaches and solutions.
 - **revert**: Reverts a previous commit.
 - **sec**: Security-related fixes or improvements.
 - **style**: Changes that do not affect the meaning of the code.
