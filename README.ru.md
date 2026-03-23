@@ -9,7 +9,13 @@
 DBVM - это универсальная реляционная СУБД, созданная на основе Altibase Community Edition. Проект сочетает в себе проверенную временем архитектуру с современными улучшениями.
 
 Исключительные особенности DBVM (Altibase CE):
-- позволяет размещать данные на диске и в памяти (in-memory),
+- табличные пространства на диске: System, Temporary, Undo, Users,
+- табличные пространства в памяти (функционал IN-MEMORY)
+- кеш данных,
+- кеш запросов,
+- MVCC (Multi-Version Concurrency Control),
+- ACID,
+- поддержка SQL-92,
 - архитектурно, функционально и синтаксически (команды) схожа с базой данных Oracle:
 [Altibase/Oracle Comparison](https://docs.altibase.com/pages/viewpage.action?pageId=16875638),
 [ORACLE to ALTIBASE Conversion Guide](https://docs.altibase.com/display/arch/ORACLE+to+ALTIBASE+Conversion+Guide).

@@ -9,7 +9,13 @@ Other languages: [English](README.md) | [Russian](README.ru.md)
 DBVM is a general-purpose relational DBMS built on the foundation of Altibase Community Edition. The project combines a reliable architecture with modern improvements.
 
 Key features of DBVM (Altibase CE):
-- supports both disk-based and in-memory data storage,
+- disk tablespaces: System, Temporary, Undo, Users,
+- memory tablespaces (IN-MEMORY feature),
+- buffer cache,
+- query cache,
+- MVCC (Multi-Version Concurrency Control),
+- ACID,
+- SQL-92 support,
 - architecturally, functionally and syntactically (commands) similar to the Oracle Database:
 [Altibase/Oracle Comparison](https://docs.altibase.com/pages/viewpage.action?pageId=16875638),
 [ORACLE to ALTIBASE Conversion Guide](https://docs.altibase.com/display/arch/ORACLE+to+ALTIBASE+Conversion+Guide).
