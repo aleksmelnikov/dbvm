@@ -1,0 +1,4 @@
+Script usage:
+bison --version | awk -f check_bison_version.awk
+
+2026: Bison is now bundled in 'thirdparty', making version detection obsolete.
