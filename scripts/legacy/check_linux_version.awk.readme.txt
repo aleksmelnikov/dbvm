@@ -1,0 +1,82 @@
+Script usage:
+gawk -f check_linux_version.awk /etc/issue
+gawk -f check_linux_version.awk /etc/redhat-release
+
+Supported Linux Distributions (Status as of March 2026)
+Distribution (in script)        Status (2026)   Latest Version / Release Date
+Ubuntu                          ACTIVE          24.04 LTS / 25.10 (Oct 2025)
+Fedora                          ACTIVE          Fedora 43 (Autumn 2025)
+Red Hat Enterprise              ACTIVE          RHEL 10.x (Mid 2025)
+Linux Mint                      ACTIVE          Mint 22.x (Summer 2025)
+SUSE / S.U.S.E                  ACTIVE          SLES 15 SP7 / ALP (2025-2026)
+CentOS                          CHANGED         CentOS Stream 10 (Active) / Classic 7 (EOL)
+Asianux                         DEPRECATED      Version 7.0 (Inactive since ~2015)
+TurboLinux                      DEPRECATED      Version 12.5 (Closed in 2012)
+Mandrake                        DEPRECATED      Predecessor to Mandriva; EOL since 2005
+Caldera                         DEPRECATED      Version 3.1.1 (Closed in 2002)
+Hancom                          DEPRECATED      Hancom Linux 4 (Inactive since ~2005)
+WowLinux                        DEPRECATED      Korean distro (Inactive for 20+ years)
+Booyo                           DEPRECATED      Chinese distro (Inactive since mid-2000s)
+Ginux                           DEPRECATED      Project no longer supported
+
+Note: 
+The 'GetKind' logic (AS/ES/WS suffixes) is deprecated and intentionally 
+removed. Red Hat Enterprise Linux (RHEL) discontinued these product 
+designations starting with RHEL 5/6. In modern distributions (RHEL 7, 8, 9, 10), 
+the system is identified solely by 'ID' and 'VERSION_ID' in /etc/os-release, 
+as the codebase is now unified across server and workstation variants.
+
+Useful links:
+=============
+
+This repo contains the /etc/os-release file from Linux distros.    
+https://github.com/chef/os_release
+
+Mysql
+https://github.com/mysql/mysql-server/blob/trunk/CMakeLists.txt
+IF(MY_HOST_SYSTEM_NAME MATCHES "Linux")
+  # Trust 'rpm -qf /' rather than 'uname -s'
+  STRING(REGEX MATCH "\\.el([6789])\\." MATCH_FSYS "${MY_HOST_FILESYSTEM_NAME}")
+  IF(NOT CMAKE_MATCH_1)
+    STRING(REGEX MATCH "\\.el(10)\\." MATCH_FSYS "${MY_HOST_FILESYSTEM_NAME}")
+  ENDIF()
+
+  # Set LINUX_RHEL6, LINUX_RHEL7, LINUX_RHEL8 or LINUX_RHEL9 or LINUX_RHEL10
+  IF(CMAKE_MATCH_1)
+    SET(LINUX_RHEL 1)
+    SET(LINUX_RHEL${CMAKE_MATCH_1} 1)
+  ENDIF()
+ENDIF()
+
+IF(NOT LINUX_RHEL AND MY_HOST_SYSTEM_NAME MATCHES "Linux")
+  IF(EXISTS "/etc/os-release")
+    FILE(READ "/etc/os-release" MY_OS_RELEASE)
+    IF(MY_OS_RELEASE MATCHES "Debian")
+      SET(LINUX_DEBIAN 1)
+    ELSEIF(MY_OS_RELEASE MATCHES "Ubuntu")
+      SET(LINUX_UBUNTU 1)
+      # /etc/os-release contains a line like
+      # VERSION_ID="20.04"
+      # Match the numeric value, including the dot, ignore the rest:
+      STRING(REGEX MATCH
+        "VERSION_ID=\"([0-9\\.]+).*" UNUSED ${MY_OS_RELEASE})
+      IF(CMAKE_MATCH_1)
+        SET(LINUX_UBUNTU_VERSION_ID ${CMAKE_MATCH_1})
+      ENDIF()
+    ENDIF()
+  ENDIF()
+ENDIF()
+
+IF(EXISTS "/etc/SuSE-release")
+  SET(LINUX_SUSE 1)
+ENDIF()
+
+IF(LINUX_SUSE)
+  FILE(READ "/etc/SuSE-release" MY_OS_RELEASE)
+  IF(MY_OS_RELEASE MATCHES "SUSE Linux Enterprise Server 15" OR
+      MY_OS_RELEASE MATCHES "openSUSE .* 15")
+    SET(LINUX_SUSE_15 1)
+  ELSE()
+    MESSAGE(WARNING "Unknown SUSE version.")
+  ENDIF()
+ENDIF()

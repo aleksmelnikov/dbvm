@@ -6562,35 +6562,41 @@ if  test "$OS_TARGET" = "INTEL_LINUX" ||
     test "$OS_TARGET" = "ELDK_LINUX"||
     test "$OS_TARGET" = "X86_64_DARWIN";
 then
-    if test -f "/etc/issue"; then
-        echo ""
-        echo "*** Checking LINUX PACKAGE INFORMATION ***";
-        $GAWK -f check_linux_version.awk "/etc/issue"
-        OS_LINUX_PACKAGE=`cat linux_package`;
-        OS_LINUX_VERSION=`cat linux_version`;
+    # --- Linux Distribution Detection ---
+    ID="unknown"
+    VER="unknown"
 
-        if test "$OS_LINUX_PACKAGE" = "Unknown"; then
-            $GAWK -f check_linux_version.awk "/etc/redhat-release"
-            OS_LINUX_PACKAGE=`cat linux_package`;
-            OS_LINUX_VERSION=`cat linux_version`;
+    echo ""; echo "*** Checking LINUX PACKAGE INFORMATION ***"
+
+    # 1. Parse /etc/os-release if it is readable
+    if test -r "/etc/os-release"; then
+        while IFS='=' read -r key val || test -n "$key"; do
+            # Remove quotes from the value
+            val=${val#\"}
+            val=${val%\"}
+            case "$key" in
+                ID)         ID="$val" ;;
+                VERSION_ID) VER="$val" ;;
+            esac
+        done < /etc/os-release
+
+        # 2. Handle Rolling Releases (e.g. Arch) where VERSION_ID is missing
+        if test "$ID" != "unknown" && test "$VER" == "unknown"; then
+            VER="rolling"
         fi
 
-        if test "$OS_LINUX_PACKAGE" = "Unknown"; then
-            echo "*** Check Failed. ***"; echo ""
-            echo "No information in /etc/issue and /etc/redhat-release. So, Can't Determine Linux Package";
-            echo "";
-	else
-            echo "Package Name : << $OS_LINUX_PACKAGE >> Package Version : << $OS_LINUX_VERSION >>"; echo ""
-            echo "*** Check Success. ***"; echo ""
-	fi
-
+        # 3. Save results to files
+        OS_LINUX_PACKAGE="$ID";
+        OS_LINUX_VERSION="$VER";
+        echo "Package Name : << $OS_LINUX_PACKAGE >> Package Version : << $OS_LINUX_VERSION >>"; echo ""
+        echo "*** Check Success. ***"; echo ""
     else
+        OS_LINUX_PACKAGE="$ID";
+        OS_LINUX_VERSION="$VER";
         echo "*** Check Failed. ***"; echo ""
-        echo "Not Exist File /etc/issue. So, Can't Determine Linux Package";
-        echo "";
-        OS_LINUX_PACKAGE="Unknown";
-        OS_LINUX_VERSION="Unknown";
+        echo "Not Exist/Readable File /etc/os-release. So, Can't Determine Linux Package"; echo ""
     fi
+    # --- Linux Distribution Detection ---
 
     OS_KERNEL_RELEASE_MAJOR=`uname -r | cut -d . -f 1`;
     OS_KERNEL_RELEASE_MINOR=`uname -r | cut -d . -f 2`;
