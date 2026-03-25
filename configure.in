@@ -1998,15 +1998,41 @@ else
     AC_MSG_WARN("COMPILER_NAME is %%% $COMPILER_NAME %%% ")
 fi
 
+# --- Compiler Version Detection ---
 if test "$COMPILER_NAME" = "GCC"; then
-   $GAWK -f check_gcc_version.awk
-   GCC_VERSION=`cat gcc_version`
-   GCC_VERSION_MAJOR=`sed 's%\..*%%' < gcc_version`
-   GCC_LD_OPTIONS=`cat gcc_ld_options`
+    COMPILER_CMD=${CXX:-g++}
+    
+    # 1. Get the raw version string from the compiler
+    RAW_VER=`$COMPILER_CMD -dumpversion`
+
+    # 2. Extract Major and Minor numbers using pure Bash (no 'cut' or 'sed')
+    # Example: "20.1.8" -> MAJOR=20, MINOR=1
+    MAJOR_VER=${RAW_VER%%.*}
+    REMAINDER=${RAW_VER#*.}
+    MINOR_VER=${REMAINDER%%.*}
+
+    GCC_VERSION=${RAW_VER}
+    GCC_VERSION_MAJOR=${MAJOR_VER}
+
+    # If the version has no dots (e.g., just "20"), set Minor to 0
+    if test "$MAJOR_VER" = "$RAW_VER"; then
+        MINOR_VER=0
+    fi
+
+    # 3. Linker Logic for --no-as-needed (Crucial for OpenSSL/Plugins)
+    if test "$MAJOR_VER" -gt 4 || { "$MAJOR_VER" -eq 4 && "$MINOR_VER" -ge 6; }; then
+        GCC_LD_OPTIONS="-Wl,--no-as-needed"
+    else
+        GCC_LD_OPTIONS=""
+    fi
 else
-   GCC_VERSION=
-   GCC_LD_OPTIONS=
+    GCC_VERSION=
+    GCC_LD_OPTIONS=
 fi
+#echo -n "$RAW_VER" > gcc_version
+#echo -n "$GCC_LD_OPTIONS" > gcc_ld_options
+# --- Compiler Version Detection ---
+
 AC_SUBST(COMPILER_NAME)
 AC_SUBST(GCC_VERSION)
 AC_SUBST(GCC_VERSION_MAJOR)

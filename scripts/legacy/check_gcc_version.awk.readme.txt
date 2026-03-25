@@ -1,0 +1,4 @@
+Script usage:
+awk -f check_gcc_version.awk
+
+2026: replace check_gcc_version.awk with native shell logic
