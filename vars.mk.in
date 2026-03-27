@@ -2,105 +2,37 @@
 #
 
 #===============================================================
-# configureø°º≠ ¿⁄µø¿˚¿∏∑Œ º≥¡§µ 
+# configureÏóêÏÑú ÏûêÎèôÏ†ÅÏúºÎ°ú ÏÑ§Ï†ïÎê®
 #===============================================================
 
-BISON_ENV_NEEDED=no # unix don't needed
-BISON_SIMPLE_PATH := /acme  # nothing for UNIX Env
-BISON_HAIRY_PATH  := /acme  # nothing for UNIX Env
+# 1. Compiler and Tools.
 
-GREP=@GREP@
-MAKE=@GMAKE@
-GAWK=@GAWK@
-FLEX=@FLEX@
-BISON=@BISON@
-JAVA_HOME=@JAVA_HOME@
-SED=sed
-DEV_DIR=@DEV_DIR@
-TARGET_DIR=$(DEV_DIR)/target/@BUILD_MODE@
-ALTI_HOME=@ALTI_HOME@
-CORE_DIR=@CORE_DIR@
-CORE_EXT_DIR=@CORE_EXT_DIR@
-PD_DIR=@PD_DIR@
-ID_DIR=@ID_DIR@
-CM_DIR=@CM_DIR@
-SM_DIR=@SM_DIR@
-ST_DIR=@ST_DIR@
-MT_DIR=@MT_DIR@
-QP_DIR=@QP_DIR@
-SD_DIR=@SD_DIR@
-RP_DIR=@RP_DIR@
-DK_DIR=@DK_DIR@
-MM_DIR=@MM_DIR@
-UL_DIR=@UL_DIR@
-UT_DIR=@UT_DIR@
-TOOL_DIR=@TOOL_DIR@
-TF_DIR=@TF_DIR@
-THIRDPARTY_DIR=@THIRDPARTY_DIR@
-
-ALTIBASE_PRODUCT=@ALTIBASE_PRODUCT@
-PRODUCT_PREFIX=@PRODUCT_PREFIX@
-ALTIDEV_PORTPKG_PATH := $(PD_DIR)/port/unix/    # nothing for UNIX Env
-
-compile64=@BIT64FLAG@
-USE_NCURSES=@NCURSESFLAG@
-
-added_optimizer_flag=@ADDED_OPTIMIZER_FLAG@
-#only for solaris CC 5.0 above..
-compat5=@COMPAT5@
-
-# ƒƒ∆ƒ¿œ∑Ø ¡æ∑˘
+# Ïª¥ÌååÏùºÎü¨ Ï¢ÖÎ•ò
+COMPILER_NAME_HELP=Compiler being used
 COMPILER_NAME=@COMPILER_NAME@
+
+GCC_VERSION_MAJOR_HELP=Major GCC version
 GCC_VERSION_MAJOR=@GCC_VERSION_MAJOR@
 
-# BUILD MODE
-BUILD_MODE=@BUILD_MODE@
-
-# LINK MODE
-LINK_MODE=@LINK_MODE@
-
-ALTIBASE_MEMORY_CHECK=@ALTIBASE_MEMORY_CHECK@
-ALTIBASE_SM_MODULE_TEST=@ALTIBASE_SM_MODULE_TEST@
-
-ALTIBASE_USE_VALGRIND=@ALTIBASE_USE_VALGRIND@
-
-ALTIBASE_RECOVERY_CHECK=@ALTIBASE_RECOVERY_CHECK@
-
-ALTIBASE_LIMIT_CHECK=@ALTIBASE_LIMIT_CHECK@
-
-ALTIBASE_FIT_CHECK=@ALTIBASE_FIT_CHECK@
-
-# Task-1994 √ ∞Ìº” Coverage√¯¡§πÊπ˝ ∞Ìæ»
-ALTIBASE_ENABLE_GCOV=@ALTIBASE_ENABLE_GCOV@
-
-# TASK-6198 Samsung Smart SSD
-ALTIBASE_ENABLE_SMARTSSD=@ALTIBASE_ENABLE_SMARTSSD@
-
-# BUG-47816 ST_Transform «‘ºˆ ¡ˆø¯
-ST_ENABLE_PROJ4_LIBRARY=@ST_ENABLE_PROJ4_LIBRARY@
-ST_ENABLE_PROJ4_STATIC_LIBRARY=@ST_ENABLE_PROJ4_STATIC_LIBRARY@
-PROJ4_DIR=@PROJ4_DIR@
-
-# øÓøµ√º¡¶ πˆ¡Ø π¯»£ 
-OS_TARGET=@OS_TARGET@
-OS_MAJORVER=@OS_MAJORVER@
-OS_MINORVER=@OS_MINORVER@
-
-OS_LINUX_PACKAGE=@OS_LINUX_PACKAGE@
-OS_LINUX_VERSION=@OS_LINUX_VERSION@
-OS_LINUX_KERNEL=@OS_LINUX_KERNEL@
-OS_KERNEL_PROCESS_TYPE_THREAD=@OS_KERNEL_PROCESS_TYPE_THREAD@
-
-ALTI_CFG_CPU=@ALTI_CFG_CPU@
-ALTI_CFG_OS=@ALTI_CFG_OS@
-ALTI_CFG_OS_MAJOR=@ALTI_CFG_OS_MAJOR@
-ALTI_CFG_OS_MINOR=@ALTI_CFG_OS_MINOR@
-ALTI_CFG_EDITION=@ALTI_CFG_EDITION@
-ALTI_CFG_BITTYPE=@ALTI_CFG_BITTYPE@
+GREP_HELP=Grep binary's path
+GREP=@GREP@
+MAKE_HELP=Make binary's path
+MAKE=@GMAKE@
+GAWK_HELP=GAWK binary's path
+GAWK=@GAWK@
+SED_HELP=Sed utility for text transformations
+SED=sed
+FLEX_HELP=Flex (lexer generator) binary's path
+FLEX=@FLEX@
+APRE_FLEX_SED_FILE_HELP=Sed script file used to process Flex output
+APRE_FLEX_SED_FILE="sedforFlex.other"
 
 ifeq "$(COMPILER_NAME)" "GCC"
+FLEX_REPLACE_BEFORE_HELP=String to be replaced in Flex-generated code (compiler-dependent)
 FLEX_REPLACE_BEFORE="^class istream;$$"
+FLEX_REPLACE_AFTER_HELP=Replacement string (includes <iostream.h> for GCC)
 FLEX_REPLACE_AFTER="\#include <iostream.h>"
+GCC_LD_OPTIONS_HELP=GCC Linker flags (LD options)
 GCC_LD_OPTIONS=@GCC_LD_OPTIONS@
 else
 # no need substitution : use same name
@@ -108,12 +40,156 @@ FLEX_REPLACE_BEFORE="istream"
 FLEX_REPLACE_AFTER="istream"
 endif
 
-APRE_FLEX_SED_FILE="sedforFlex.other"
+BISON_HELP=Bison (parser generator) binary's path
+BISON=@BISON@
+BISON_ENV_NEEDED_HELP=Indicates if Bison environment is required
+BISON_ENV_NEEDED=no # unix don't needed
+BISON_SIMPLE_PATH_HELP=
+BISON_SIMPLE_PATH := /acme  # nothing for UNIX Env
+BISON_HAIRY_PATH_HELP=
+BISON_HAIRY_PATH  := /acme  # nothing for UNIX Env
 
+JAVA_HOME_HELP=JDK home directory
+JAVA_HOME=@JAVA_HOME@
+USE_NCURSES_HELP=Use Ncurses library
+USE_NCURSES=@NCURSESFLAG@
+
+# 2. Directories and Paths.
+
+ALTI_HOME_HELP=Altibase CE home directory
+ALTI_HOME=@ALTI_HOME@
+DEV_DIR_HELP=Development root directory
+DEV_DIR=@DEV_DIR@
+TARGET_DIR_HELP=Build output directory (target)
+TARGET_DIR=$(DEV_DIR)/target/@BUILD_MODE@
+
+CORE_DIR_HELP=Core (low level base system layer for Database) module
+CORE_DIR=@CORE_DIR@
+CORE_EXT_DIR_HELP=Core external libraries directory (ACL external libraries)
+CORE_EXT_DIR=@CORE_EXT_DIR@
+CM_DIR_HELP=CM (Communication Manager) module
+CM_DIR=@CM_DIR@
+DK_DIR_HELP=DK (Distributed Kernel) module
+DK_DIR=@DK_DIR@
+ID_DIR_HELP=ID (Independend Definition) module
+ID_DIR=@ID_DIR@
+MM_DIR_HELP=MM (Metadata Manager) module
+MM_DIR=@MM_DIR@
+MT_DIR_HELP=MT (Meta Type) module
+MT_DIR=@MT_DIR@
+PD_DIR_HELP=PD (Portable Definition) module
+PD_DIR=@PD_DIR@
+QP_DIR_HELP=QP (Query Processor) module
+QP_DIR=@QP_DIR@
+RP_DIR_HELP=RP (Replication) module
+RP_DIR=@RP_DIR@
+SD_DIR_HELP=SD (Shard Definition) module
+SD_DIR=@SD_DIR@
+SM_DIR_HELP=SM (Storage Manager) module
+SM_DIR=@SM_DIR@
+ST_DIR_HELP=ST (Spatial Type) module
+ST_DIR=@ST_DIR@
+TF_DIR_HELP=TF (Tools Framework) module
+TF_DIR=@TF_DIR@
+THIRDPARTY_DIR_HELP=Thirdparty libs directory
+THIRDPARTY_DIR=@THIRDPARTY_DIR@
+TOOL_DIR_HELP=TOOL (Database Tools) module
+TOOL_DIR=@TOOL_DIR@
+UL_DIR_HELP=UL (User-Level interface) module
+UL_DIR=@UL_DIR@
+UT_DIR_HELP=UT (User Tools) module
+UT_DIR=@UT_DIR@
+
+# 3. Build Parameters and Modes.
+
+added_optimizer_flag_HELP=Additional optimization flags
+added_optimizer_flag=@ADDED_OPTIMIZER_FLAG@
+BUILD_MODE_HELP=Build mode name
+BUILD_MODE=@BUILD_MODE@
+LINK_MODE_HELP=Linkage mode name
+LINK_MODE=@LINK_MODE@
+compile64_HELP=Indicates 64-bit build
+compile64=@BIT64FLAG@
+compat5_HELP=Only for solaris CC 5.0 above.
+compat5=@COMPAT5@
+CROSS_COMPILE_HELP=Cross-compiltaion setting
 CROSS_COMPILE=@CROSS_COMPILE@
-CONFIG_QP_COMPRESS_SCANNER_TABLES=@CONFIG_QP_COMPRESS_SCANNER_TABLES@
+
+# 4. Feature Flags and Options.
+
+# Task-1994 Ï¥àÍ≥†ÏÜç CoverageÏ∏°Ï†ïÎ∞©Î≤ï Í≥†Ïïà
+ALTIBASE_ENABLE_GCOV_HELP=Enable GCOV support for code coverage
+ALTIBASE_ENABLE_GCOV=@ALTIBASE_ENABLE_GCOV@
+# TASK-6198 Samsung Smart SSD
+ALTIBASE_ENABLE_SMARTSSD_HELP=Samsung Smart SSD support
+ALTIBASE_ENABLE_SMARTSSD=@ALTIBASE_ENABLE_SMARTSSD@
+ALTIBASE_FIT_CHECK_HELP=Enable FIT (Fault Injection Testing) checks
+ALTIBASE_FIT_CHECK=@ALTIBASE_FIT_CHECK@
+ALTIBASE_LIMIT_CHECK_HELP=System Limits check
+ALTIBASE_LIMIT_CHECK=@ALTIBASE_LIMIT_CHECK@
+ALTIBASE_MEMORY_CHECK_HELP=Memory Leak check
+ALTIBASE_MEMORY_CHECK=@ALTIBASE_MEMORY_CHECK@
+ALTIBASE_RECOVERY_CHECK_HELP=Recovery check
+ALTIBASE_RECOVERY_CHECK=@ALTIBASE_RECOVERY_CHECK@
+ALTIBASE_SM_MODULE_TEST_HELP=SM module testing
+ALTIBASE_SM_MODULE_TEST=@ALTIBASE_SM_MODULE_TEST@
+ALTIBASE_USE_VALGRIND_HELP=Valgrind usage
+ALTIBASE_USE_VALGRIND=@ALTIBASE_USE_VALGRIND@
+CONFIG_LACKS_IOSTREAM_HELP=System Lacks <iostream> header
 CONFIG_LACKS_IOSTREAM=@CONFIG_LACKS_IOSTREAM@
+CONFIG_QP_COMPRESS_SCANNER_TABLES_HELP=Compress QP scanner tables
+CONFIG_QP_COMPRESS_SCANNER_TABLES=@CONFIG_QP_COMPRESS_SCANNER_TABLES@
 
+# BUG-47816 ST_Transform Ìï®Ïàò ÏßÄÏõê
+ST_ENABLE_PROJ4_LIBRARY_HELP=Use Proj4 for ST_Transform
+ST_ENABLE_PROJ4_LIBRARY=@ST_ENABLE_PROJ4_LIBRARY@
+ST_ENABLE_PROJ4_STATIC_LIBRARY_HELP=Use static Proj4 library
+ST_ENABLE_PROJ4_STATIC_LIBRARY=@ST_ENABLE_PROJ4_STATIC_LIBRARY@
+PROJ4_DIR_HELP=Proj4 directory
+PROJ4_DIR=@PROJ4_DIR@
+
+# 5. Platform and Architecture.
+
+ALTI_CFG_BITTYPE_HELP=Architecture bittype
+ALTI_CFG_BITTYPE=@ALTI_CFG_BITTYPE@
+ALTI_CFG_CPU_HELP=Target CPU
+ALTI_CFG_CPU=@ALTI_CFG_CPU@
+ALTI_CFG_EDITION_HELP=Product edition
+ALTI_CFG_EDITION=@ALTI_CFG_EDITION@
+ALTI_CFG_OS_HELP=Operation System
+ALTI_CFG_OS=@ALTI_CFG_OS@
+ALTI_CFG_OS_MAJOR_HELP=OS major version 
+ALTI_CFG_OS_MAJOR=@ALTI_CFG_OS_MAJOR@
+ALTI_CFG_OS_MINOR_HELP=OS minor version
+ALTI_CFG_OS_MINOR=@ALTI_CFG_OS_MINOR@
+
+# Ïö¥ÏòÅÏ≤¥Ï†ú Î≤ÑÏ†º Î≤àÌò∏ 
+OS_TARGET_HELP=Target Platform
+OS_TARGET=@OS_TARGET@
+OS_MAJORVER_HELP=OS major version
+OS_MAJORVER=@OS_MAJORVER@
+OS_MINORVER_HELP=OS minor version
+OS_MINORVER=@OS_MINORVER@
+
+OS_LINUX_PACKAGE_HELP=Linux distribution
+OS_LINUX_PACKAGE=@OS_LINUX_PACKAGE@
+OS_LINUX_VERSION_HELP=Distribution version
+OS_LINUX_VERSION=@OS_LINUX_VERSION@
+OS_LINUX_KERNEL_HELP=Linux kernel flag
+OS_LINUX_KERNEL=@OS_LINUX_KERNEL@
+OS_KERNEL_PROCESS_TYPE_THREAD_HELP=Kernel process type
+OS_KERNEL_PROCESS_TYPE_THREAD=@OS_KERNEL_PROCESS_TYPE_THREAD@
+
+# 6. Miscellaneous Variables.
+
+ALTIBASE_PRODUCT_HELP=Product identifier
+ALTIBASE_PRODUCT=@ALTIBASE_PRODUCT@
+ALTIDEV_PORTPKG_PATH_HELP=Path to the porting package - used in Unix
+ALTIDEV_PORTPKG_PATH := $(PD_DIR)/port/unix/    # nothing for UNIX Env
+PRODUCT_PREFIX_HELP=Product prefix
+PRODUCT_PREFIX=@PRODUCT_PREFIX@
+
+DO_UNITTEST_HELP=Run unit test
 DO_UNITTEST=@DO_UNITTEST@
+UNITTEST_USE_STATIC_LIB_HELP=Use static libraries in unittests
 UNITTEST_USE_STATIC_LIB=@UNITTEST_USE_STATIC_LIB@
-
