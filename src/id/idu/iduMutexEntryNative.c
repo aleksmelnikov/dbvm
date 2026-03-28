@@ -97,7 +97,7 @@ static IDE_RC iduNativeInitialize(void *aRsc, UInt aBusyValue)
 {
     iduMutexResNative * sMutexRes = (iduMutexResNative *)aRsc;
 
-    aBusyValue = aBusyValue; /* To Prevent Compiler Warning */
+    (void)aBusyValue; /* To Prevent Compiler Warning */
 
     initNativeMutex( & sMutexRes->mMutexObj );
 
@@ -221,7 +221,7 @@ static void iduNativeUnlock(void *aRsc, iduMutexStat * aStat)
     iduMutexResNative * sMutexRes = (iduMutexResNative *)aRsc;
     iduNativeMutexObj * sObj = & sMutexRes->mMutexObj;
 
-    aStat = aStat; /* To Prevent Compiler Warning */
+    (void)aStat; /* To Prevent Compiler Warning */
 
     if ( iduBridge_getCheckMutexDurationTimeEnable() ==1 )
     {
