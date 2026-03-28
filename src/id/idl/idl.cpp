@@ -2123,8 +2123,8 @@ void *idlOS::memsetOnMemCheck(void *s, int c, size_t len)
 #if defined(ALTIBASE_MEMORY_CHECK)
     return memset(s, c, len);
 #else
-    c = c;
-    len = len;
+    (void)c;
+    (void)len;
     return s;
 #endif
 }
