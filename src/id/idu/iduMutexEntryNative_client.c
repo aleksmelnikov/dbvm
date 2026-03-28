@@ -66,7 +66,7 @@ static IDE_RC iduNativeDestroyStatic()
 
 static IDE_RC iduNativeCreate(void *aRsc)
 {
-    aRsc = aRsc;
+    (void)aRsc; /* to fix compile warning */
 
     return IDE_SUCCESS;
 }
@@ -75,7 +75,7 @@ static IDE_RC iduNativeInitialize(void *aRsc, UInt aBusyValue)
 {
     iduNativeMutexObj *sObj = (iduNativeMutexObj *)aRsc;
 
-    aBusyValue = aBusyValue; /* to fix compile warning */
+    (void)aBusyValue; /* to fix compile warning */
 
     initNativeMutex(sObj);
 
