@@ -127,10 +127,10 @@ static IDE_RC cmnSockCheckRECV(PDL_SOCKET aHandle, SInt aFlag, idBool *aIsClosed
 IDE_RC cmnSockCheck(cmnLink *aLink, PDL_SOCKET aHandle, idBool *aIsClosed)
 {
 #if defined(MSG_PEEK) && defined(MSG_DONTWAIT)
-    aLink = aLink ; // To Fix Compiler Warning
+    (void)aLink ; // To Fix Compiler Warning
     return cmnSockCheckRECV(aHandle, MSG_PEEK | MSG_DONTWAIT, aIsClosed);
 #elif defined(MSG_PEEK) && defined(MSG_NONBLOCK)
-    aLink = aLink ; // To Fix Compiler Warning
+    (void)aLink ; // To Fix Compiler Warning
     return cmnSockCheckRECV(aHandle, MSG_PEEK | MSG_NONBLOCK, aIsClosed);
 #elif defined(MSG_PEEK)
     idBool sIsNonBlock;
@@ -146,7 +146,7 @@ IDE_RC cmnSockCheck(cmnLink *aLink, PDL_SOCKET aHandle, idBool *aIsClosed)
         return cmnSockCheckIOCTL(aHandle, aIsClosed);
     }
 #else
-    aLink = aLink ; // To Fix Compiler Warning
+    (void)aLink ; // To Fix Compiler Warning
     return cmnSockCheckIOCTL(aHandle, aIsClosed);
 #endif
 }

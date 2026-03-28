@@ -146,10 +146,10 @@ static ACI_RC cmnSockCheckRECV(acp_sock_t *aSock, acp_sint32_t aFlag, acp_bool_t
 ACI_RC cmnSockCheck(cmnLink *aLink, acp_sock_t *aSock, acp_bool_t *aIsClosed)
 {
 #if defined(ACP_MSG_PEEK) && defined(ACP_MSG_DONTWAIT)
-    aLink = aLink ; // To Fix Compiler Warning
+    (void)aLink ; // To Fix Compiler Warning
     return cmnSockCheckRECV(aSock, ACP_MSG_PEEK | ACP_MSG_DONTWAIT, aIsClosed);
 #elif defined(ACP_MSG_PEEK) && defined(ACP_MSG_NONBLOCK)
-    aLink = aLink ; // To Fix Compiler Warning
+    (void)aLink ; // To Fix Compiler Warning
     return cmnSockCheckRECV(aSock, ACP_MSG_PEEK | ACP_MSG_NONBLOCK, aIsClosed);
 #elif defined(ACP_MSG_PEEK)
     acp_bool_t sIsNonBlock;
@@ -165,7 +165,7 @@ ACI_RC cmnSockCheck(cmnLink *aLink, acp_sock_t *aSock, acp_bool_t *aIsClosed)
         return cmnSockCheckIOCTL(aSock, aIsClosed);
     }
 #else
-    aLink = aLink ; // To Fix Compiler Warning
+    (void)aLink ; // To Fix Compiler Warning
     return cmnSockCheckIOCTL(aSock, aIsClosed);
 #endif
 }
