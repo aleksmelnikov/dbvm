@@ -6531,8 +6531,8 @@ else
     GCC_VERSION=
     GCC_LD_OPTIONS=
 fi
-#echo -n "$RAW_VER" > gcc_version
-#echo -n "$GCC_LD_OPTIONS" > gcc_ld_options
+echo -n "$RAW_VER" > gcc_version
+echo -n "$GCC_LD_OPTIONS" > gcc_ld_options
 # --- Compiler Version Detection ---
 
 
