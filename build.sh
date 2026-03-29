@@ -49,6 +49,13 @@ export PATH=${current_directory}:${ALTIBASE_HOME}/bin:${JAVA_HOME}/bin:${PATH}
 export CLASSPATH=${current_directory}:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib:${ALTIBASE_HOME}/lib/Altibase.jar:${CLASSPATH}
 export LD_LIBRARY_PATH=${ADAPTER_JAVA_HOME}/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
 
+# Check if the installed version of GNU Make supports output synchronization (Make 4.0+)
+# This prevents interleaved output from different threads during parallel builds
+sync_opt=""
+if make --help | grep -q "output-sync"; then
+    sync_opt="--output-sync=target"
+fi
+
 #===============================================================================
 # Universal Dependency Build Function
 #===============================================================================
@@ -73,7 +80,7 @@ build_dep() (
 
     # Configuration and Compilation
     $conf_script --prefix="${dep_install_directory}" $extra_flags
-    make -j"${jobs}"
+    make -j"${jobs}" ${sync_opt}
     make "$install_target"
 )
 
@@ -96,4 +103,4 @@ build_dep "ncurses" "${ncurses_ver}" "--without-ada --without-manpages --without
 cd "${ALTIDEV_HOME}"
 ./configure --with-build-mode=release
 make clean
-make SILENT_MODE=false build -j"${jobs}"
+make SILENT_MODE=false build -j"${jobs}" ${sync_opt}
