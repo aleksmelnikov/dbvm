@@ -428,8 +428,8 @@ public class JdbcDriverManager
             else
             {
                 /* BUG-46878 dblink support on jdk 11
-                 * jdk9 부터는 platform class loader를 인자로 넘겨줘야 한다.
-                 * 9 이하 버전에서 빌드하기 위해 아래같이 system class의 부모를 넘겨준다 */
+                 * Starting from jdk9, the platform class loader must be passed as an argument.
+                 * To build on versions 9 or lower, pass the parent of the system class as shown below */                
                 sUrlClassLoader = 
                     new URLClassLoader(new URL[] { sJarUrl },
                                        ClassLoader.getSystemClassLoader().getParent() );

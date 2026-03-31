@@ -29,10 +29,10 @@ public final class ByteUtils
     }
 
     /**
-     * Hex String으로 쓸 수 있는 문자인지 확인한다.
+     * Checks if a character can be written as a Hex String.
      *
-     * @param c 확인할 문자
-     * @return [0-9a-fA-F]이면 true, 아니면 false
+     * @param c The character to check
+     * @return true if [0-9a-fA-F], false otherwise
      */
     public static boolean isHexCharacter(char c)
     {
@@ -46,12 +46,12 @@ public final class ByteUtils
     }
 
     /**
-     * hex string을 byte array로 변환한다.
+     * Converts a hex string to a byte array.
      * <p>
-     * 만약 hex string이 짝수가 아니라면, 마지막 바이트의 하위 4bit는 0으로 채운다.
-     * 
-     * @param aHexString byte array로 변환할 hex string
-     * @return 변환된 byte array. hex string이 null이면 null, 빈 문자열이면 길이가 0인 배열.
+     * If the hex string is not even, the lower 4 bits of the last byte are filled with zeros.
+     *
+     * @param aHexString hex string to convert to a byte array
+     * @return The converted byte array. An array that is null if the hex string is null, or has a length of 0 if the string is empty.
      */
     public static byte[] parseByteArray(String aHexString) throws Exception
     {
@@ -59,17 +59,17 @@ public final class ByteUtils
     }
 
     /**
-     * hex string을 byte array로 변환한다.
+     * Converts a hex string to a byte array.
      * <p>
-     * hex string의 길이가 2의 배수가 아닐때, 0으로 패딩할 수도 있고 예외를 낼 수도 있다.
-     * 만약 2의 배수가 아닐 때, 패딩을 사용한다면 마지막 바이트의 하위 4bit는 0으로 채우고,
-     * 패딩을 사용하지 않는다면 예외를 던진다.
+     * If the length of the hex string is not a multiple of 2, it may be padded with zeros or an exception may be thrown.
+     * If padding is used when it is not a multiple of 2, the lower 4 bits of the last byte are filled with zeros,
+     * and if padding is not used, an exception is thrown.
      *
-     * @param aHexString byte array로 변환할 hex string
-     * @param aUsePadding hex string이 2의 배수가 아닐 때, 0으로 패딩할지 여부.
-     * @return 변환된 byte array. hex string이 null이면 null, 빈 문자열이면 길이가 0인 배열.
-     * @exception IllegalArgumentException hex string이 올바르지 않을 경우
-     * @exception IllegalArgumentException 패딩을 사용하지 않을 때, hex string이 2의 배수가 아닌 경우
+     * @param aHexString The hex string to be converted to a byte array
+     * @param aUsePadding Whether to pad with zeros when the hex string is not a multiple of 2.
+     * @return The converted byte array. An array that is null if the hex string is null, or has a length of 0 if it is an empty string.
+     * @exception IllegalArgumentException If the hex string is invalid
+     * @exception IllegalArgumentException If padding is not used and the hex string is not a multiple of 2
      */
     public static byte[] parseByteArray(String aHexString, boolean aUsePadding) throws Exception
     {
@@ -101,7 +101,7 @@ public final class ByteUtils
                 throw new Exception( sExString );
 
             }
-            c |= 0x20; // to lowercase. hext char임을 확인했으므로 이렇게 해도 된다.
+            c |= 0x20; // to lowercase. Since it has been confirmed to be a hex char, this is acceptable.
             int v = (c < 'a') ? (c - '0') : (10 + c - 'a');
             if ((i % 2) == 0)
             {
@@ -113,10 +113,10 @@ public final class ByteUtils
     }
 
     /**
-     * byte array를 hex string으로 변환한다.
-     * 
-     * @param aByteArray hex string으로 변환할 byte array
-     * @return 변환된 hex string. byte array가 null이면 "null", 길이가 0이면 빈 문자열.
+     * Converts a byte array to a hex string.
+     *
+     * @param aByteArray The byte array to be converted to a hex string
+     * @return The converted hex string. "null" if the byte array is null, and an empty string if the length is 0.
      */
     public static String toHexString(byte[] aByteArray) throws Exception
     {
@@ -124,13 +124,13 @@ public final class ByteUtils
     }
 
     /**
-     * byte array를 hex string으로 변환한다.
-     * 
-     * @param aByteArray hex string으로 변환할 byte array
-     * @param aStartIdx 첫 index (inclusive)
-     * @param aEndIdx 끝 index (exclusive)
-     * @return 변환된 hex string. byte array가 null이면 "null", 길이가 0이면 빈 문자열.
-     * @exception IllegalArgumentException 인자가 올바르지 않을 경우
+     * Converts a byte array to a hex string.
+     *
+     * @param aByteArray The byte array to be converted to a hex string
+     * @param aStartIdx The first index (inclusive)
+     * @param aEndIdx The last index (exclusive)
+     * @return The converted hex string. "null" if the byte array is null, and an empty string if the length is 0.
+     * @exception IllegalArgumentException If the argument is invalid
      */
     public static String toHexString( byte[] aByteArray, 
                                       int    aStartIdx,
@@ -140,11 +140,11 @@ public final class ByteUtils
     }
 
     /**
-     * byte array를 hex string으로 변환한다.
-     * 
-     * @param aByteArray hex string으로 변환할 byte array
-     * @param aSpacingBase 공백을 삽입할 단위. 0이면 공백을 붙이지 않는다.
-     * @return 변환된 hex string. byte array가 null이면 "null", 길이가 0이면 빈 문자열.
+     * Converts a byte array to a hex string.
+     *
+     * @param aByteArray The byte array to convert to a hex string
+     * @param aSpacingBase The unit for spacing. If 0, no spaces are added.
+     * @return The converted hex string. "null" if the byte array is null, and an empty string if the length is 0.
      */
     public static String toHexString( byte[] aByteArray, 
                                       int    aSpacingBase ) throws Exception
@@ -153,12 +153,12 @@ public final class ByteUtils
     }
 
     /**
-     * byte array를 hex string으로 변환한다.
-     * 
-     * @param aByteArray hex string으로 변환할 byte array
-     * @param aAppendingBase aAppendingChar를 삽입할 단위. 0이면 붙이지 않는다.
-     * @param aAppendingString aAppendingBase 마다 추가할 문자열
-     * @return 변환된 hex string. byte array가 null이면 "null", 길이가 0이면 빈 문자열.
+     * Converts a byte array to a hex string.
+     *
+     * @param aByteArray The byte array to convert to a hex string
+     * @param aAppendingBase The unit to insert aAppendingChar. If 0, do not append.
+     * @param aAppendingString The string to append for each aAppendingBase
+     * @return The converted hex string. "null" if the byte array is null, and an empty string if the length is 0.
      */
     public static String toHexString( byte[]    aByteArray, 
                                       int       aAppendingBase,
@@ -168,16 +168,16 @@ public final class ByteUtils
     }
 
     /**
-     * byte array를 hex string으로 변환한다.
-     * 
-     * @param aByteArray hex string으로 변환할 byte array
-     * @param aStartIdx 첫 index (inclusive)
-     * @param aEndIdx 끝 index (exclusive)
-     * @param aAppendingBase aAppendingChar를 삽입할 단위. 0이면 붙이지 않는다.
-     * @param aAppendingString aAppendingBase 마다 추가할 문자열
-     * @param aToUpper Upper case로 변환할것인지 여부
-     * @return 변환된 hex string. byte array가 null이면 "null", 길이가 0이면 빈 문자열.
-     * @exception IllegalArgumentException 인자가 올바르지 않을 경우
+     * Converts a byte array to a hex string.
+     *
+     * @param aByteArray The byte array to be converted to a hex string
+     * @param aStartIdx The first index (inclusive)
+     * @param aEndIdx The last index (exclusive)
+     * @param aAppendingBase The unit to insert aAppendingChar. If 0, do not append.
+     * @param aAppendingString The string to append for each aAppendingBase
+     * @param aToUpper Whether to convert to uppercase
+     * @return The converted hex string. Returns "null" if the byte array is null, or an empty string if the length is 0.
+     * @exception IllegalArgumentException If the argument is invalid
      */
     public static String toHexString( byte[] aByteArray, 
                                       int    aStartIdx,
@@ -247,10 +247,10 @@ public final class ByteUtils
     }
 
     /**
-     * ByteBuffer를 hex string으로 변환한다.
-     * 
-     * @param aByteArray hex string으로 변환할 ByteBuffer
-     * @return 변환된 hex string. byte array가 null이면 "null", 길이가 0이면 빈 문자열.
+     * Converts a ByteBuffer to a hex string.
+     *
+     * @param aByteArray ByteBuffer to be converted to a hex string
+     * @return The converted hex string. "null" if the byte array is null, an empty string if the length is 0.
      */
     public static String toHexString(ByteBuffer mByteBuffer) throws Exception
     {
@@ -262,12 +262,12 @@ public final class ByteUtils
     }
 
     /**
-     * ByteBuffer를 hex string으로 변환한다.
-     * 
-     * @param aByteArray hex string으로 변환할 ByteBuffer
-     * @param aStartIdx 첫 index (inclusive)
-     * @param aEndIdx 끝 index (exclusive)
-     * @return 변환된 hex string. byte array가 null이면 "null", 길이가 0이면 빈 문자열.
+     * Converts a ByteBuffer to a hex string.
+     *
+     * @param aByteArray ByteBuffer to be converted to a hex string
+     * @param aStartIdx First index (inclusive)
+     * @param aEndIdx Last index (exclusive)
+     * @return Converted hex string. Returns "null" if the byte array is null, and an empty string if the length is 0.
      */
     public static String toHexString( ByteBuffer mByteBuffer, 
                                       int        aStartIdx,

@@ -55,7 +55,7 @@ public class XAPrepareResultOp extends ResultOperation
             mRDOnlyXidList.clear();
         }
 
-//      DK에서 첫번째 Error를 로그에 찍어 주므로 첫번째 Error만 보낸다.
+//      Since DK logs the first error, only the first error is sent.
 //      writeInt( aOpPayload, mFailXidList.size() );
         if ( mFailXidList.size() > 0 )
         {
