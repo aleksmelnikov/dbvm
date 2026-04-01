@@ -31,7 +31,7 @@ dnf install temurin-8-jdk
 Install Library Dependencies
 ----------------------------
 
-Not needed. Because the specific `Flex, Bison, Re2c, Openssl, Ncurses` sources was added to the repository`/thirdparty`.
+Not needed. Because the specific `Flex, Bison, Re2c, Openssl, Ncurses` sources was added to the repository`/3rdparty`.
 
 Build and Installation Instructions
 -----------------------------------

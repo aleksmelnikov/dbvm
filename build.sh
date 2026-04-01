@@ -25,7 +25,7 @@ declare -r jobs="${1:-$(nproc)}"
 
 # Path definitions
 declare -r current_directory=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-declare -r thirdparty_directory=${current_directory}/thirdparty
+declare -r thirdparty_directory=${current_directory}/3rdparty
 declare -r dep_build_directory=${current_directory}/target
 declare -r dep_install_directory=${current_directory}/target/dep
 
@@ -42,7 +42,7 @@ export ADAPTER_JAVA_HOME=${JAVA_HOME}
 export ALTIDEV_HOME=${current_directory}
 export ALTIBASE_DEV=${ALTIDEV_HOME}
 export ALTIBASE_HOME=${ALTIDEV_HOME}/altibase_home
-export THIRDPARTY_DIR=${ALTIDEV_HOME}/thirdparty
+export THIRDPARTY_DIR=${ALTIDEV_HOME}/3rdparty
 export ALTIBASE_PORT_NO=17730
 export ALTIBASE_NLS_USE=UTF8
 export PATH=${current_directory}:${ALTIBASE_HOME}/bin:${JAVA_HOME}/bin:${PATH}

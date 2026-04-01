@@ -370,19 +370,19 @@ sample/SHARD/Fail-Over
 [*][*][S/C][*][*][0755][DIR] # directory creation
 !
 !
-thirdparty
+3rdparty
 !
 
 [*][*][S][*][*][0755][DIR] # directory creation
 !
 !
-thirdparty/ArcGIS
+3rdparty/ArcGIS
 !
 
 [*][*][S][*][*][0755][DIR] # directory creation
 !
 !
-thirdparty/SmartSSD
+3rdparty/SmartSSD
 !
 
 [*][*][S][*][*][0755][DIR] # directory creation
@@ -3763,22 +3763,22 @@ dk_objlist.txt
 
 #################################################################################################
 ##
-##   thirdparty
+##   3rdparty
 ##
 #################################################################################################
 
-#0644 ../thirdparty/ArcGIS/spatial_ref_sys.sql      ../thirdparty/ArcGIS/spatial_ref_sys.sql
+#0644 ../3rdparty/ArcGIS/spatial_ref_sys.sql      ../3rdparty/ArcGIS/spatial_ref_sys.sql
 [*][*][S][*][*][0644][*]
-thirdparty/ArcGIS
+3rdparty/ArcGIS
 spatial_ref_sys.sql
-thirdparty/ArcGIS
+3rdparty/ArcGIS
 spatial_ref_sys.sql
 
-#0644 ../thirdparty/SmartSSD/libsdm.so ../thirdparty/SmartSSD/libsdm.so
+#0644 ../3rdparty/SmartSSD/libsdm.so ../3rdparty/SmartSSD/libsdm.so
 [*][*][S][*][*][0644][*]
-thirdparty/SmartSSD
+3rdparty/SmartSSD
 libsdm.so
-thirdparty/SmartSSD
+3rdparty/SmartSSD
 libsdm.so
 
 ################################################################################################

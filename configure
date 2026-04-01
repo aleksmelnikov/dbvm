@@ -2114,7 +2114,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 ac_aux_dir=
-for ac_dir in ./thirdparty/build-aux "$srcdir"/./thirdparty/build-aux; do
+for ac_dir in ./3rdparty/build-aux "$srcdir"/./3rdparty/build-aux; do
   for ac_t in install-sh install.sh shtool; do
     if test -f "$ac_dir/$ac_t"; then
       ac_aux_dir=$ac_dir
@@ -2124,7 +2124,7 @@ for ac_dir in ./thirdparty/build-aux "$srcdir"/./thirdparty/build-aux; do
   done
 done
 if test -z "$ac_aux_dir"; then
-  as_fn_error "cannot find install-sh, install.sh, or shtool in ./thirdparty/build-aux \"$srcdir\"/./thirdparty/build-aux" "$LINENO" 5
+  as_fn_error "cannot find install-sh, install.sh, or shtool in ./3rdparty/build-aux \"$srcdir\"/./3rdparty/build-aux" "$LINENO" 5
 fi
 
 # These three variables are undocumented and unsupported,
@@ -4417,18 +4417,18 @@ fi
 
 # 5.1 check bison output header name
 echo "Checking Bison header postfix.";
-(cd thirdparty/build-aux; rm -rf *.cpp *.h; ${BISON} -d -y ./test.y -o test.cpp)
-if test -f ./thirdparty/build-aux/test.cpp.h; then
+(cd 3rdparty/build-aux; rm -rf *.cpp *.h; ${BISON} -d -y ./test.y -o test.cpp)
+if test -f ./3rdparty/build-aux/test.cpp.h; then
     echo "   BISON POSTFIX ==> .cpp.h"
     $as_echo "#define BISON_POSTFIX_CPP_H 1" >>confdefs.h
 
 else
-    if test -f ./thirdparty/build-aux/test.hpp; then
+    if test -f ./3rdparty/build-aux/test.hpp; then
         echo "   BISON POSTFIX ==> .hpp"
         $as_echo "#define BISON_POSTFIX_HPP 1" >>confdefs.h
 
     else
-        echo "ERROR : Unknown header postfix. check altidev/thirdparty/build-aux/test file"
+        echo "ERROR : Unknown header postfix. check altidev/3rdparty/build-aux/test file"
         exit;
     fi
 fi
@@ -6104,38 +6104,11 @@ DK_DIR="${DEV_DIR}/src/${SELECT_DK_KIND}"
 UL_DIR="${DEV_DIR}/${PRODUCT_PREFIX}src/ul"
 UT_DIR="${DEV_DIR}/ut"
 TOOL_DIR="${DEV_DIR}/tool"
-THIRDPARTY_DIR="${DEV_DIR}/thirdparty"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+THIRDPARTY_DIR="${DEV_DIR}/3rdparty"
 
 rm -rf ${PD_DIR}/makeinclude/config-linkage.h
 rm -rf ${PD_DIR}/makefiles/platform_macros.GNU
 rm -rf ${PD_DIR}/makefiles2/platform.mk
-
 
 case "$OS_TARGET" in
     SPARC_SOLARIS )
