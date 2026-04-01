@@ -168,7 +168,7 @@ COMP_FLAGS = -c
 PREP_FLAGS = -E
 DEP_FLAGS  = -MM -MT '$(sort $(addsuffix $(OBJ_SUF),$(basename $@)) $(addsuffix $(SHOBJ_SUF), $(basename $@))) $@'
 DEP_CMD_CC		= $(CC) $(DEP_FLAGS) $(CC_FLAGS) $(addprefix $(DEF_OPT),$(DEFINES)) $(INCLUDES) $< > $@
-DEP_CMD_CXX		= $(CXX) $(DEP_FLAGS) $(CC_FLAGS) $(addprefix $(DEF_OPT),$(DEFINES)) $(INCLUDES) $< > $@
+DEP_CMD_CXX		= $(CXX) $(DEP_FLAGS) $(CXX_FLAGS) $(addprefix $(DEF_OPT),$(DEFINES)) $(INCLUDES) $< > $@
 
 DEFINES    = _POSIX_PTHREAD_SEMANTICS _POSIX_THREADS _POSIX_THREAD_SAFE_FUNCTIONS _REENTRANT _THREAD_SAFE
 
@@ -291,7 +291,7 @@ else ifeq ($(ALTI_CFG_OS),HPUX)
 else ifeq ($(ALTI_CFG_OS),LINUX)
   DEFINES_M32 += _FILE_OFFSET_BITS=64
   DEFINES     += _GNU_SOURCE
-  CC_FLAGS    +=
+# CC_FLAGS    +=
   SO_FLAGS    += -rdynamic
   LD_LIBS     += -lpthread -ldl -rdynamic
   SO_LIBS     += -lpthread -ldl
@@ -299,7 +299,7 @@ else ifeq ($(ALTI_CFG_OS),LINUX)
 else ifeq ($(ALTI_CFG_OS),FREEBSD)   
   DEFINES_M32 += _FILE_OFFSET_BITS=64
   DEFINES     += _GNU_SOURCE
-  CC_FLAGS    +=
+# CC_FLAGS    +=
   SO_FLAGS    += -rdynamic
   LD_LIBS     += -lpthread -rdynamic
   SO_LIBS     += -lpthread        
@@ -308,7 +308,7 @@ else ifeq ($(ALTI_CFG_OS),FREEBSD)
 ################ MAX ####################
 else ifeq ($(ALTI_CFG_OS),DARWIN)
   DEFINES     += _XOPEN_SOURCE
-  CC_FLAGS    +=
+# CC_FLAGS    +=
   # TASK-5309
   # flat_namespace option makes linker resolve symols dynamically
   SO_FLAGS    += -dynamiclib -static-libgcc -flat_namespace
@@ -405,3 +405,8 @@ ifneq ($(static_anlz),)
   READLINE_SUPPORT = no
   DEFINES  += __STATIC_ANALYSIS_DOING__ ACP_CFG_MEMORY_CHECK
 endif
+
+###  Backward compatibility flags for new C/C++ compiler stardards ###
+CC_FLAGS  += $(C_BACKWARD_FLAGS)
+CXX_FLAGS += $(CXX_BACKWARD_FLAGS)
+###  Backward compatibility flags for new C/C++ compiler stardards ###
