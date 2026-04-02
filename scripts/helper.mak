@@ -44,3 +44,29 @@
 # v2
 print-% : ; @echo '$* = $($*) $(if $($*_HELP),# $($*_HELP))'
 printvalue-% : ; @echo '$($*)'
+
+
+
+# This target prints all variables in two columns: VARIABLE=VALUE and DESCRIPTION (from _HELP)
+# Usage example: make -f vars.mk -f scripts/helper.mak print-all
+#
+# Magic breakdown:
+# 1. $(filter-out $(INTERNAL_VARS), $(.VARIABLES)) — removes noisy built-in make variables.
+# 2. $(sort ...) — alphabetizes the remaining list.
+# 3. $(filter file,$(origin $(v))) — picks only variables defined in .mk files (skips env, cmd-line, defaults).
+# 4. $(if $(filter %_HELP,$(v)), , ...) — hides the description variables themselves from the left column.
+# 5. $(shell printf ...) — formats the output into columns via the system shell.
+# 6. $(info ...) — prints the result directly to the terminal.
+
+# List of internal make variables to exclude from the output
+INTERNAL_VARS := INTERNAL_VARS .VARIABLES .RECIPEPREFIX .SHELLFLAGS .DEFAULT_GOAL MAKEFILE_LIST MAKEFLAGS SHELL CURDIR MAKECMDGOALS MAKELEVEL SUFFIXES
+
+print-all:
+	@$(foreach v, $(sort $(filter-out $(INTERNAL_VARS), $(.VARIABLES))), \
+		$(if $(filter file,$(origin $(v))), \
+			$(if $(filter %_HELP,$(v)), , \
+				$(info $(shell printf "%-60s" '$(v)=$($(v))')$($(v)_HELP)) \
+			) \
+		) \
+	)
+	@:
