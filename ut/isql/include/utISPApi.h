@@ -161,19 +161,19 @@ public:
 		, SInt   aConnType
 		, SChar  *aTimezone       /* PROJ-2209 DBTimezone */
 		, SQLMessageCallbackStruct *aMessageCallback
-		, SChar *aSslCa      = "" /* BUG-41281 SSL, use default value for compatibility */
-		, SChar *aSslCapath  = ""
-		, SChar *aSslCert    = ""
-		, SChar *aSslKey     = ""
-		, SChar *aSslVerify  = ""
-		, SChar *aSslCipher  = ""
-		, SChar *aUserCert   = "" /* use default value for compatibility */
-		, SChar *aUserKey    = "" /* use default value for compatibility */
-		, SChar *aUserAID    = "" /* use default value for compatibility */
-		, SChar *aUserPasswd = "" /* use default value for compatibility */
-		, SChar *aUnixdomainFilepath = "" /* use default value for compatibility */
-		, SChar *aIpcFilepath        = "" /* use default value for compatibility */
-        , SChar *aAppInfo    = "" /* use default value for compatibility */
+		, SChar *aSslCa      = (SChar *)"" /* BUG-41281 SSL, use default value for compatibility */
+		, SChar *aSslCapath  = (SChar *)""
+		, SChar *aSslCert    = (SChar *)""
+		, SChar *aSslKey     = (SChar *)""
+		, SChar *aSslVerify  = (SChar *)""
+		, SChar *aSslCipher  = (SChar *)""
+		, SChar *aUserCert   = (SChar *)"" /* use default value for compatibility */
+		, SChar *aUserKey    = (SChar *)"" /* use default value for compatibility */
+		, SChar *aUserAID    = (SChar *)"" /* use default value for compatibility */
+		, SChar *aUserPasswd = (SChar *)"" /* use default value for compatibility */
+		, SChar *aUnixdomainFilepath = (SChar *)"" /* use default value for compatibility */
+		, SChar *aIpcFilepath        = (SChar *)"" /* use default value for compatibility */
+        , SChar *aAppInfo    = (SChar *)"" /* use default value for compatibility */
         , idBool aIsSysDBA   = ID_FALSE   /* use default value for compatibility */
         , idBool aIsPreferIPv6 = ID_FALSE ); /* BUG-29915 */
 

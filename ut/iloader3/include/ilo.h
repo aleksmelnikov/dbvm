@@ -111,12 +111,12 @@ IDE_RC ConnectDB( ALTIBASE_ILOADER_HANDLE  aHandle,
                   SInt                     aPortNo,
                   SInt                     aConnType,
                   iloBool                  aPreferIPv6,
-                  SChar                   *aSslCa      = "",
-                  SChar                   *aSslCapath  = "",
-                  SChar                   *aSslCert    = "",
-                  SChar                   *aSslKey     = "",
-                  SChar                   *aSslVerify  = "",
-                  SChar                   *aSslCipher  = "");
+                  SChar                   *aSslCa      = (SChar *)"",
+                  SChar                   *aSslCapath  = (SChar *)"",
+                  SChar                   *aSslCert    = (SChar *)"",
+                  SChar                   *aSslKey     = (SChar *)"",
+                  SChar                   *aSslVerify  = (SChar *)"",
+                  SChar                   *aSslCipher  = (SChar *)"");
 
 IDE_RC DisconnectDB(iloSQLApi *aISPApi);
 
