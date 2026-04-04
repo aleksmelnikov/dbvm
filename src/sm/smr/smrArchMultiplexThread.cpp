@@ -74,7 +74,7 @@ IDE_RC smrArchMultiplexThread::initialize(
         new(&((*aArchMultiplexThread)[sMultiplexIdx])) smrArchMultiplexThread();
 
         IDU_FIT_POINT("BUG-45313@smrArchMultiplexThread::initialize::initializeThread");
-        IDE_TEST( (*aArchMultiplexThread)[sMultiplexIdx].initializeThread( 
+        IDE_TEST( (*aArchMultiplexThread)[sMultiplexIdx].initializeThreadParams( 
                                                       aArchPath[sMultiplexIdx],
                                                       sMultiplexIdx ) 
                   != IDE_SUCCESS );
@@ -106,8 +106,8 @@ IDE_RC smrArchMultiplexThread::initialize(
  * aArchPath            - [IN] archive될 디렉토리 path
  * aMultiplexIdx        - [IN] 초기화할 thread의 idx 번호
  **********************************************************************/
-IDE_RC smrArchMultiplexThread::initializeThread( const SChar * aArchPath,
-                                                 UInt          aMultiplexIdx )
+IDE_RC smrArchMultiplexThread::initializeThreadParams( const SChar * aArchPath,
+                                                       UInt          aMultiplexIdx )
 {
     SChar sMtxName[128] = {'\0',};
     SChar sCVName[128]  = {'\0',};

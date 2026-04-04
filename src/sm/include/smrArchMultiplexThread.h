@@ -61,8 +61,8 @@ public:
 
 private:
 
-    IDE_RC initializeThread( const SChar * aArchPath,
-                             UInt          aMultiplexIdx );
+    IDE_RC initializeThreadParams( const SChar * aArchPath,
+                                   UInt          aMultiplexIdx );
 
     IDE_RC destroyThread();
 
