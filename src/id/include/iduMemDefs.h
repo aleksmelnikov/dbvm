@@ -310,7 +310,7 @@ class iduMemAlloc : public iduMemAllocCore
 {
 public:
     /* Initialization functions */
-    virtual IDE_RC initialize(SChar* aName);
+/*virtual*/ IDE_RC initialize(SChar* aName); /* Non-virtual: no polymorphic usage in derived classes */
     virtual IDE_RC destroy(void);
 
     /* for fixed-size allocators */
@@ -466,7 +466,7 @@ public:
     virtual ~iduMemSmall() {};
 
 public:
-    virtual IDE_RC  initialize(SChar*, UInt);
+/*virtual*/ IDE_RC  initialize(SChar*, UInt); /* Overridden but not virtual (no polymorphic calls)*/
     virtual IDE_RC  destroy();
     virtual IDE_RC  malloc(iduMemoryClientIndex, ULong, void**);
     virtual IDE_RC  free(void*);
@@ -566,7 +566,7 @@ public:
     virtual IDE_RC  lock(void);
     virtual IDE_RC  unlock(void);
 
-    virtual IDE_RC  initialize(SChar*, idBool, ULong);
+/*virtual*/ IDE_RC  initialize(SChar*, idBool, ULong); /* Overridden but not virtual (no polymorphic calls)*/
 
     virtual IDE_RC  expand(void);
     virtual IDE_RC  shrink(void) {return IDE_SUCCESS;}
