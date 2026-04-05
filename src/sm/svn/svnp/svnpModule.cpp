@@ -56,7 +56,9 @@ static IDE_RC svnpInit( svnpIterator         * aIterator,
 
 static IDE_RC svnpDest( svnpIterator* aIterator );
 
-static IDE_RC svnpNA( void );
+static IDE_RC svnpNA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ );
+
 static IDE_RC svnpAA( svnpIterator  * aIterator,
                                  const void   ** aRow );
 static IDE_RC svnpBeforeFirst( svnpIterator      * aIterator,
@@ -688,7 +690,8 @@ static IDE_RC svnpAA( svnpIterator*,
     return IDE_SUCCESS;
 }
 
-IDE_RC svnpNA( void )
+IDE_RC svnpNA( void         * /*aIterator*/,
+               const void  ** /*aRow */ )
 {
     IDE_SET( ideSetErrorCode( smERR_ABORT_smiTraverseNotApplicable ) );
 

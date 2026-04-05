@@ -53,7 +53,8 @@ static IDE_RC smnfInit( smnfIterator        * aIterator,
 
 static IDE_RC smnfDest( smnfIterator* aIterator );
 
-static IDE_RC        smnfNA           ( void );
+static IDE_RC        smnfNA           ( void         * /*aIterator*/,
+                                        const void  ** /*aRow*/ );
 static IDE_RC        smnfAA           ( smnfIterator* aIterator,
                                         const void**  aRow );
 static IDE_RC smnfBeforeFirst  ( smnfIterator*       aIterator,
@@ -430,7 +431,8 @@ static IDE_RC smnfAA( smnfIterator*,
 
 }
 
-static IDE_RC smnfNA( void )
+static IDE_RC smnfNA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ )
 {
 
     IDE_SET( ideSetErrorCode( smERR_ABORT_smiTraverseNotApplicable ) );

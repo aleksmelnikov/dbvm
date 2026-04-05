@@ -135,7 +135,8 @@ public:
                             idBool         aIgnoreNotFoundKey,
                             idBool       * aIsExistFreeKey );
     
-    static IDE_RC NA( void );
+    static IDE_RC NA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ );
 
     static IDE_RC beforeFirst( stnmrIterator*       aIterator,
                                const smSeekFunc**  aSeekFunc );

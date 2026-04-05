@@ -197,7 +197,8 @@ public:
                               void           * aStats,
                               idBool           aDynamicMode );
 
-    static IDE_RC NA( void );
+    static IDE_RC NA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ );
 
     static IDE_RC beforeFirst( smnbIterator*       aIterator,
                                const smSeekFunc**  aSeekFunc );

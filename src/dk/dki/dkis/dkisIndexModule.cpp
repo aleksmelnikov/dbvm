@@ -100,7 +100,8 @@ static IDE_RC dkisAA( void * /*aIterator*/, const void  ** /*aRow*/)
 /*
  *
  */ 
-static IDE_RC dkisNA( void )
+static IDE_RC dkisNA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ )
 {
     IDE_SET( ideSetErrorCode( dkERR_ABORT_TRAVERSE_NOT_APPLICABLE ) );
     

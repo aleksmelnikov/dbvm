@@ -19460,7 +19460,8 @@ IDE_RC sdnbBTree::analyzeNode4GatherStat( sdnbStatArgument * aStatArgument,
  * ------------------------------------------------------------------*
  * default function for invalid traversing protocol                  *
  *********************************************************************/
-IDE_RC sdnbBTree::NA( void )
+IDE_RC sdnbBTree::NA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ )
 {
 
     IDE_SET( ideSetErrorCode( smERR_ABORT_smiTraverseNotApplicable ) );

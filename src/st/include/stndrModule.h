@@ -196,7 +196,8 @@ public:
      * Seek Fucntion
      * ----------------------------------------------*/
     
-    static IDE_RC NA( void ); 
+    static IDE_RC NA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ );
 
     static IDE_RC beforeFirst( stndrIterator     * aIterator,
                                const smSeekFunc ** aSeekFunc );

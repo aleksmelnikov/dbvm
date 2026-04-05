@@ -60,7 +60,9 @@ static IDE_RC sdnpInit( sdnpIterator          * aIterator,
 
 static IDE_RC sdnpDest( sdnpIterator  * aIterator );
 
-static IDE_RC sdnpNA( void );
+static IDE_RC sdnpNA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ );
+
 static IDE_RC sdnpAA( sdnpIterator   * aIterator,
                       const void    ** aRow );
 
@@ -720,7 +722,8 @@ static IDE_RC sdnpAA( sdnpIterator   * /*aIterator*/,
     return IDE_SUCCESS;
 }
 
-IDE_RC sdnpNA( void )
+IDE_RC sdnpNA( void         * /*aIterator*/,
+               const void  ** /*aRow*/ )
 {
     IDE_SET( ideSetErrorCode( smERR_ABORT_smiTraverseNotApplicable ) );
 

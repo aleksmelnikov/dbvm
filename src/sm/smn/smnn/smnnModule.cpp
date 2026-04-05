@@ -596,7 +596,8 @@ IDE_RC smnnSeq::AA( smnnIterator*,
 
 }
 
-IDE_RC smnnSeq::NA( void )
+IDE_RC smnnSeq::NA( void         * /*aIterator*/,
+                    const void  ** /*aRow*/ )
 {
 
     IDE_SET( ideSetErrorCode( smERR_ABORT_smiTraverseNotApplicable ) );

@@ -868,7 +868,8 @@ public:
                          smcTableHeader * aHeader,
                          smnIndexHeader * aIndex );
 
-    static IDE_RC NA( void ); 
+    static IDE_RC NA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ );
 
     static IDE_RC beforeFirstInternal( sdnbIterator* a_pIterator );
     

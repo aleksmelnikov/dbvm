@@ -2138,7 +2138,8 @@ stnmrNode* stnmrRTree::findLeaf( const stnmrHeader* aHeader,
 
 }
 
-IDE_RC stnmrRTree::NA( void )
+IDE_RC stnmrRTree::NA( void         * /*aIterator*/,
+                       const void  ** /*aRow*/ )
 {
 
     IDE_SET( ideSetErrorCode( stERR_ABORT_TRAVERSE_NOT_APPLICABLE ) );

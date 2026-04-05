@@ -6533,7 +6533,8 @@ void smnbBTree::getNextNode4Stat( smnbHeader     * aIdxHdr,
     }
 }
 
-IDE_RC smnbBTree::NA( void )
+IDE_RC smnbBTree::NA( void         * /*aIterator*/,
+                      const void  ** /*aRow*/ )
 {
     IDE_SET( ideSetErrorCode( smERR_ABORT_smiTraverseNotApplicable ) );
 

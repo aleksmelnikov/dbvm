@@ -3265,7 +3265,8 @@ IDE_RC stndrRTree::aging( idvSQL            * aStatistics,
  * ------------------------------------------------------------------*
  * default function for invalid traversing protocol
  *********************************************************************/
-IDE_RC stndrRTree::NA( void )
+IDE_RC stndrRTree::NA( void         * /*aIterator*/,
+                       const void  ** /*aRow*/ )
 {
     IDE_SET( ideSetErrorCode( smERR_ABORT_smiTraverseNotApplicable ) );
 
