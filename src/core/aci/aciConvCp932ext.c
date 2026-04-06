@@ -747,7 +747,7 @@ acp_sint32_t aciConvConvertWcToMb4Cp932ext( void         * aSrc,
  ***********************************************************************/
 
     acp_uint8_t      *  sDestPtr = ( acp_uint8_t * )aDest;
-    aciConvSummary16 *  sSummary = NULL;
+    const aciConvSummary16 *  sSummary = NULL;
     acp_uint16_t        sWideChar = 0;
     acp_uint16_t        sVal = 0;
     acp_uint16_t        sUsed = 0;
