@@ -20,7 +20,7 @@ void testvalidateTableName()
     sStatement.sharedPlan.sTmplate = &sTemplate1;
     sStatement.myPlan = &(sStatement.sharedPlan);
 
-    sTableName.stmtText = "X$Table";
+    sTableName.stmtText = (char*)"X$Table";
     sTableName.offset   = 0;
     sTableName.size     = 7;
 
@@ -37,7 +37,7 @@ void testvalidateTableName()
     ACT_CHECK( sStatement.myPlan->sTmplate->fixedTableAutomataStatus == 3);
 
 
-    sTableName.stmtText = "x$Table";
+    sTableName.stmtText = (char*)"x$Table";
     sTableName.offset   = 0;
     sTableName.size     = 7;
 
@@ -60,14 +60,14 @@ void testmakeTrimmedName()
     SChar  sDst[12]    = {0,0,0,0,0,0,0,0,0,0,0,0};
     SChar  sResult[12] = {'T','a','b','l','e',0,0,0,0,0,0,0};
 
-    qcmFixedTable::makeTrimmedName(sDst, "Table    ");
+    qcmFixedTable::makeTrimmedName(sDst, (char*)"Table    ");
 
     for(i=0; i < 10; ++i)
     {
         ACT_CHECK( sDst[i] == sResult[i]);
     }
 
-    qcmFixedTable::makeTrimmedName(sDst, "Table Name");
+    qcmFixedTable::makeTrimmedName(sDst, (char*)"Table Name");
 
     for(i=0; i < 10; ++i)
     {
@@ -89,4 +89,3 @@ acp_sint32_t main(acp_sint32_t aArgc, acp_char_t *aArgv[])
 
     return 0;
 }
-

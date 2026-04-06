@@ -295,7 +295,7 @@ void unittestIdeTestCorruptLogHandling( ideMsgLogStrategy aStrategy )
 
     /* create a corrupt log file */
     ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdOpen(&sFile, const_cast<acp_char_t*>(TEST_FILE_NAME), "w")));
-    ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdPutCString(&sFile, "oh shoot, the file is corrupted :-(", 50, &sWritten)));
+    ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdPutCString(&sFile, const_cast<acp_char_t*>("oh shoot, the file is corrupted :-("), 50, &sWritten)));
     ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdClose(&sFile)));
 
     unittestIdeSetupLog( aStrategy, 256, ACP_TRUE );
@@ -319,7 +319,7 @@ void unittestIdeTestLogReserve( ideMsgLogStrategy aStrategy )
     const acp_char_t *const TEST_MESSAGE = "Logging test from unittestIdeTestLogReserve()\n";
 
     acp_std_file_t sFile;
-    acp_char_t    *IDE_RESERVE_FILL_CHAR = "\0";
+    const acp_char_t *const IDE_RESERVE_FILL_CHAR = "\0";
 
     /* Write log */
     unittestIdeSetupLog( aStrategy, 2048 );
@@ -442,8 +442,8 @@ void unittestIdeStressTest( ideMsgLogStrategy aStrategy )
         acp_sint32_t   sLineCount = 0;
         acp_std_file_t sFile;
         acp_bool_t     sIsEOF;
-        acp_char_t    *IDE_RESERVE_FILL_CHAR = "\0";
-        acp_char_t    *IDE_RESERVE_LINE_BREAK = "\n";
+        const acp_char_t *const IDE_RESERVE_FILL_CHAR = "\0";
+        const acp_char_t *const IDE_RESERVE_LINE_BREAK = "\n";
 
         ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdOpen(&sFile, sEntryName, "r")));
         ACT_ASSERT(ACP_RC_IS_SUCCESS(acpStdGetCString(&sFile, sBuf, BUF_SIZE))); /*ignore the header*/
