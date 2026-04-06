@@ -24,16 +24,15 @@ void setXLog( rpdXLog * aXLog, acp_uint32_t aNumber )
 }
 
 /* unittest
- * rpdQueue::read(rpdXLog **)
- * rpdQueue::read(rpdXLog **, smSN *)
- * rpdQueue::write
+ * rpdQueue::write(rpdXLog *aXLogPtr)
+ * rpdQueue::read(rpdXLog **aXLogPtr)
+ * rpdQueue::read(rpdXLog **aXLogPtr, UInt  aTimeoutSec)
  */
 acp_sint32_t main( void )
 {
     rpdQueue     sQueue;
     rpdXLog    * sPushXLog[3];
     rpdXLog    * sPopXLog;
-    smSN         sSN;
     acp_uint32_t sCount;
     UInt         aTimeoutSec = 0;
 
@@ -41,7 +40,7 @@ acp_sint32_t main( void )
 
     ACT_CHECK( iduMutexMgr::initializeStatic( IDU_CLIENT_TYPE ) == ACP_RC_SUCCESS );
 
-    ACT_CHECK( sQueue.initialize( "REP_NAME" ) == ACP_RC_SUCCESS );
+    ACT_CHECK( sQueue.initialize( (char*)"REP_NAME" ) == ACP_RC_SUCCESS );
 
     /* insert datas to Queue
      * ( mColCnt, mSN ) : ( 100, 101 ) -> ( 200, 201 ) -> ( 300, 301 )
@@ -53,13 +52,20 @@ acp_sint32_t main( void )
         sQueue.write( sPushXLog[sCount] );
     }
 
-    /* read(rpdXLog) function returns first poped XLog */
+    /* read(rpdXLog) function returns the first XLog */
     sQueue.read( &sPopXLog );
     ACT_CHECK( 100 == sPopXLog->mColCnt );
+    ACT_CHECK( 101 == sPopXLog->mSN );
 
-    /* read(rpdXLog, smSN) function returns first poped XLog and last XLog's SN */
+    /* read(rpdXLog, UInt) function returns the second XLog */
     sQueue.read( &sPopXLog, aTimeoutSec );
-    ACT_CHECK( ( 200 == sPopXLog->mColCnt ) && ( 301 == sSN ) );
+    ACT_CHECK( 200 == sPopXLog->mColCnt );
+    ACT_CHECK( 201 == sPopXLog->mSN );
+
+    /* read(rpdXLog) function returns the third XLog */
+    sQueue.read( &sPopXLog );
+    ACT_CHECK( 300 == sPopXLog->mColCnt );
+    ACT_CHECK( 301 == sPopXLog->mSN );
 
     /* XLog's free is run inside destroy function. */
     sQueue.destroy();
