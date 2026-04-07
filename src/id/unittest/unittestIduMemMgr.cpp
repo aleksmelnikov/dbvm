@@ -86,7 +86,7 @@ public:
         SInt    j;
         void*   sPtr;
 
-        for(j = 0; i < TEST_LOOP; i++)
+        for(j = 0; j < TEST_LOOP; j++)
         {
             for(i = 0; i < TEST_CHUNKSIZE; i++)
             {
