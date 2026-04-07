@@ -12756,7 +12756,8 @@ IDE_RC stndrRTree::beforeFirst( stndrIterator       *  aIterator,
 {
     for( aIterator->mKeyRange       = aIterator->mKeyRange;
          aIterator->mKeyRange->prev != NULL;
-         aIterator->mKeyRange       = aIterator->mKeyRange->prev ) ;
+         aIterator->mKeyRange       = aIterator->mKeyRange->prev )
+       ;
 
     IDE_TEST( beforeFirstInternal( aIterator ) != IDE_SUCCESS );
 

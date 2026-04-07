@@ -1510,7 +1510,8 @@ IDE_RC qdx::validatePartitionedIndexOnCreateTable(
     // 지정한 인덱스 파티션 개수
     for( sIndexPartCount = 0, sIndexPartAttr = aPartIndex->partAttr;
          sIndexPartAttr != NULL;
-         sIndexPartCount++, sIndexPartAttr = sIndexPartAttr->next ) ;
+         sIndexPartCount++, sIndexPartAttr = sIndexPartAttr->next )
+       ;
 
     // ------------------------------------------------------------
     // 2. 지정한 인덱스 파티션의 개수 체크

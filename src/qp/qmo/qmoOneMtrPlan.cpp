@@ -9227,7 +9227,8 @@ IDE_RC qmoOneMtrPlan::makeAggrArgumentsMtrNode( qcStatement * aStatement,
     {
         for ( sLastMtrNode        = *aFirstMtrNode;
               sLastMtrNode->next != NULL;
-              sLastMtrNode        = sLastMtrNode->next );
+              sLastMtrNode        = sLastMtrNode->next )
+            ;
 
         IDE_TEST( qmg::changeColumnLocate( aStatement,
                                            aQuerySet,
@@ -9308,7 +9309,8 @@ IDE_RC qmoOneMtrPlan::makeAggrArgumentsMtrNode( qcStatement * aStatement,
         {
             for ( sLastMtrNode        = *aFirstMtrNode;
                   sLastMtrNode->next != NULL;
-                  sLastMtrNode        = sLastMtrNode->next );
+                  sLastMtrNode        = sLastMtrNode->next )
+                ;
 
             IDE_TEST( qmg::makeColumnMtrNode( aStatement,
                                               aQuerySet,

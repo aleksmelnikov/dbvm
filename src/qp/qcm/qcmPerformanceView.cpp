@@ -2102,7 +2102,8 @@ IDE_RC qcmPerformanceView::registerOnIduFixedTableDesc(
 
     for( sQcmColumn = aParseTree->columns, sColumnCount =0;
          sQcmColumn != NULL;
-         sQcmColumn = sQcmColumn->next, sColumnCount++ ) ;
+         sQcmColumn = sQcmColumn->next, sColumnCount++ )
+       ;
 
     // alloc sColumnCount + 1, 1 means null columnDescription for detecting terminal.
     IDU_FIT_POINT( "qcmPerformanceView::registerOnIduFixedTableDesc::malloc::sFixedTableColDesc",

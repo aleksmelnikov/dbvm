@@ -6546,7 +6546,8 @@ IDE_RC smnbBTree::beforeFirst( smnbIterator* a_pIterator,
 {
     for( a_pIterator->mKeyRange      = a_pIterator->mKeyRange;
          a_pIterator->mKeyRange->prev != NULL;
-         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->prev ) ;
+         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->prev )
+       ;
 
     IDE_TEST( beforeFirstInternal( a_pIterator ) != IDE_SUCCESS );
 
@@ -7524,7 +7525,8 @@ IDE_RC smnbBTree::beforeFirstQ( void* aIterator )
 
     for( a_pIterator->mKeyRange      = a_pIterator->mKeyRange;
          a_pIterator->mKeyRange->prev != NULL;
-         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->prev ) ;
+         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->prev )
+       ;
 
     IDE_TEST( beforeFirstInternalQ( a_pIterator ) != IDE_SUCCESS );
 
@@ -8083,7 +8085,8 @@ IDE_RC smnbBTree::afterLast( smnbIterator* a_pIterator,
 {
     for( a_pIterator->mKeyRange        = a_pIterator->mKeyRange;
          a_pIterator->mKeyRange->next != NULL;
-         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->next ) ;
+         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->next )
+       ;
 
     IDE_TEST( afterLastInternal( a_pIterator ) != IDE_SUCCESS );
 
@@ -8107,7 +8110,8 @@ IDE_RC smnbBTree::afterLastQ( void* aIterator )
 
     for( a_pIterator->mKeyRange        = a_pIterator->mKeyRange;
          a_pIterator->mKeyRange->next != NULL;
-         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->next ) ;
+         a_pIterator->mKeyRange        = a_pIterator->mKeyRange->next )
+       ;
 
     IDE_TEST( afterLastInternal( a_pIterator ) != IDE_SUCCESS );
 

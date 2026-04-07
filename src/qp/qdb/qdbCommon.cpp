@@ -240,7 +240,8 @@ IDE_RC qdbCommon::makeSmiColumnList(
 
     for( sColumn = aColumns, sColumnCount = 0;
          sColumn != NULL;
-         sColumn = sColumn->next, sColumnCount ++ ) ;
+         sColumn = sColumn->next, sColumnCount ++ )
+       ;
 
     // make smi columnlist using aColumns.
     IDU_LIMITPOINT("qdbCommon::makeSmiColumnList::malloc");
@@ -6839,7 +6840,8 @@ IDE_RC qdbCommon::createConstrPrimaryUnique(
                 // 지정한 인덱스 파티션 개수
                 for( sIndexPartCount = 0, sPartAttr = aConstr->partIndex->partAttr;
                      sPartAttr != NULL;
-                     sIndexPartCount++, sPartAttr = sPartAttr->next ) ;
+                     sIndexPartCount++, sPartAttr = sPartAttr->next )
+                   ;
 
                 // 테이블 파티션 개수
                 IDE_TEST( qcmPartition::getPartitionCount( aStatement,
@@ -7738,7 +7740,8 @@ IDE_RC qdbCommon::createIndexFromIndexParseTree(
             // 지정한 인덱스 파티션 개수
             for( sIndexPartCount = 0, sPartAttr = aIndexParseTree->partIndex->partAttr;
                  sPartAttr != NULL;
-                 sIndexPartCount++, sPartAttr = sPartAttr->next ) ;
+                 sIndexPartCount++, sPartAttr = sPartAttr->next )
+               ;
 
             // 테이블 파티션 개수
             IDE_TEST( qcmPartition::getPartitionCount( aStatement,
@@ -9097,7 +9100,8 @@ IDE_RC qdbCommon::setColListOffset( iduMemory * aMem,
 
     for (sColumn = aColumns, sColumnCount = 0;
          sColumn != NULL;
-         sColumn = sColumn->next, sColumnCount++) ;
+         sColumn = sColumn->next, sColumnCount++)
+        ;
 
     IDU_LIMITPOINT("qdbCommon::setColListOffset::malloc1");
     IDE_TEST( aMem->alloc( ID_SIZEOF(qdColumnIdx) * sColumnCount,
@@ -9363,7 +9367,8 @@ IDE_RC qdbCommon::setColListOffset( iduVarMemList * aMem,
 
     for (sColumn = aColumns, sColumnCount = 0;
          sColumn != NULL;
-         sColumn = sColumn->next, sColumnCount++) ;
+         sColumn = sColumn->next, sColumnCount++)
+        ;
 
     IDU_LIMITPOINT("qdbCommon::setColListOffset::malloc2");
     IDE_TEST( aMem->alloc( ID_SIZEOF(qdColumnIdx) * sColumnCount,
@@ -15968,7 +15973,8 @@ IDE_RC qdbCommon::makeNcharLiteralStrForIndex(
             {
                 for ( sNcharLiteral = aColumn->ncharLiteralPos;
                       sNcharLiteral->next != NULL;
-                      sNcharLiteral = sNcharLiteral->next ) ;
+                      sNcharLiteral = sNcharLiteral->next )
+                    ;
 
                 IDE_TEST( QC_QMP_MEM(aStatement)->alloc( ID_SIZEOF(qcNamePosList),
                                                          (void**)&sTempNcharLiteral )
@@ -16061,7 +16067,8 @@ IDE_RC qdbCommon::makeNcharLiteralStrForConstraint(
             {
                 for ( sNcharLiteral = aConstr->ncharList;
                       sNcharLiteral->next != NULL;
-                      sNcharLiteral = sNcharLiteral->next ) ;
+                      sNcharLiteral = sNcharLiteral->next )
+                    ;
 
                 IDE_TEST( QC_QMP_MEM(aStatement)->alloc( ID_SIZEOF(qcNamePosList),
                                                          (void**)&sTempNcharLiteral )
@@ -16217,7 +16224,8 @@ IDE_RC qdbCommon::makeNcharLiteralStr(
             {
                 for( sNcharLiteral = aColumn->ncharLiteralPos;
                      sNcharLiteral->next != NULL;
-                     sNcharLiteral = sNcharLiteral->next ) ;
+                     sNcharLiteral = sNcharLiteral->next )
+                   ;
 
                 IDU_LIMITPOINT("qdbCommon::makeNcharLiteralStr::malloc1");
                 IDE_TEST(QC_QMP_MEM(aStatement)->alloc( ID_SIZEOF(qcNamePosList),
@@ -16324,7 +16332,8 @@ IDE_RC qdbCommon::makeNcharLiteralStr(
             {
                 for( sNcharLiteral = aPartAttr->ncharLiteralPos;
                      sNcharLiteral->next != NULL;
-                     sNcharLiteral = sNcharLiteral->next ) ;
+                     sNcharLiteral = sNcharLiteral->next )
+                   ;
 
                 IDU_LIMITPOINT("qdbCommon::makeNcharLiteralStr::malloc3");
                 IDE_TEST(QC_QMP_MEM(aStatement)->alloc( ID_SIZEOF(qcNamePosList),

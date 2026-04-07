@@ -5218,11 +5218,13 @@ IDE_RC qcmPartition::checkPartitionCount4Execute( qcStatement          * aStatem
 
     for ( sPartInfo = aPartInfoList, sOrgCount = 0;
           sPartInfo != NULL;
-          sPartInfo = sPartInfo->next, sOrgCount++ );
+          sPartInfo = sPartInfo->next, sOrgCount++ )
+        ;
 
     for ( sPartInfo = sTempPartInfo, sNewCount = 0;
           sPartInfo != NULL;
-          sPartInfo = sPartInfo->next, sNewCount++ );
+          sPartInfo = sPartInfo->next, sNewCount++ )
+        ;
 
     /* BUG-42681 valgrind split 중 add column 동시성 문제
      *

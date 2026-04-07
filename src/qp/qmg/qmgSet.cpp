@@ -223,7 +223,8 @@ qmgSet::optimize( qcStatement * aStatement, qmgGraph * aGraph )
     {
         for ( sQuerySet = sMyGraph->graph.myQuerySet;
               sQuerySet->left != NULL;
-              sQuerySet = sQuerySet->left ) ;
+              sQuerySet = sQuerySet->left )
+            ;
 
         IDE_TEST(
             qmg::getBucketCntWithTarget(

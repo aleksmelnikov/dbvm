@@ -19483,7 +19483,8 @@ IDE_RC sdnbBTree::beforeFirst( sdnbIterator*       aIterator,
 
     for ( aIterator->mKeyRange      = aIterator->mKeyRange ;
           aIterator->mKeyRange->prev != NULL ;
-          aIterator->mKeyRange        = aIterator->mKeyRange->prev ) ;
+          aIterator->mKeyRange        = aIterator->mKeyRange->prev )
+        ;
 
     IDE_TEST( beforeFirstInternal( aIterator ) != IDE_SUCCESS );
 
@@ -20222,7 +20223,8 @@ IDE_RC sdnbBTree::afterLast( sdnbIterator*       aIterator,
 
     for ( aIterator->mKeyRange        = aIterator->mKeyRange ;
           aIterator->mKeyRange->next != NULL ;
-          aIterator->mKeyRange        = aIterator->mKeyRange->next ) ;
+          aIterator->mKeyRange        = aIterator->mKeyRange->next )
+        ;
 
     IDE_TEST( afterLastInternal( aIterator ) != IDE_SUCCESS );
 
