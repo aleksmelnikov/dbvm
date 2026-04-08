@@ -288,8 +288,9 @@ void ulpSymTable::ulpPrintSymT( SInt aScopeD )
 
             if( sIsIDEnd != ID_TRUE )
             {
-                for( (sIsFirst == ID_TRUE )?sIDcnt = 0 : sIDcnt=sIDcnt
-                     ; sIDcnt < 15 * sMLineCnt ; sIDcnt++ )
+                for( sIsFirst == ID_TRUE && ( sIDcnt = 0 );
+                     sIDcnt < 15 * sMLineCnt;
+                     sIDcnt++ )
                 {
                     if( sNode->mElement.mName[sIDcnt] == '\0' )
                     {
@@ -465,8 +466,9 @@ void ulpSymTable::ulpPrintSymT( SInt aScopeD )
 
             if( sIsArrSizeEnd != ID_TRUE )
             {
-                for( (sIsFirst == ID_TRUE )?sArrSizecnt = 0 : sArrSizecnt=sArrSizecnt
-                      ; sArrSizecnt < 10 * sMLineCnt ; sArrSizecnt++ )
+                for( sIsFirst == ID_TRUE && ( sArrSizecnt = 0 );
+                     sArrSizecnt < 10 * sMLineCnt;
+                     sArrSizecnt++ )
                 {
                     if( sArrSize[sArrSizecnt] == '\0' )
                     {
@@ -504,8 +506,9 @@ void ulpSymTable::ulpPrintSymT( SInt aScopeD )
 
             if( sIsSIDEnd != ID_TRUE )
             {
-                for( (sIsFirst == ID_TRUE )?sSIDcnt = 0 : sSIDcnt=sSIDcnt
-                      ; sSIDcnt < 10 * sMLineCnt ; sSIDcnt++ )
+                for( sIsFirst == ID_TRUE && ( sSIDcnt = 0 );
+                     sSIDcnt < 10 * sMLineCnt;
+                     sSIDcnt++ )
                 {
                     if( sNode->mElement.mStructName[sSIDcnt] == '\0' )
                     {

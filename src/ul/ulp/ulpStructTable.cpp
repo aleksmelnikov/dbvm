@@ -328,8 +328,9 @@ void ulpStructTable::ulpPrintStructT()
 
             if( sIsIDEnd != ID_TRUE )
             {
-                for( (sIsFirst == ID_TRUE )?sIDcnt = 0 : sIDcnt=sIDcnt
-                     ; sIDcnt < 49 * sMLineCnt ; sIDcnt++ )
+                for( sIsFirst == ID_TRUE && ( sIDcnt = 0 );
+                     sIDcnt < 49 * sMLineCnt;
+                     sIDcnt++ )
                 {
                     if( sNode->mName[sIDcnt] == '\0' )
                     {

@@ -329,8 +329,9 @@ void ulpMacroTable::ulpMPrint( void )
 
             if( sIsIDEnd != ID_TRUE )
             {
-                for( (sIsFirst == ID_TRUE )?sIDcnt = 0 : sIDcnt=sIDcnt
-                     ; sIDcnt < 15 * sMLineCnt ; sIDcnt++ )
+                for( sIsFirst == ID_TRUE && ( sIDcnt = 0 );
+                     sIDcnt < 15 * sMLineCnt;
+                     sIDcnt++ )
                 {
                     if( sNode->mName[sIDcnt] == '\0' )
                     {
@@ -359,8 +360,9 @@ void ulpMacroTable::ulpMPrint( void )
 
             if( sIsTEXTEnd != ID_TRUE )
             {
-                for( (sIsFirst == ID_TRUE )?sTEXTcnt = 0:sTEXTcnt=sTEXTcnt
-                    ; sTEXTcnt < (45 * sMLineCnt) ; sTEXTcnt++ )
+                for( sIsFirst == ID_TRUE && ( sTEXTcnt = 0 ); 
+                     sTEXTcnt < (45 * sMLineCnt);
+                     sTEXTcnt++ )
                 {
                     if( sNode->mText[sTEXTcnt] == '\0' )
                     {
