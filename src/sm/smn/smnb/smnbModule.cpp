@@ -9950,7 +9950,7 @@ IDE_RC smnbBTree::fetchNextR( smnbIterator* aIterator )
     return IDE_FAILURE;
 }
 
-IDE_RC smnbBTree::retraverse( idvSQL        * /* aStatistics */,
+IDE_RC smnbBTree::retraverse( /* idvSQL        *  aStatistics ,*/
                               smnbIterator  * aIterator,
                               const void   ** /* aRow */ )
 {
@@ -10669,7 +10669,7 @@ IDE_RC smnbBTree::setPosition( smnbIterator     * aIterator,
     {
         /* BUG-39983 lstFetchRecPtr을 NULL로 세팅해 노드를 처음부터 탐색하도록 한다.*/
         aIterator->lstFetchRecPtr = NULL;
-        IDE_TEST( retraverse( NULL,
+        IDE_TEST( retraverse( /* NULL, */
                               aIterator,
                               NULL )
                   != IDE_SUCCESS );

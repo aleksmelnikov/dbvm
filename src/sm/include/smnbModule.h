@@ -241,7 +241,7 @@ public:
                               const void**  aRow );
     
 
-    static IDE_RC retraverse( idvSQL*       aStatistics,
+    static IDE_RC retraverse( /*idvSQL*       aStatistics,*/
                               smnbIterator* aIterator,
                               const void**  /*aRow*/ );
 
