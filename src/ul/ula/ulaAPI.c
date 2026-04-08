@@ -1719,11 +1719,11 @@ ACI_RC ulaDataBuildColumnFromMT( ulnFnContext * aFnContext,
             break;
     }
 
-    return ALA_SUCCESS;
+    return ACI_SUCCESS;
 
     ACI_EXCEPTION_END;
 
-    return ALA_FAILURE;
+    return ACI_FAILURE;
 }
 
 /* Data Type Conversion API
