@@ -1564,7 +1564,7 @@ IDE_RC mmtServiceThread::shardPrepareProtocol(cmiProtocolContext *aProtocolConte
     mmcSession          *sSession;
     smSCN                sPrepareSCN;
 
-    UInt                 sXIDSize;
+    UInt                 sXIDSize = 0;
     ID_XID               sParentXID;
     idBool               sReadOnly;
 
@@ -1736,7 +1736,7 @@ IDE_RC mmtServiceThread::shardEndPendingTxProtocol(cmiProtocolContext *aProtocol
 {
     mmcTask             *sTask = (mmcTask *)aSessionOwner;
     mmtServiceThread    *sThread = (mmtServiceThread *)aUserContext;
-    mmcSession          *sSession;
+    mmcSession          *sSession = NULL;
 
     UInt                 sXIDSize;
     ID_XID               sXID;
