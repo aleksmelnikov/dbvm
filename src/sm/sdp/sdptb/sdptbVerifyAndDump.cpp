@@ -48,7 +48,7 @@ IDE_RC sdptbVerifyAndDump::dump( scSpaceID   aSpaceID,
     UInt                  sGGPID;
     SChar               * sTempBuf;
 
-    aDumpFlag =aDumpFlag;
+    (void)aDumpFlag; /* To avoid a compiler warning. */
     
     IDE_TEST( sdrMiniTrans::begin( NULL, /* idvSQL* */
                                    &sMtx,
