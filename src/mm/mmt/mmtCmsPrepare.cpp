@@ -184,7 +184,7 @@ IDE_RC mmtServiceThread::prepareProtocol(cmiProtocolContext *aProtocolContext,
     IDE_RC            sRet;
 
     UInt              sStatementID;
-    UInt              sStatementStringLen;
+    UInt              sStatementStringLen = 0;
     UInt              sRowSize;
     UChar             sMode;
 
@@ -418,7 +418,7 @@ IDE_RC mmtServiceThread::prepareByCIDProtocol(cmiProtocolContext *aProtocolConte
     IDE_RC                  sRet;
 
     UInt                    sStmtCID;
-    UInt                    sStatementStringLen;
+    UInt                    sStatementStringLen = 0;
     UInt                    sRowSize;
     UChar                   sMode;
 
