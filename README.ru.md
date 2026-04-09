@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/dbvm-logo.png" alt="Logo">
+  <img src="doc/dbvm-logo.png" alt="Logo">
 </p>
 
 > ⭐ Звёзды = мотивация делать больше и лучше. Спасибо!
@@ -34,4 +34,4 @@ DBVM - это универсальная реляционная СУБД, соз
 Список всех лицензий и условий копирования доступен в файле [COPYING.readme](COPYING.readme).
 
 ---
-*Note: Файл README из оригинального проекта можно найти в [README-orig.md](docs/legacy/README-orig.md) только для ознакомления.*
+*Note: Файл README из оригинального проекта можно найти в [README-orig.md](doc/legacy/README-orig.md) только для ознакомления.*

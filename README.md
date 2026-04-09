@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/dbvm-logo.png" alt="Logo">
+  <img src="doc/dbvm-logo.png" alt="Logo">
 </p>
 
 > ⭐ Stars = motivation to do more and better. Thank you!
@@ -34,4 +34,4 @@ Lisence
 This project is licensed under the terms specified in the [COPYING.readme](COPYING.readme) file.
 
 ---
-*Note: Historical README from the original project can be found in [README-orig.md](docs/legacy/README-orig.md) for reference only.*
+*Note: Historical README from the original project can be found in [README-orig.md](doc/legacy/README-orig.md) for reference only.*
