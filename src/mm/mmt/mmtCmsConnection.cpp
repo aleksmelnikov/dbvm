@@ -62,8 +62,8 @@ static IDE_RC answerConnectResult(cmiProtocolContext *aProtocolContext,
                 sSCN);
     #endif
 
-    /* PROJ-2733-Protocol SCNÀº ConnectExÀÇ Reserved ¿µ¿ªÀ» È°¿ëÇÒ ¼ö ÀÖÁö¸¸
-                          Á¤º¸°¡ Ãß°¡µÉ ¼ö ÀÖÀ¸´Ï ConnectV3À» Ãß°¡ÇØ µÎÀÚ. */
+    /* PROJ-2733-Protocol SCNì€ ConnectExì˜ Reserved ì˜ì—­ì„ í™œìš©í•  ìˆ˜ ìžˆì§€ë§Œ
+                          ì •ë³´ê°€ ì¶”ê°€ë  ìˆ˜ ìžˆìœ¼ë‹ˆ ConnectV3ì„ ì¶”ê°€í•´ ë‘ìž. */
     switch (aProtocolContext->mProtocol.mOpID)
     {
         case CMP_OP_DB_ConnectV3:
@@ -127,7 +127,7 @@ static IDE_RC answerConnectResult(cmiProtocolContext *aProtocolContext,
 
     IDE_EXCEPTION_END;
 
-    /* BUG-44124 ipcda ¸ðµå »ç¿ë Áß hang - iloader ÄÃ·³ÀÌ ¸¹Àº Å×ÀÌºí */
+    /* BUG-44124 ipcda ëª¨ë“œ ì‚¬ìš© ì¤‘ hang - iloader ì»¬ëŸ¼ì´ ë§Žì€ í…Œì´ë¸” */
     if( (sWriteCheckState == CMI_WRITE_CHECK_ACTIVATED) && (cmiGetLinkImpl(aProtocolContext) == CMI_LINK_IMPL_IPCDA) )
     {
         IDE_SET(ideSetErrorCode(mmERR_ABORT_IPCDA_MESSAGE_TOO_LONG, CMB_BLOCK_DEFAULT_SIZE));
@@ -153,7 +153,7 @@ static IDE_RC answerDisconnectResult(cmiProtocolContext *aProtocolContext)
 
     IDE_EXCEPTION_END;
 
-    /* BUG-44124 ipcda ¸ðµå »ç¿ë Áß hang - iloader ÄÃ·³ÀÌ ¸¹Àº Å×ÀÌºí */
+    /* BUG-44124 ipcda ëª¨ë“œ ì‚¬ìš© ì¤‘ hang - iloader ì»¬ëŸ¼ì´ ë§Žì€ í…Œì´ë¸” */
     if( (sWriteCheckState == CMI_WRITE_CHECK_ACTIVATED) && (cmiGetLinkImpl(aProtocolContext) == CMI_LINK_IMPL_IPCDA) )
     {
         IDE_SET(ideSetErrorCode(mmERR_ABORT_IPCDA_MESSAGE_TOO_LONG, CMB_BLOCK_DEFAULT_SIZE));
@@ -750,7 +750,7 @@ static IDE_RC answerPropertyGetResult(cmiProtocolContext *aProtocolContext,
             CMI_WR2( aProtocolContext, &aPropertyID );
             CMI_WR4( aProtocolContext, &sInfo->mDDLLockTimeout);
             break;
-        /* ¼­¹ö-Å¬¶óÀÌ¾ðÆ®(Session) ÇÁ·ÎÆÛÆ¼´Â FIT Å×½ºÆ®¸¦ Ãß°¡ÇÏÀÚ. since 2015.07.09 */
+        /* ì„œë²„-í´ë¼ì´ì–¸íŠ¸(Session) í”„ë¡œí¼í‹°ëŠ” FIT í…ŒìŠ¤íŠ¸ë¥¼ ì¶”ê°€í•˜ìž. since 2015.07.09 */
 
         default:
             /* BUG-36256 Improve property's communication */
@@ -770,7 +770,7 @@ static IDE_RC answerPropertyGetResult(cmiProtocolContext *aProtocolContext,
 
     IDE_EXCEPTION_END;
 
-    /* BUG-44124 ipcda ¸ðµå »ç¿ë Áß hang - iloader ÄÃ·³ÀÌ ¸¹Àº Å×ÀÌºí */
+    /* BUG-44124 ipcda ëª¨ë“œ ì‚¬ìš© ì¤‘ hang - iloader ì»¬ëŸ¼ì´ ë§Žì€ í…Œì´ë¸” */
     if( (sWriteCheckState == CMI_WRITE_CHECK_ACTIVATED) && (cmiGetLinkImpl(aProtocolContext) == CMI_LINK_IMPL_IPCDA) )
     {
         IDE_SET(ideSetErrorCode(mmERR_ABORT_IPCDA_MESSAGE_TOO_LONG, CMB_BLOCK_DEFAULT_SIZE));
@@ -813,7 +813,7 @@ static IDE_RC answerPropertySetResult(cmiProtocolContext *aProtocolContext,
             break;
     }
 
-    /* PROJ-2733-Protocol CMP_OP_DB_PropertySetV3ºÎÅÍ´Â ÇÁ·ÎÆÛÆ¼ ÀÀ´ä¿¡ Ãß°¡Á¤º¸¸¦ º¸³¾ ¼ö ÀÖ´Ù. */
+    /* PROJ-2733-Protocol CMP_OP_DB_PropertySetV3ë¶€í„°ëŠ” í”„ë¡œí¼í‹° ì‘ë‹µì— ì¶”ê°€ì •ë³´ë¥¼ ë³´ë‚¼ ìˆ˜ ìžˆë‹¤. */
     switch (aPropertyID)
     {
         case CMP_DB_PROPERTY_GLOBAL_TRANSACTION_LEVEL:
@@ -861,7 +861,7 @@ static IDE_RC answerPropertySetResult(cmiProtocolContext *aProtocolContext,
 
     IDE_EXCEPTION_END;
 
-    /* BUG-44124 ipcda ¸ðµå »ç¿ë Áß hang - iloader ÄÃ·³ÀÌ ¸¹Àº Å×ÀÌºí */
+    /* BUG-44124 ipcda ëª¨ë“œ ì‚¬ìš© ì¤‘ hang - iloader ì»¬ëŸ¼ì´ ë§Žì€ í…Œì´ë¸” */
     if( (sWriteCheckState == CMI_WRITE_CHECK_ACTIVATED) && (cmiGetLinkImpl(aProtocolContext) == CMI_LINK_IMPL_IPCDA) )
     {
         IDE_SET(ideSetErrorCode(mmERR_ABORT_IPCDA_MESSAGE_TOO_LONG, CMB_BLOCK_DEFAULT_SIZE));
@@ -879,7 +879,7 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
     SChar             sDbmsName[IDP_MAX_PROP_DBNAME_LEN + 1] = {'\0', };
     SChar             sUserName[QC_MAX_OBJECT_NAME_LEN + 1] = {'\0', };
     SChar             sPassword[QC_MAX_NAME_LEN + 1] = {'\0', };
-    UShort            sDbmsNameLen;
+    UShort            sDbmsNameLen = 0;
     UShort            sUserNameLen;
     UShort            sPasswordLen;
     UShort            sMode;
@@ -925,16 +925,16 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
 
     if (sDbmsNameLen > 0)
     {
-        // BUGBUG (2013-01-23) catalog¸¦ Áö¿øÇÏÁö ¾ÊÀ¸¹Ç·Î property¿¡ ¼³Á¤µÈ db name°ú ´Ü¼ø ºñ±³ÇÑ´Ù.
-        // ³ªÁß¿¡ catalog¸¦ Áö¿øÇÏ°Ô µÇ¸é, userÃ³·³ È®ÀÎÇØ¾ß ÇÒ °ÍÀÌ´Ù.
+        // BUGBUG (2013-01-23) catalogë¥¼ ì§€ì›í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ propertyì— ì„¤ì •ëœ db nameê³¼ ë‹¨ìˆœ ë¹„êµí•œë‹¤.
+        // ë‚˜ì¤‘ì— catalogë¥¼ ì§€ì›í•˜ê²Œ ë˜ë©´, userì²˜ëŸ¼ í™•ì¸í•´ì•¼ í•  ê²ƒì´ë‹¤.
         IDE_TEST_RAISE(idlOS::strcasecmp(sDbmsName, mmuProperty::getDbName())
                        != 0, DbmsNotFound);
     }
     else
     {
         // use default dbms
-        // BUGBUG (2013-01-23) connect ÀÎÀÚ·Î db nameÀ» ¹ÞÁö ¾Ê´Â CLI¸¦ À§ÇØ, ºñ¾îÀÖÀ¸¸é ±âº» dbms·Î ¿¬°áÇØÁØ´Ù.
-        // ³ªÁß¿¡ catalog¸¦ Áö¿øÇÏ°Ô µÇ¸é, ±âº»À¸·Î »ç¿ëÀÚ°¡ ¼ÓÇÑ catalog¸¦ ¾²µµ·Ï ÇØ¾ß ÇÒ °ÍÀÌ´Ù.
+        // BUGBUG (2013-01-23) connect ì¸ìžë¡œ db nameì„ ë°›ì§€ ì•ŠëŠ” CLIë¥¼ ìœ„í•´, ë¹„ì–´ìžˆìœ¼ë©´ ê¸°ë³¸ dbmsë¡œ ì—°ê²°í•´ì¤€ë‹¤.
+        // ë‚˜ì¤‘ì— catalogë¥¼ ì§€ì›í•˜ê²Œ ë˜ë©´, ê¸°ë³¸ìœ¼ë¡œ ì‚¬ìš©ìžê°€ ì†í•œ catalogë¥¼ ì“°ë„ë¡ í•´ì•¼ í•  ê²ƒì´ë‹¤.
     }
 
     /* TASK-5894 Permit sysdba via IPC */
@@ -948,19 +948,19 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
                    != IDE_SUCCESS, ConnectionNotPermitted);
 
     // To Fix BUG-17430
-    // ¹«Á¶°Ç ´ë¹®ÀÚ·Î º¯°æÇÏ¸é ¾ÈµÊ.
+    // ë¬´ì¡°ê±´ ëŒ€ë¬¸ìžë¡œ ë³€ê²½í•˜ë©´ ì•ˆë¨.
     sUserName[sUserNameLen] = '\0';
     mtl::makeNameInSQL( aUserInfo->loginID, sUserName, sUserNameLen );
 
     // To fix BUG-21137
-    // password¿¡µµ double quotationÀÌ ¿Ã ¼ö ÀÖ´Ù.
-    // ÀÌ¸¦ makeNameInSQLÇÔ¼ö·Î Á¦°ÅÇÑ´Ù.
+    // passwordì—ë„ double quotationì´ ì˜¬ ìˆ˜ ìžˆë‹¤.
+    // ì´ë¥¼ makeNameInSQLí•¨ìˆ˜ë¡œ ì œê±°í•œë‹¤.
     sPassword[sPasswordLen] = '\0';
     mtl::makePasswordInSQL( aUserInfo->loginPassword, sPassword, sPasswordLen );
 
     // PROJ-2002 Column Security
-    // login IP(session login IP)´Â ¸ðµç ·¹ÄÚµåÀÇ ÄÃ·³¸¶´Ù
-    // È£ÃâÇÏ¿© È£Ãâ È½¼ö°¡ ¸¹¾Æ IP¸¦ º°µµ·Î ÀúÀåÇÑ´Ù.
+    // login IP(session login IP)ëŠ” ëª¨ë“  ë ˆì½”ë“œì˜ ì»¬ëŸ¼ë§ˆë‹¤
+    // í˜¸ì¶œí•˜ì—¬ í˜¸ì¶œ íšŸìˆ˜ê°€ ë§Žì•„ IPë¥¼ ë³„ë„ë¡œ ì €ìž¥í•œë‹¤.
     if( cmiGetLinkInfo( sTask->getLink(),
                         aUserInfo->loginIP,
                         QCI_MAX_IP_LEN,
@@ -1019,13 +1019,13 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
     IDE_TEST(sTask->authenticate(aUserInfo) != IDE_SUCCESS);
 
     /*
-     * Session »ý¼º
+     * Session ìƒì„±
      */
 
     IDE_TEST(mmtSessionManager::allocSession(sTask, aUserInfo->mIsSysdba) != IDE_SUCCESS);
 
     /*
-     * Session »óÅÂ È®ÀÎ
+     * Session ìƒíƒœ í™•ì¸
      */
 
     sSession = sTask->getSession();
@@ -1039,7 +1039,7 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
     IDE_TEST_RAISE(sSession->getSessionState() >= MMC_SESSION_STATE_AUTH, AlreadyConnectedError);
 
     /*
-     * Session¿¡ ·Î±×ÀÎÁ¤º¸ ÀúÀå
+     * Sessionì— ë¡œê·¸ì¸ì •ë³´ ì €ìž¥
      */
 
     sTask->getSession()->setUserInfo(aUserInfo);
@@ -1049,17 +1049,17 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
     IDV_SESS_ADD(sTask->getSession()->getStatistics(), IDV_STAT_INDEX_LOGON_CUMUL, 1);
     IDV_SESS_ADD(sTask->getSession()->getStatistics(), IDV_STAT_INDEX_LOGON_CURR, 1);
 
-    /* BUGBUG ¿©±â¼­´Â ¼¼¼ÇÅ¸ÀÔÀ» ¾Ë ¼ö ¾ø´Ù. */
+    /* BUGBUG ì—¬ê¸°ì„œëŠ” ì„¸ì…˜íƒ€ìž…ì„ ì•Œ ìˆ˜ ì—†ë‹¤. */
     if ( ( sdi::isShardEnable() == ID_TRUE ) &&
          ( sSession->isShardUserSession() == ID_TRUE ) )
     {
         /* Make Shard PIN
-         * SHARD_ENABLE Property °¡ ¼³Á¤µÈ ³ëµå(META)¸¸ ½Å±Ô Shard PINÀ» »ý¼ºÇÑ´Ù.
-         * DATA ³ëµå´Â PropertySet ÇÁ·ÎÅäÄÝÀ» ÅëÇØ Shard PINÀ» ¹Þ´Â´Ù.
+         * SHARD_ENABLE Property ê°€ ì„¤ì •ëœ ë…¸ë“œ(META)ë§Œ ì‹ ê·œ Shard PINì„ ìƒì„±í•œë‹¤.
+         * DATA ë…¸ë“œëŠ” PropertySet í”„ë¡œí† ì½œì„ í†µí•´ Shard PINì„ ë°›ëŠ”ë‹¤.
          * */
         sSession->setNewSessionShardPin();
 
-        /* BUG-46090 Meta Node SMN ÀüÆÄ */
+        /* BUG-46090 Meta Node SMN ì „íŒŒ */
         sSession->setShardMetaNumber( sdi::getSMNForDataNode() );
         sSession->setLastShardMetaNumber( sSession->getShardMetaNumber() );
         sSession->setReceivedShardMetaNumber( sSession->getShardMetaNumber() );
@@ -1069,11 +1069,11 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
         /* Nothing to do. */
     }
 
-    /* PROJ-2733 ¼­¹ö°¡ GCTx »óÅÂ¿¡¼­ GCTx ¹ÌÁö¿ø Å¬¶óÀÌ¾ðÆ®°¡ Á¢¼ÓµÈ °æ¿ì
-                 GCTx µ¿ÀÛÀ» ¸·±â À§ÇØ Multi-node transaction(Default)À¸·Î º¯°æÇÑ´Ù. */
+    /* PROJ-2733 ì„œë²„ê°€ GCTx ìƒíƒœì—ì„œ GCTx ë¯¸ì§€ì› í´ë¼ì´ì–¸íŠ¸ê°€ ì ‘ì†ëœ ê²½ìš°
+                 GCTx ë™ìž‘ì„ ë§‰ê¸° ìœ„í•´ Multi-node transaction(Default)ìœ¼ë¡œ ë³€ê²½í•œë‹¤. */
     if (aProtocolContext->mProtocol.mClientLastOpID < CMP_OP_DB_ConnectV3)
     {
-        sSession->setGCTxPermit(ID_FALSE);  /* GCTx ¹ÌÁö¿ø Å¬¶óÀÌ¾ðÆ®´Â Çã¿ë¾ÈÇÔ */
+        sSession->setGCTxPermit(ID_FALSE);  /* GCTx ë¯¸ì§€ì› í´ë¼ì´ì–¸íŠ¸ëŠ” í—ˆìš©ì•ˆí•¨ */
 
         if (sSession->isGCTx() == ID_TRUE)
         {
@@ -1121,8 +1121,8 @@ IDE_RC connectProtocolCore(cmiProtocolContext *aProtocolContext,
     }
     IDE_EXCEPTION_END;
 
-    /* PROJ-2160 CM Å¸ÀÔÁ¦°Å
-       ÇÁ·ÎÅäÄÝÀÌ ÀÐ´Â µµÁß¿¡ ½ÇÆÐÇØµµ ¸ðµÎ ÀÐ¾î¾ß ÇÑ´Ù. */
+    /* PROJ-2160 CM íƒ€ìž…ì œê±°
+       í”„ë¡œí† ì½œì´ ì½ëŠ” ë„ì¤‘ì— ì‹¤íŒ¨í•´ë„ ëª¨ë‘ ì½ì–´ì•¼ í•œë‹¤. */
     aProtocolContext->mReadBlock->mCursor = sOrgCursor;
 
     CMI_RD2(aProtocolContext, &sDbmsNameLen);
@@ -1161,7 +1161,7 @@ IDE_RC mmtServiceThread::connectProtocol(cmiProtocolContext *aProtocolContext,
         sSession = ((mmcTask *)aSessionOwner)->getSession();
 
         /* PROJ-2177 User Interface - Cancel
-         * Áßº¹µÇÁö ¾Ê´Â StmtCID »ý¼ºÀ» À§ÇØ SessionID ÂüÁ¶ */
+         * ì¤‘ë³µë˜ì§€ ì•ŠëŠ” StmtCID ìƒì„±ì„ ìœ„í•´ SessionID ì°¸ì¡° */
         sRet = answerConnectResult(aProtocolContext, sSession);
 
         /* Set the error code for auditing */
@@ -1215,8 +1215,8 @@ IDE_RC mmtServiceThread::disconnectProtocol(cmiProtocolContext *aProtocolContext
     /* BUG-41986 */
     idvAuditTrail     sAuditTrail;
 
-    /* PROJ-2160 CM Å¸ÀÔÁ¦°Å
-       ¸ðµÎ ÀÐÀº ´ÙÀ½¿¡ ÇÁ·ÎÅäÄÝÀ» Ã³¸®ÇØ¾ß ÇÑ´Ù. */
+    /* PROJ-2160 CM íƒ€ìž…ì œê±°
+       ëª¨ë‘ ì½ì€ ë‹¤ìŒì— í”„ë¡œí† ì½œì„ ì²˜ë¦¬í•´ì•¼ í•œë‹¤. */
     CMI_SKIP_READ_BLOCK(aProtocolContext, 1);
 
     IDE_CLEAR();
@@ -1243,10 +1243,10 @@ IDE_RC mmtServiceThread::disconnectProtocol(cmiProtocolContext *aProtocolContext
 
     IDE_EXCEPTION_CONT( AUDIT_NOT_STARTED );
 
-    /* shardingÀÇ ¸ðµç connectionÀº disconnect½Ã rollbackÇÑ´Ù. */
+    /* shardingì˜ ëª¨ë“  connectionì€ disconnectì‹œ rollbackí•œë‹¤. */
     if (sSession->isShardTrans() == ID_TRUE )
     {
-        /* freeSession¿¡¼­ rollbackÇÑ´Ù. */
+        /* freeSessionì—ì„œ rollbackí•œë‹¤. */
         sSession->setSessionState(MMC_SESSION_STATE_ROLLBACK);
     }
     else
@@ -1322,9 +1322,9 @@ IDE_RC mmtServiceThread::propertyGetProtocol(cmiProtocolContext *aProtocolContex
         /*
          * BUG-36256 Improve property's communication
          *
-         * ulnCallbackDBPropertySetResult ÇÔ¼ö¸¦ ÀÌ¿ëÇÒ ¼ö ¾ø±â¿¡ Get()µµ
-         * ÅëÀÏ¼ºÀ» À§ÇØ answerErrorResult¸¦ ÀÌ¿ëÇØ ¿¡·¯¸¦ ¹ß»ý½ÃÅ°Áö ¾Ê°í
-         * Client¿¡°Ô ÀÀ´äÀ» ÁØ´Ù.
+         * ulnCallbackDBPropertySetResult í•¨ìˆ˜ë¥¼ ì´ìš©í•  ìˆ˜ ì—†ê¸°ì— Get()ë„
+         * í†µì¼ì„±ì„ ìœ„í•´ answerErrorResultë¥¼ ì´ìš©í•´ ì—ëŸ¬ë¥¼ ë°œìƒì‹œí‚¤ì§€ ì•Šê³ 
+         * Clientì—ê²Œ ì‘ë‹µì„ ì¤€ë‹¤.
          */
         ideLog::log(IDE_MM_0,
                     MM_TRC_GET_UNSUPPORTED_PROPERTY,
@@ -1469,8 +1469,8 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
             sInfo->mClientAppInfo[sLen] = 0;
 
             /* PROJ-2626 Snapshot Export
-             * iloader ÀÎÁö ¾Æ´ÑÁö¸¦ ±¸ºÐÇØ¾ß µÉ °æ¿ì ¸Å¹ø string compare¸¦ ÇÏ±â
-             * º¸´Ù ¹Ì¸® °ªÀ» Á¤ÇØ ³õ´Â´Ù.
+             * iloader ì¸ì§€ ì•„ë‹Œì§€ë¥¼ êµ¬ë¶„í•´ì•¼ ë  ê²½ìš° ë§¤ë²ˆ string compareë¥¼ í•˜ê¸°
+             * ë³´ë‹¤ ë¯¸ë¦¬ ê°’ì„ ì •í•´ ë†“ëŠ”ë‹¤.
              */
             if ( ( sLen == 7 ) &&
                  ( idlOS::strncmp( sInfo->mClientAppInfo, "iloader", sLen ) == 0 ) )
@@ -1711,7 +1711,7 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
             CMI_RD8( aProtocolContext, &sInfo->mShardPin );
             break;
 
-            /* BUG-46090 Meta Node SMN ÀüÆÄ */
+            /* BUG-46090 Meta Node SMN ì „íŒŒ */
         case CMP_DB_PROPERTY_SHARD_META_NUMBER:
             CMI_RD8( aProtocolContext, &sValue8 );
 
@@ -1738,10 +1738,10 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
 
             IDE_DASSERT( sSession->getReceivedShardMetaNumber() <= sValue8 );
 
-            /* sValues8 °ªÀÌ
-             * ReceivedShardMetaNumber(¸¶Áö¸·À¸·Î ¼ö½ÅÇÑ SHARD_META_NUMBER, REBUILD_SHARD_META_NUMBER) °ª°ú
-             * ºñ±³ÇÏ¿© µ¿ÀÏÇÏ°Å³ª ÀÛÀº °æ¿ì
-             * Rebuild loop °¡ ¹ß»ýÇÑ °æ¿ìÀÌ´Ù.
+            /* sValues8 ê°’ì´
+             * ReceivedShardMetaNumber(ë§ˆì§€ë§‰ìœ¼ë¡œ ìˆ˜ì‹ í•œ SHARD_META_NUMBER, REBUILD_SHARD_META_NUMBER) ê°’ê³¼
+             * ë¹„êµí•˜ì—¬ ë™ì¼í•˜ê±°ë‚˜ ìž‘ì€ ê²½ìš°
+             * Rebuild loop ê°€ ë°œìƒí•œ ê²½ìš°ì´ë‹¤.
              */
             IDU_FIT_POINT_RAISE( "mmtServiceThread::propertySetProtocol::NO_SHARD_META_CHANGE_TO_REBUILD",
                                  ERROR_NO_SHARD_META_CHANGE_TO_REBUILD );
@@ -1792,7 +1792,7 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
         case CMP_DB_PROPERTY_GLOBAL_TRANSACTION_LEVEL:
             CMI_RD1( aProtocolContext, sBool );
 
-            /* BUG-45844 (Server-Side) (Autocommit Mode) Multi-TransactionÀ» Áö¿øÇØ¾ß ÇÕ´Ï´Ù. */
+            /* BUG-45844 (Server-Side) (Autocommit Mode) Multi-Transactionì„ ì§€ì›í•´ì•¼ í•©ë‹ˆë‹¤. */
             IDE_TEST( sSession->setGlobalTransactionLevel( (UInt)sBool ) != IDE_SUCCESS );
 
             sSession->setIsNeedBlockCommit();
@@ -1922,7 +1922,7 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
             CMI_RCP(aProtocolContext, sNlsISOCurrency, sLen);
             sNlsISOCurrency[sLen] = 0;
 
-            // code °ªÀ» ±¹°¡ ÀÌ¸§À¸·Î º¯°æ
+            // code ê°’ì„ êµ­ê°€ ì´ë¦„ìœ¼ë¡œ ë³€ê²½
             
             IDE_TEST( sSession->setNlsISOCurrency((SChar *)sNlsISOCurrency,
                                                   idlOS::strlen(sNlsISOCurrency))
@@ -2156,7 +2156,7 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
 
             break;
 
-            /* ¼­¹ö-Å¬¶óÀÌ¾ðÆ®(Session) ÇÁ·ÎÆÛÆ¼´Â FIT Å×½ºÆ®¸¦ Ãß°¡ÇÏÀÚ. since 2015.07.09 */
+            /* ì„œë²„-í´ë¼ì´ì–¸íŠ¸(Session) í”„ë¡œí¼í‹°ëŠ” FIT í…ŒìŠ¤íŠ¸ë¥¼ ì¶”ê°€í•˜ìž. since 2015.07.09 */
 
         case CMP_DB_PROPERTY_TRANSACTIONAL_DDL:
             CMI_RD4(aProtocolContext, &sValue4 );
@@ -2175,16 +2175,16 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
             sMaxLen = ID_SIZEOF(sInvokeUserName) - 1;
             IDE_TEST_RAISE( sLen > sMaxLen, InvalidLengthError );
 
-            // 1. Invoke user nameÀ» ¹Þ´Â´Ù. 
+            // 1. Invoke user nameì„ ë°›ëŠ”ë‹¤. 
             CMI_RCP(aProtocolContext, sInvokeUserName, sLen);
             sInvokeUserName[sLen] = '\0';
 
             // 2. TODO
             if ( sSession->isShardCoordinatorSession() == ID_TRUE )
             {
-                // 3. invokeUserNameÀ» user id·Î º¯È¯
-                //      - User name¿¡ ÇØ´çÇÏ´Â user°¡ ¾øÀ¸¸é
-                //        "user not found" ERROR°¡ ¿Ã¶ó¿Â´Ù.
+                // 3. invokeUserNameì„ user idë¡œ ë³€í™˜
+                //      - User nameì— í•´ë‹¹í•˜ëŠ” userê°€ ì—†ìœ¼ë©´
+                //        "user not found" ERRORê°€ ì˜¬ë¼ì˜¨ë‹¤.
                 IDE_TEST( qciMisc::getUserIdByName( sInvokeUserName,
                                                     &sInvokeUserID )
                           != IDE_SUCCESS );
@@ -2192,9 +2192,9 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
                 idlOS::strncpy( sUserInfo->invokeUserName, sInvokeUserName, sLen );
                 sUserInfo->invokeUserName[sLen] = '\0';
 
-                // 4. userId¿¡ invokeUserName¿¡ ÇØ´çÇÏ´Â user id¸¦ ¼³Á¤
+                // 4. userIdì— invokeUserNameì— í•´ë‹¹í•˜ëŠ” user idë¥¼ ì„¤ì •
                 sUserInfo->userID = sInvokeUserID;
-                // 5. invokeUserNamePtrÀÌ invokeUserNameÀ» pointing
+                // 5. invokeUserNamePtrì´ invokeUserNameì„ pointing
                 sUserInfo->invokeUserNamePtr = (SChar*)&(sUserInfo->invokeUserName);
 
                 IDE_TEST( sSession->setSessionPropertyInfo( CMP_DB_PROPERTY_INVOKE_USER,
@@ -2282,10 +2282,10 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
         /*
          * BUG-36256 Improve property's communication
          *
-         * CMP_OP_DB_ProprtySetResult´Â OP(2)¸¸ º¸³»±â ¶§¹®¿¡ ÇÏÀ§ È£È¯¼ºÀ»
-         * À¯ÁöÇÏ±â À§ÇØ¼­´Â ulnCallbackDBPropertySetResult ÇÔ¼ö¸¦ ÀÌ¿ëÇÒ ¼ö ¾ø´Ù.
-         * answerErrorResult¸¦ ÀÌ¿ëÇØ ¿¡·¯¸¦ ¹ß»ý½ÃÅ°Áö ¾Ê°í Client¿¡°Ô ÀÀ´äÀ» ÁØ´Ù.
-         * ÃÊ±â ¼³°è°¡ ¾Æ½¬¿î ºÎºÐÀÌ´Ù.
+         * CMP_OP_DB_ProprtySetResultëŠ” OP(2)ë§Œ ë³´ë‚´ê¸° ë•Œë¬¸ì— í•˜ìœ„ í˜¸í™˜ì„±ì„
+         * ìœ ì§€í•˜ê¸° ìœ„í•´ì„œëŠ” ulnCallbackDBPropertySetResult í•¨ìˆ˜ë¥¼ ì´ìš©í•  ìˆ˜ ì—†ë‹¤.
+         * answerErrorResultë¥¼ ì´ìš©í•´ ì—ëŸ¬ë¥¼ ë°œìƒì‹œí‚¤ì§€ ì•Šê³  Clientì—ê²Œ ì‘ë‹µì„ ì¤€ë‹¤.
+         * ì´ˆê¸° ì„¤ê³„ê°€ ì•„ì‰¬ìš´ ë¶€ë¶„ì´ë‹¤.
          */
         ideLog::log(IDE_MM_0,
                     MM_TRC_SET_UNSUPPORTED_PROPERTY,
@@ -2313,8 +2313,8 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
 
     IDE_EXCEPTION_END;
 
-    /* PROJ-2160 CM Å¸ÀÔÁ¦°Å
-       ÇÁ·ÎÅäÄÝÀÌ ÀÐ´Â µµÁß¿¡ ½ÇÆÐÇØµµ ¸ðµÎ ÀÐ¾î¾ß ÇÑ´Ù. */
+    /* PROJ-2160 CM íƒ€ìž…ì œê±°
+       í”„ë¡œí† ì½œì´ ì½ëŠ” ë„ì¤‘ì— ì‹¤íŒ¨í•´ë„ ëª¨ë‘ ì½ì–´ì•¼ í•œë‹¤. */
     aProtocolContext->mReadBlock->mCursor = sOrgCursor;
 
     /* BUG-41793 Keep a compatibility among tags */
@@ -2325,8 +2325,8 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
     else
     {
         /*
-         * 6.3.1°úÀÇ ÇÏÀ§È£È¯¼ºÀ» À§ÇØ µÐ´Ù.
-         * ÇÁ·ÎÆÛÆ¼°¡ Ãß°¡µÇ¾îµµ ¾Æ·¡¿¡ Ãß°¡ÇÒ ÇÊ¿ä°¡ ¾ø´Ù. since CM 7.1.3
+         * 6.3.1ê³¼ì˜ í•˜ìœ„í˜¸í™˜ì„±ì„ ìœ„í•´ ë‘”ë‹¤.
+         * í”„ë¡œí¼í‹°ê°€ ì¶”ê°€ë˜ì–´ë„ ì•„ëž˜ì— ì¶”ê°€í•  í•„ìš”ê°€ ì—†ë‹¤. since CM 7.1.3
          */
         switch (sPropertyID)
         {
@@ -2373,8 +2373,8 @@ IDE_RC mmtServiceThread::propertySetProtocol(cmiProtocolContext *aProtocolContex
         }
     }
 
-    /* PROJ-2733-Protocol ÇÏÀ§ È£È¯¼ºÀ¸·Î ÀÎÇØ ¾Æ·¡ ÄÚµå°¡ Ãß°¡µÈ´Ù.
-                          CMP_OP_DB_PropertySetV?°¡ Ãß°¡µÇ¾îµµ ¿©±â´Â ½Å°æ¾µ ÇÊ¿ä°¡ ¾ø´Ù. */
+    /* PROJ-2733-Protocol í•˜ìœ„ í˜¸í™˜ì„±ìœ¼ë¡œ ì¸í•´ ì•„ëž˜ ì½”ë“œê°€ ì¶”ê°€ëœë‹¤.
+                          CMP_OP_DB_PropertySetV?ê°€ ì¶”ê°€ë˜ì–´ë„ ì—¬ê¸°ëŠ” ì‹ ê²½ì“¸ í•„ìš”ê°€ ì—†ë‹¤. */
     if ((aProtocol->mOpID == CMP_OP_DB_PropertySetV2) ||
         (aProtocol->mOpID == CMP_OP_DB_PropertySet))
     {
@@ -2418,14 +2418,14 @@ IDE_RC mmtServiceThread::handshakeProtocol(cmiProtocolContext *aCtx,
     // client is A7 or higher.
     if (cmiGetPacketType(aCtx) != CMP_PACKET_TYPE_A5)
     {
-        /* PROJ-2733-Protocol-BUGBUG Handshake¿¡ ´õ ¸¹Àº Á¤º¸¸¦ ³ÖÀ»·Á¸é ÇÁ·ÎÅäÄÝÀ» Ãß°¡ÇØ¾ß ÇÑ´Ù. */
+        /* PROJ-2733-Protocol-BUGBUG Handshakeì— ë” ë§Žì€ ì •ë³´ë¥¼ ë„£ì„ë ¤ë©´ í”„ë¡œí† ì½œì„ ì¶”ê°€í•´ì•¼ í•œë‹¤. */
         CMI_RD1(aCtx, sModuleID);
         CMI_RD1(aCtx, sMajorVersion);
         CMI_RD1(aCtx, sMinorVersion);
         CMI_RD1(aCtx, sPatchVersion);
         CMI_RD1(aCtx, sLastOpID);
 
-        /* PROJ-2733-Protocol Reserve ¿µ¿ªÀ» ÀÌ¿ëÇÏÀÚ. */
+        /* PROJ-2733-Protocol Reserve ì˜ì—­ì„ ì´ìš©í•˜ìž. */
         if (sLastOpID != 0)
         {
             aProtocol->mClientLastOpID = sLastOpID;
