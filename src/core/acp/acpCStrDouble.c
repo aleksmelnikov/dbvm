@@ -213,7 +213,7 @@ acpCStrDoubleType acpCStrDoubleToString(acp_double_t   aValue,
 {
     acp_char_t*     sString = NULL;
     acp_rc_t        sRC;
-    acp_sint32_t    sResult;
+    acp_sint32_t    sResult = 0;
     acp_sint32_t    sSign;
     acpCStrDoubleType sReturn;
 
