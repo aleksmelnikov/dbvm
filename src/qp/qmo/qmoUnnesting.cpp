@@ -2822,7 +2822,7 @@ void qmoUnnesting::removeDownSemiJoinFlag( qmsSFWGH * aSFWGH )
         }
         else
         {
-            sNode = sNode;
+            /* sNode = sNode; *//* FIXME: remove */
         }
 
         // target = 상수 조건이 존재하면 semi 조인을 제거하지 않는다.

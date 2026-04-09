@@ -1042,7 +1042,7 @@ qmnGRAG::initMtrNode( qcTemplate * aTemplate,
         // Nothing To Do 
     }  
 
-    for ( sNode = sNode,
+    for ( /* sNode = sNode, *//* FIXME: remove */
               aDataPlan->aggrNodeCnt  = 0;
           sNode != NULL;
           sNode = sNode->next )
@@ -1167,7 +1167,7 @@ qmnGRAG::initAggrNode( qcTemplate * aTemplate,
 
     // Aggregation Column의 연결 정보 생성
     for ( i = 0,
-              sNode = sNode,
+           /* sNode = sNode, *//* FIXME: remove */
               sAggrNode = aDataPlan->aggrNode,
               sPrevNode = NULL;
           i < aDataPlan->aggrNodeCnt;

@@ -10423,7 +10423,7 @@ qmoPred::nodeTransform4SubQ( qmoPredTrans * aPredTrans,
 
     if ( sSubqueryWrapperNode != NULL )
     {
-        for( sConditionNode = sConditionNode;
+        for( /* sConditionNode = sConditionNode; *//* FIXME: remove */ ;
              sConditionNode != NULL;
              sConditionNode = (qtcNode*)(sConditionNode->node.next) )
         {
@@ -10441,7 +10441,7 @@ qmoPred::nodeTransform4SubQ( qmoPredTrans * aPredTrans,
     }
     else
     {
-        for( sConditionNode = sConditionNode;
+        for( /* sConditionNode = sConditionNode; *//* FIXME: remove */ ;
              sConditionNode != NULL;
              sConditionNode = (qtcNode*)(sConditionNode->node.next) )
         {

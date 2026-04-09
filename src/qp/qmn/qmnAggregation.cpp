@@ -812,7 +812,7 @@ qmnAGGR::initMtrNode( qcTemplate * aTemplate,
         // Nothing To Do 
     }    
 
-    for ( sNode = sNode,
+    for ( /* sNode = sNode, *//* FIXME: remove */
               aDataPlan->aggrNodeCnt  = 0;
           sNode != NULL;
           sNode = sNode->next )
@@ -1137,7 +1137,7 @@ qmnAGGR::linkAggrNode( qmncAGGR   * aCodePlan,
     }
 
     for ( i = 0,
-              sNode = sNode,
+           /* sNode = sNode, *//* FIXME: remove */
               sAggrNode = aDataPlan->aggrNode,
               sPrevNode = NULL;
           i < aDataPlan->aggrNodeCnt;

@@ -1066,7 +1066,7 @@ IDE_RC qcuTemporaryObj::expandTempTableInfo( void   ** aTempTableInfo,
             != IDE_SUCCESS);
         sState = 1;
 
-        sNewTableInfo   = sNewTableInfo;
+        /* sNewTableInfo   = sNewTableInfo; *//* FIXME: remove */
         sTableAlloCount = QCU_TEMPORARY_TABLE_INIT_SIZE;
     }
     else
@@ -1084,7 +1084,7 @@ IDE_RC qcuTemporaryObj::expandTempTableInfo( void   ** aTempTableInfo,
 
         (void) iduMemMgr::free( sOldTableInfo );
 
-        sNewTableInfo    = sNewTableInfo;
+        /* sNewTableInfo    = sNewTableInfo; *//* FIXME: remove */
         sTableAlloCount *= 2;
     }
 

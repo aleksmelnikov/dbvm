@@ -918,7 +918,7 @@ IDE_RC sdiGlobalDDL::lockTable( qcStatement    * aStatement,
         {
             sPartInfoList = sParseTree->partTable->partInfoList;
 
-            for ( sPartInfoList = sPartInfoList;
+            for ( /* sPartInfoList = sPartInfoList; *//* FIXME: remove */ ;
                   sPartInfoList != NULL;
                   sPartInfoList = sPartInfoList->next )
             {

@@ -166,7 +166,7 @@ IDE_RC qmoRownumPredToLimit::makeLimit( qcStatement  * aStatement,
 
         sStartValue = 1;
         sCountValue = *((mtdBigintType *)QTC_STMT_FIXEDDATA( aStatement, sValueNode ));
-        sCountValue = sCountValue;
+        /* sCountValue = sCountValue; *//* There is no changes for sCountValue. */
     }
     else if ( sNode->module == &mtfGreaterThan )
     {
