@@ -149,7 +149,7 @@ qmgDistinction::optimize( qcStatement * aStatement, qmgGraph * aGraph )
     qtcNode             * sNode;
     mtcColumn           * sMtcColumn;
     idBool                sSuccess;
-    qmoDistinctMethodType sDistinctMethodHint;
+    qmoDistinctMethodType sDistinctMethodHint = QMO_DISTINCT_METHOD_TYPE_NOT_DEFINED;
 
     SDouble               sRecordSize;
 
