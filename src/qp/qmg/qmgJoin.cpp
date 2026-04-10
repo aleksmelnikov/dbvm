@@ -2802,7 +2802,7 @@ qmgJoin::selectJoinMethodCost( qcStatement        * aStatement,
  ***********************************************************************/
 
     qmsJoinMethodHints * sJoinMethodHints;
-    UInt                 sJoinMethodCnt;
+    UInt                 sJoinMethodCnt = 0;
     UInt                 i;
 
     // To Fix PR-7989
