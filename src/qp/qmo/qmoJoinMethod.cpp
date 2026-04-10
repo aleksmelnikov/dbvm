@@ -63,7 +63,7 @@ qmoJoinMethodMgr::init( qcStatement    * aStatement,
 
     qmoJoinMethodCost       * sJoinMethodCost;
     qmoJoinLateralDirection   sLateralDirection;
-    UInt                      sJoinMethodCnt;
+    UInt                      sJoinMethodCnt = 0;
     UInt                      sCount;
 
     IDU_FIT_POINT_FATAL( "qmoJoinMethodMgr::init::__FT__" );
