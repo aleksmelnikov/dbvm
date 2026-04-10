@@ -4137,7 +4137,7 @@ qmoOneNonPlan::makeVIEW( qcStatement  * aStatement ,
     qmncVIEW          * sVIEW = (qmncVIEW*)aPlan;
     UInt                sDataNodeOffset;
 
-    UShort              sTupleID;
+    UShort              sTupleID = 0;
     UShort              sColumnCount;
     UInt                sViewaDependencyFlag    = 0;
     qtcNode           * sPrevNode = NULL;
