@@ -829,7 +829,7 @@ IDE_RC sdf::searchReplicaSet( qcStatement            * aStatement,
     {
         switch (aRole)
         {
-            case SDM_REPL_SENDER:
+            case SDF_REPL_SENDER:
                 if ( aNth == 0 ) /* First */
                 {
                     if ( idlOS::strncmp( aReplicaSetInfo->mReplicaSets[sCnt].mFirstBackupNodeName,
@@ -966,7 +966,7 @@ IDE_RC sdf::searchReplicaSet( qcStatement            * aStatement,
                     }
                 }
                 break;
-            case SDM_REPL_RECEIVER:
+            case SDF_REPL_RECEIVER:
                 if ( aNth == 0 ) /* First */
                 {
                     if ( idlOS::strncmp( aReplicaSetInfo->mReplicaSets[sCnt].mFirstBackupNodeName,
