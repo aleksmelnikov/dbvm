@@ -2304,7 +2304,7 @@ IDE_RC smriChangeTrackingMgr::addBmpExt2DataFileDescSlot(
 IDE_RC smriChangeTrackingMgr::allocBmpExt( smriCTBmpExt ** aAllocBmpExt )
 {
     UInt                sExtMapIdx;
-    UInt                sAllocBmpExtIdx;
+    UInt                sAllocBmpExtIdx = 0;
     UInt                sCTBodyIdx;
     smriCTExtMapBlock * sExtMapBlock;
     smriCTBody        * sCTBody;
