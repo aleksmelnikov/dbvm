@@ -13949,7 +13949,7 @@ IDE_RC sdi::systemPropertyForShard( qcStatement * aStatement,
 
     SChar               sSqlStr[QD_MAX_SQL_LENGTH + 1];
 
-    iduList           * sNodeList;
+    iduList           * sNodeList = NULL;
     idBool              sIsAllocList = ID_FALSE;
     idBool              sIsStmtAlloc = ID_FALSE;
     idBool              sIsTransBegin  = ID_FALSE;
