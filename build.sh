@@ -20,9 +20,6 @@ declare -r re2c_ver="1.0.1"
 
 #===============================================================================
 
-# Number of build jobs (defaults to nproc if $1 is empty)
-declare -r jobs="${1:-$(nproc)}"
-
 # Path definitions
 declare -r current_directory=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 declare -r thirdparty_directory=${current_directory}/3rdparty
@@ -54,6 +51,70 @@ export LD_LIBRARY_PATH=${ADAPTER_JAVA_HOME}/jre/lib/amd64/server:${ALTIBASE_HOME
 sync_opt=""
 if make --help | grep -q "output-sync"; then
     sync_opt="--output-sync=target"
+fi
+
+#===============================================================================
+# Parse command line arguments
+#===============================================================================
+
+# Default values
+jobs="$(nproc)"
+do_unittest="no"
+build_mode="release"
+
+# Function to display help message
+show_help() {
+  echo "Usage: $0 [-j jobs] [-t] [-m mode] [-h]"
+  echo ""
+  echo "Options:"
+  echo "  -j JOBS       Number of parallel build jobs (default: number of CPU cores)"
+  echo "  -t            Enable unit tests (DO_UNITTEST=yes) (default: no)"
+  echo "  -m MODE       Build mode: debug or release (default: release)"
+  echo "  -h            Show this help message and exit"
+  echo ""
+  echo "Example:"
+  echo "  $0 -j 4 -t -m debug"
+}
+
+# Parse flags: -j (jobs), -t (unittests), -m (build_mode), and -h (help)
+# A leading colon ':' enables silent error mode
+while getopts ":j:thm:" opt; do
+  case "${opt}" in
+    j) jobs="${OPTARG}" ;;
+    t) do_unittest="yes" ;;
+    m) 
+      if [ "${OPTARG}" != "debug" ] && [ "${OPTARG}" != "release" ]; then
+        echo "Error: Invalid build mode '${OPTARG}'. Use 'debug' or 'release'." >&2
+        show_help >&2
+        exit 1
+      fi
+      build_mode="${OPTARG}"
+      ;;
+    h)
+      show_help
+      exit 0
+      ;;
+    \?)
+      echo "Error: Illegal option -$OPTARG" >&2
+      show_help >&2
+      exit 1
+      ;;
+    :)
+      echo "Error: Option -$OPTARG requires an argument" >&2
+      show_help >&2
+      exit 1
+      ;;
+  esac
+done
+
+# Remove processed flags from arguments
+shift $((OPTIND - 1))
+
+# Check if there are any unexpected positional arguments left
+if [ $# -gt 0 ]; then
+  echo "Error: Unexpected argument(s) '$*'" >&2
+  show_help >&2
+  exit 1
 fi
 
 #===============================================================================
@@ -89,18 +150,30 @@ build_dep() (
 #===============================================================================
 
 # 0. Clean dependencies installation directory
-[ -d "${dep_install_directory}" ] && rm -rf "${dep_install_directory}"
+echo "==> Cleaning dependencies directory..."
+rm -rf "${dep_install_directory}"
 mkdir -p "${dep_install_directory}"
 
 # 1. Build Dependencies
-build_dep "bison"   "${bison_ver}"
-build_dep "flex"    "${flex_ver}"    "--enable-shared=no"
-build_dep "re2c"    "${re2c_ver}"
-build_dep "openssl" "${openssl_ver}" "-fPIC shared" "./config" "install_sw"
-build_dep "ncurses" "${ncurses_ver}" "--without-ada --without-manpages --without-tests --disable-db-install --without-debug --enable-overwrite --without-progs CFLAGS=-fPIC"
+echo "==> Building Dependencies..."
+echo "    (logging to build.dep.log)"
+{
+  build_dep "bison"   "${bison_ver}"
+  build_dep "flex"    "${flex_ver}"    "--enable-shared=no"
+  build_dep "re2c"    "${re2c_ver}"
+  build_dep "openssl" "${openssl_ver}" "-fPIC shared" "./config" "install_sw"
+  build_dep "ncurses" "${ncurses_ver}" "--without-ada --without-manpages --without-tests --disable-db-install --without-debug --enable-overwrite --without-progs CFLAGS=-fPIC"
+} > "build.dep.log" 2>&1
 
 # 2. Build Database
-cd "${ALTIDEV_HOME}"
-./configure --with-build-mode=release
-make clean
-make SILENT_MODE=false build -j"${jobs}" ${sync_opt}
+echo "==> Building Database: MODE=[${build_mode}], JOBS=[${jobs}], UNITTEST=[${do_unittest}]"
+echo "    (logging to build.db.log)"
+{
+  cd "${ALTIDEV_HOME}"
+  ./configure --with-build-mode="${build_mode}"
+  make clean
+  make SILENT_MODE=false DO_UNITTEST="${do_unittest}" build -j"${jobs}" ${sync_opt}
+} > "build.db.log" 2>&1
+
+# 3. The end
+echo "==> Build completed successfully!"
