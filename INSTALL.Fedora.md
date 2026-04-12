@@ -44,7 +44,7 @@ git clone https://github.com/aleksmelnikov/dbvm.git
 Build the project:
 ```bash
 cd dbvm
-./build
+./build.sh
 ```
 
 Build artifacts will be located in the `dbvm/altibase_home` directory.
