@@ -454,7 +454,7 @@ IDE_RC iduMemList::grow(void)
     vULong       i;
     iduMemChunk *sChunk=NULL;
     iduMemSlot  *sSlot;
-    iduMemSlot  *sFirstSlot;
+    iduMemSlot  *sFirstSlot = NULL;
 
 
 
@@ -490,7 +490,7 @@ IDE_RC iduMemList::grow(void)
 #endif
 
 
-    IDE_ASSERT( sChunk != NULL ); 
+    IDE_ASSERT( sChunk != NULL );
 
 
     *(iduMemList**)&sChunk->mParent         = this;
@@ -626,7 +626,7 @@ IDE_RC iduMemList::alloc(void **aMem)
 IDE_RC iduMemList::memfree(void *aFreeElem)
 {
     iduMemSlot*  sFreeElem;
-    iduMemChunk *sCur;
+    iduMemChunk *sCur = NULL;
 
     IDE_ASSERT(aFreeElem != NULL);
 
