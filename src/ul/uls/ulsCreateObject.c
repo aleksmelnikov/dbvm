@@ -1267,9 +1267,9 @@ ACI_RC ulsRecalcMBR(  ulsHandle                * aHandle,
  * Implementation:
  *
  *---------------------------------------------------------------*/
-ACI_RC ulsGetSRID(  ulsHandle         * aHandle,
-                    stdGeometryType   * aObj,
-                    acp_sint32_t      * aSRID  )
+ACSRETURN ulsGetSRID(  ulsHandle         * aHandle,
+                       stdGeometryType   * aObj,
+                       acp_sint32_t      * aSRID  )
 {
     ACI_TEST_RAISE( ulsCheckEnv( aHandle ) != ACI_SUCCESS,
                     ERR_INVALID_HANDLE );
@@ -1279,7 +1279,7 @@ ACI_RC ulsGetSRID(  ulsHandle         * aHandle,
 
     *aSRID = ulsM_GetSRID( aObj );
     
-    return ACI_SUCCESS;
+    return ACS_SUCCESS;
 
     ACI_EXCEPTION( ERR_INVALID_HANDLE );
     {
@@ -1293,5 +1293,5 @@ ACI_RC ulsGetSRID(  ulsHandle         * aHandle,
     }
     ACI_EXCEPTION_END;
     
-    return ACI_FAILURE;
+    return ACS_ERROR;
 }

@@ -164,7 +164,7 @@ ulsRecalcMBR(  ulsHandle                * aHandle,
                stdGeometryType          * aObj,
                stdMBR                   * aMbr  );
 
-ACI_RC
+ACSRETURN
 ulsGetSRID(  ulsHandle         * aHandle,
              stdGeometryType   * aObj,
              acp_sint32_t      * aSRID  );
