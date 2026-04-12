@@ -163,7 +163,7 @@ echo "    (logging to build.dep.log)"
   build_dep "re2c"    "${re2c_ver}"
   build_dep "openssl" "${openssl_ver}" "-fPIC shared" "./config" "install_sw"
   build_dep "ncurses" "${ncurses_ver}" "--without-ada --without-manpages --without-tests --disable-db-install --without-debug --enable-overwrite --without-progs CFLAGS=-fPIC"
-} > "build.dep.log" 2>&1
+} > "${current_directory}/build.dep.log" 2>&1
 
 # 2. Build Database
 echo "==> Building Database: MODE=[${build_mode}], JOBS=[${jobs}], UNITTEST=[${do_unittest}]"
@@ -173,7 +173,7 @@ echo "    (logging to build.db.log)"
   ./configure --with-build-mode="${build_mode}"
   make clean
   make SILENT_MODE=false DO_UNITTEST="${do_unittest}" build -j"${jobs}" ${sync_opt}
-} > "build.db.log" 2>&1
+} > "${current_directory}/build.db.log" 2>&1
 
 # 3. The end
 echo "==> Build completed successfully!"
