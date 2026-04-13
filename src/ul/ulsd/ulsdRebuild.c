@@ -960,7 +960,7 @@ SQLRETURN ulsdCheckFailoverAvailable( ulnFnContext * aFnContext,
                                       acp_bool_t   * aIsNodeDroped )
 {
     ulnDbc       * sDbc     = NULL;
-    SQLRETURN      sRc;
+    SQLRETURN      sRc = SQL_SUCCESS;
     acp_bool_t     sIsSMNChanged = ACP_FALSE;
     acp_bool_t     sIsNodeDrop   = ACP_FALSE;
 
