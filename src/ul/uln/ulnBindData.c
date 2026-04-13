@@ -723,7 +723,7 @@ ACI_RC ulnCallbackParamDataOutList(cmiProtocolContext *aPtContext,
 
     acp_uint32_t        sStatementID;
     acp_uint32_t        sRowNumber;
-    acp_uint32_t        sRowSize;
+    acp_uint32_t        sRowSize = 0;
     acp_uint8_t        *sRow;
 
     ACP_UNUSED(aProtocol);
