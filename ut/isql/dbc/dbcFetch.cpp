@@ -67,7 +67,7 @@ SQLRETURN utISPApi::GetLobData(idBool aPrepare, SInt aIdx,
                                SInt aOffset)
 {
     SQLRETURN sSQLRC;
-    SQLHSTMT  sStmt;
+    SQLHSTMT  sStmt = NULL;
     SInt      sBindSize;
     SInt      sDisplaySize;
 
