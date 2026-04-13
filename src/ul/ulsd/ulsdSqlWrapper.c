@@ -472,7 +472,7 @@ SQLRETURN  SQL_API SQLSetConnectAttrW(SQLHDBC    ConnectionHandle,
      *     SQL_IS_INTEGER or SQL_IS_UINTEGER, as appropriate.
      */
 
-    SQLRETURN     sRet;
+    SQLRETURN     sRet = SQL_SUCCESS;
     ulnCharSet    sCharSet;
     acp_char_t   *sTemp = NULL;
     acp_sint32_t  sStep = 0;
@@ -765,7 +765,7 @@ SQLRETURN  SQL_API SQLSetConnectOptionW(SQLHDBC      ConnectionHandle,
                                         SQLUSMALLINT Option,
                                         SQLULEN      Value)
 {
-    SQLRETURN     sRet;
+    SQLRETURN     sRet = SQL_SUCCESS;
     ulnCharSet    sCharSet;
     acp_char_t   *sTemp = NULL;
     acp_sint32_t  sStep = 0;
@@ -1291,7 +1291,7 @@ SQLRETURN  SQL_API SQLSetDescFieldW(SQLHDESC    DescriptorHandle,
      *     as appropriate.
      */
 
-    SQLRETURN     sRet;
+    SQLRETURN     sRet = SQL_SUCCESS;
     ulnCharSet    sCharSet;
     acp_char_t   *sTemp = NULL;
     acp_sint32_t  sStep = 0;
