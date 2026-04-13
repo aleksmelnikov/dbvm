@@ -35,7 +35,7 @@ ACI_RC ulnCallbackFetchResult(cmiProtocolContext *aProtocolContext,
     ulnStmt       *sStmt      = sFnContext->mHandle.mStmt;
     ulnCache      *sCache     = ulnStmtGetCache(sStmt);
     acp_uint8_t   *sRow;
-    acp_uint32_t   sRowSize;
+    acp_uint32_t   sRowSize = 0;
     acp_sint64_t   sPosition;
     acp_sint64_t   sPRowID;
 
