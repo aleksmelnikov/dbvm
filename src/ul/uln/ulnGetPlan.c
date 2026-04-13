@@ -27,7 +27,7 @@ ACI_RC ulnCallbackPlanGetResult(cmiProtocolContext *aPtContext,
     ulnDbc                  *sDbc;
     acp_uint8_t             *sPlan;
     acp_uint8_t             *sRow = NULL;
-    acp_uint32_t             sRowSize;
+    acp_uint32_t             sRowSize = 0;
 
     acp_uint32_t             sStatementID;
     acp_uint32_t             sLen;
