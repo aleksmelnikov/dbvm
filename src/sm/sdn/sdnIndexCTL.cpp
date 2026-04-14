@@ -154,7 +154,7 @@ IDE_RC sdnIndexCTL::allocCTS( idvSQL             * aStatistics,
     UChar       sDeadCTS;
     UChar       sAgableCTS;
     UChar     * sPageStartPtr;
-    SChar     * sDumpBuf;
+    SChar     * sDumpBuf = NULL;
     smSCN       sSysMinDskViewSCN;
 
     *aCTSlotNum          = SDN_CTS_INFINITE;
@@ -335,8 +335,11 @@ IDE_RC sdnIndexCTL::allocCTS( idvSQL             * aStatistics,
     switch( sState )
     {
         case 1:
-            IDE_ASSERT( iduMemMgr::free( sDumpBuf ) == IDE_SUCCESS );
-            sDumpBuf = NULL;
+            if ( sDumpBuf != NULL )
+            { 
+                IDE_ASSERT( iduMemMgr::free( sDumpBuf ) == IDE_SUCCESS );
+                sDumpBuf = NULL;
+            }
         default:
             break;
     }
