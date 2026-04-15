@@ -3609,7 +3609,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
 {
     {
         (SChar*)"DATE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mCreateTime),
+        offsetof(smiDBMSStat4Perf,mCreateTime),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mCreateTime),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -3617,7 +3617,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"SAMPLE_SIZE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mSampleSize),
+        offsetof(smiDBMSStat4Perf,mSampleSize),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mSampleSize),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -3625,7 +3625,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"NUM_ROW_CHANGE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mNumRowChange),
+        offsetof(smiDBMSStat4Perf,mNumRowChange),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mNumRowChange),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3633,7 +3633,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"TYPE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mType),
+        offsetof(smiDBMSStat4Perf,mType),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mType),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -3641,7 +3641,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"SREAD_TIME",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mSReadTime),
+        offsetof(smiDBMSStat4Perf,mSReadTime),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mSReadTime),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -3649,7 +3649,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"MREAD_TIME",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mMReadTime),
+        offsetof(smiDBMSStat4Perf,mMReadTime),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mMReadTime),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -3657,7 +3657,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"MREAD_PAGE_COUNT",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mDBFileMultiPageReadCount),
+        offsetof(smiDBMSStat4Perf,mDBFileMultiPageReadCount),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mDBFileMultiPageReadCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3665,7 +3665,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"HASH_TIME",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mHashTime),
+        offsetof(smiDBMSStat4Perf,mHashTime),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mHashTime),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -3673,7 +3673,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"COMPARE_TIME",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mCompareTime),
+        offsetof(smiDBMSStat4Perf,mCompareTime),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mCompareTime),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -3681,7 +3681,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"STORE_TIME",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mStoreTime),
+        offsetof(smiDBMSStat4Perf,mStoreTime),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mStoreTime),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -3689,7 +3689,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"TARGET_ID",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mTargetID),
+        offsetof(smiDBMSStat4Perf,mTargetID),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mTargetID),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3698,7 +3698,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     {
 
         (SChar*)"COLUMN_ID",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mColumnID),
+        offsetof(smiDBMSStat4Perf,mColumnID),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mColumnID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -3706,7 +3706,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"NUM_ROW",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mNumRow),
+        offsetof(smiDBMSStat4Perf,mNumRow),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mNumRow),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3714,7 +3714,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"NUM_PAGE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mNumPage),
+        offsetof(smiDBMSStat4Perf,mNumPage),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mNumPage),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3722,7 +3722,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"NUM_DIST",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mNumDist),
+        offsetof(smiDBMSStat4Perf,mNumDist),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mNumDist),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3730,7 +3730,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"NUM_NULL",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mNumNull),
+        offsetof(smiDBMSStat4Perf,mNumNull),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mNumNull),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3738,7 +3738,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"AVG_LEN",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mAvgLen),
+        offsetof(smiDBMSStat4Perf,mAvgLen),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mAvgLen),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3746,7 +3746,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"ONE_ROW_READ_TIME",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mOneRowReadTime),
+        offsetof(smiDBMSStat4Perf,mOneRowReadTime),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mOneRowReadTime),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -3754,7 +3754,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"AVG_SLOT_COUNT",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mAvgSlotCnt),
+        offsetof(smiDBMSStat4Perf,mAvgSlotCnt),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mAvgSlotCnt),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3762,7 +3762,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"INDEX_HEIGHT",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mIndexHeight),
+        offsetof(smiDBMSStat4Perf,mIndexHeight),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mIndexHeight),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3770,7 +3770,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"CLUSTERING_FACTOR",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mClusteringFactor),
+        offsetof(smiDBMSStat4Perf,mClusteringFactor),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mClusteringFactor),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3778,7 +3778,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"MIN",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mMinValue),
+        offsetof(smiDBMSStat4Perf,mMinValue),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mMinValue),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -3786,7 +3786,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"MAX",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mMaxValue),
+        offsetof(smiDBMSStat4Perf,mMaxValue),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mMaxValue),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -3794,7 +3794,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"META_SPACE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mMetaSpace),
+        offsetof(smiDBMSStat4Perf,mMetaSpace),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mMetaSpace),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3802,7 +3802,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"USED_SPACE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mUsedSpace),
+        offsetof(smiDBMSStat4Perf,mUsedSpace),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mUsedSpace),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3810,7 +3810,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"AGEABLE_SPACE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mAgableSpace),
+        offsetof(smiDBMSStat4Perf,mAgableSpace),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mAgableSpace),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -3818,7 +3818,7 @@ static iduFixedTableColDesc  gDBMSStatColDesc[]=
     },
     {
         (SChar*)"FREE_SPACE",
-        IDU_FT_OFFSETOF(smiDBMSStat4Perf,mFreeSpace),
+        offsetof(smiDBMSStat4Perf,mFreeSpace),
         IDU_FT_SIZEOF(smiDBMSStat4Perf,mFreeSpace),
         IDU_FT_TYPE_UBIGINT,
         NULL,

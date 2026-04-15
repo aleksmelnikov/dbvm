@@ -41,7 +41,7 @@ static iduFixedTableColDesc gDumpDiskDBPageColDesc[] =
 {
     {
         (SChar*)"TBSID",
-        IDU_FT_OFFSETOF(sdpDiskDBPageDump, mTBSID),
+        offsetof(sdpDiskDBPageDump,mTBSID),
         IDU_FT_SIZEOF(sdpDiskDBPageDump, mTBSID),
         IDU_FT_TYPE_USMALLINT,
         NULL,
@@ -49,7 +49,7 @@ static iduFixedTableColDesc gDumpDiskDBPageColDesc[] =
     },
     {
         (SChar*)"PID",
-        IDU_FT_OFFSETOF(sdpDiskDBPageDump, mPID),
+        offsetof(sdpDiskDBPageDump,mPID),
         IDU_FT_SIZEOF(sdpDiskDBPageDump, mPID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -57,7 +57,7 @@ static iduFixedTableColDesc gDumpDiskDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP",
-        IDU_FT_OFFSETOF(sdpDiskDBPageDump, mPageDump),
+        offsetof(sdpDiskDBPageDump,mPageDump),
         IDU_FT_SIZEOF(sdpDiskDBPageDump, mPageDump),
         IDU_FT_TYPE_VARCHAR,
         NULL,

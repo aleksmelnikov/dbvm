@@ -500,7 +500,7 @@ static iduFixedTableColDesc gRBHashColDesc[] =
 {
     {
         (SChar *)"NAME",
-        IDU_FT_OFFSETOF(iddRBHashStat, mName),
+        offsetof(iddRBHashStat,mName),
         IDU_FT_SIZEOF(iddRBHashStat, mName),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -508,7 +508,7 @@ static iduFixedTableColDesc gRBHashColDesc[] =
     },
     {
         (SChar *)"BUCKET_NO",
-        IDU_FT_OFFSETOF(iddRBHashStat, mBucketNo),
+        offsetof(iddRBHashStat,mBucketNo),
         IDU_FT_SIZEOF(iddRBHashStat, mBucketNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -516,7 +516,7 @@ static iduFixedTableColDesc gRBHashColDesc[] =
     },
     {
         (SChar *)"KEY_LENGTH",
-        IDU_FT_OFFSETOF(iddRBHashStat, mKeyLength),
+        offsetof(iddRBHashStat,mKeyLength),
         IDU_FT_SIZEOF(iddRBHashStat, mKeyLength),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -524,7 +524,7 @@ static iduFixedTableColDesc gRBHashColDesc[] =
     },
     {
         (SChar *)"NODE_COUNT",
-        IDU_FT_OFFSETOF(iddRBHashStat, mCount),
+        offsetof(iddRBHashStat,mCount),
         IDU_FT_SIZEOF(iddRBHashStat, mCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -532,7 +532,7 @@ static iduFixedTableColDesc gRBHashColDesc[] =
     },
     {
         (SChar *)"SEARCH_COUNT",
-        IDU_FT_OFFSETOF(iddRBHashStat, mSearchCount),
+        offsetof(iddRBHashStat,mSearchCount),
         IDU_FT_SIZEOF(iddRBHashStat, mSearchCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -540,7 +540,7 @@ static iduFixedTableColDesc gRBHashColDesc[] =
     },
     {
         (SChar *)"INSERT_LEFT_MOVE",
-        IDU_FT_OFFSETOF(iddRBHashStat, mInsertLeft),
+        offsetof(iddRBHashStat,mInsertLeft),
         IDU_FT_SIZEOF(iddRBHashStat, mInsertLeft),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -548,7 +548,7 @@ static iduFixedTableColDesc gRBHashColDesc[] =
     },
     {
         (SChar *)"INSERT_RIGHT_MOVE",
-        IDU_FT_OFFSETOF(iddRBHashStat, mInsertRight),
+        offsetof(iddRBHashStat,mInsertRight),
         IDU_FT_SIZEOF(iddRBHashStat, mInsertRight),
         IDU_FT_TYPE_UBIGINT,
         NULL,

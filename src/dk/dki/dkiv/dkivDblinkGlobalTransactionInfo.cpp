@@ -61,7 +61,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"GLOBAL_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmGlobalTransactionInfo, mGlobalTxId ),
+        offsetof( dkmGlobalTransactionInfo,mGlobalTxId ),
         IDU_FT_SIZEOF( dkmGlobalTransactionInfo, mGlobalTxId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -69,7 +69,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmGlobalTransactionInfo, mLocalTxId ),
+        offsetof( dkmGlobalTransactionInfo,mLocalTxId ),
         IDU_FT_SIZEOF( dkmGlobalTransactionInfo, mLocalTxId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -77,7 +77,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"STATUS",
-        IDU_FT_OFFSETOF( dkmGlobalTransactionInfo, mStatus ),
+        offsetof( dkmGlobalTransactionInfo,mStatus ),
         IDU_FT_SIZEOF( dkmGlobalTransactionInfo, mStatus ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -85,7 +85,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"SESSION_ID",
-        IDU_FT_OFFSETOF( dkmGlobalTransactionInfo, mSessionId ),
+        offsetof( dkmGlobalTransactionInfo,mSessionId ),
         IDU_FT_SIZEOF( dkmGlobalTransactionInfo, mSessionId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -93,7 +93,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"REMOTE_TRANSACTION_COUNT",
-        IDU_FT_OFFSETOF( dkmGlobalTransactionInfo, mRemoteTransactionCount ),
+        offsetof( dkmGlobalTransactionInfo,mRemoteTransactionCount ),
         IDU_FT_SIZEOF( dkmGlobalTransactionInfo, mRemoteTransactionCount ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -101,7 +101,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TRANSACTION_LEVEL",
-        IDU_FT_OFFSETOF( dkmGlobalTransactionInfo, mTransactionLevel ),
+        offsetof( dkmGlobalTransactionInfo,mTransactionLevel ),
         IDU_FT_SIZEOF( dkmGlobalTransactionInfo, mTransactionLevel ),
         IDU_FT_TYPE_UINTEGER,
         NULL,

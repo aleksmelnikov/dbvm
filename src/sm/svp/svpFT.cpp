@@ -40,7 +40,7 @@ static iduFixedTableColDesc gDumpVolDBPageColDesc[] =
 {
     {
         (SChar*)"TBSID",
-        IDU_FT_OFFSETOF(svpVolDBPageDump, mTBSID),
+        offsetof(svpVolDBPageDump,mTBSID),
         IDU_FT_SIZEOF(svpVolDBPageDump, mTBSID),
         IDU_FT_TYPE_USMALLINT,
         NULL,
@@ -48,7 +48,7 @@ static iduFixedTableColDesc gDumpVolDBPageColDesc[] =
     },
     {
         (SChar*)"PID",
-        IDU_FT_OFFSETOF(svpVolDBPageDump, mPID),
+        offsetof(svpVolDBPageDump,mPID),
         IDU_FT_SIZEOF(svpVolDBPageDump, mPID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -56,7 +56,7 @@ static iduFixedTableColDesc gDumpVolDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP1",
-        IDU_FT_OFFSETOF(svpVolDBPageDump, mPageDump1),
+        offsetof(svpVolDBPageDump,mPageDump1),
         IDU_FT_SIZEOF(svpVolDBPageDump, mPageDump1),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -64,7 +64,7 @@ static iduFixedTableColDesc gDumpVolDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP2",
-        IDU_FT_OFFSETOF(svpVolDBPageDump, mPageDump2),
+        offsetof(svpVolDBPageDump,mPageDump2),
         IDU_FT_SIZEOF(svpVolDBPageDump, mPageDump2),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -72,7 +72,7 @@ static iduFixedTableColDesc gDumpVolDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP3",
-        IDU_FT_OFFSETOF(svpVolDBPageDump, mPageDump3),
+        offsetof(svpVolDBPageDump,mPageDump3),
         IDU_FT_SIZEOF(svpVolDBPageDump, mPageDump3),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -80,7 +80,7 @@ static iduFixedTableColDesc gDumpVolDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP4",
-        IDU_FT_OFFSETOF(svpVolDBPageDump, mPageDump4),
+        offsetof(svpVolDBPageDump,mPageDump4),
         IDU_FT_SIZEOF(svpVolDBPageDump, mPageDump4),
         IDU_FT_TYPE_VARCHAR,
         NULL,

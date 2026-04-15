@@ -55,7 +55,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"SESSION_ID",
-        IDU_FT_OFFSETOF( dkmLinkerSessionInfo, mId ),
+        offsetof( dkmLinkerSessionInfo,mId ),
         IDU_FT_SIZEOF( dkmLinkerSessionInfo, mId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -63,7 +63,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"STATUS",
-        IDU_FT_OFFSETOF( dkmLinkerSessionInfo, mStatus ),
+        offsetof( dkmLinkerSessionInfo,mStatus ),
         IDU_FT_SIZEOF( dkmLinkerSessionInfo, mStatus ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -71,7 +71,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"SESSION_TYPE",
-        IDU_FT_OFFSETOF( dkmLinkerSessionInfo, mType ),
+        offsetof( dkmLinkerSessionInfo,mType ),
         IDU_FT_SIZEOF( dkmLinkerSessionInfo, mType ),
         IDU_FT_TYPE_INTEGER,
         NULL,

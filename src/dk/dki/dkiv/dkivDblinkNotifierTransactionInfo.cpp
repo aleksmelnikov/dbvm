@@ -43,7 +43,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"GLOBAL_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmNotifierTransactionInfo, mGlobalTransactionId ),
+        offsetof( dkmNotifierTransactionInfo,mGlobalTransactionId ),
         IDU_FT_SIZEOF( dkmNotifierTransactionInfo, mGlobalTransactionId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -51,7 +51,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmNotifierTransactionInfo, mLocalTransactionId ),
+        offsetof( dkmNotifierTransactionInfo,mLocalTransactionId ),
         IDU_FT_SIZEOF( dkmNotifierTransactionInfo, mLocalTransactionId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -59,7 +59,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"XID",
-        IDU_FT_OFFSETOF( dkmNotifierTransactionInfo, mXID ),
+        offsetof( dkmNotifierTransactionInfo,mXID ),
         DKT_2PC_XID_STRING_LEN,
         IDU_FT_TYPE_VARCHAR,
         idaXaConvertXIDToString,
@@ -67,7 +67,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TRANSACTION_RESULT",
-        IDU_FT_OFFSETOF( dkmNotifierTransactionInfo, mTransactionResult ),
+        offsetof( dkmNotifierTransactionInfo,mTransactionResult ),
         10,
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -75,7 +75,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TARGET_INFO",
-        IDU_FT_OFFSETOF( dkmNotifierTransactionInfo, mTargetInfo ),
+        offsetof( dkmNotifierTransactionInfo,mTargetInfo ),
         DK_NAME_LEN,
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -83,7 +83,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"PARENT_XID",
-        IDU_FT_OFFSETOF( dkmNotifierTransactionInfo, mParentXID ),
+        offsetof( dkmNotifierTransactionInfo,mParentXID ),
         DKT_2PC_XID_STRING_LEN,
         IDU_FT_TYPE_VARCHAR,
         idaXaConvertXIDToString,

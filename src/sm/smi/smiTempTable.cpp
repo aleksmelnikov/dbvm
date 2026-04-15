@@ -381,7 +381,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
 {
     {
         (SChar*)"SLOT_IDX",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mSlotIdx),
+        offsetof(smiTempTableStats4Perf,mSlotIdx),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mSlotIdx),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -389,7 +389,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"SQL_TEXT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mSQLText),
+        offsetof(smiTempTableStats4Perf,mSQLText),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mSQLText),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -397,7 +397,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"CREATE_TIME",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mCreateTime),
+        offsetof(smiTempTableStats4Perf,mCreateTime),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mCreateTime),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -405,7 +405,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"DROP_TIME",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mDropTime),
+        offsetof(smiTempTableStats4Perf,mDropTime),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mDropTime),
         IDU_FT_TYPE_CHAR | IDU_FT_COLUMN_INDEX,
         NULL,
@@ -413,7 +413,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"CONSUME_TIME",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mConsumeTime),
+        offsetof(smiTempTableStats4Perf,mConsumeTime),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mConsumeTime),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -421,7 +421,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"TBS_ID",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf, mSpaceID),
+        offsetof(smiTempTableStats4Perf,mSpaceID),
         IDU_FT_SIZEOF(smiTempTableStats4Perf, mSpaceID),
         IDU_FT_TYPE_UINTEGER | IDU_FT_COLUMN_INDEX,
         NULL,
@@ -429,7 +429,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"TRANSACTION_ID",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf, mTransID),
+        offsetof(smiTempTableStats4Perf,mTransID),
         IDU_FT_SIZEOF(smiTempTableStats4Perf, mTransID),
         IDU_FT_TYPE_UBIGINT,  // BUG-47379 unsigned int -> big int
         NULL,
@@ -437,7 +437,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"STATE",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf, mTTState),
+        offsetof(smiTempTableStats4Perf,mTTState),
         IDU_FT_SIZEOF(smiTempTableStats4Perf, mTTState),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -445,7 +445,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"IO_PASS_NUMBER",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf, mIOPassNo),
+        offsetof(smiTempTableStats4Perf,mIOPassNo),
         IDU_FT_SIZEOF(smiTempTableStats4Perf, mIOPassNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -453,7 +453,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"ESTIMATED_OPTIMAL_SIZE",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf, mEstimatedOptimalSize),
+        offsetof(smiTempTableStats4Perf,mEstimatedOptimalSize),
         IDU_FT_SIZEOF(smiTempTableStats4Perf, mEstimatedOptimalSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -461,7 +461,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"ESTIMATED_SUB_OPTIMAL_SIZE",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mEstimatedSubOptimalSize), 
+        offsetof(smiTempTableStats4Perf,mEstimatedSubOptimalSize), 
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mEstimatedSubOptimalSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -469,7 +469,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"READ_COUNT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mReadCount),
+        offsetof(smiTempTableStats4Perf,mReadCount),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mReadCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -477,7 +477,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"WRITE_COUNT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mWriteCount),
+        offsetof(smiTempTableStats4Perf,mWriteCount),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mWriteCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -485,7 +485,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"WRITE_PAGE_COUNT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mWritePageCount),
+        offsetof(smiTempTableStats4Perf,mWritePageCount),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mWritePageCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -493,7 +493,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"OVER_ALLOC_COUNT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mOverAllocCount),
+        offsetof(smiTempTableStats4Perf,mOverAllocCount),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mOverAllocCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -501,7 +501,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"ALLOC_WAIT_COUNT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mAllocWaitCount),
+        offsetof(smiTempTableStats4Perf,mAllocWaitCount),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mAllocWaitCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -509,7 +509,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"WORK_AREA_SIZE",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mUsedWorkAreaSize),
+        offsetof(smiTempTableStats4Perf,mUsedWorkAreaSize),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mUsedWorkAreaSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -517,7 +517,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"MAX_WORK_AREA_SIZE",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mMaxWorkAreaSize),
+        offsetof(smiTempTableStats4Perf,mMaxWorkAreaSize),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mMaxWorkAreaSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -525,7 +525,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"NORMAL_AREA_SIZE",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mNormalAreaSize),
+        offsetof(smiTempTableStats4Perf,mNormalAreaSize),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mNormalAreaSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -533,7 +533,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"RUNTIME_MAP_SIZE",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mRuntimeMemSize),
+        offsetof(smiTempTableStats4Perf,mRuntimeMemSize),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mRuntimeMemSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -541,7 +541,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"RECORD_COUNT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mRecordCount),
+        offsetof(smiTempTableStats4Perf,mRecordCount),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mRecordCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -549,7 +549,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"RECORD_LENGTH",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mRecordLength),
+        offsetof(smiTempTableStats4Perf,mRecordLength),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mRecordLength),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -557,7 +557,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"MERGE_RUN_COUNT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mMergeRunCount),
+        offsetof(smiTempTableStats4Perf,mMergeRunCount),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mMergeRunCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -565,7 +565,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"HEIGHT",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mHeight),
+        offsetof(smiTempTableStats4Perf,mHeight),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mHeight),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -573,7 +573,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"LAST_OPERATION",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mLastOpr),
+        offsetof(smiTempTableStats4Perf,mLastOpr),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mLastOpr),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -581,7 +581,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"EXTRA_STAT1",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mExtraStat1),
+        offsetof(smiTempTableStats4Perf,mExtraStat1),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mExtraStat1),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -589,7 +589,7 @@ static iduFixedTableColDesc  gTempTableStatsColDesc[]=
     },
     {
         (SChar*)"EXTRA_STAT2",
-        IDU_FT_OFFSETOF(smiTempTableStats4Perf,mExtraStat2),
+        offsetof(smiTempTableStats4Perf,mExtraStat2),
         IDU_FT_SIZEOF(smiTempTableStats4Perf,mExtraStat2),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -695,7 +695,7 @@ static iduFixedTableColDesc  gTempInfoColDesc[]=
 {
     {
         (SChar*)"NAME",
-        IDU_FT_OFFSETOF(smiTempInfo4Perf,mName),
+        offsetof(smiTempInfo4Perf,mName),
         IDU_FT_SIZEOF(smiTempInfo4Perf,mName),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -703,7 +703,7 @@ static iduFixedTableColDesc  gTempInfoColDesc[]=
     },
     {
         (SChar*)"VALUE",
-        IDU_FT_OFFSETOF(smiTempInfo4Perf,mValue),
+        offsetof(smiTempInfo4Perf,mValue),
         IDU_FT_SIZEOF(smiTempInfo4Perf,mValue),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -711,7 +711,7 @@ static iduFixedTableColDesc  gTempInfoColDesc[]=
     },
     {
         (SChar*)"UNIT",
-        IDU_FT_OFFSETOF(smiTempInfo4Perf,mUnit),
+        offsetof(smiTempInfo4Perf,mUnit),
         IDU_FT_SIZEOF(smiTempInfo4Perf,mUnit),
         IDU_FT_TYPE_CHAR,
         NULL,

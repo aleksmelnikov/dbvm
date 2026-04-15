@@ -61,7 +61,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"GLOBAL_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmRemoteStatementInfo, mGlobalTxId ),
+        offsetof( dkmRemoteStatementInfo,mGlobalTxId ),
         IDU_FT_SIZEOF( dkmRemoteStatementInfo, mGlobalTxId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -69,7 +69,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmRemoteTransactionInfo, mLocalTxId ),
+        offsetof( dkmRemoteTransactionInfo,mLocalTxId ),
         IDU_FT_SIZEOF( dkmRemoteTransactionInfo, mLocalTxId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -77,7 +77,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"REMOTE_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmRemoteTransactionInfo, mRemoteTransactionId ),
+        offsetof( dkmRemoteTransactionInfo,mRemoteTransactionId ),
         IDU_FT_SIZEOF( dkmRemoteTransactionInfo, mRemoteTransactionId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -85,7 +85,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"XID",
-        IDU_FT_OFFSETOF( dkmRemoteTransactionInfo, mXID ),
+        offsetof( dkmRemoteTransactionInfo,mXID ),
         DKT_2PC_XID_STRING_LEN,
         IDU_FT_TYPE_VARCHAR,
         idaXaConvertXIDToString,
@@ -93,7 +93,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TARGET_INFO",
-        IDU_FT_OFFSETOF( dkmRemoteTransactionInfo, mTargetInfo ),
+        offsetof( dkmRemoteTransactionInfo,mTargetInfo ),
         QCI_MAX_NAME_LEN,
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -101,7 +101,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"STATUS",
-        IDU_FT_OFFSETOF( dkmRemoteTransactionInfo, mStatus ),
+        offsetof( dkmRemoteTransactionInfo,mStatus ),
         IDU_FT_SIZEOF( dkmRemoteTransactionInfo, mStatus ),
         IDU_FT_TYPE_UINTEGER,
         NULL,

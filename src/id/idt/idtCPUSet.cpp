@@ -1404,7 +1404,7 @@ static iduFixedTableColDesc gCPUCoreColDesc[] =
 {
     {
         (SChar*)"LOGICAL_ID",
-        IDU_FT_OFFSETOF(idtCPUCoreStat, mLogicalID),
+        offsetof(idtCPUCoreStat,mLogicalID),
         sizeof(SInt),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1412,7 +1412,7 @@ static iduFixedTableColDesc gCPUCoreColDesc[] =
     },
     {
         (SChar*)"NUMA_ID",
-        IDU_FT_OFFSETOF(idtCPUCoreStat, mSocketID),
+        offsetof(idtCPUCoreStat,mSocketID),
         sizeof(SInt),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1420,7 +1420,7 @@ static iduFixedTableColDesc gCPUCoreColDesc[] =
     },
     {
         (SChar*)"CORE_ID",
-        IDU_FT_OFFSETOF(idtCPUCoreStat, mCoreID),
+        offsetof(idtCPUCoreStat,mCoreID),
         sizeof(SInt),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1428,7 +1428,7 @@ static iduFixedTableColDesc gCPUCoreColDesc[] =
     },
     {
         (SChar*)"IN_USE",
-        IDU_FT_OFFSETOF(idtCPUCoreStat, mInUse),
+        offsetof(idtCPUCoreStat,mInUse),
         4,
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -1436,7 +1436,7 @@ static iduFixedTableColDesc gCPUCoreColDesc[] =
     },
     {
         (SChar*)"MODEL_NAME",
-        IDU_FT_OFFSETOF(idtCPUCoreStat, mModelName),
+        offsetof(idtCPUCoreStat,mModelName),
         128,
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -1506,7 +1506,7 @@ static iduFixedTableColDesc gNUMAStatColDesc[] =
 {
     {
         (SChar*)"NUMA_ID",
-        IDU_FT_OFFSETOF(idtCPUNUMAStat, mNUMAID),
+        offsetof(idtCPUNUMAStat,mNUMAID),
         sizeof(SInt),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1514,7 +1514,7 @@ static iduFixedTableColDesc gNUMAStatColDesc[] =
     },
     {
         (SChar*)"CPUSET",
-        IDU_FT_OFFSETOF(idtCPUNUMAStat, mCPUIDs),
+        offsetof(idtCPUNUMAStat,mCPUIDs),
         128,
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -1522,7 +1522,7 @@ static iduFixedTableColDesc gNUMAStatColDesc[] =
     },
     {
         (SChar*)"CPUSETHEX",
-        IDU_FT_OFFSETOF(idtCPUNUMAStat, mCPUIDsHex),
+        offsetof(idtCPUNUMAStat,mCPUIDsHex),
         128,
         IDU_FT_TYPE_VARCHAR,
         NULL,

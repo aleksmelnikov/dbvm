@@ -296,7 +296,7 @@ static iduFixedTableColDesc gReservedWordColDesc[] =
 {
     {
         (SChar *)"KEYWORD",
-        IDU_FT_OFFSETOF(qcpUtilReservedWordTables, mWord),
+        offsetof(qcpUtilReservedWordTables,mWord),
         40,    // RESERVED WORD MAX LENGTH
         IDU_FT_TYPE_VARCHAR | IDU_FT_TYPE_POINTER,
         NULL,
@@ -304,7 +304,7 @@ static iduFixedTableColDesc gReservedWordColDesc[] =
     },
     {
         (SChar *)"LENGTH",
-        IDU_FT_OFFSETOF(qcpUtilReservedWordTables, mLen),
+        offsetof(qcpUtilReservedWordTables,mLen),
         IDU_FT_SIZEOF(qcpUtilReservedWordTables, mLen),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -312,7 +312,7 @@ static iduFixedTableColDesc gReservedWordColDesc[] =
     },
     {
         (SChar *)"RESERVED_TYPE",
-        IDU_FT_OFFSETOF(qcpUtilReservedWordTables, mReservedType),
+        offsetof(qcpUtilReservedWordTables,mReservedType),
         IDU_FT_SIZEOF(qcpUtilReservedWordTables, mReservedType),
         IDU_FT_TYPE_UINTEGER,
         NULL,

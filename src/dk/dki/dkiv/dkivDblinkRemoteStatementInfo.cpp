@@ -61,7 +61,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"GLOBAL_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmRemoteStatementInfo, mGlobalTxId ),
+        offsetof( dkmRemoteStatementInfo,mGlobalTxId ),
         IDU_FT_SIZEOF( dkmRemoteStatementInfo, mGlobalTxId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -69,7 +69,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmRemoteStatementInfo, mLocalTxId ),
+        offsetof( dkmRemoteStatementInfo,mLocalTxId ),
         IDU_FT_SIZEOF( dkmRemoteStatementInfo, mLocalTxId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -77,7 +77,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"REMOTE_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmRemoteStatementInfo, mRemoteTransactionId ),
+        offsetof( dkmRemoteStatementInfo,mRemoteTransactionId ),
         IDU_FT_SIZEOF( dkmRemoteStatementInfo, mRemoteTransactionId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -85,7 +85,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"STATEMENT_ID",
-        IDU_FT_OFFSETOF( dkmRemoteStatementInfo, mStatementId ),
+        offsetof( dkmRemoteStatementInfo,mStatementId ),
         IDU_FT_SIZEOF( dkmRemoteStatementInfo, mStatementId ),
         IDU_FT_TYPE_BIGINT,
         NULL,
@@ -93,7 +93,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"QUERY",
-        IDU_FT_OFFSETOF( dkmRemoteStatementInfo, mQuery ),
+        offsetof( dkmRemoteStatementInfo,mQuery ),
         IDU_FT_SIZEOF( dkmRemoteStatementInfo, mQuery ),
         IDU_FT_TYPE_VARCHAR,
         NULL,

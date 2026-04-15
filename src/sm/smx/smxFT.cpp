@@ -76,7 +76,7 @@ static iduFixedTableColDesc gTxMgrTableColDesc[] =
 {
     {
         (SChar*)"TOTAL_COUNT",
-        IDU_FT_OFFSETOF(smxTransMgrStatistics, mTransCnt),
+        offsetof(smxTransMgrStatistics,mTransCnt),
         IDU_FT_SIZEOF_UINTEGER,
         IDU_FT_TYPE_UINTEGER | IDU_FT_TYPE_POINTER,
         NULL,
@@ -85,7 +85,7 @@ static iduFixedTableColDesc gTxMgrTableColDesc[] =
 
     {
         (SChar*)"FREE_LIST_COUNT",
-        IDU_FT_OFFSETOF(smxTransMgrStatistics, mTransFreeListCnt),
+        offsetof(smxTransMgrStatistics,mTransFreeListCnt),
         IDU_FT_SIZEOF_UINTEGER,
         IDU_FT_TYPE_UINTEGER | IDU_FT_TYPE_POINTER,
         NULL,
@@ -95,7 +95,7 @@ static iduFixedTableColDesc gTxMgrTableColDesc[] =
 
     {
         (SChar*)"BEGIN_ENABLE",
-        IDU_FT_OFFSETOF(smxTransMgrStatistics, mEnabledTransBegin),
+        offsetof(smxTransMgrStatistics,mEnabledTransBegin),
         ID_SIZEOF(smxTransMgr::mEnabledTransBegin),
         IDU_FT_TYPE_UBIGINT | IDU_FT_TYPE_POINTER,
         NULL,
@@ -104,7 +104,7 @@ static iduFixedTableColDesc gTxMgrTableColDesc[] =
 
     {
         (SChar*)"ACTIVE_COUNT",
-        IDU_FT_OFFSETOF(smxTransMgrStatistics, mActiveTransCnt),
+        offsetof(smxTransMgrStatistics,mActiveTransCnt),
         IDU_FT_SIZEOF_UINTEGER,
         IDU_FT_TYPE_UINTEGER | IDU_FT_TYPE_POINTER,
         NULL,
@@ -113,7 +113,7 @@ static iduFixedTableColDesc gTxMgrTableColDesc[] =
 
     {
         (SChar*)"SYS_MIN_DISK_VIEWSCN",
-        IDU_FT_OFFSETOF(smxTransMgrStatistics, mSysMinDskViewSCN),
+        offsetof(smxTransMgrStatistics,mSysMinDskViewSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -122,7 +122,7 @@ static iduFixedTableColDesc gTxMgrTableColDesc[] =
 
     {   /* BUG-47655 Transaction 할당 재시도 총 횟수 */
         (SChar*)"ALLOC_TRANSACTION_RETRY_COUNT",
-        IDU_FT_OFFSETOF(smxTransMgrStatistics, mTransTableFullCount),
+        offsetof(smxTransMgrStatistics,mTransTableFullCount),
         ID_SIZEOF(smxTransMgr::mTransTableFullCount),
         IDU_FT_TYPE_UBIGINT | IDU_FT_TYPE_POINTER,
         NULL,
@@ -131,7 +131,7 @@ static iduFixedTableColDesc gTxMgrTableColDesc[] =
 
     {   /* BUG-47655 Transaction 할당 재시도한 Transaction 갯수 */
         (SChar*)"ALLOC_RETRY_TRANSACTION_COUNT",
-        IDU_FT_OFFSETOF(smxTransMgrStatistics, mAllocRetryTransCount),
+        offsetof(smxTransMgrStatistics,mAllocRetryTransCount),
         ID_SIZEOF(smxTransMgr::mAllocRetryTransCount),
         IDU_FT_TYPE_UBIGINT | IDU_FT_TYPE_POINTER,
         NULL,
@@ -202,7 +202,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
 {
     {
         (SChar*)"ID",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mTransID),
+        offsetof(smxTransInfo4Perf,mTransID),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mTransID),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -212,7 +212,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     //그들간의 관계를 정확히 유지해야 함.
     {
         (SChar*)"SESSION_ID",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mSessionID),
+        offsetof(smxTransInfo4Perf,mSessionID),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mSessionID),
         IDU_FT_TYPE_UINTEGER | IDU_FT_COLUMN_INDEX,
         NULL,
@@ -220,7 +220,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"MIN_MEM_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mMscn),
+        offsetof(smxTransInfo4Perf,mMscn),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -228,7 +228,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"MIN_MEM_VIEW_SCN_FOR_LOB",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mMinMemViewSCNwithLOB),
+        offsetof(smxTransInfo4Perf,mMinMemViewSCNwithLOB),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -236,7 +236,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"MIN_DISK_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mDscn),
+        offsetof(smxTransInfo4Perf,mDscn),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -244,7 +244,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"MIN_DISK_VIEW_SCN_FOR_LOB",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mMinDskViewSCNwithLOB),
+        offsetof(smxTransInfo4Perf,mMinDskViewSCNwithLOB),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -252,7 +252,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"FIRST_MIN_DISK_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mFstDskViewSCN),
+        offsetof(smxTransInfo4Perf,mFstDskViewSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -260,7 +260,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LAST_REQUEST_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mLastRequestSCN),
+        offsetof(smxTransInfo4Perf,mLastRequestSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -268,7 +268,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"PREPARE_SCN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mPrepareSCN),
+        offsetof(smxTransInfo4Perf,mPrepareSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -276,7 +276,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"COMMIT_SCN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mCommitSCN),
+        offsetof(smxTransInfo4Perf,mCommitSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -284,7 +284,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"STATUS",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mStatus),
+        offsetof(smxTransInfo4Perf,mStatus),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mStatus),
         IDU_FT_TYPE_UBIGINT | IDU_FT_COLUMN_INDEX,
         NULL,
@@ -292,7 +292,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"UPDATE_STATUS",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mIsUpdate),
+        offsetof(smxTransInfo4Perf,mIsUpdate),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mIsUpdate),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -300,7 +300,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LOG_TYPE",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mLogTypeFlag),
+        offsetof(smxTransInfo4Perf,mLogTypeFlag),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mLogTypeFlag),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -309,7 +309,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
 #ifdef NOTDEF
     {
         (SChar*)"XA_ID",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mXaTransID),
+        offsetof(smxTransInfo4Perf,mXaTransID),
         256,
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -318,7 +318,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
 #endif
     {
         (SChar*)"XA_COMMIT_STATUS",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mCommitState),
+        offsetof(smxTransInfo4Perf,mCommitState),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mCommitState),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -326,7 +326,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"XA_PREPARED_TIME",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mPreparedTime),
+        offsetof(smxTransInfo4Perf,mPreparedTime),
         64,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertTIMESTAMP,
@@ -334,7 +334,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"FIRST_UNDO_NEXT_LSN_FILENO",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mFstUndoNxtLSN) + IDU_FT_OFFSETOF(smLSN, mFileNo),
+        offsetof(smxTransInfo4Perf,mFstUndoNxtLSN) + offsetof(smLSN,mFileNo),
         IDU_FT_SIZEOF(smLSN, mFileNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -342,7 +342,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"FIRST_UNDO_NEXT_LSN_OFFSET",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mFstUndoNxtLSN) + IDU_FT_OFFSETOF(smLSN, mOffset),
+        offsetof(smxTransInfo4Perf,mFstUndoNxtLSN) + offsetof(smLSN,mOffset),
         IDU_FT_SIZEOF(smLSN, mOffset),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -350,7 +350,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"CURRENT_UNDO_NEXT_SN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mCurUndoNxtSN),
+        offsetof(smxTransInfo4Perf,mCurUndoNxtSN),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mCurUndoNxtSN),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -358,7 +358,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"CURRENT_UNDO_NEXT_LSN_FILENO",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mCurUndoNxtLSN) + IDU_FT_OFFSETOF(smLSN, mFileNo),
+        offsetof(smxTransInfo4Perf,mCurUndoNxtLSN) + offsetof(smLSN,mFileNo),
         IDU_FT_SIZEOF(smLSN, mFileNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -366,7 +366,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"CURRENT_UNDO_NEXT_LSN_OFFSET",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mCurUndoNxtLSN) + IDU_FT_OFFSETOF(smLSN, mOffset),
+        offsetof(smxTransInfo4Perf,mCurUndoNxtLSN) + offsetof(smLSN,mOffset),
         IDU_FT_SIZEOF(smLSN, mOffset),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -374,7 +374,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LAST_UNDO_NEXT_LSN_FILENO",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mLstUndoNxtLSN) + IDU_FT_OFFSETOF(smLSN, mFileNo),
+        offsetof(smxTransInfo4Perf,mLstUndoNxtLSN) + offsetof(smLSN,mFileNo),
         IDU_FT_SIZEOF(smLSN, mFileNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -382,7 +382,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LAST_UNDO_NEXT_LSN_OFFSET",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mLstUndoNxtLSN) + IDU_FT_OFFSETOF(smLSN, mOffset),
+        offsetof(smxTransInfo4Perf,mLstUndoNxtLSN) + offsetof(smLSN,mOffset),
         IDU_FT_SIZEOF(smLSN, mOffset),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -390,7 +390,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LAST_UNDO_NEXT_SN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mCurUndoNxtSN),
+        offsetof(smxTransInfo4Perf,mCurUndoNxtSN),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mCurUndoNxtSN),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -398,7 +398,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"SLOT_NO",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mSlotN),
+        offsetof(smxTransInfo4Perf,mSlotN),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mSlotN),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -406,7 +406,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"UPDATE_SIZE",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mUpdateSize),
+        offsetof(smxTransInfo4Perf,mUpdateSize),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mUpdateSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -414,7 +414,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"ENABLE_ROLLBACK",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mAbleToRollback),
+        offsetof(smxTransInfo4Perf,mAbleToRollback),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mAbleToRollback),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -422,7 +422,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"FIRST_UPDATE_TIME",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mFstUpdateTime),
+        offsetof(smxTransInfo4Perf,mFstUpdateTime),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mFstUpdateTime),
         IDU_FT_TYPE_UINTEGER | IDU_FT_COLUMN_INDEX,
         NULL,
@@ -430,7 +430,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"PROCESSED_UNDO_TIME",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mProcessedUndoTime),
+        offsetof(smxTransInfo4Perf,mProcessedUndoTime),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mProcessedUndoTime),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -438,7 +438,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"ESTIMATED_TOTAL_UNDO_TIME",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mEstimatedTotalUndoTime),
+        offsetof(smxTransInfo4Perf,mEstimatedTotalUndoTime),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mEstimatedTotalUndoTime),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -446,7 +446,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"TOTAL_LOG_COUNT",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mTotalLogCount),
+        offsetof(smxTransInfo4Perf,mTotalLogCount),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mTotalLogCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -454,7 +454,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"PROCESSED_UNDO_LOG_COUNT",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mProcessedUndoLogCount),
+        offsetof(smxTransInfo4Perf,mProcessedUndoLogCount),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mProcessedUndoLogCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -462,7 +462,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LOG_BUF_SIZE",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mLogBufferSize),
+        offsetof(smxTransInfo4Perf,mLogBufferSize),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mLogBufferSize),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -470,7 +470,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LOG_OFFSET",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mLogOffset),
+        offsetof(smxTransInfo4Perf,mLogOffset),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mLogOffset),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -478,7 +478,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"SKIP_CHECK_FLAG",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mDoSkipCheck),
+        offsetof(smxTransInfo4Perf,mDoSkipCheck),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mDoSkipCheck),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -486,7 +486,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"SKIP_CHECK_SCN_FLAG",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mDoSkipCheckSCN),
+        offsetof(smxTransInfo4Perf,mDoSkipCheckSCN),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mDoSkipCheckSCN),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -494,7 +494,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DDL_FLAG",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mIsDDL),
+        offsetof(smxTransInfo4Perf,mIsDDL),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mIsDDL),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -502,7 +502,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"TSS_RID",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mTSSlotSID),
+        offsetof(smxTransInfo4Perf,mTSSlotSID),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mTSSlotSID),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -510,7 +510,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"RESOURCE_GROUP_ID",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mRSGroupID),
+        offsetof(smxTransInfo4Perf,mRSGroupID),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mRSGroupID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -518,7 +518,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"MEM_LOB_CURSOR_COUNT",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mMemLobCursorCount ),
+        offsetof(smxTransInfo4Perf,mMemLobCursorCount ),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mMemLobCursorCount ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -526,7 +526,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DISK_LOB_CURSOR_COUNT",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mDiskLobCursorCount ),
+        offsetof(smxTransInfo4Perf,mDiskLobCursorCount ),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mDiskLobCursorCount ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -534,7 +534,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"LEGACY_TRANS_COUNT",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mLegacyTransCount ),
+        offsetof(smxTransInfo4Perf,mLegacyTransCount ),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mLegacyTransCount ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -542,7 +542,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"ISOLATION_LEVEL",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mIsolationLevel ),
+        offsetof(smxTransInfo4Perf,mIsolationLevel ),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mIsolationLevel ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -550,7 +550,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"GLOBAL_CONSISTENCY",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mIsGCTx ),
+        offsetof(smxTransInfo4Perf,mIsGCTx ),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mIsGCTx ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -558,7 +558,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar *)"SHARD_PIN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mShardPin ),
+        offsetof(smxTransInfo4Perf,mShardPin ),
         SMI_MAX_SHARD_PIN_STR_LEN,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertShardPinToString,
@@ -566,7 +566,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DISTRIBUTION_FIRST_STMT_TIME",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mGCTxFirstStmtTime.tv_ ),
+        offsetof(smxTransInfo4Perf,mGCTxFirstStmtTime.tv_ ),
         64,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertAlignedTIMESTAMP,
@@ -574,7 +574,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DISTRIBUTION_FIRST_STMT_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mGCTxFirstStmtViewSCN ),
+        offsetof(smxTransInfo4Perf,mGCTxFirstStmtViewSCN ),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -582,7 +582,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DISTRIBUTION_LEVEL",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mDistLevel ),
+        offsetof(smxTransInfo4Perf,mDistLevel ),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mDistLevel ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -590,7 +590,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DISTRIBUTION_DEADLOCK_DETECTION",
-        IDU_FT_OFFSETOF( smxTransInfo4Perf, mDetectionStr ),
+        offsetof( smxTransInfo4Perf,mDetectionStr ),
         IDU_FT_SIZEOF( smxTransInfo4Perf, mDetectionStr ),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -598,7 +598,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DISTRIBUTION_DEADLOCK_WAIT_TIME",
-        IDU_FT_OFFSETOF( smxTransInfo4Perf, mDieWaitTime ),
+        offsetof( smxTransInfo4Perf,mDieWaitTime ),
         IDU_FT_SIZEOF( smxTransInfo4Perf, mDieWaitTime ),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -606,7 +606,7 @@ static iduFixedTableColDesc gTxListTableColDesc[] =
     },
     {
         (SChar*)"DISTRIBUTION_DEADLOCK_ELAPSED_TIME",
-        IDU_FT_OFFSETOF( smxTransInfo4Perf, mElapsedTime ),
+        offsetof( smxTransInfo4Perf,mElapsedTime ),
         IDU_FT_SIZEOF( smxTransInfo4Perf, mElapsedTime ),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -802,7 +802,7 @@ static iduFixedTableColDesc gTxPendingTableColDesc[] =
 {
     {
         (SChar*)"LOCAL_TRAN_ID",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mTransID),
+        offsetof(smxTransInfo4Perf,mTransID),
         IDU_FT_SIZEOF(smxTransInfo4Perf, mTransID),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -810,7 +810,7 @@ static iduFixedTableColDesc gTxPendingTableColDesc[] =
     },
     {
         (SChar*)"GLOBAL_TX_ID",
-        IDU_FT_OFFSETOF(smxTransInfo4Perf, mXaTransID),
+        offsetof(smxTransInfo4Perf,mXaTransID),
         256,
         IDU_FT_TYPE_VARCHAR,
         idaXaConvertXIDToString,
@@ -819,7 +819,7 @@ static iduFixedTableColDesc gTxPendingTableColDesc[] =
 /* prepared 상태의 transaction 만 보여줌
     {
         (SChar*)"STATUS",
-        IDU_FT_OFFSETOF(smxTrans, mCommitState),
+        offsetof(smxTrans,mCommitState),
         IDU_FT_SIZEOF(smxTrans, mCommitState),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -893,7 +893,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
 {
     {
         (SChar*)"ID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf, mEntryID),
+        offsetof(smxTXSeg4Perf,mEntryID),
         IDU_FT_SIZEOF(smxTXSeg4Perf, mEntryID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -901,7 +901,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"TRANS_ID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf, mTransID),
+        offsetof(smxTXSeg4Perf,mTransID),
         IDU_FT_SIZEOF(smxTXSeg4Perf, mTransID),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -909,7 +909,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"MIN_DISK_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf, mMinDskViewSCN),
+        offsetof(smxTXSeg4Perf,mMinDskViewSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -917,7 +917,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"COMMIT_SCN",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf, mCommitSCN),
+        offsetof(smxTXSeg4Perf,mCommitSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -925,7 +925,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"FIRST_DISK_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf, mFstDskViewSCN),
+        offsetof(smxTXSeg4Perf,mFstDskViewSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -933,7 +933,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"TSSLOT_SID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mTSSlotSID),
+        offsetof(smxTXSeg4Perf,mTSSlotSID),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mTSSlotSID),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -941,7 +941,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"TSSEG_EXTDESC_RID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mExtRID4TSS),
+        offsetof(smxTXSeg4Perf,mExtRID4TSS),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mExtRID4TSS),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -949,7 +949,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"FST_UDSEG_EXTENT_RID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mFstExtRID4UDS),
+        offsetof(smxTXSeg4Perf,mFstExtRID4UDS),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mFstExtRID4UDS),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -957,7 +957,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"LST_UDSEG_EXTENT_RID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mLstExtRID4UDS),
+        offsetof(smxTXSeg4Perf,mLstExtRID4UDS),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mLstExtRID4UDS),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -965,7 +965,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"FST_UNDO_PAGEID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mFstUndoPID),
+        offsetof(smxTXSeg4Perf,mFstUndoPID),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mFstUndoPID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -973,7 +973,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"FST_UNDO_SLOTNUM",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mFstUndoSlotNum),
+        offsetof(smxTXSeg4Perf,mFstUndoSlotNum),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mFstUndoSlotNum),
         IDU_FT_TYPE_USMALLINT,
         NULL,
@@ -981,7 +981,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"LST_UNDO_PAGEID",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mLstUndoPID),
+        offsetof(smxTXSeg4Perf,mLstUndoPID),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mLstUndoPID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -989,7 +989,7 @@ static iduFixedTableColDesc gActiveTXSEGSTableColDesc[] =
     },
     {
         (SChar*)"LST_UNDO_SLOTNUM",
-        IDU_FT_OFFSETOF(smxTXSeg4Perf,mLstUndoSlotNum),
+        offsetof(smxTXSeg4Perf,mLstUndoSlotNum),
         IDU_FT_SIZEOF(smxTXSeg4Perf,mLstUndoSlotNum),
         IDU_FT_TYPE_USMALLINT,
         NULL,
@@ -1105,7 +1105,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
 {
     {
         (SChar*)"TransID",
-        IDU_FT_OFFSETOF(smxLegacyTrans, mTransID),
+        offsetof(smxLegacyTrans,mTransID),
         IDU_FT_SIZEOF(smxLegacyTrans, mTransID),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1113,7 +1113,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
     },
     {
         (SChar*)"COMMIT_END_LSN_FILENO",
-        IDU_FT_OFFSETOF(smxLegacyTrans, mCommitEndLSN) + IDU_FT_OFFSETOF(smLSN, mFileNo),
+        offsetof(smxLegacyTrans,mCommitEndLSN) + offsetof(smLSN,mFileNo),
         IDU_FT_SIZEOF(smLSN, mFileNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1121,7 +1121,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
     },
     {
         (SChar*)"COMMIT_END_LSN_OFFSET",
-        IDU_FT_OFFSETOF(smxLegacyTrans, mCommitEndLSN) + IDU_FT_OFFSETOF(smLSN, mOffset),
+        offsetof(smxLegacyTrans,mCommitEndLSN) + offsetof(smLSN,mOffset),
         IDU_FT_SIZEOF(smLSN, mOffset),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1129,7 +1129,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
     },
     {
         (SChar*)"COMMIT_SCN",
-        IDU_FT_OFFSETOF(smxLegacyTrans, mCommitSCN),
+        offsetof(smxLegacyTrans,mCommitSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -1137,7 +1137,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
     },
     {
         (SChar*)"MIN_MEM_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxLegacyTrans, mMinMemViewSCN),
+        offsetof(smxLegacyTrans,mMinMemViewSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -1145,7 +1145,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
     },
     {
         (SChar*)"MIN_DISK_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxLegacyTrans, mMinDskViewSCN),
+        offsetof(smxLegacyTrans,mMinDskViewSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -1153,7 +1153,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
     },
     {
         (SChar*)"FIRST_DISK_VIEW_SCN",
-        IDU_FT_OFFSETOF(smxLegacyTrans, mFstDskViewSCN),
+        offsetof(smxLegacyTrans,mFstDskViewSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -1161,7 +1161,7 @@ static iduFixedTableColDesc gLegacyTxListTableColDesc[] =
     },
     {
         (SChar*)"IS_MADE_BY_COMMIT/ROLLBACK",
-        IDU_FT_OFFSETOF( smxLegacyTrans, mMadeType ),
+        offsetof( smxLegacyTrans,mMadeType ),
         IDU_FT_SIZEOF( smxLegacyTrans, mMadeType ),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -1205,7 +1205,7 @@ static iduFixedTableColDesc gTimeSCNListTableColDesc[] =
 {
     {
         (SChar*)"TIME",
-        IDU_FT_OFFSETOF(smxTimeSCN4Perf, mTime ),
+        offsetof(smxTimeSCN4Perf,mTime ),
         32,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertAlignedTIMESTAMP,
@@ -1213,7 +1213,7 @@ static iduFixedTableColDesc gTimeSCNListTableColDesc[] =
     },
     {
         (SChar*)"SYSTEM_SCN",
-        IDU_FT_OFFSETOF(smxTimeSCN4Perf, mSystemSCN),
+        offsetof(smxTimeSCN4Perf,mSystemSCN),
         29,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertSCN,
@@ -1221,7 +1221,7 @@ static iduFixedTableColDesc gTimeSCNListTableColDesc[] =
     },
     {
         (SChar*)"BASE",
-        IDU_FT_OFFSETOF(smxTimeSCN4Perf, mBase),
+        offsetof(smxTimeSCN4Perf,mBase),
         IDU_FT_SIZEOF(smxTimeSCN4Perf, mBase),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -1353,7 +1353,7 @@ static iduFixedTableColDesc   gPendingWaitColDesc[]=
     },
     {
         (SChar *)"SHARD_PIN",
-        IDU_FT_OFFSETOF(smxPendingWait4Perf, mWaitingTxShardPin),
+        offsetof(smxPendingWait4Perf,mWaitingTxShardPin),
         SMI_MAX_SHARD_PIN_STR_LEN,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertShardPinToString,
@@ -1369,7 +1369,7 @@ static iduFixedTableColDesc   gPendingWaitColDesc[]=
     },
     {
         (SChar*)"WAIT_FOR_XID",
-        IDU_FT_OFFSETOF(smxPendingWait4Perf, mPendingXID),
+        offsetof(smxPendingWait4Perf,mPendingXID),
         SMI_XID_STRING_LEN,
         IDU_FT_TYPE_VARCHAR,
         idaXaConvertXIDToString,
@@ -1377,7 +1377,7 @@ static iduFixedTableColDesc   gPendingWaitColDesc[]=
     },
     {
         (SChar *)"WAIT_FOR_SHARD_PIN",
-        IDU_FT_OFFSETOF(smxPendingWait4Perf, mPendingTxShardPin),
+        offsetof(smxPendingWait4Perf,mPendingTxShardPin),
         SMI_MAX_SHARD_PIN_STR_LEN,
         IDU_FT_TYPE_VARCHAR,
         smiFixedTable::convertShardPinToString,

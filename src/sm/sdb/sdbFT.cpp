@@ -50,7 +50,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
 {
     {
         (SChar*)"NAME",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mName),
+        offsetof(sdbBCBListStat,mName),
         IDU_FT_SIZEOF(sdbBCBListStat, mName),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -58,7 +58,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"NUMBER",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mNumber),
+        offsetof(sdbBCBListStat,mNumber),
         IDU_FT_SIZEOF(sdbBCBListStat, mNumber),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -66,7 +66,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"FIRST_BCB_ID",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mFirstBCBID),
+        offsetof(sdbBCBListStat,mFirstBCBID),
         IDU_FT_SIZEOF(sdbBCBListStat, mFirstBCBID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -74,7 +74,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"FIRST_BCB_SPACEID",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mFirstBCBSpaceID),
+        offsetof(sdbBCBListStat,mFirstBCBSpaceID),
         IDU_FT_SIZEOF(sdbBCBListStat, mFirstBCBSpaceID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -82,7 +82,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"FIRST_BCB_PAGEID",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mFirstBCBPageID),
+        offsetof(sdbBCBListStat,mFirstBCBPageID),
         IDU_FT_SIZEOF(sdbBCBListStat, mFirstBCBPageID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -90,7 +90,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"LAST_BCB_ID",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mLastBCBID),
+        offsetof(sdbBCBListStat,mLastBCBID),
         IDU_FT_SIZEOF(sdbBCBListStat, mLastBCBID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -98,7 +98,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"LAST_BCB_SPACEID",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mLastBCBSpaceID),
+        offsetof(sdbBCBListStat,mLastBCBSpaceID),
         IDU_FT_SIZEOF(sdbBCBListStat, mLastBCBSpaceID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -106,7 +106,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"LAST_BCB_PAGEID",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mLastBCBPageID),
+        offsetof(sdbBCBListStat,mLastBCBPageID),
         IDU_FT_SIZEOF(sdbBCBListStat, mLastBCBPageID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -114,7 +114,7 @@ static iduFixedTableColDesc gBCBListColDesc[] =
     },
     {
         (SChar*)"LENGTH",
-        IDU_FT_OFFSETOF(sdbBCBListStat, mLength),
+        offsetof(sdbBCBListStat,mLength),
         IDU_FT_SIZEOF(sdbBCBListStat, mLength),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -424,7 +424,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
 {
     {
         (SChar*)"ID",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mID),
+        offsetof(sdbBufferPoolStatData,mID),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -432,7 +432,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"POOL_SIZE",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mPoolSize),
+        offsetof(sdbBufferPoolStatData,mPoolSize),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mPoolSize),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -440,7 +440,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"PAGE_SIZE",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mPageSize),
+        offsetof(sdbBufferPoolStatData,mPageSize),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mPageSize),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -448,7 +448,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"HASH_BUCKET_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mHashBucketCount),
+        offsetof(sdbBufferPoolStatData,mHashBucketCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mHashBucketCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -456,7 +456,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"HASH_CHAIN_LATCH_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mHashChainLatchCount),
+        offsetof(sdbBufferPoolStatData,mHashChainLatchCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mHashChainLatchCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -464,7 +464,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"LRU_LIST_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mLRUListCount),
+        offsetof(sdbBufferPoolStatData,mLRUListCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mLRUListCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -472,7 +472,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"PREPARE_LIST_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mPrepareListCount),
+        offsetof(sdbBufferPoolStatData,mPrepareListCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mPrepareListCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -480,7 +480,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"FLUSH_LIST_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mFlushListCount),
+        offsetof(sdbBufferPoolStatData,mFlushListCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mFlushListCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -488,7 +488,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"CHECKPOINT_LIST_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mCheckpointListCount),
+        offsetof(sdbBufferPoolStatData,mCheckpointListCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mCheckpointListCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -496,7 +496,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"VICTIM_SEARCH_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mVictimSearchCount),
+        offsetof(sdbBufferPoolStatData,mVictimSearchCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mVictimSearchCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -504,7 +504,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"HASH_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mHashPages),
+        offsetof(sdbBufferPoolStatData,mHashPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mHashPages),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -512,7 +512,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"HOT_LIST_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mHotListPages),
+        offsetof(sdbBufferPoolStatData,mHotListPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mHotListPages),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -520,7 +520,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"COLD_LIST_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mColdListPages),
+        offsetof(sdbBufferPoolStatData,mColdListPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mColdListPages),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -528,7 +528,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"PREPARE_LIST_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mPrepareListPages),
+        offsetof(sdbBufferPoolStatData,mPrepareListPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mPrepareListPages),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -536,7 +536,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"FLUSH_LIST_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mFlushListPages),
+        offsetof(sdbBufferPoolStatData,mFlushListPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mFlushListPages),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -544,7 +544,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"CHECKPOINT_LIST_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mCheckpointListPages),
+        offsetof(sdbBufferPoolStatData,mCheckpointListPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mCheckpointListPages),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -552,7 +552,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"FIX_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mFixPages),
+        offsetof(sdbBufferPoolStatData,mFixPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mFixPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -560,7 +560,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"GET_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mGetPages),
+        offsetof(sdbBufferPoolStatData,mGetPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mGetPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -568,7 +568,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"READ_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mReadPages),
+        offsetof(sdbBufferPoolStatData,mReadPages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mReadPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -576,7 +576,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"CREATE_PAGES",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mCreatePages),
+        offsetof(sdbBufferPoolStatData,mCreatePages),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mCreatePages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -584,7 +584,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"HIT_RATIO",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mHitRatio),
+        offsetof(sdbBufferPoolStatData,mHitRatio),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mHitRatio),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -592,7 +592,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"HOT_HITS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mHotHits),
+        offsetof(sdbBufferPoolStatData,mHotHits),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mHotHits),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -600,7 +600,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"COLD_HITS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mColdHits),
+        offsetof(sdbBufferPoolStatData,mColdHits),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mColdHits),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -608,7 +608,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"PREPARE_HITS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mPrepareHits),
+        offsetof(sdbBufferPoolStatData,mPrepareHits),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mPrepareHits),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -616,7 +616,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"FLUSH_HITS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mFlushHits),
+        offsetof(sdbBufferPoolStatData,mFlushHits),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mFlushHits),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -624,7 +624,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"DELAYED_FLUSH_HITS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mDelayedFlushHits),
+        offsetof(sdbBufferPoolStatData,mDelayedFlushHits),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mDelayedFlushHits),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -632,7 +632,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"OTHER_HITS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mOtherHits),
+        offsetof(sdbBufferPoolStatData,mOtherHits),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mOtherHits),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -640,7 +640,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"PREPARE_VICTIMS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mPrepareVictims),
+        offsetof(sdbBufferPoolStatData,mPrepareVictims),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mPrepareVictims),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -648,7 +648,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"LRU_VICTIMS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mLRUVictims),
+        offsetof(sdbBufferPoolStatData,mLRUVictims),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mLRUVictims),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -656,7 +656,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"VICTIM_FAILS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mVictimFails),
+        offsetof(sdbBufferPoolStatData,mVictimFails),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mVictimFails),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -664,7 +664,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"PREPARE_AGAIN_VICTIMS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mPrepareAgainVictims),
+        offsetof(sdbBufferPoolStatData,mPrepareAgainVictims),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mPrepareAgainVictims),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -672,7 +672,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"VICTIM_SEARCH_WARP",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mVictimSearchWarps),
+        offsetof(sdbBufferPoolStatData,mVictimSearchWarps),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mVictimSearchWarps),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -680,7 +680,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"VICTIM_WAITS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mVictimWaits),
+        offsetof(sdbBufferPoolStatData,mVictimWaits),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mVictimWaits),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -688,7 +688,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"LRU_SEARCHS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mLRUSearchs),
+        offsetof(sdbBufferPoolStatData,mLRUSearchs),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mLRUSearchs),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -696,7 +696,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"LRU_SEARCHS_AVG",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mLRUSearchsAvg),
+        offsetof(sdbBufferPoolStatData,mLRUSearchsAvg),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mLRUSearchsAvg),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -704,7 +704,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"LRU_TO_HOTS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mLRUToHots),
+        offsetof(sdbBufferPoolStatData,mLRUToHots),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mLRUToHots),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -712,7 +712,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"LRU_TO_COLDS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mLRUToColds),
+        offsetof(sdbBufferPoolStatData,mLRUToColds),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mLRUToColds),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -720,7 +720,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"LRU_TO_FLUSHS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mLRUToFlushs),
+        offsetof(sdbBufferPoolStatData,mLRUToFlushs),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mLRUToFlushs),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -728,7 +728,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"HOT_INSERTIONS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mHotInsertions),
+        offsetof(sdbBufferPoolStatData,mHotInsertions),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mHotInsertions),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -736,7 +736,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"COLD_INSERTIONS",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mColdInsertions),
+        offsetof(sdbBufferPoolStatData,mColdInsertions),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mColdInsertions),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -744,7 +744,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"NORMAL_READ_USEC",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mNormalReadTime),
+        offsetof(sdbBufferPoolStatData,mNormalReadTime),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mNormalReadTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -752,7 +752,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"NORMAL_READ_PAGE_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mNormalReadPageCount),
+        offsetof(sdbBufferPoolStatData,mNormalReadPageCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mNormalReadPageCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -760,7 +760,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"NORMAL_CALC_CHECKSUM_USEC",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mNormalCalcChecksumTime),
+        offsetof(sdbBufferPoolStatData,mNormalCalcChecksumTime),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mNormalCalcChecksumTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -768,7 +768,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"MPR_READ_USEC",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mMPRReadTime),
+        offsetof(sdbBufferPoolStatData,mMPRReadTime),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mMPRReadTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -776,7 +776,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"MPR_READ_PAGE_COUNT",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mMPRReadPageCount),
+        offsetof(sdbBufferPoolStatData,mMPRReadPageCount),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mMPRReadPageCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -784,7 +784,7 @@ static iduFixedTableColDesc gBufferPoolStatTableColDesc[] =
     },
     {
         (SChar*)"MPR_CALC_CHECKSUM_USEC",
-        IDU_FT_OFFSETOF(sdbBufferPoolStatData, mMPRCalcChecksumTime),
+        offsetof(sdbBufferPoolStatData,mMPRCalcChecksumTime),
         IDU_FT_SIZEOF(sdbBufferPoolStatData, mMPRCalcChecksumTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -804,7 +804,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
 {
     {
         (SChar*)"WHO",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mOwner),
+        offsetof(sdbPageTypeStatData,mOwner),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mOwner),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -812,7 +812,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"PAGE_TYPE",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mPageType),
+        offsetof(sdbPageTypeStatData,mPageType),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mPageType),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -820,7 +820,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"READ_PAGES",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mReadPages),
+        offsetof(sdbPageTypeStatData,mReadPages),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mReadPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -828,7 +828,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"GET_PAGES",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mGetPages),
+        offsetof(sdbPageTypeStatData,mGetPages),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mGetPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -836,7 +836,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"FIX_PAGES",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mFixPages),
+        offsetof(sdbPageTypeStatData,mFixPages),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mFixPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -844,7 +844,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"CREATE_PAGES",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mCreatePages),
+        offsetof(sdbPageTypeStatData,mCreatePages),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mCreatePages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -852,7 +852,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"VICTIM_PAGES_FROM_LRU",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mVictimPagesFromLRU),
+        offsetof(sdbPageTypeStatData,mVictimPagesFromLRU),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mVictimPagesFromLRU),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -860,7 +860,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"VICTIM_PAGES_FROM_PREPARE",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mVictimPagesFromPrepare),
+        offsetof(sdbPageTypeStatData,mVictimPagesFromPrepare),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mVictimPagesFromPrepare),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -868,7 +868,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"SKIP_PAGES_FROM_LRU",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mSkipPagesFromLRU),
+        offsetof(sdbPageTypeStatData,mSkipPagesFromLRU),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mSkipPagesFromLRU),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -876,7 +876,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"SKIP_PAGES_FROM_PREPARE",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mSkipPagesFromPrepare),
+        offsetof(sdbPageTypeStatData,mSkipPagesFromPrepare),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mSkipPagesFromPrepare),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -884,7 +884,7 @@ static iduFixedTableColDesc gBufferPageInfoTableColDesc[] =
     },
     {
         (SChar*)"HIT_RATIO",
-        IDU_FT_OFFSETOF(sdbPageTypeStatData, mHitRatio),
+        offsetof(sdbPageTypeStatData,mHitRatio),
         IDU_FT_SIZEOF(sdbPageTypeStatData, mHitRatio),
         IDU_FT_TYPE_DOUBLE,
         NULL,
@@ -992,7 +992,7 @@ static iduFixedTableColDesc gFlushMgrStatTableColDesc[] =
 {
     {
         (SChar*)"LOW_FLUSH_LENGTH",
-        IDU_FT_OFFSETOF(sdbFlushMgrStat, mLowFlushLength),
+        offsetof(sdbFlushMgrStat,mLowFlushLength),
         IDU_FT_SIZEOF(sdbFlushMgrStat, mLowFlushLength),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1000,7 +1000,7 @@ static iduFixedTableColDesc gFlushMgrStatTableColDesc[] =
     },
     {
         (SChar*)"HIGH_FLUSH_LENGTH",
-        IDU_FT_OFFSETOF(sdbFlushMgrStat, mHighFlushLength),
+        offsetof(sdbFlushMgrStat,mHighFlushLength),
         IDU_FT_SIZEOF(sdbFlushMgrStat, mHighFlushLength),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1008,7 +1008,7 @@ static iduFixedTableColDesc gFlushMgrStatTableColDesc[] =
     },
     {
         (SChar*)"LOW_PREPARE_LENGTH",
-        IDU_FT_OFFSETOF(sdbFlushMgrStat, mLowPrepareLength),
+        offsetof(sdbFlushMgrStat,mLowPrepareLength),
         IDU_FT_SIZEOF(sdbFlushMgrStat, mLowPrepareLength),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1016,7 +1016,7 @@ static iduFixedTableColDesc gFlushMgrStatTableColDesc[] =
     },
     {
         (SChar*)"CHECKPOINT_FLUSH_COUNT",
-        IDU_FT_OFFSETOF(sdbFlushMgrStat, mCheckpointFlushCount),
+        offsetof(sdbFlushMgrStat,mCheckpointFlushCount),
         IDU_FT_SIZEOF(sdbFlushMgrStat, mCheckpointFlushCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1024,7 +1024,7 @@ static iduFixedTableColDesc gFlushMgrStatTableColDesc[] =
     },
     {
         (SChar*)"FAST_START_IO_TARGET",
-        IDU_FT_OFFSETOF(sdbFlushMgrStat, mFastStartIoTarget),
+        offsetof(sdbFlushMgrStat,mFastStartIoTarget),
         IDU_FT_SIZEOF(sdbFlushMgrStat, mFastStartIoTarget),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1032,7 +1032,7 @@ static iduFixedTableColDesc gFlushMgrStatTableColDesc[] =
     },
     {
         (SChar*)"FAST_START_LOGFILE_TARGET",
-        IDU_FT_OFFSETOF(sdbFlushMgrStat, mFastStartLogFileTarget),
+        offsetof(sdbFlushMgrStat,mFastStartLogFileTarget),
         IDU_FT_SIZEOF(sdbFlushMgrStat, mFastStartLogFileTarget),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1040,7 +1040,7 @@ static iduFixedTableColDesc gFlushMgrStatTableColDesc[] =
     },
     {
         (SChar*)"REQ_JOB_COUNT",
-        IDU_FT_OFFSETOF(sdbFlushMgrStat, mReqJobCount),
+        offsetof(sdbFlushMgrStat,mReqJobCount),
         IDU_FT_SIZEOF(sdbFlushMgrStat, mReqJobCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1103,7 +1103,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
 {
     {
         (SChar*)"ID",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mID),
+        offsetof(sdbFlusherStatData,mID),
         IDU_FT_SIZEOF(sdbFlusherStatData, mID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1111,7 +1111,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"ALIVE",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mAlive),
+        offsetof(sdbFlusherStatData,mAlive),
         IDU_FT_SIZEOF(sdbFlusherStatData, mAlive),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1119,7 +1119,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"CURRENT_JOB",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mCurrentJob),
+        offsetof(sdbFlusherStatData,mCurrentJob),
         IDU_FT_SIZEOF(sdbFlusherStatData, mCurrentJob),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1127,7 +1127,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"DOING_IO",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mIOing),
+        offsetof(sdbFlusherStatData,mIOing),
         IDU_FT_SIZEOF(sdbFlusherStatData, mIOing),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1135,7 +1135,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"INIOB_COUNT",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mINIOBCount),
+        offsetof(sdbFlusherStatData,mINIOBCount),
         IDU_FT_SIZEOF(sdbFlusherStatData, mINIOBCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1143,7 +1143,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"REPLACE_FLUSH_JOBS",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mReplacementFlushJobs),
+        offsetof(sdbFlusherStatData,mReplacementFlushJobs),
         IDU_FT_SIZEOF(sdbFlusherStatData, mReplacementFlushJobs),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1151,7 +1151,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"REPLACE_FLUSH_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mReplacementFlushPages),
+        offsetof(sdbFlusherStatData,mReplacementFlushPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mReplacementFlushPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1159,7 +1159,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"REPLACE_SKIP_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mReplacementSkipPages),
+        offsetof(sdbFlusherStatData,mReplacementSkipPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mReplacementSkipPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1167,7 +1167,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"REPLACE_ADD_DELAYED_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mReplacementAddDelayedPages),
+        offsetof(sdbFlusherStatData,mReplacementAddDelayedPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mReplacementAddDelayedPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1175,7 +1175,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"REPLACE_SKIP_DELAYED_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mReplacementSkipDelayedPages),
+        offsetof(sdbFlusherStatData,mReplacementSkipDelayedPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mReplacementSkipDelayedPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1183,7 +1183,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"REPLACE_OVERFLOW_DELAYED_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mReplacementOverflowDelayedPages),
+        offsetof(sdbFlusherStatData,mReplacementOverflowDelayedPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mReplacementOverflowDelayedPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1191,7 +1191,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"CHECKPOINT_FLUSH_JOBS",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mCheckpointFlushJobs),
+        offsetof(sdbFlusherStatData,mCheckpointFlushJobs),
         IDU_FT_SIZEOF(sdbFlusherStatData, mCheckpointFlushJobs),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1199,7 +1199,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"CHECKPOINT_FLUSH_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mCheckpointFlushPages),
+        offsetof(sdbFlusherStatData,mCheckpointFlushPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mCheckpointFlushPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1207,7 +1207,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"CHECKPOINT_SKIP_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mCheckpointSkipPages),
+        offsetof(sdbFlusherStatData,mCheckpointSkipPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mCheckpointSkipPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1215,7 +1215,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"OBJECT_FLUSH_JOBS",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mObjectFlushJobs),
+        offsetof(sdbFlusherStatData,mObjectFlushJobs),
         IDU_FT_SIZEOF(sdbFlusherStatData, mObjectFlushJobs),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1223,7 +1223,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"OBJECT_FLUSH_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mObjectFlushPages),
+        offsetof(sdbFlusherStatData,mObjectFlushPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mObjectFlushPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1231,7 +1231,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"OBJECT_SKIP_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mObjectSkipPages),
+        offsetof(sdbFlusherStatData,mObjectSkipPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mObjectSkipPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1239,7 +1239,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"LAST_SLEEP_SEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mLastSleepSec),
+        offsetof(sdbFlusherStatData,mLastSleepSec),
         IDU_FT_SIZEOF(sdbFlusherStatData, mLastSleepSec),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1247,7 +1247,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TIMEOUT",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mWakeUpsByTimeout),
+        offsetof(sdbFlusherStatData,mWakeUpsByTimeout),
         IDU_FT_SIZEOF(sdbFlusherStatData, mWakeUpsByTimeout),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1255,7 +1255,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"SIGNALED",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mWakeUpsBySignal),
+        offsetof(sdbFlusherStatData,mWakeUpsBySignal),
         IDU_FT_SIZEOF(sdbFlusherStatData, mWakeUpsBySignal),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1263,7 +1263,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_SLEEP_SEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalSleepSec),
+        offsetof(sdbFlusherStatData,mTotalSleepSec),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalSleepSec),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1271,7 +1271,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_FLUSH_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalFlushPages),
+        offsetof(sdbFlusherStatData,mTotalFlushPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalFlushPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1279,7 +1279,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_FLUSH_DELAYED_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalFlushDelayedPages),
+        offsetof(sdbFlusherStatData,mTotalFlushDelayedPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalFlushDelayedPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1287,7 +1287,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_LOG_SYNC_USEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalLogSyncTime),
+        offsetof(sdbFlusherStatData,mTotalLogSyncTime),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalLogSyncTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1295,7 +1295,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_DW_USEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalDWTime),
+        offsetof(sdbFlusherStatData,mTotalDWTime),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalDWTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1303,7 +1303,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_WRITE_USEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalWriteTime),
+        offsetof(sdbFlusherStatData,mTotalWriteTime),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalWriteTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1311,7 +1311,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_SYNC_USEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalSyncTime),
+        offsetof(sdbFlusherStatData,mTotalSyncTime),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalSyncTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1319,7 +1319,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_FLUSH_TEMP_PAGES",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalFlushTempPages),
+        offsetof(sdbFlusherStatData,mTotalFlushTempPages),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalFlushTempPages),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1327,7 +1327,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_TEMP_WRITE_USEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalTempWriteTime),
+        offsetof(sdbFlusherStatData,mTotalTempWriteTime),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalTempWriteTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1335,7 +1335,7 @@ static iduFixedTableColDesc gFlusherStatColDesc[] =
     },
     {
         (SChar*)"TOTAL_CALC_CHECKSUM_USEC",
-        IDU_FT_OFFSETOF(sdbFlusherStatData, mTotalCalcChecksumTime),
+        offsetof(sdbFlusherStatData,mTotalCalcChecksumTime),
         IDU_FT_SIZEOF(sdbFlusherStatData, mTotalCalcChecksumTime),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1450,7 +1450,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
 {
     {
         (SChar*)"ID",
-        IDU_FT_OFFSETOF(sdbBCBStat, mID),
+        offsetof(sdbBCBStat,mID),
         IDU_FT_SIZEOF(sdbBCBStat, mID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1458,7 +1458,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"STATE",
-        IDU_FT_OFFSETOF(sdbBCBStat, mState),
+        offsetof(sdbBCBStat,mState),
         IDU_FT_SIZEOF(sdbBCBStat, mState),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1466,7 +1466,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"FRAME_PTR",
-        IDU_FT_OFFSETOF(sdbBCBStat, mFramePtr),
+        offsetof(sdbBCBStat,mFramePtr),
         IDU_FT_SIZEOF(sdbBCBStat, mFramePtr),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1474,7 +1474,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"SPACE_ID",
-        IDU_FT_OFFSETOF(sdbBCBStat, mSpaceID),
+        offsetof(sdbBCBStat,mSpaceID),
         IDU_FT_SIZEOF(sdbBCBStat, mSpaceID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1482,7 +1482,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"PAGE_LATCH_PTR",
-        IDU_FT_OFFSETOF(sdbBCBStat, mPageLatchPtr),
+        offsetof(sdbBCBStat,mPageLatchPtr),
         16,
         IDU_FT_TYPE_CHAR | IDU_FT_TYPE_POINTER,
         NULL,
@@ -1490,7 +1490,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"PAGE_ID",
-        IDU_FT_OFFSETOF(sdbBCBStat, mPageID),
+        offsetof(sdbBCBStat,mPageID),
         IDU_FT_SIZEOF(sdbBCBStat, mPageID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1498,7 +1498,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"PAGE_TYPE",
-        IDU_FT_OFFSETOF(sdbBCBStat, mPageType),
+        offsetof(sdbBCBStat,mPageType),
         IDU_FT_SIZEOF(sdbBCBStat, mPageType),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1506,7 +1506,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"RECV_LSN_FILENO",
-        IDU_FT_OFFSETOF(sdbBCBStat, mRecvLSNFileNo),
+        offsetof(sdbBCBStat,mRecvLSNFileNo),
         IDU_FT_SIZEOF(sdbBCBStat, mRecvLSNFileNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1514,7 +1514,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"RECV_LSN_OFFSET",
-        IDU_FT_OFFSETOF(sdbBCBStat, mRecvLSNOffset),
+        offsetof(sdbBCBStat,mRecvLSNOffset),
         IDU_FT_SIZEOF(sdbBCBStat, mRecvLSNOffset),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1522,7 +1522,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"BCB_LIST_TYPE",
-        IDU_FT_OFFSETOF(sdbBCBStat, mBCBListType),
+        offsetof(sdbBCBStat,mBCBListType),
         IDU_FT_SIZEOF(sdbBCBStat, mBCBListType),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1530,7 +1530,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"CPLIST_NO",
-        IDU_FT_OFFSETOF(sdbBCBStat, mCPListNo),
+        offsetof(sdbBCBStat,mCPListNo),
         IDU_FT_SIZEOF(sdbBCBStat, mCPListNo),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1538,7 +1538,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"BCB_MUTEX",
-        IDU_FT_OFFSETOF(sdbBCBStat, mBCBMutexLocked),
+        offsetof(sdbBCBStat,mBCBMutexLocked),
         IDU_FT_SIZEOF(sdbBCBStat, mBCBMutexLocked),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1546,7 +1546,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"READIO_MUTEX",
-        IDU_FT_OFFSETOF(sdbBCBStat, mReadIOMutexLocked),
+        offsetof(sdbBCBStat,mReadIOMutexLocked),
         IDU_FT_SIZEOF(sdbBCBStat, mReadIOMutexLocked),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1554,7 +1554,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"PAGE_LATCH",
-        IDU_FT_OFFSETOF(sdbBCBStat, mPageLatchState),
+        offsetof(sdbBCBStat,mPageLatchState),
         IDU_FT_SIZEOF(sdbBCBStat, mPageLatchState),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1562,7 +1562,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"TOUCH_COUNT",
-        IDU_FT_OFFSETOF(sdbBCBStat, mTouchCount),
+        offsetof(sdbBCBStat,mTouchCount),
         IDU_FT_SIZEOF(sdbBCBStat, mTouchCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1570,7 +1570,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"FIX_COUNT",
-        IDU_FT_OFFSETOF(sdbBCBStat, mFixCount),
+        offsetof(sdbBCBStat,mFixCount),
         IDU_FT_SIZEOF(sdbBCBStat, mFixCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1578,7 +1578,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"TOUCHED_TIME_SEC",
-        IDU_FT_OFFSETOF(sdbBCBStat, mTouchedTimeSec),
+        offsetof(sdbBCBStat,mTouchedTimeSec),
         IDU_FT_SIZEOF(sdbBCBStat, mTouchedTimeSec),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1586,7 +1586,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"READ_TIME_SEC",
-        IDU_FT_OFFSETOF(sdbBCBStat, mReadTimeSec),
+        offsetof(sdbBCBStat,mReadTimeSec),
         IDU_FT_SIZEOF(sdbBCBStat, mReadTimeSec),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -1594,7 +1594,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"WRITE_COUNT",
-        IDU_FT_OFFSETOF(sdbBCBStat, mWriteCount),
+        offsetof(sdbBCBStat,mWriteCount),
         IDU_FT_SIZEOF(sdbBCBStat, mWriteCount),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1602,7 +1602,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"LATCH_READ_GETS",
-        IDU_FT_OFFSETOF(sdbBCBStat, mLatchReadGets),
+        offsetof(sdbBCBStat,mLatchReadGets),
         IDU_FT_SIZEOF(sdbBCBStat, mLatchReadGets),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1610,7 +1610,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"LATCH_WRITE_GETS",
-        IDU_FT_OFFSETOF(sdbBCBStat, mLatchWriteGets),
+        offsetof(sdbBCBStat,mLatchWriteGets),
         IDU_FT_SIZEOF(sdbBCBStat, mLatchWriteGets),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1618,7 +1618,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"LATCH_READ_MISSES",
-        IDU_FT_OFFSETOF(sdbBCBStat, mLatchReadMisses),
+        offsetof(sdbBCBStat,mLatchReadMisses),
         IDU_FT_SIZEOF(sdbBCBStat, mLatchReadMisses),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1626,7 +1626,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"LATCH_WRITE_MISSES",
-        IDU_FT_OFFSETOF(sdbBCBStat, mLatchWriteMisses),
+        offsetof(sdbBCBStat,mLatchWriteMisses),
         IDU_FT_SIZEOF(sdbBCBStat, mLatchWriteMisses),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1634,7 +1634,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"LATCH_SLEEPS",
-        IDU_FT_OFFSETOF(sdbBCBStat, mLatchSleeps),
+        offsetof(sdbBCBStat,mLatchSleeps),
         IDU_FT_SIZEOF(sdbBCBStat, mLatchSleeps),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -1642,7 +1642,7 @@ static iduFixedTableColDesc gBufferBCBColDesc[] =
     },
     {
         (SChar*)"HASH_BUCKET_NO",
-        IDU_FT_OFFSETOF(sdbBCBStat, mHashBucketNo),
+        offsetof(sdbBCBStat,mHashBucketNo),
         IDU_FT_SIZEOF(sdbBCBStat, mHashBucketNo),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1776,7 +1776,7 @@ static iduFixedTableColDesc gBufferFrameDumpColDesc[] =
 {
     {
         (SChar*)"ID",
-        IDU_FT_OFFSETOF(sdbFrameDumpStat, mBCBID),
+        offsetof(sdbFrameDumpStat,mBCBID),
         IDU_FT_SIZEOF(sdbFrameDumpStat, mBCBID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1784,7 +1784,7 @@ static iduFixedTableColDesc gBufferFrameDumpColDesc[] =
     },
     {
         (SChar*)"SPACE_ID",
-        IDU_FT_OFFSETOF(sdbFrameDumpStat, mSpaceID),
+        offsetof(sdbFrameDumpStat,mSpaceID),
         IDU_FT_SIZEOF(sdbFrameDumpStat, mSpaceID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1792,7 +1792,7 @@ static iduFixedTableColDesc gBufferFrameDumpColDesc[] =
     },
     {
         (SChar*)"PAGE_ID",
-        IDU_FT_OFFSETOF(sdbFrameDumpStat, mPageID),
+        offsetof(sdbFrameDumpStat,mPageID),
         IDU_FT_SIZEOF(sdbFrameDumpStat, mPageID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -1800,7 +1800,7 @@ static iduFixedTableColDesc gBufferFrameDumpColDesc[] =
     },
     {
         (SChar*)"FRAME_DUMP",
-        IDU_FT_OFFSETOF(sdbFrameDumpStat, mFrameDump),
+        offsetof(sdbFrameDumpStat,mFrameDump),
         IDU_FT_SIZEOF(sdbFrameDumpStat, mFrameDump),
         IDU_FT_TYPE_VARCHAR,
         NULL,

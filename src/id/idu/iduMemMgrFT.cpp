@@ -26,7 +26,7 @@ static iduFixedTableColDesc gMemoryMgrColDesc[] =
 {
     {
         (SChar *)"OWNER",
-        IDU_FT_OFFSETOF(iduMemClientInfo, mOwner),
+        offsetof(iduMemClientInfo,mOwner),
         64,
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -34,7 +34,7 @@ static iduFixedTableColDesc gMemoryMgrColDesc[] =
     },
     {
         (SChar *)"MODULE",
-        IDU_FT_OFFSETOF(iduMemClientInfo, mModule),
+        offsetof(iduMemClientInfo,mModule),
         IDU_FT_SIZEOF(iduMemClientInfo, mModule),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -42,7 +42,7 @@ static iduFixedTableColDesc gMemoryMgrColDesc[] =
     },
     {
         (SChar *)"NAME",
-        IDU_FT_OFFSETOF(iduMemClientInfo, mName),
+        offsetof(iduMemClientInfo,mName),
         IDU_FT_SIZEOF(iduMemClientInfo, mName),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -50,7 +50,7 @@ static iduFixedTableColDesc gMemoryMgrColDesc[] =
     },
     {
         (SChar *)"ALLOC_SIZE",
-        IDU_FT_OFFSETOF(iduMemClientInfo, mAllocSize),
+        offsetof(iduMemClientInfo,mAllocSize),
         IDU_FT_SIZEOF(iduMemClientInfo, mAllocSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -58,7 +58,7 @@ static iduFixedTableColDesc gMemoryMgrColDesc[] =
     },
     {
         (SChar *)"ALLOC_COUNT",
-        IDU_FT_OFFSETOF(iduMemClientInfo, mAllocCount),
+        offsetof(iduMemClientInfo,mAllocCount),
         IDU_FT_SIZEOF(iduMemClientInfo, mAllocCount),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -70,7 +70,7 @@ static iduFixedTableColDesc gMemoryMgrColDesc[] =
     //===============================================================
     {
         (SChar *)"MAX_TOTAL_SIZE",
-        IDU_FT_OFFSETOF(iduMemClientInfo, mMaxTotSize),
+        offsetof(iduMemClientInfo,mMaxTotSize),
         IDU_FT_SIZEOF(iduMemClientInfo, mMaxTotSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -220,7 +220,7 @@ static iduFixedTableColDesc gMemAllocColDesc[] =
 {
     {
         (SChar *)"INSTANCE",
-        IDU_FT_OFFSETOF(iduMemAllocCore, mAddr),
+        offsetof(iduMemAllocCore,mAddr),
         IDU_FT_SIZEOF(iduMemAllocCore, mAddr),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -228,7 +228,7 @@ static iduFixedTableColDesc gMemAllocColDesc[] =
     },
     {
         (SChar *)"ALLOC_NAME",
-        IDU_FT_OFFSETOF(iduMemAllocCore, mName),
+        offsetof(iduMemAllocCore,mName),
         IDU_FT_SIZEOF(iduMemAllocCore, mName),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -236,7 +236,7 @@ static iduFixedTableColDesc gMemAllocColDesc[] =
     },
     {
         (SChar *)"ALLOC_TYPE",
-        IDU_FT_OFFSETOF(iduMemAllocCore, mType),
+        offsetof(iduMemAllocCore,mType),
         IDU_FT_SIZEOF(iduMemAllocCore, mType),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -244,7 +244,7 @@ static iduFixedTableColDesc gMemAllocColDesc[] =
     },
     {
         (SChar *)"USED_SIZE",
-        IDU_FT_OFFSETOF(iduMemAllocCore, mUsedSize),
+        offsetof(iduMemAllocCore,mUsedSize),
         IDU_FT_SIZEOF(iduMemAllocCore, mUsedSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,
@@ -252,7 +252,7 @@ static iduFixedTableColDesc gMemAllocColDesc[] =
     },
     {
         (SChar *)"POOL_SIZE",
-        IDU_FT_OFFSETOF(iduMemAllocCore, mPoolSize),
+        offsetof(iduMemAllocCore,mPoolSize),
         IDU_FT_SIZEOF(iduMemAllocCore, mPoolSize),
         IDU_FT_TYPE_UBIGINT,
         NULL,

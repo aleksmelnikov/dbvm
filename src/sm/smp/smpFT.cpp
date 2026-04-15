@@ -38,7 +38,7 @@ static iduFixedTableColDesc gDumpMemDBPageColDesc[] =
 {
     {
         (SChar*)"TBSID",
-        IDU_FT_OFFSETOF(smpMemDBPageDump, mTBSID),
+        offsetof(smpMemDBPageDump,mTBSID),
         IDU_FT_SIZEOF(smpMemDBPageDump, mTBSID),
         IDU_FT_TYPE_USMALLINT,
         NULL,
@@ -46,7 +46,7 @@ static iduFixedTableColDesc gDumpMemDBPageColDesc[] =
     },
     {
         (SChar*)"PID",
-        IDU_FT_OFFSETOF(smpMemDBPageDump, mPID),
+        offsetof(smpMemDBPageDump,mPID),
         IDU_FT_SIZEOF(smpMemDBPageDump, mPID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -54,7 +54,7 @@ static iduFixedTableColDesc gDumpMemDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP1",
-        IDU_FT_OFFSETOF(smpMemDBPageDump, mPageDump1),
+        offsetof(smpMemDBPageDump,mPageDump1),
         IDU_FT_SIZEOF(smpMemDBPageDump, mPageDump1),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -62,7 +62,7 @@ static iduFixedTableColDesc gDumpMemDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP2",
-        IDU_FT_OFFSETOF(smpMemDBPageDump, mPageDump2),
+        offsetof(smpMemDBPageDump,mPageDump2),
         IDU_FT_SIZEOF(smpMemDBPageDump, mPageDump2),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -70,7 +70,7 @@ static iduFixedTableColDesc gDumpMemDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP3",
-        IDU_FT_OFFSETOF(smpMemDBPageDump, mPageDump3),
+        offsetof(smpMemDBPageDump,mPageDump3),
         IDU_FT_SIZEOF(smpMemDBPageDump, mPageDump3),
         IDU_FT_TYPE_VARCHAR,
         NULL,
@@ -78,7 +78,7 @@ static iduFixedTableColDesc gDumpMemDBPageColDesc[] =
     },
     {
         (SChar*)"PAGE_DUMP4",
-        IDU_FT_OFFSETOF(smpMemDBPageDump, mPageDump4),
+        offsetof(smpMemDBPageDump,mPageDump4),
         IDU_FT_SIZEOF(smpMemDBPageDump, mPageDump4),
         IDU_FT_TYPE_VARCHAR,
         NULL,

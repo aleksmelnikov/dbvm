@@ -3188,7 +3188,7 @@ IDE_RC smiTable::modifyIndexID( smiStatement * aStatement,
 
     sPageID = SM_MAKE_PID( sIndex->mSelfOID );
     sOffset = SM_MAKE_OFFSET( sIndex->mSelfOID );
-    sOffset += IDU_FT_OFFSETOF( smnIndexHeader, mId );
+    sOffset += offsetof( smnIndexHeader,mId );
 
     IDE_TEST( smrUpdate::physicalUpdate( NULL, /* idvSQL* */
                                          (void *)sTrans,
@@ -3276,7 +3276,7 @@ IDE_RC smiTable::modifyIndexColumns( smiStatement  * aStatement,
 
     sPageID = SM_MAKE_PID( sIndex->mSelfOID );
     sOffset = SM_MAKE_OFFSET( sIndex->mSelfOID );
-    sOffset += IDU_FT_OFFSETOF( smnIndexHeader, mColumns );
+    sOffset += offsetof( smnIndexHeader,mColumns );
 
     IDE_TEST( smrUpdate::physicalUpdate( NULL, /* idvSQL* */
                                          (void *)sTrans,

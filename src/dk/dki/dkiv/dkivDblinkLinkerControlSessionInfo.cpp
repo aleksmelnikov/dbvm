@@ -52,7 +52,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"STATUS",
-        IDU_FT_OFFSETOF( dkmLinkerControlSessionInfo, mStatus ),
+        offsetof( dkmLinkerControlSessionInfo,mStatus ),
         IDU_FT_SIZEOF( dkmLinkerControlSessionInfo, mStatus ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -60,7 +60,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"REFERENCE_COUNT",
-        IDU_FT_OFFSETOF( dkmLinkerControlSessionInfo, mReferenceCount ),
+        offsetof( dkmLinkerControlSessionInfo,mReferenceCount ),
         IDU_FT_SIZEOF( dkmLinkerControlSessionInfo, mReferenceCount ),
         IDU_FT_TYPE_UINTEGER,
         NULL,

@@ -51,7 +51,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"STATUS",
-        IDU_FT_OFFSETOF( dkmAltiLinkerStatus, mStatus ),
+        offsetof( dkmAltiLinkerStatus,mStatus ),
         IDU_FT_SIZEOF( dkmAltiLinkerStatus, mStatus ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -59,7 +59,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"SESSION_COUNT",
-        IDU_FT_OFFSETOF( dkmAltiLinkerStatus, mSessionCount ),
+        offsetof( dkmAltiLinkerStatus,mSessionCount ),
         IDU_FT_SIZEOF( dkmAltiLinkerStatus, mSessionCount ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -67,7 +67,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"REMOTE_SESSION_COUNT",
-        IDU_FT_OFFSETOF( dkmAltiLinkerStatus, mRemoteSessionCount ),
+        offsetof( dkmAltiLinkerStatus,mRemoteSessionCount ),
         IDU_FT_SIZEOF( dkmAltiLinkerStatus, mRemoteSessionCount ),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -75,7 +75,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"JVM_MEMORY_POOL_MAX_SIZE",
-        IDU_FT_OFFSETOF( dkmAltiLinkerStatus, mJvmMemoryPoolMaxSize ),
+        offsetof( dkmAltiLinkerStatus,mJvmMemoryPoolMaxSize ),
         IDU_FT_SIZEOF( dkmAltiLinkerStatus, mJvmMemoryPoolMaxSize ),
         IDU_FT_TYPE_INTEGER,
         NULL,
@@ -83,7 +83,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"JVM_MEMORY_USAGE",
-        IDU_FT_OFFSETOF( dkmAltiLinkerStatus, mJvmMemoryUsage ),
+        offsetof( dkmAltiLinkerStatus,mJvmMemoryUsage ),
         IDU_FT_SIZEOF( dkmAltiLinkerStatus, mJvmMemoryUsage ),
         IDU_FT_TYPE_BIGINT,
         NULL,
@@ -91,7 +91,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"START_TIME",
-        IDU_FT_OFFSETOF( dkmAltiLinkerStatus, mStartTime ),
+        offsetof( dkmAltiLinkerStatus,mStartTime ),
         IDU_FT_SIZEOF( dkmAltiLinkerStatus, mStartTime ),        
         IDU_FT_TYPE_VARCHAR,
         NULL,

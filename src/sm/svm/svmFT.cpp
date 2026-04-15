@@ -40,7 +40,7 @@ static iduFixedTableColDesc gDumpVolTBSPCHColDesc[] =
 {
     {
         (SChar*)"SPACEID",
-        IDU_FT_OFFSETOF(svmVolTBSPCHDump, mSpaceID),
+        offsetof(svmVolTBSPCHDump,mSpaceID),
         IDU_FT_SIZEOF(svmVolTBSPCHDump, mSpaceID),
         IDU_FT_TYPE_USMALLINT,
         NULL,
@@ -48,7 +48,7 @@ static iduFixedTableColDesc gDumpVolTBSPCHColDesc[] =
     },
     {
         (SChar*)"MY_PAGEID",
-        IDU_FT_OFFSETOF(svmVolTBSPCHDump, mMyPageID),
+        offsetof(svmVolTBSPCHDump,mMyPageID),
         IDU_FT_SIZEOF(svmVolTBSPCHDump, mMyPageID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -56,7 +56,7 @@ static iduFixedTableColDesc gDumpVolTBSPCHColDesc[] =
     },
     {
         (SChar*)"PAGE",
-        IDU_FT_OFFSETOF(svmVolTBSPCHDump, mPage),
+        offsetof(svmVolTBSPCHDump,mPage),
         IDU_FT_SIZEOF(svmVolTBSPCHDump, mPage),
         IDU_FT_TYPE_BIGINT,
         NULL,
@@ -64,7 +64,7 @@ static iduFixedTableColDesc gDumpVolTBSPCHColDesc[] =
     },
     {
         (SChar*)"NEXT_SCAN_PID",
-        IDU_FT_OFFSETOF(svmVolTBSPCHDump, mNxtScanPID),
+        offsetof(svmVolTBSPCHDump,mNxtScanPID),
         IDU_FT_SIZEOF(svmVolTBSPCHDump, mNxtScanPID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -72,7 +72,7 @@ static iduFixedTableColDesc gDumpVolTBSPCHColDesc[] =
     },
     {
         (SChar*)"PREV_SCAN_PID",
-        IDU_FT_OFFSETOF(svmVolTBSPCHDump, mPrvScanPID),
+        offsetof(svmVolTBSPCHDump,mPrvScanPID),
         IDU_FT_SIZEOF(svmVolTBSPCHDump, mPrvScanPID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -80,7 +80,7 @@ static iduFixedTableColDesc gDumpVolTBSPCHColDesc[] =
     },
     {
         (SChar*)"MODIFYSEQ_FOR_SCAN",
-        IDU_FT_OFFSETOF(svmVolTBSPCHDump, mModifySeqForScan),
+        offsetof(svmVolTBSPCHDump,mModifySeqForScan),
         IDU_FT_SIZEOF(svmVolTBSPCHDump, mModifySeqForScan),
         IDU_FT_TYPE_UBIGINT,
         NULL,

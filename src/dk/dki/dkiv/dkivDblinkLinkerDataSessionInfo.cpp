@@ -55,7 +55,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"ID",
-        IDU_FT_OFFSETOF( dkmLinkerDataSessionInfo, mId ),
+        offsetof( dkmLinkerDataSessionInfo,mId ),
         IDU_FT_SIZEOF( dkmLinkerDataSessionInfo, mId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -63,7 +63,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"STATUS",
-        IDU_FT_OFFSETOF( dkmLinkerDataSessionInfo, mStatus ),
+        offsetof( dkmLinkerDataSessionInfo,mStatus ),
         IDU_FT_SIZEOF( dkmLinkerDataSessionInfo, mStatus ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -71,7 +71,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"LOCAL_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmLinkerDataSessionInfo, mLocalTransactionId ),
+        offsetof( dkmLinkerDataSessionInfo,mLocalTransactionId ),
         IDU_FT_SIZEOF( dkmLinkerDataSessionInfo, mLocalTransactionId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -79,7 +79,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"GLOBAL_TRANSACTION_ID",
-        IDU_FT_OFFSETOF( dkmLinkerDataSessionInfo, mGlobalTransactionId ),
+        offsetof( dkmLinkerDataSessionInfo,mGlobalTransactionId ),
         IDU_FT_SIZEOF( dkmLinkerDataSessionInfo, mGlobalTransactionId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,

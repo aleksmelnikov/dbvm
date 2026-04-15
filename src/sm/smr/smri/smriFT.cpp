@@ -45,7 +45,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
 {
     {  
         (SChar*)"BEGIN_BACKUP_TIME",
-        IDU_FT_OFFSETOF(smriBackupInfo, mBeginBackupTime),
+        offsetof(smriBackupInfo,mBeginBackupTime),
         IDU_FT_SIZEOF(smriBackupInfo, mBeginBackupTime),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -53,7 +53,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"END_BACKUP_TIME",
-        IDU_FT_OFFSETOF(smriBackupInfo, mEndBackupTime),
+        offsetof(smriBackupInfo,mEndBackupTime),
         IDU_FT_SIZEOF(smriBackupInfo, mEndBackupTime),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -61,7 +61,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"INCREMENTAL_BACKUP_CHUNK_COUNT",
-        IDU_FT_OFFSETOF(smriBackupInfo, mIBChunkCNT),
+        offsetof(smriBackupInfo,mIBChunkCNT),
         IDU_FT_SIZEOF(smriBackupInfo, mIBChunkCNT),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -69,7 +69,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"BACKUP_TARGET",
-        IDU_FT_OFFSETOF(smriBackupInfo, mBackupTarget),
+        offsetof(smriBackupInfo,mBackupTarget),
         IDU_FT_SIZEOF(smriBackupInfo, mBackupTarget),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -77,7 +77,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"BACKUP_LEVEL",
-        IDU_FT_OFFSETOF(smriBackupInfo, mBackupLevel),
+        offsetof(smriBackupInfo,mBackupLevel),
         IDU_FT_SIZEOF(smriBackupInfo, mBackupLevel),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -85,7 +85,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"BACKUP_TYPE",
-        IDU_FT_OFFSETOF(smriBackupInfo, mBackupType),
+        offsetof(smriBackupInfo,mBackupType),
         IDU_FT_SIZEOF(smriBackupInfo, mBackupType),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -93,7 +93,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"TABLESPACE_ID",
-        IDU_FT_OFFSETOF(smriBackupInfo, mSpaceID),
+        offsetof(smriBackupInfo,mSpaceID),
         IDU_FT_SIZEOF(smriBackupInfo, mSpaceID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -101,7 +101,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"FILE_ID",
-        IDU_FT_OFFSETOF(smriBackupInfo, mFileID),
+        offsetof(smriBackupInfo,mFileID),
         IDU_FT_SIZEOF(smriBackupInfo, mFileID),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -109,7 +109,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"BACKUP_TAG",
-        IDU_FT_OFFSETOF(smriBackupInfo, mBackupTag),
+        offsetof(smriBackupInfo,mBackupTag),
         IDU_FT_SIZEOF(smriBackupInfo, mBackupTag),
         IDU_FT_TYPE_CHAR,
         NULL,
@@ -117,7 +117,7 @@ static iduFixedTableColDesc gBackupInfoColDesc[] =
     }, 
     {  
         (SChar*)"BACKUP_FILE",
-        IDU_FT_OFFSETOF(smriBackupInfo, mBackupFileName),
+        offsetof(smriBackupInfo,mBackupFileName),
         IDU_FT_SIZEOF(smriBackupInfo, mBackupFileName),
         IDU_FT_TYPE_CHAR,
         NULL,

@@ -61,7 +61,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
 {
     {
         (SChar *)"ID",
-        IDU_FT_OFFSETOF( dkmDatabaseLinkInfo, mId ),
+        offsetof( dkmDatabaseLinkInfo,mId ),
         IDU_FT_SIZEOF( dkmDatabaseLinkInfo, mId ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -69,7 +69,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"STATUS",
-        IDU_FT_OFFSETOF( dkmDatabaseLinkInfo, mStatus ),
+        offsetof( dkmDatabaseLinkInfo,mStatus ),
         IDU_FT_SIZEOF( dkmDatabaseLinkInfo, mStatus ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
@@ -77,7 +77,7 @@ static iduFixedTableColDesc gFixedTableColDesc[] =
     },
     {
         (SChar *)"REFERENCE_COUNT",
-        IDU_FT_OFFSETOF( dkmDatabaseLinkInfo, mReferenceCount ),
+        offsetof( dkmDatabaseLinkInfo,mReferenceCount ),
         IDU_FT_SIZEOF( dkmDatabaseLinkInfo, mReferenceCount ),
         IDU_FT_TYPE_UINTEGER,
         NULL,
