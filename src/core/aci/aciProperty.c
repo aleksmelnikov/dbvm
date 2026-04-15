@@ -35,6 +35,8 @@ aci_property_t gAciProperty =
     0,                         /* mServerTrcFlag */
     0,                         /* mSmTrcFlag */
     0,                         /* mQpTrcFlag */
+    0,                         /* mJobTrcFlag */
+    0,                         /* mSdTrcFlag */
     0,                         /* mRpTrcFlag */ 
     0,                         /* mDlTrcFlag */
     0,                         /* mLkTrcFlag */
