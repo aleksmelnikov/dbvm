@@ -118,28 +118,25 @@ iloTableNode::iloTableNode(ETableNodeType eNodeType, SChar *szNodeValue,
 
 iloTableNode::~iloTableNode()
 {
-    if (this != NULL)
+    if ( m_pSon != NULL )
     {
-        if ( m_pSon != NULL )
-        {
-            delete m_pSon;
-            m_pSon = NULL;
-        }
-        if ( m_pBrother != NULL )
-        {
-            delete m_pBrother;
-            m_pBrother = NULL;
-        }
-        if ( m_NodeValue != NULL )
-        {
-            delete [] m_NodeValue;
-            m_NodeValue = NULL;
-        }
-        if (m_Condition != NULL)
-        {
-            delete m_Condition;
-            m_Condition = NULL;
-        }
+        delete m_pSon;
+        m_pSon = NULL;
+    }
+    if ( m_pBrother != NULL )
+    {
+        delete m_pBrother;
+        m_pBrother = NULL;
+    }
+    if ( m_NodeValue != NULL )
+    {
+        delete [] m_NodeValue;
+        m_NodeValue = NULL;
+    }
+    if (m_Condition != NULL)
+    {
+        delete m_Condition;
+        m_Condition = NULL;
     }
 }
 
