@@ -518,56 +518,56 @@ smiDataPortHeaderColDesc  gScpfBlockHeaderEncColDesc[]=
 {
     {
         (SChar*)"CHECK_SUM",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mCheckSum ),
+        offsetof( scpfBlockInfo, mCheckSum ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mCheckSum ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"BLOCK_ID",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mBlockID ),
+        offsetof( scpfBlockInfo, mBlockID ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mBlockID ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"ROW_SEQ_OF_FIRST_SLOT",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mRowSeqOfFirstSlot ),
+        offsetof( scpfBlockInfo, mRowSeqOfFirstSlot ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mRowSeqOfFirstSlot ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_LONG
     },
     {
         (SChar*)"ROW_SEQ_OF_LAST_SLOT",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mRowSeqOfLastSlot ),
+        offsetof( scpfBlockInfo, mRowSeqOfLastSlot ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mRowSeqOfLastSlot ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_LONG
     },
     {
         (SChar*)"FIRST_ROW_SLOTSEQ",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mFirstRowSlotSeq ),
+        offsetof( scpfBlockInfo, mFirstRowSlotSeq ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mFirstRowSlotSeq ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"FIRST_ROW_OFFSET",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mFirstRowOffset ),
+        offsetof( scpfBlockInfo, mFirstRowOffset ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mFirstRowOffset ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"HAS_LASTCHAINED_SLOT",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mHasLastChainedSlot ),
+        offsetof( scpfBlockInfo, mHasLastChainedSlot ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mHasLastChainedSlot ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"SLOT_COUNT",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfBlockInfo, mSlotCount ),
+        offsetof( scpfBlockInfo, mSlotCount ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfBlockInfo, mSlotCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
@@ -660,63 +660,63 @@ smiDataPortHeaderColDesc  gScpfFileHeaderEncColDesc[]=
 {
     {
         (SChar*)"FILE_HEADER_SIZE",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mFileHeaderSize ),
+        offsetof( scpfHeader, mFileHeaderSize ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mFileHeaderSize ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"BLOCK_HEADER_SIZE",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mBlockHeaderSize ),
+        offsetof( scpfHeader, mBlockHeaderSize ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mBlockHeaderSize ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"BLOCK_SIZE",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mBlockSize ),
+        offsetof( scpfHeader, mBlockSize ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mBlockSize ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"MAX_BLOCK_COUNT_PER_ROW",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mBlockInfoCount ),
+        offsetof( scpfHeader, mBlockInfoCount ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mBlockInfoCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"MAX_ROW_COUNT_IN_BLOCK",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mMaxRowCountInBlock ),
+        offsetof( scpfHeader, mMaxRowCountInBlock ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mMaxRowCountInBlock ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"BLOCK_COUNT",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mBlockCount ),
+        offsetof( scpfHeader, mBlockCount ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mBlockCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"ROW_COUNT",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mRowCount ),
+        offsetof( scpfHeader, mRowCount ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mRowCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_LONG
     },
     {
         (SChar*)"FIRST_ROW_SEQ",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mFirstRowSeqInFile ),
+        offsetof( scpfHeader, mFirstRowSeqInFile ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mFirstRowSeqInFile ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_LONG
     },
     {
         (SChar*)"LAST_ROW_SEQ",
-        SMI_DATAPORT_HEADER_OFFSETOF( scpfHeader, mLastRowSeqInFile ),
+        offsetof( scpfHeader, mLastRowSeqInFile ),
         SMI_DATAPORT_HEADER_SIZEOF( scpfHeader, mLastRowSeqInFile ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_LONG
