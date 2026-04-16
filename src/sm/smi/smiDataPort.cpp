@@ -116,7 +116,7 @@ IDE_RC gSmiDataPortHeaderValidation( void * aDesc,
     sDesc   = (smiDataPortHeaderDesc*)aDesc;
     sHeader = (smiDataPortHeader*)aHeader;
 
-    IDE_TEST_RAISE( sHeader->mIsBigEndian >= 2,
+    IDE_TEST_RAISE( sHeader->mIsBigEndian != ID_FALSE && sHeader->mIsBigEndian != ID_TRUE,
                     ERR_ABORT_DATA_PORT_INTERNAL_ERROR );
 
     IDE_TEST_RAISE( ( sHeader->mCompileBit  < 32 ) ||
