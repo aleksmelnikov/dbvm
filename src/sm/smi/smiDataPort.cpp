@@ -42,56 +42,56 @@ smiDataPortHeaderColDesc  gSmiDataPortHeaderColDesc[]=
 {
     {
         (SChar*)"IS_BIGENDIAN",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader, mIsBigEndian ),
+        offsetof( smiDataPortHeader, mIsBigEndian ),
         SMI_DATAPORT_HEADER_SIZEOF( smiDataPortHeader, mIsBigEndian ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"COMPILE_BIT",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader, mCompileBit ),
+        offsetof( smiDataPortHeader, mCompileBit ),
         SMI_DATAPORT_HEADER_SIZEOF( smiDataPortHeader, mCompileBit ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"DB_CHARSET",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader, mDBCharSet ),
+        offsetof( smiDataPortHeader, mDBCharSet ),
         IDN_MAX_CHAR_SET_LEN,
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_CHAR
     },
     {
         (SChar*)"NATIONAL_CHARSET",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader, mNationalCharSet ),
+        offsetof( smiDataPortHeader, mNationalCharSet ),
         IDN_MAX_CHAR_SET_LEN,
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_CHAR
     },
     {
         (SChar*)"COLUMN_COUNT",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader , mColumnCount ),
+        offsetof( smiDataPortHeader , mColumnCount ),
         SMI_DATAPORT_HEADER_SIZEOF( smiDataPortHeader , mColumnCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"BASIC_COLUMN_COUNT",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader , mBasicColumnCount ),
+        offsetof( smiDataPortHeader , mBasicColumnCount ),
         SMI_DATAPORT_HEADER_SIZEOF( smiDataPortHeader , mBasicColumnCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"LOB_COLUMN_COUNT",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader , mLobColumnCount ),
+        offsetof( smiDataPortHeader , mLobColumnCount ),
         SMI_DATAPORT_HEADER_SIZEOF( smiDataPortHeader , mLobColumnCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
     },
     {
         (SChar*)"PARTITION_COUNT",
-        SMI_DATAPORT_HEADER_OFFSETOF( smiDataPortHeader , mPartitionCount ),
+        offsetof( smiDataPortHeader , mPartitionCount ),
         SMI_DATAPORT_HEADER_SIZEOF( smiDataPortHeader , mPartitionCount ),
         0, NULL,
         SMI_DATAPORT_HEADER_TYPE_INTEGER
