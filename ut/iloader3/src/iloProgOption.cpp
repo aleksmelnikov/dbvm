@@ -47,8 +47,7 @@ static const SChar *gHelpCommand[] =
     "[-dry-run]\n",
     "[-prefetch_rows]\n",
     "[-async_prefetch off|on|auto]\n",
-    "[-geom WKB]\n", /* BUG-48357 WKB compatibility option */
-    (SChar*) HELP_WITHOUT_NEWLINE(OPT_STMT_PREFIX) /* BUG-47608 */
+    (SChar*) HELP_WITHOUT_NEWLINE(OPT_GEOM " WKB"), /* BUG-48357 WKB compatibility option */
 #else /* COMPILE_SHARDCLI */
     "{ in | out | formout | structout | help }\n",
     "[-d datafile or datafiles] [-f formatfile]\n",
@@ -63,8 +62,9 @@ static const SChar *gHelpCommand[] =
     "[-partition]\n", /* BUG-32114 aexport must support the import/export of partition tables.*/
     "[-dry-run]\n",
     "[-prefetch_rows]\n",
-    "[-async_prefetch off|on|auto]"
-    "[-geom WKB]\n", /* BUG-48357 WKB compatibility option */
+    "[-async_prefetch off|on|auto]\n",
+    (SChar*) HELP_WITH_NEWLINE(OPT_GEOM " WKB"),    /* BUG-48357 WKB compatibility option */
+    (SChar*) HELP_WITHOUT_NEWLINE(OPT_STMT_PREFIX)  /* BUG-47608 */
 #endif /* COMPILE_SHARDCLI */
 };
 
@@ -84,7 +84,6 @@ static const SChar *gHelpMessage[] =
     "                    [-port port_no] [-silent] [-nst] [-displayquery]\n"
     "                    [-NLS_USE nls_name]\n"
     "                    [-prefer_ipv6]\n"
-    "                    [-geom WKB]\n"
     "                    [-ssl_ca CA_file_path | -ssl_capath CA_dir_path]\n"
     "                    [-ssl_cert certificate_file_path]\n"
     "                    [-ssl_key key_file_path]\n"
