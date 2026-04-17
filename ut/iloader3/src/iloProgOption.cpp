@@ -351,7 +351,7 @@ void iloProgOption::InitOption()
     m_bExist_ShowCommit = ID_FALSE;
 
     /* BUG-47652 Set file permission */
-    mbExistFilePerm == ID_FALSE;
+    mbExistFilePerm = ID_FALSE;
     gFilePerm = DEFAULT_FILE_PERM;
     
     /* BUG-48357 WKB compatibility option */
