@@ -5881,7 +5881,7 @@ void sdiZookeeper::watch_deleteNode( aclZK_Handler *,
                         SDI_ZKC_PATH_LENGTH );
         (void)settingDeleteNodeWatch( sPath );
 
-        if( ( aType == ZOO_DELETED_EVENT ) )
+        if( aType == ZOO_DELETED_EVENT )
         {
             /* aPath는 '/altibase_shard/connection_info/[deadNodeName]'의 형태이므로 * 
              * [deadNodeName] 부분만 분리하면 바로 죽은 노드의 이름을 알 수 있다. */
