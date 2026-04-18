@@ -3179,7 +3179,7 @@ void stdUtils::shiftMultiObjToSingleObj(stdGeometryHeader* aMultiObj)
         i++;
     }
     
-    if( (aMultiObj->mType == STD_GEOCOLLECTION_2D_TYPE))
+    if( aMultiObj->mType == STD_GEOCOLLECTION_2D_TYPE )
     {
         shiftMultiObjToSingleObj(aMultiObj);
     }
