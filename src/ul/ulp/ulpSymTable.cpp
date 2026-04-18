@@ -276,7 +276,7 @@ void ulpSymTable::ulpPrintSymT( SInt aScopeD )
 
             if( aScopeD != -1 )
             {
-                if( (sIsFirst == ID_TRUE))
+                if( sIsFirst == ID_TRUE )
                 {
                     idlOS::printf( "%-5d|", aScopeD );
                 }
