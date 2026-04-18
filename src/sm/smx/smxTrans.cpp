@@ -1295,7 +1295,7 @@ IDE_RC smxTrans::begin( idvSQL * aStatistics,
     }
     else
     {
-        if ( ( sFlag == SMX_REPL_RECOVERY ) )
+        if ( sFlag == SMX_REPL_RECOVERY )
         {
             mLogTypeFlag = SMR_LOG_TYPE_REPL_RECOVERY;
         }
