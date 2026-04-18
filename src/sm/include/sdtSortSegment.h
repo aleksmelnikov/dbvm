@@ -607,7 +607,7 @@ IDE_RC sdtSortSegment::getWCBByNPID(sdtSortSegHdr* aWASegment,
     sdtWCB      * sWCBPtr = NULL;
     sdtSortGroup* sGrpInfo;
 
-    if ( ( aWASegment->mHintWCBPtr->mNPageID == aNPID ) )
+    if ( aWASegment->mHintWCBPtr->mNPageID == aNPID )
     {
         (*aRetWCB) = aWASegment->mHintWCBPtr;
         IDE_ASSERT( aWASegment->mHintWCBPtr->mWAPagePtr != NULL );
