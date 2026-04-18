@@ -254,7 +254,7 @@ IDE_RC smxTouchPageList::add( scSpaceID     aSpaceID,
     IDE_TEST_CONT( mMaxCachePageCnt == 0,
                    do_not_use_touch_page_list );
 
-    if ( ( sCurNode == NULL ) ) 
+    if ( sCurNode == NULL ) 
     {
         IDE_TEST( alloc() != IDE_SUCCESS );
         sCurNode = mNodeList;
