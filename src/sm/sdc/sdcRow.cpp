@@ -13081,7 +13081,7 @@ void sdcRow::copyPKInfo( const UChar                   *aSlotPtr,
             }
             else
             {
-                if ( (sPKColSeq == (sPKColCount-1)) )
+                if ( sPKColSeq == (sPKColCount-1) )
                 {
                     sFind = ID_FALSE;
                     break;
