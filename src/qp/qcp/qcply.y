@@ -10112,7 +10112,7 @@ join_partitioning_clause
                    sCurr != NULL;
                    sCurr = sCurr->next )
               {
-                  if( ( sCurr->partValuesType == QD_LIST_VALUES_TYPE ) )
+                  if( sCurr->partValuesType == QD_LIST_VALUES_TYPE )
                   {
                       sqlInfo.setSourceInfo( STATEMENT, & $<position>3 );
                       sqlInfo.init( MEMORY );
@@ -10152,7 +10152,7 @@ join_partitioning_clause
                     sCurr != NULL;
                     sCurr = sCurr->next )
               {
-                  if ( ( sCurr->partValuesType == QD_LIST_VALUES_TYPE ) )
+                  if ( sCurr->partValuesType == QD_LIST_VALUES_TYPE )
                   {
                       sqlInfo.setSourceInfo( STATEMENT, & $<position>3 );
                       sqlInfo.init( MEMORY );
@@ -10192,7 +10192,7 @@ join_partitioning_clause
                    sCurr != NULL;
                    sCurr = sCurr->next )
               {
-                  if( ( sCurr->partValuesType == QD_RANGE_VALUES_TYPE ) )
+                  if( sCurr->partValuesType == QD_RANGE_VALUES_TYPE )
                   {
                       sqlInfo.setSourceInfo( STATEMENT, & $<position>3 );
                       sqlInfo.init( MEMORY );
