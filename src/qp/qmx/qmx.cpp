@@ -7863,7 +7863,7 @@ IDE_RC qmx::makeSmiValueForSubqueryMultiTable( qcTemplate    * aTemplate,
             sNode = NULL;
             for ( sValue = aValues, i = 0; sValue != NULL; sValue = sValue->next, i++ )
             {
-                if ( ( aValuesPos[i] == sValuePointer->valueNode ) )
+                if ( aValuesPos[i] == sValuePointer->valueNode )
                 {
                     sNode = sValuePointer->valueNode->value;
                     break;
