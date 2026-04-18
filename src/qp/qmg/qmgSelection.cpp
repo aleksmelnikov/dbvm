@@ -1426,7 +1426,7 @@ qmgSelection::makePlan( qcStatement * aStatement, const qmgGraph * aParent, qmgG
         aGraph->flag |= QMG_PARALLEL_IMPOSSIBLE_TRUE;
     }
 
-    if( (sMyGraph->graph.left == NULL) )
+    if( sMyGraph->graph.left == NULL )
     {
         /*
          * 1. DML 이 아니어야 함
