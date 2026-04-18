@@ -8739,7 +8739,7 @@ IDE_RC stndrRTree::moveSlots( sdrMtx            * aMtx,
     {
         sSeq = aKeyArray[i].mKeySeq;
 
-        if( (sSeq == STNDR_INVALID_KEY_SEQ) )
+        if( sSeq == STNDR_INVALID_KEY_SEQ )
         {
             continue;
         }
