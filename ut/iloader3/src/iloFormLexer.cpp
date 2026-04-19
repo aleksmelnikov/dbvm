@@ -1,6 +1,6 @@
-#line 2 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.cpp"
+#line 2 "iloFormLexer.cpp"
 
-#line 4 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.cpp"
+#line 4 "iloFormLexer.cpp"
 
 #define  YY_INT_ALIGNED long int
 
@@ -33691,7 +33691,7 @@ static yyconst yy_state_type yy_NUL_trans[1047] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 1 "iloFormLexer.l"
 /** 
  *  Copyright (c) 1999~2017, Altibase Corp. and/or its affiliates. All rights reserved.
  *
@@ -33708,7 +33708,7 @@ static yyconst yy_state_type yy_NUL_trans[1047] =
  *  along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 /***********************************************************************
- * $Id: iloFormLexer.l 73660 2015-12-02 00:09:00Z bethy $
+ * $Id: iloFormLexer.l 80545 2017-07-19 08:05:23Z daramix $
  **********************************************************************/
 /***********************************************************************
  * ATTENTION : 
@@ -33720,7 +33720,8 @@ static yyconst yy_state_type yy_NUL_trans[1047] =
  3) commit iloFormLexer.l
  4) commit iloFormLexer.cpp
  **********************************************************************/
-#line 39 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#define YY_NO_INPUT 1
+#line 39 "iloFormLexer.l"
 /* This is Lex Source for lexical Analysis of iLoader Form file */
 //#define _ILOADER_DEBUG
 //#undef  _ILOADER_DEBUG
@@ -33757,7 +33758,7 @@ void removeEscapeChars(SChar *aStr);
 
 
 
-#line 33761 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.cpp"
+#line 33762 "iloFormLexer.cpp"
 
 #define INITIAL 0
 #define COMMENT 1
@@ -33902,7 +33903,7 @@ static int input (yyscan_t yyscanner );
 /* This used to be an fputs(), but since the string might contain NUL's,
  * we now use fwrite().
  */
-#define ECHO do { if (fwrite( yytext, yyleng, 1, yyout )) {} } while (0)
+#define ECHO fwrite( yytext, yyleng, 1, yyout )
 #endif
 
 /* Gets input and stuffs it into "buf".  number of characters read, or YY_NULL,
@@ -33982,10 +33983,10 @@ YY_DECL
 	register int yy_act;
     struct yyguts_t * yyg = (struct yyguts_t*)yyscanner;
 
-#line 87 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 87 "iloFormLexer.l"
 
 
-#line 33989 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.cpp"
+#line 33990 "iloFormLexer.cpp"
 
     yylval = yylval_param;
 
@@ -34060,28 +34061,28 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 89 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 89 "iloFormLexer.l"
 ;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 90 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 90 "iloFormLexer.l"
 yy_push_state(COMMENT, yyscanner);
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 91 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 91 "iloFormLexer.l"
 yy_push_state(param->mParser.mIloFLStartState, yyscanner);
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 92 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 92 "iloFormLexer.l"
 ;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 93 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 93 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token '{'\n");
@@ -34091,7 +34092,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 99 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 99 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token '}'\n");
@@ -34101,7 +34102,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 105 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 105 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token '('\n");
@@ -34111,7 +34112,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 111 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 111 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token ')'\n");
@@ -34121,7 +34122,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 117 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 117 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token ','\n");
@@ -34131,7 +34132,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 123 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 123 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token ';'\n");
@@ -34141,7 +34142,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 129 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 129 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token '.'\n");
@@ -34151,7 +34152,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 136 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 136 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'download'\n");
@@ -34168,7 +34169,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 149 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 149 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'condition'\n");
@@ -34184,7 +34185,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 161 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 161 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'sequence'\n");
@@ -34200,7 +34201,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 173 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 173 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'table'\n");
@@ -34212,7 +34213,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 181 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 181 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'queue'\n");
@@ -34229,7 +34230,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 194 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 194 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token HINT\n");
@@ -34246,7 +34247,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 207 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 207 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'noexp'\n");
@@ -34261,7 +34262,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 218 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 218 "iloFormLexer.l"
 {
 //PROJ-2030, CT_CASE-3020 CHAR outfile Áö¿ø 
 #ifdef _ILOADER_DEBUG
@@ -34277,7 +34278,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 230 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 230 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'skip'\n");
@@ -34292,7 +34293,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 241 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 241 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'default'\n");
@@ -34302,7 +34303,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 247 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 247 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'binary'\n");
@@ -34317,7 +34318,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 258 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 258 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'null'\n");
@@ -34327,7 +34328,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 264 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 264 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'add'\n");
@@ -34337,7 +34338,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 270 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 270 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token 'dateform'\n");
@@ -34351,14 +34352,14 @@ YY_RULE_SETUP
                                }
 	YY_BREAK
 case 26:
-#line 282 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 282 "iloFormLexer.l"
 case 27:
-#line 283 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 283 "iloFormLexer.l"
 case 28:
-#line 284 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 284 "iloFormLexer.l"
 case 29:
 YY_RULE_SETUP
-#line 284 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 284 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34375,7 +34376,7 @@ YY_RULE_SETUP
 case 30:
 /* rule 30 can match eol */
 YY_RULE_SETUP
-#line 296 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 296 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34390,10 +34391,10 @@ YY_RULE_SETUP
                                }
 	YY_BREAK
 case 31:
-#line 309 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 309 "iloFormLexer.l"
 case 32:
 YY_RULE_SETUP
-#line 309 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 309 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34408,10 +34409,10 @@ YY_RULE_SETUP
                                }
 	YY_BREAK
 case 33:
-#line 322 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 322 "iloFormLexer.l"
 case 34:
 YY_RULE_SETUP
-#line 322 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 322 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34427,7 +34428,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 334 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 334 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token T_TIMESTAMP_VALUE [%s]\n", yytext);
@@ -34443,7 +34444,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 346 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 346 "iloFormLexer.l"
 {
 // ex) DATA_NLS_USE=KO16KSC5601
 #ifdef _ILOADER_DEBUG
@@ -34460,7 +34461,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 359 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 359 "iloFormLexer.l"
 {
 /* BUG-30467 */
 #ifdef _ILOADER_DEBUG
@@ -34476,7 +34477,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 371 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 371 "iloFormLexer.l"
 {
 // ex) NCHAR_UTF16=YES
 #ifdef _ILOADER_DEBUG
@@ -34493,7 +34494,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 384 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 384 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token '='\n");
@@ -34503,7 +34504,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 390 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 390 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34514,7 +34515,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 397 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 397 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34525,7 +34526,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 404 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 404 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34536,7 +34537,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 411 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 411 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34552,7 +34553,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 423 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 423 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34568,7 +34569,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 435 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 435 "iloFormLexer.l"
 {
 #ifdef _ILOADER_DEBUG
                                    idlOS::printf("Token Identifier [%s]\n", yytext);
@@ -34584,7 +34585,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 447 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 447 "iloFormLexer.l"
 {
 // bug-23282: formout file parsing: ex) DATA_NLS_USE=EUC-JP (or SHIFT-JIS)
 #ifdef _ILOADER_DEBUG
@@ -34602,7 +34603,7 @@ YY_RULE_SETUP
 case 47:
 /* rule 47 can match eol */
 YY_RULE_SETUP
-#line 461 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 461 "iloFormLexer.l"
 {
 /* BUG-40363 To handle where condition strings having double quotation marks */
 /* BUG-40310 [ux-iloader] Fail to handle where condition when 'WHERE' keyword has mixed case. */
@@ -34626,7 +34627,7 @@ YY_RULE_SETUP
 case 48:
 /* rule 48 can match eol */
 YY_RULE_SETUP
-#line 481 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 481 "iloFormLexer.l"
 {
 /* BUG-40363 To handle strings having double quotation marks */
 
@@ -34652,7 +34653,7 @@ case YY_STATE_EOF(COMMENT):
 case YY_STATE_EOF(NEG_TRAIL):
 case YY_STATE_EOF(POS_TRAIL):
 case YY_STATE_EOF(SJIS):
-#line 501 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 501 "iloFormLexer.l"
 {
                                    yyterminate();
                                }
@@ -34660,29 +34661,29 @@ case YY_STATE_EOF(SJIS):
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 505 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 505 "iloFormLexer.l"
 ;
 	YY_BREAK
 case 50:
 /* rule 50 can match eol */
 YY_RULE_SETUP
-#line 506 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 506 "iloFormLexer.l"
 ;
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 507 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 507 "iloFormLexer.l"
 {
                                    return yytext[0];
                                }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 511 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 511 "iloFormLexer.l"
 ECHO;
 	YY_BREAK
-#line 34686 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.cpp"
+#line 34687 "iloFormLexer.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -35844,7 +35845,7 @@ void Formfree (void * ptr , yyscan_t yyscanner)
 
 #define YYTABLES_NAME "yytables"
 
-#line 511 "/home/daramix/work/hdb_trunk2/ut/iloader3/src/iloFormLexer.l"
+#line 511 "iloFormLexer.l"
 
 
 
