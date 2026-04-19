@@ -41,6 +41,8 @@
 %option nostdinit
 %option prefix="mtddl"
 %option header-file="mtddlLexer.h" 
+%option noinput
+%option nounput
 
 %{
 #include <idl.h>
