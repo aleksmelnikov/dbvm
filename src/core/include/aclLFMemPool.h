@@ -31,9 +31,11 @@ ACP_EXTERN_C_BEGIN
 #define ACL_LOCKFREE_MEMPOOL_EMPTYCHUNK     acpByteOrderTON8(0x8000000000000000)
 #define ACL_LOCKFREE_MEMPOOL_INACTIVECHUNK  ACP_UINT64_LITERAL(0x0)
 
+struct acl_lockfree_mempool_t;
+
 typedef struct aclLFMemPoolFuncs {
-    acp_rc_t (*mChunkAlloc)();
-    acp_rc_t (*mChunkFree)();
+    acp_rc_t (*mChunkAlloc)(struct acl_lockfree_mempool_t* aMemPool, void** aChunk);
+    acp_rc_t (*mChunkFree)(void* aChunk);
 } aclLFMemPoolFuncs;
 
 typedef enum aclLFMemPoolTypes {
