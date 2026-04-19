@@ -38,7 +38,7 @@
 
 %option 8bit
 %option caseless
-%option nounput noyymore noyywrap
+%option nounput noyymore noyywrap noinput
 %option prefix="iSQLLexer"
 
 %{
