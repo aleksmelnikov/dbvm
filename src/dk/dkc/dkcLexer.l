@@ -24,6 +24,7 @@
 %option nostdinit
 %option prefix="dkcLexer"
 %option nounput
+%option noinput
      
 %{
 #include <idp.h>
