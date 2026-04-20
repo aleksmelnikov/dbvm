@@ -61,27 +61,30 @@ fi
 jobs="$(nproc)"
 do_unittest="no"
 build_mode="release"
+partial_build="no"
 
 # Function to display help message
 show_help() {
-  echo "Usage: $0 [-j jobs] [-t] [-m mode] [-h]"
+  echo "Usage: $0 [-j jobs] [-t] [-m mode] [-p] [-h]"
   echo ""
   echo "Options:"
   echo "  -j JOBS       Number of parallel build jobs (default: number of CPU cores)"
   echo "  -t            Enable unit tests (DO_UNITTEST=yes) (default: no)"
   echo "  -m MODE       Build mode: debug or release (default: release)"
+  echo "  -p            Partial build: skipping 3rdparty"
   echo "  -h            Show this help message and exit"
   echo ""
   echo "Example:"
-  echo "  $0 -j 4 -t -m debug"
+  echo "  $0 -j 4 -t -p -m debug"
 }
 
-# Parse flags: -j (jobs), -t (unittests), -m (build_mode), and -h (help)
+# Parse flags: -j (jobs), -t (unittests), -m (build_mode), -p (partial), and -h (help)
 # A leading colon ':' enables silent error mode
-while getopts ":j:thm:" opt; do
+while getopts ":j:thm:p" opt; do
   case "${opt}" in
     j) jobs="${OPTARG}" ;;
     t) do_unittest="yes" ;;
+    p) partial_build="yes" ;;
     m) 
       if [ "${OPTARG}" != "debug" ] && [ "${OPTARG}" != "release" ]; then
         echo "Error: Invalid build mode '${OPTARG}'. Use 'debug' or 'release'." >&2
@@ -149,21 +152,24 @@ build_dep() (
 # Main Execution Flow
 #===============================================================================
 
-# 0. Clean dependencies installation directory
-echo "==> Cleaning dependencies directory..."
-rm -rf "${dep_install_directory}"
-mkdir -p "${dep_install_directory}"
+# 1. Build Dependencies (unless partial build is requested)
+if [ "${partial_build}" == "yes" ]; then
+  echo "==> Partial build: skipping 3rdparty..."
+else
+  echo "==> Cleaning dependencies directory..."
+  rm -rf "${dep_install_directory}"
+  mkdir -p "${dep_install_directory}"
 
-# 1. Build Dependencies
-echo "==> Building Dependencies..."
-echo "    (logging to build.dep.log)"
-{
-  build_dep "bison"   "${bison_ver}"
-  build_dep "flex"    "${flex_ver}"    "--enable-shared=no"
-  build_dep "re2c"    "${re2c_ver}"
-  build_dep "openssl" "${openssl_ver}" "-fPIC shared" "./config" "install_sw"
-  build_dep "ncurses" "${ncurses_ver}" "--without-ada --without-manpages --without-tests --disable-db-install --without-debug --enable-overwrite --without-progs CFLAGS=-fPIC"
-} > "${current_directory}/build.dep.log" 2>&1
+  echo "==> Building Dependencies..."
+  echo "    (logging to build.dep.log)"
+  {
+    build_dep "bison"   "${bison_ver}"
+    build_dep "flex"    "${flex_ver}"    "--enable-shared=no"
+    build_dep "re2c"    "${re2c_ver}"
+    build_dep "openssl" "${openssl_ver}" "-fPIC shared" "./config" "install_sw"
+    build_dep "ncurses" "${ncurses_ver}" "--without-ada --without-manpages --without-tests --disable-db-install --without-debug --enable-overwrite --without-progs CFLAGS=-fPIC"
+  } > "${current_directory}/build.dep.log" 2>&1
+fi
 
 # 2. Build Database
 echo "==> Building Database: MODE=[${build_mode}], JOBS=[${jobs}], UNITTEST=[${do_unittest}]"
