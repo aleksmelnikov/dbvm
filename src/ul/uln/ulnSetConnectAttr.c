@@ -2005,7 +2005,7 @@ acp_sint32_t ulnCallbackSetConnAttr( void                         *aContext,
     switch (aEvent)
     {
         case ULN_CONNSTR_PARSE_EVENT_GO:
-            sFilterID = (ulnConnAttrID) aFilter;
+            sFilterID = (ulnConnAttrID)(acp_ulong_t) aFilter;
             sConnAttrID = ulnGetConnAttrIDfromKEYWORD(aKey, aKeyLen);
             if ( (sFilterID == ULN_CONN_ATTR_MAX) || (sFilterID == sConnAttrID) )
             {
