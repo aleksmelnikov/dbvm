@@ -1,0 +1,269 @@
+--- lempar-3.5.0-orig.c	2007-09-04 06:38:14.000000000 +0400
++++ lempar-3.5.0-alti.c	2025-12-28 14:34:06.000000000 +0300
+@@ -1,9 +1,27 @@
+-/* Driver template for the LEMON parser generator.
+-** The author disclaims copyright to this source code.
+-*/
++/** 
++ *  Copyright (c) 1999~2017, Altibase Corp. and/or its affiliates. All rights reserved.
++ *
++ *  This program is free software: you can redistribute it and/or modify
++ *  it under the terms of the GNU Affero General Public License, version 3,
++ *  as published by the Free Software Foundation.
++ *
++ *  This program is distributed in the hope that it will be useful,
++ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ *  GNU Affero General Public License for more details.
++ *
++ *  You should have received a copy of the GNU Affero General Public License
++ *  along with this program. If not, see <http://www.gnu.org/licenses/>.
++ */
++ 
++
++/*******************************************************************************
++ * $Id: lempar.c 8042 2009-10-06 04:59:48Z djin $
++ ******************************************************************************/
++
+ /* First off, code is include which follows the "include" declaration
+ ** in the input file. */
+-#include <stdio.h>
++#include <acpMem.h>
+ %%
+ /* Next is all token values, in a form suitable for use by makeheaders.
+ ** This section will be null unless lemon is run with the -m switch.
+@@ -162,13 +180,12 @@
+ };
+ typedef struct yyParser yyParser;
+ 
+-#ifndef NDEBUG
+-#include <stdio.h>
++#ifdef ACP_CFG_DEBUG
+ static FILE *yyTraceFILE = 0;
+ static char *yyTracePrompt = 0;
+-#endif /* NDEBUG */
++#endif /* ACP_CFG_DEBUG */
+ 
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+ /* 
+ ** Turn parser tracing on by giving a stream to which to write the trace
+ ** and a prompt to preface each trace message.  Tracing is turned off
+@@ -192,23 +209,23 @@
+   if( yyTraceFILE==0 ) yyTracePrompt = 0;
+   else if( yyTracePrompt==0 ) yyTraceFILE = 0;
+ }
+-#endif /* NDEBUG */
++#endif /* ACP_CFG_DEBUG */
+ 
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+ /* For tracing shifts, the names of all terminals and nonterminals
+ ** are required.  The following table supplies these names */
+ static const char *const yyTokenName[] = { 
+ %%
+ };
+-#endif /* NDEBUG */
++#endif /* ACP_CFG_DEBUG */
+ 
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+ /* For tracing reduce actions, the names of all rules are required.
+ */
+ static const char *const yyRuleName[] = {
+ %%
+ };
+-#endif /* NDEBUG */
++#endif /* ACP_CFG_DEBUG */
+ 
+ 
+ #if YYSTACKDEPTH<=0
+@@ -224,7 +241,7 @@
+   if( pNew ){
+     p->yystack = pNew;
+     p->yystksz = newSize;
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+     if( yyTraceFILE ){
+       fprintf(yyTraceFILE,"%sStack grows to %d entries!\n",
+               yyTracePrompt, p->yystksz);
+@@ -246,10 +263,11 @@
+ ** A pointer to a parser.  This pointer is used in subsequent calls
+ ** to Parse and ParseFree.
+ */
+-void *ParseAlloc(void *(*mallocProc)(size_t)){
++void *ParseAlloc(){
+   yyParser *pParser;
+-  pParser = (yyParser*)(*mallocProc)( (size_t)sizeof(yyParser) );
+-  if( pParser ){
++  acp_rc_t  sRC;
++  sRC = acpMemAlloc((void **)&pParser, sizeof(yyParser));
++  if( ACP_RC_IS_SUCCESS(sRC) ){
+     pParser->yyidx = -1;
+ #if YYSTACKDEPTH<=0
+     yyGrowStack(pParser);
+@@ -264,6 +282,7 @@
+ ** the value.
+ */
+ static void yy_destructor(YYCODETYPE yymajor, YYMINORTYPE *yypminor){
++  ACP_UNUSED(yypminor);
+   switch( yymajor ){
+     /* Here is inserted the actions which take place when a
+     ** terminal or non-terminal is destroyed.  This can happen
+@@ -293,7 +312,7 @@
+   yyStackEntry *yytos = &pParser->yystack[pParser->yyidx];
+ 
+   if( pParser->yyidx<0 ) return 0;
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+   if( yyTraceFILE && pParser->yyidx>=0 ){
+     fprintf(yyTraceFILE,"%sPopping %s\n",
+       yyTracePrompt,
+@@ -319,8 +338,7 @@
+ ** </ul>
+ */
+ void ParseFree(
+-  void *p,                    /* The parser to be deleted */
+-  void (*freeProc)(void*)     /* Function used to reclaim memory */
++  void *p                     /* The parser to be deleted */
+ ){
+   yyParser *pParser = (yyParser*)p;
+   if( pParser==0 ) return;
+@@ -328,7 +346,7 @@
+ #if YYSTACKDEPTH<=0
+   free(pParser->yystack);
+ #endif
+-  (*freeProc)((void*)pParser);
++  acpMemFree(pParser);
+ }
+ 
+ /*
+@@ -359,7 +377,7 @@
+       int iFallback;            /* Fallback token */
+       if( iLookAhead<sizeof(yyFallback)/sizeof(yyFallback[0])
+              && (iFallback = yyFallback[iLookAhead])!=0 ){
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+         if( yyTraceFILE ){
+           fprintf(yyTraceFILE, "%sFALLBACK %s => %s\n",
+              yyTracePrompt, yyTokenName[iLookAhead], yyTokenName[iFallback]);
+@@ -372,12 +390,12 @@
+       {
+         int j = i - iLookAhead + YYWILDCARD;
+         if( j>=0 && j<YY_SZ_ACTTAB && yy_lookahead[j]==YYWILDCARD ){
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+           if( yyTraceFILE ){
+             fprintf(yyTraceFILE, "%sWILDCARD %s => %s\n",
+                yyTracePrompt, yyTokenName[iLookAhead], yyTokenName[YYWILDCARD]);
+           }
+-#endif /* NDEBUG */
++#endif /* ACP_CFG_DEBUG */
+           return yy_action[j];
+         }
+       }
+@@ -424,8 +442,9 @@
+ */
+ static void yyStackOverflow(yyParser *yypParser, YYMINORTYPE *yypMinor){
+    ParseARG_FETCH;
++   ACP_UNUSED(yypMinor);
+    yypParser->yyidx--;
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+    if( yyTraceFILE ){
+      fprintf(yyTraceFILE,"%sStack Overflow!\n",yyTracePrompt);
+    }
+@@ -466,7 +485,7 @@
+   yytos->stateno = yyNewState;
+   yytos->major = yyMajor;
+   yytos->minor = *yypMinor;
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+   if( yyTraceFILE && yypParser->yyidx>0 ){
+     int i;
+     fprintf(yyTraceFILE,"%sShift %d\n",yyTracePrompt,yyNewState);
+@@ -505,13 +524,13 @@
+   int yysize;                     /* Amount to pop the stack */
+   ParseARG_FETCH;
+   yymsp = &yypParser->yystack[yypParser->yyidx];
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+   if( yyTraceFILE && yyruleno>=0 
+         && yyruleno<(int)(sizeof(yyRuleName)/sizeof(yyRuleName[0])) ){
+     fprintf(yyTraceFILE, "%sReduce [%s].\n", yyTracePrompt,
+       yyRuleName[yyruleno]);
+   }
+-#endif /* NDEBUG */
++#endif /* ACP_CFG_DEBUG */
+ 
+   /* Silence complaints from purify about yygotominor being uninitialized
+   ** in some cases when it is copied into the stack after the following
+@@ -546,7 +565,7 @@
+   yypParser->yyidx -= yysize;
+   yyact = yy_find_reduce_action(yymsp[-yysize].stateno,yygoto);
+   if( yyact < YYNSTATE ){
+-#ifdef NDEBUG
++#ifndef ACP_CFG_DEBUG
+     /* If we are not debugging and the reduce action popped at least
+     ** one element off the stack, then we can push the new element back
+     ** onto the stack here, and skip the stack overflow test in yy_shift().
+@@ -574,7 +593,7 @@
+   yyParser *yypParser           /* The parser */
+ ){
+   ParseARG_FETCH;
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+   if( yyTraceFILE ){
+     fprintf(yyTraceFILE,"%sFail!\n",yyTracePrompt);
+   }
+@@ -595,10 +614,14 @@
+   YYMINORTYPE yyminor            /* The minor type of the error token */
+ ){
+   ParseARG_FETCH;
++  ACP_UNUSED(yymajor);
++  ACP_UNUSED(yyminor);
+ #define TOKEN (yyminor.yy0)
++{
+ %%
+   ParseARG_STORE; /* Suppress warning about unused %extra_argument variable */
+ }
++}
+ 
+ /*
+ ** The following is executed when the parser accepts
+@@ -607,7 +630,7 @@
+   yyParser *yypParser           /* The parser */
+ ){
+   ParseARG_FETCH;
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+   if( yyTraceFILE ){
+     fprintf(yyTraceFILE,"%sAccept!\n",yyTracePrompt);
+   }
+@@ -669,7 +692,7 @@
+   yyendofinput = (yymajor==0);
+   ParseARG_STORE;
+ 
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+   if( yyTraceFILE ){
+     fprintf(yyTraceFILE,"%sInput %s\n",yyTracePrompt,yyTokenName[yymajor]);
+   }
+@@ -689,7 +712,7 @@
+       yy_reduce(yypParser,yyact-YYNSTATE);
+     }else if( yyact == YY_ERROR_ACTION ){
+       int yymx;
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+       if( yyTraceFILE ){
+         fprintf(yyTraceFILE,"%sSyntax Error!\n",yyTracePrompt);
+       }
+@@ -719,7 +742,7 @@
+       }
+       yymx = yypParser->yystack[yypParser->yyidx].major;
+       if( yymx==YYERRORSYMBOL || yyerrorhit ){
+-#ifndef NDEBUG
++#ifdef ACP_CFG_DEBUG
+         if( yyTraceFILE ){
+           fprintf(yyTraceFILE,"%sDiscard input token %s\n",
+              yyTracePrompt,yyTokenName[yymajor]);

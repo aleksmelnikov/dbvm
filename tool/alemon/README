@@ -1,15 +1,18 @@
 LEMON is an LALR(1) parser generator for C or C++.
-
 http://www.hwacl.com/sw/lemon/lemon.html
 
-the source is stolen from sqlite-3.5.0 (http://www.sqlite.org)
+3.5.0 Initial version
+    The source is taken from sqlite-3.5.0 (http://www.sqlite.org)
 
-
-BUILD
+    FILES
+    lemon.c - modified version of sqlite's lemon.c
+    lempar.c - modified version of sqlite's lempar.c
+    history/lemon-3.5.0.patch - diff against original sqlite-3.5.0 lemon.c
+    history/lempar-3.5.0.patch - diff against original sqlite-3.5.0 lempar.c
+    
+    BUILD
     just make;
-
     $ make
-
-MODIFICATIONS
-
-    1. -t option added for specify default parser template file
+    
+    MODIFICATIONS
+    1. -t option added to specify default parser template file
