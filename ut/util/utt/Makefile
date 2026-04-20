@@ -19,7 +19,7 @@ qpKeywords.c : $(QP_DIR)/qcp/qcpll.l
 	$(GREP) TO_ $< | $(GAWK) '{print $$1}' >> a
 	$(GREP) TA_ $< | $(GAWK) '{print $$1}' >> a
 	$(GREP) TM_ $< | $(GAWK) '{print $$1}' >> a
-	cat a | $(GREP) -v "\[" | $(GREP) -v "\/\*" | $(GREP) -v "\*\/" | $(GREP) -v return | sort > b
+	cat a | $(GREP) -v "\[" | $(GREP) -v "/\*" | $(GREP) -v "\*/" | $(GREP) -v return | sort > b
 	$(SED) "s/^/(SChar *)\"/g" b > c
 	$(SED) "s/$$/\",/g" c > $@
 	$(RM) a b c
