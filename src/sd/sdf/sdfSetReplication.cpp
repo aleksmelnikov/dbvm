@@ -241,8 +241,8 @@ IDE_RC sdfCalculate_SetReplication( mtcNode*     aNode,
         {
             IDE_TEST_RAISE( sKSafety == 0, ERR_PARALLEL_COUNT );
             sParallelCount = *(mtdIntegerType*)aStack[3].value;
-            IDE_TEST_RAISE( ( sParallelCount > SDU_SHARD_REPLICATION_MAX_PARALLEL_COUNT ) ||
-                            ( sParallelCount <= 0 ),
+            IDE_TEST_RAISE( ( sParallelCount <= 0 ) ||
+                            ( (UInt)sParallelCount > SDU_SHARD_REPLICATION_MAX_PARALLEL_COUNT ),
                             ERR_PARALLEL_COUNT);
         }
         //---------------------------------
