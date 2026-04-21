@@ -182,7 +182,7 @@ ACP_INLINE aclStackSmrRec *aclStackGetSmrRec(acl_stack_t *aStack)
         for (i = 0; i < ACL_STACK_SMR_HP_COUNT; i++)
         {
             if (aStack->mSpec.mLockFree.mHazardNodes[i].mActive == ACP_FALSE &&
-                (acp_sint32_t)ACL_STACK_CAS(
+                (acp_slong_t)ACL_STACK_CAS(
                     &aStack->mSpec.mLockFree.mHazardNodes[i].mActive,
                     sTrue,
                     sFalse) == sFalse)
