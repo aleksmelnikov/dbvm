@@ -308,7 +308,7 @@ IDE_RC mtfDecodeOffsetCalculate( mtcNode*     aNode,
         }
 
         // 범위를 넘으면 에러
-        IDE_TEST_RAISE( ( sValue <= 0 ) || ( sValue > ( sFence - 1 ) ),
+        IDE_TEST_RAISE( ( sValue <= 0 ) || ( (UInt)sValue > ( sFence - 1 ) ),
                          ERR_ARGUMENT_NOT_APPLICABLE );
 
         // Calculate the Nth( offset_value ) node
