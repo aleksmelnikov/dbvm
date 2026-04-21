@@ -13530,10 +13530,10 @@ yyreduce:
 #line 4982 "ulpCompy.y"
     {
         if(idlOS::strncasecmp("SYSTEM", (yyvsp[(2) - (3)].strval), 6) != 0 ||
-           idlOS::strncasecmp("CHECKPOINT", (yyvsp[(3) - (3)].strval), 10) != 0 &&
-           idlOS::strncasecmp("REORGANIZE", (yyvsp[(3) - (3)].strval), 10) != 0 &&
-           idlOS::strncasecmp("VERIFY", (yyvsp[(3) - (3)].strval), 6) != 0 &&
-           idlOS::strncasecmp("COMPACT", (yyvsp[(3) - (3)].strval), 7) != 0)
+           (idlOS::strncasecmp("CHECKPOINT", (yyvsp[(3) - (3)].strval), 10) != 0 &&
+            idlOS::strncasecmp("REORGANIZE", (yyvsp[(3) - (3)].strval), 10) != 0 &&
+            idlOS::strncasecmp("VERIFY", (yyvsp[(3) - (3)].strval), 6) != 0 &&
+            idlOS::strncasecmp("COMPACT", (yyvsp[(3) - (3)].strval), 7) != 0))
         {
             // error 贸府
 
@@ -14438,10 +14438,10 @@ yyreduce:
 #line 6476 "ulpCompy.y"
     {
         if(idlOS::strncasecmp("INDEXTYPE", (yyvsp[(1) - (3)].strval), 9) != 0 ||
-           idlOS::strncasecmp("BTREE", (yyvsp[(3) - (3)].strval), 5) != 0 &&
-           idlOS::strncasecmp("RTREE", (yyvsp[(3) - (3)].strval), 5) != 0 &&
-           // Altibase Spatio-Temporal DBMS
-           idlOS::strncasecmp("TDRTREE", (yyvsp[(3) - (3)].strval), 7) != 0)
+           (idlOS::strncasecmp("BTREE", (yyvsp[(3) - (3)].strval), 5) != 0 &&
+            idlOS::strncasecmp("RTREE", (yyvsp[(3) - (3)].strval), 5) != 0 &&
+            // Altibase Spatio-Temporal DBMS
+            idlOS::strncasecmp("TDRTREE", (yyvsp[(3) - (3)].strval), 7) != 0))
         {
             // error 贸府
 
@@ -15461,10 +15461,10 @@ yyreduce:
     //    else if ( strMatch : G, 4)
     // }
     if(idlOS::strncasecmp("SIZE", (yyvsp[(2) - (5)].strval), 4) != 0 ||
-       idlOS::strncasecmp("REUSE", (yyvsp[(4) - (5)].strval), 5) != 0 &&
-       idlOS::strncasecmp("K", (yyvsp[(4) - (5)].strval), 1) != 0 &&
-       idlOS::strncasecmp("M", (yyvsp[(4) - (5)].strval), 1) != 0 &&
-       idlOS::strncasecmp("G", (yyvsp[(4) - (5)].strval), 1) != 0)
+       (idlOS::strncasecmp("REUSE", (yyvsp[(4) - (5)].strval), 5) != 0 &&
+        idlOS::strncasecmp("K", (yyvsp[(4) - (5)].strval), 1) != 0 &&
+        idlOS::strncasecmp("M", (yyvsp[(4) - (5)].strval), 1) != 0 &&
+        idlOS::strncasecmp("G", (yyvsp[(4) - (5)].strval), 1) != 0))
     {
           // error 贸府
 
@@ -15507,9 +15507,9 @@ yyreduce:
     // }
     if(idlOS::strncasecmp("SIZE", (yyvsp[(2) - (6)].strval), 4) != 0 ||
        idlOS::strncasecmp("REUSE", (yyvsp[(5) - (6)].strval), 5) != 0 ||
-       idlOS::strncasecmp("K", (yyvsp[(4) - (6)].strval), 1) != 0 &&
-       idlOS::strncasecmp("M", (yyvsp[(4) - (6)].strval), 1) != 0 &&
-       idlOS::strncasecmp("G", (yyvsp[(4) - (6)].strval), 1) != 0)
+       (idlOS::strncasecmp("K", (yyvsp[(4) - (6)].strval), 1) != 0 &&
+        idlOS::strncasecmp("M", (yyvsp[(4) - (6)].strval), 1) != 0 &&
+        idlOS::strncasecmp("G", (yyvsp[(4) - (6)].strval), 1) != 0))
     {
           // error 贸府
 
@@ -15621,9 +15621,9 @@ yyreduce:
     // strMatch : AUTOEXTEND, 1
     // strMatch : K|M|G, 5
     if(idlOS::strncasecmp("AUTOEXTEND", (yyvsp[(1) - (6)].strval), 10) != 0 ||
-       idlOS::strncasecmp("K", (yyvsp[(5) - (6)].strval), 1) != 0 &&
-       idlOS::strncasecmp("M", (yyvsp[(5) - (6)].strval), 1) != 0 &&
-       idlOS::strncasecmp("G", (yyvsp[(5) - (6)].strval), 1) != 0)
+       (idlOS::strncasecmp("K", (yyvsp[(5) - (6)].strval), 1) != 0 &&
+        idlOS::strncasecmp("M", (yyvsp[(5) - (6)].strval), 1) != 0 &&
+        idlOS::strncasecmp("G", (yyvsp[(5) - (6)].strval), 1) != 0))
     {
           // error 贸府
 

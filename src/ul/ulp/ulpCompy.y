@@ -4981,10 +4981,10 @@ alter_system_statement
     /* ALTER SYSTEM COMPACT */
     {
         if(idlOS::strncasecmp("SYSTEM", $<strval>2, 6) != 0 ||
-           idlOS::strncasecmp("CHECKPOINT", $<strval>3, 10) != 0 &&
-           idlOS::strncasecmp("REORGANIZE", $<strval>3, 10) != 0 &&
-           idlOS::strncasecmp("VERIFY", $<strval>3, 6) != 0 &&
-           idlOS::strncasecmp("COMPACT", $<strval>3, 7) != 0)
+           (idlOS::strncasecmp("CHECKPOINT", $<strval>3, 10) != 0 &&
+            idlOS::strncasecmp("REORGANIZE", $<strval>3, 10) != 0 &&
+            idlOS::strncasecmp("VERIFY", $<strval>3, 6) != 0 &&
+            idlOS::strncasecmp("COMPACT", $<strval>3, 7) != 0))
         {
             // error 贸府
 
@@ -6475,10 +6475,10 @@ opt_index_type
     /* INDEXTYPE IS BTREE OR RTREE */
     {
         if(idlOS::strncasecmp("INDEXTYPE", $<strval>1, 9) != 0 ||
-           idlOS::strncasecmp("BTREE", $<strval>3, 5) != 0 &&
-           idlOS::strncasecmp("RTREE", $<strval>3, 5) != 0 &&
-           // Altibase Spatio-Temporal DBMS
-           idlOS::strncasecmp("TDRTREE", $<strval>3, 7) != 0)
+           (idlOS::strncasecmp("BTREE", $<strval>3, 5) != 0 &&
+            idlOS::strncasecmp("RTREE", $<strval>3, 5) != 0 &&
+            // Altibase Spatio-Temporal DBMS
+            idlOS::strncasecmp("TDRTREE", $<strval>3, 7) != 0))
         {
             // error 贸府
 
@@ -9911,10 +9911,10 @@ filespec
     //    else if ( strMatch : G, 4)
     // }
     if(idlOS::strncasecmp("SIZE", $<strval>2, 4) != 0 ||
-       idlOS::strncasecmp("REUSE", $<strval>4, 5) != 0 &&
-       idlOS::strncasecmp("K", $<strval>4, 1) != 0 &&
-       idlOS::strncasecmp("M", $<strval>4, 1) != 0 &&
-       idlOS::strncasecmp("G", $<strval>4, 1) != 0)
+       (idlOS::strncasecmp("REUSE", $<strval>4, 5) != 0 &&
+        idlOS::strncasecmp("K", $<strval>4, 1) != 0 &&
+        idlOS::strncasecmp("M", $<strval>4, 1) != 0 &&
+        idlOS::strncasecmp("G", $<strval>4, 1) != 0))
     {
           // error 贸府
 
@@ -9949,9 +9949,9 @@ filespec
     // }
     if(idlOS::strncasecmp("SIZE", $<strval>2, 4) != 0 ||
        idlOS::strncasecmp("REUSE", $<strval>5, 5) != 0 ||
-       idlOS::strncasecmp("K", $<strval>4, 1) != 0 &&
-       idlOS::strncasecmp("M", $<strval>4, 1) != 0 &&
-       idlOS::strncasecmp("G", $<strval>4, 1) != 0)
+       (idlOS::strncasecmp("K", $<strval>4, 1) != 0 &&
+        idlOS::strncasecmp("M", $<strval>4, 1) != 0 &&
+        idlOS::strncasecmp("G", $<strval>4, 1) != 0))
     {
           // error 贸府
 
@@ -10049,9 +10049,9 @@ autoextend_statement
     // strMatch : AUTOEXTEND, 1
     // strMatch : K|M|G, 5
     if(idlOS::strncasecmp("AUTOEXTEND", $<strval>1, 10) != 0 ||
-       idlOS::strncasecmp("K", $<strval>5, 1) != 0 &&
-       idlOS::strncasecmp("M", $<strval>5, 1) != 0 &&
-       idlOS::strncasecmp("G", $<strval>5, 1) != 0)
+       (idlOS::strncasecmp("K", $<strval>5, 1) != 0 &&
+        idlOS::strncasecmp("M", $<strval>5, 1) != 0 &&
+        idlOS::strncasecmp("G", $<strval>5, 1) != 0))
     {
           // error 贸府
 
