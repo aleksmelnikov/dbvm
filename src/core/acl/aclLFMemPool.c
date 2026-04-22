@@ -691,9 +691,9 @@ aclLFMemPoolAllocFromChunk(void*                     aChunk,
     {
         sChunkHeader = acpAtomicGet64(aChunk);
 
-        ACP_TEST_RAISE(sChunkHeader == ACL_LOCKFREE_MEMPOOL_FULLCHUNK, E_FULL);
+        ACP_TEST_RAISE((acp_uint64_t)sChunkHeader == ACL_LOCKFREE_MEMPOOL_FULLCHUNK, E_FULL);
 
-        if (sChunkHeader == ACL_LOCKFREE_MEMPOOL_EMPTYCHUNK)
+        if ((acp_uint64_t)sChunkHeader == ACL_LOCKFREE_MEMPOOL_FULLCHUNK)
         {
             *aResult = ACL_LOCKFREE_MEMPOOL_WAS_EMPTY;
         }
@@ -714,7 +714,7 @@ aclLFMemPoolAllocFromChunk(void*                     aChunk,
         sAllocMask = acpByteOrderTON8(sAllocMask);
         sNewChunkHeader = sChunkHeader | sAllocMask;
 
-        if (sNewChunkHeader == ACL_LOCKFREE_MEMPOOL_FULLCHUNK)
+        if ((acp_uint64_t)sNewChunkHeader == ACL_LOCKFREE_MEMPOOL_FULLCHUNK)
         {
             *aResult = ACL_LOCKFREE_MEMPOOL_FULL;
         }
@@ -857,7 +857,7 @@ ACP_INLINE acp_rc_t aclLFMemPoolShrink(acl_lockfree_mempool_t* aMemPool)
         sRC = aclSafeListLast(&(aMemPool->mList), &sNode);
         ACP_TEST(ACP_RC_NOT_SUCCESS(sRC));
 
-        while (acpAtomicGet64(sNode->mData) != ACL_LOCKFREE_MEMPOOL_EMPTYCHUNK)
+        while ((acp_uint64_t)acpAtomicGet64(sNode->mData) != ACL_LOCKFREE_MEMPOOL_EMPTYCHUNK)
         {
             sRC = aclSafeListPrev(&(aMemPool->mList), sNode, &sNode);
             ACP_TEST(ACP_RC_NOT_SUCCESS(sRC));
@@ -905,7 +905,7 @@ aclLFMemPoolFreeInChunk(void*                     aChunk,
 
         sChunkHeader = acpAtomicGet64(aChunk);
 
-        if (sChunkHeader == ACL_LOCKFREE_MEMPOOL_FULLCHUNK)
+        if ((acp_uint64_t)sChunkHeader == ACL_LOCKFREE_MEMPOOL_FULLCHUNK)
         {
             *aResult = ACL_LOCKFREE_MEMPOOL_WAS_FULL;
         }
@@ -922,7 +922,7 @@ aclLFMemPoolFreeInChunk(void*                     aChunk,
         sNewChunkHeader = sChunkHeader ^ sFreeMask;
 
         /* Check if it empty now */
-        if (sNewChunkHeader == ACL_LOCKFREE_MEMPOOL_EMPTYCHUNK)
+        if ((acp_uint64_t)sNewChunkHeader == ACL_LOCKFREE_MEMPOOL_EMPTYCHUNK)
         {
             *aResult = ACL_LOCKFREE_MEMPOOL_EMPTY;
         }
