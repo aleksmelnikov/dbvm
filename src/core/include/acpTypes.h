@@ -379,6 +379,35 @@ typedef acp_uint8_t        acp_bool_t;
  */
 #define ACP_UINT64_MIN ACP_UINT64_LITERAL(0)
 
+/*
+ * Floating Point Boundaries for Integer Range Validation
+ *
+ * Purpose:
+ *   These constants represent the exact power-of-two boundaries for integer types.
+ *   They are used to determine if a floating-point value falls within the
+ *   representable range of integer types.
+ *
+ * Technical Note:
+ *   Each SINT_LIMIT is 2^(N-1), which is exactly representable in IEEE 754.
+ *
+ * Usage logic for Signed Types (SINT):
+ *   - Upper Bound: (val >= LIMIT)      -> OUT OF RANGE (value is >= MAX + 1)
+ *   - Lower Bound: (val < -LIMIT)      -> OUT OF RANGE (value is < MIN)
+ *
+ * Usage logic for Unsigned Types (UINT):
+ *   - Upper Bound: (val >= LIMIT)      -> OUT OF RANGE (value is >= MAX + 1)
+ *   - Lower Bound: (val < ACP_FP_ZERO) -> OUT OF RANGE (negative value)
+ */
+#define ACP_FP_ZERO                         (0.0L)
+#define ACP_SINT8_LIMIT                   (128.0L)
+#define ACP_UINT8_LIMIT                   (256.0L)
+#define ACP_SINT16_LIMIT                (32768.0L)
+#define ACP_UINT16_LIMIT                (65536.0L)
+#define ACP_SINT32_LIMIT           (2147483648.0L)
+#define ACP_UINT32_LIMIT           (4294967296.0L)
+#define ACP_SINT64_LIMIT  (9223372036854775808.0L)
+#define ACP_UINT64_LIMIT (18446744073709551616.0L)
+
 #if defined(ACP_CFG_DOXYGEN) || defined(ACP_CFG_COMPILE_64BIT)
 
 /**
