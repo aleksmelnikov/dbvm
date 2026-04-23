@@ -262,8 +262,8 @@ ACI_RC ulncREAL_ULONG(ulnFnContext  *aFnContext,
 
     sFloatValue = *(acp_float_t *)aColumn->mBuffer;
 
-    ACI_TEST_RAISE(sFloatValue < 0, LABEL_OUT_OF_RANGE_MINUS);
-    ACI_TEST_RAISE(sFloatValue > ACP_UINT32_MAX, LABEL_OUT_OF_RANGE);
+    ACI_TEST_RAISE(sFloatValue <  ACP_FP_ZERO, LABEL_OUT_OF_RANGE_MINUS);
+    ACI_TEST_RAISE(sFloatValue >= ACP_UINT64_LIMIT, LABEL_OUT_OF_RANGE);
 
     sBigIntValue = (acp_sint64_t)sFloatValue;
 
