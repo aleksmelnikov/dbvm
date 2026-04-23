@@ -201,8 +201,8 @@ ACI_RC ulncREAL_SBIGINT(ulnFnContext  *aFnContext,
 
     sFloatValue = *(acp_float_t *)aColumn->mBuffer;
 
-    ACI_TEST_RAISE(sFloatValue < ACP_SINT64_MIN, LABEL_OUT_OF_RANGE);
-    ACI_TEST_RAISE(sFloatValue > ACP_SINT64_MAX, LABEL_OUT_OF_RANGE);
+    ACI_TEST_RAISE(sFloatValue < -ACP_SINT64_LIMIT, LABEL_OUT_OF_RANGE);
+    ACI_TEST_RAISE(sFloatValue >= ACP_SINT64_LIMIT, LABEL_OUT_OF_RANGE);
 
     sBigIntValue = (acp_sint64_t)sFloatValue;
 
@@ -252,8 +252,8 @@ ACI_RC ulncDOUBLE_SBIGINT(ulnFnContext  *aFnContext,
 
     sDoubleValue = *(acp_double_t *)aColumn->mBuffer;
 
-    ACI_TEST_RAISE(sDoubleValue < ACP_SINT64_MIN, LABEL_OUT_OF_RANGE);
-    ACI_TEST_RAISE(sDoubleValue > ACP_SINT64_MAX, LABEL_OUT_OF_RANGE);
+    ACI_TEST_RAISE(sDoubleValue < -ACP_SINT64_LIMIT, LABEL_OUT_OF_RANGE);
+    ACI_TEST_RAISE(sDoubleValue >= ACP_SINT64_LIMIT, LABEL_OUT_OF_RANGE);
 
     sBigIntValue = (acp_sint64_t)sDoubleValue;
 

@@ -213,8 +213,8 @@ ACI_RC ulncREAL_SLONG(ulnFnContext  *aFnContext,
 
     sFloatValue = *(acp_float_t *)aColumn->mBuffer;
 
-    ACI_TEST_RAISE(sFloatValue > ACP_SINT32_MAX || sFloatValue < ACP_SINT32_MIN,
-                   LABEL_OUT_OF_RANGE);
+    ACI_TEST_RAISE(sFloatValue < -ACP_SINT32_LIMIT, LABEL_OUT_OF_RANGE);
+    ACI_TEST_RAISE(sFloatValue >= ACP_SINT32_LIMIT, LABEL_OUT_OF_RANGE);
 
     sBigIntValue = (acp_sint64_t)sFloatValue;
 
