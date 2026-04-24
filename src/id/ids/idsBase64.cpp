@@ -96,6 +96,8 @@ IDE_RC idsBase64::base64Encode( UChar * aSrc, UInt aSrcLen, UChar ** aDst, UInt 
         }
     }
 
+    ACP_UNUSED(sBlockCnt);
+
     sDst[sDstLen] = '\0';
     (*aDstLen ) = sDstLen;
 
