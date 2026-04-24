@@ -202,6 +202,8 @@ IDE_RC iduMemSmall::freeStatic(void* aPtr)
     IDE_DASSERT(sChunk->mBlockSize == sAllocSize);
     sSmall  = sChunk->mParent;
     
+    ACP_UNUSED(sAllocSize);
+
     return sSmall->free(aPtr);
 }
 
@@ -305,6 +307,8 @@ SInt   iduMemSmall::calcFL(ULong aSize)
     sLSB = acpBitFfs32(aSize);
 
     IDE_DASSERT(sMSB == sLSB);
+
+    ACP_UNUSED(sLSB);
 
     return sMSB - 4;
 }
