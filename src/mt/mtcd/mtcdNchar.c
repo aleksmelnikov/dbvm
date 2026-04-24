@@ -1824,6 +1824,8 @@ ACI_RC mtdNcharInterfaceToNchar( mtcStack*        aStack,
         aResult->length = aSource->length;
     }
 
+    ACP_UNUSED(sNcharCnt);
+
     return ACI_SUCCESS;
 
     ACI_EXCEPTION( ERR_INVALID_DATA_LENGTH );
@@ -1925,6 +1927,8 @@ ACI_RC mtdNcharInterfaceToNchar2( mtcStack*        aStack,
 
         aResult->length = aSourceLen;
     }
+
+    ACP_UNUSED(sNcharCnt);
 
     return ACI_SUCCESS;
 

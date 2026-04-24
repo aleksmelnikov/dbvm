@@ -4181,6 +4181,8 @@ IDE_RC mtdNcharInterface::toNchar( mtcStack         * aStack,
         aResult->length = aSource->length;
     }
 
+    ACP_UNUSED(sNcharCnt);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION( ERR_INVALID_DATA_LENGTH );
@@ -4282,6 +4284,8 @@ IDE_RC mtdNcharInterface::toNchar( mtcStack         * aStack,
 
         aResult->length = aSourceLen;
     }
+
+    ACP_UNUSED(sNcharCnt);
 
     return IDE_SUCCESS;
 
@@ -4572,6 +4576,8 @@ IDE_RC mtdNcharInterface::toNchar( SInt               aPrecision,
 
         aResult->length = aSource->length;
     }
+
+    ACP_UNUSED(sNcharCnt);
 
     return IDE_SUCCESS;
 
