@@ -477,6 +477,9 @@ IDE_RC iduVarMemList::clone( iduVarMemList *aMem )
                        (SChar*) sIterator->mObj + ID_SIZEOF(ULong),
                        sSize );
     }
+
+    ACP_UNUSED(sTotalSize);
+    ACP_UNUSED(sCount);
     
     return IDE_SUCCESS;
 
