@@ -639,8 +639,6 @@ void iduStack::dumpStack( const iduSignalDef    *aSignal,
     SInt        sLen;
     SChar*      sTemp;
     SChar       sLine[512] = "\n[0x"; //BUG-46515
-    void*       sIP;
-    void**      sSP;
     SChar       sBuff[IDU_DUMP_BUFSIZE_MAX];  //BUG-48433
     UInt        sOffset = 0;         //BUG-48433
 
@@ -810,8 +808,8 @@ void iduStack::dumpStack( const iduSignalDef    *aSignal,
 #   if defined(ALTI_CFG_CPU_POWERPC)
     mCallDepth = 0;
 
-    sIP = (void*)sContext->uc_mcontext.gp_regs[36];
-    sSP = (void**)sContext->uc_mcontext.gp_regs[1];
+    void*  sIP = (void*)sContext->uc_mcontext.gp_regs[36];
+    void** sSP = (void**)sContext->uc_mcontext.gp_regs[1];
 
     do
     {
@@ -874,8 +872,8 @@ void iduStack::dumpStack( const iduSignalDef    *aSignal,
 #  elif defined(ALTI_CFG_OS_AIX)
     mCallDepth = 0;
 
-    sIP = (void*)sContext->uc_mcontext.jmp_context.iar;
-    sSP = (void**)sContext->uc_mcontext.jmp_context.gpr[1];
+    void*  sIP = (void*)sContext->uc_mcontext.jmp_context.iar;
+    void** sSP = (void**)sContext->uc_mcontext.jmp_context.gpr[1];
 
     do
     {
@@ -901,6 +899,8 @@ void iduStack::dumpStack( const iduSignalDef    *aSignal,
 #  endif
 
 # endif
+    ACP_UNUSED(sContext);
+
     if( aDumpStackPrefix == ID_TRUE )
     {
         writeString(sBuff,&sOffset, IDU_DUMPSTACKS_PREFIX, IDU_DUMPSTACKS_PREFIX_LEN );
