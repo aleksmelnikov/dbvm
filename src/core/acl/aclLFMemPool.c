@@ -756,6 +756,9 @@ ACP_EXPORT acp_rc_t aclLFMemPoolAlloc(acl_lockfree_mempool_t* aMemPool,
     acp_uint32_t             sEmptyCount = 0;
     acp_bool_t               sAllocated = ACP_FALSE;
 
+    ACP_UNUSED(sEmptyCount);
+    ACP_UNUSED(sAllocated);
+
     ACP_TEST_RAISE(aMemPool == NULL, E_NULL);
 
 
@@ -849,6 +852,8 @@ ACP_INLINE acp_rc_t aclLFMemPoolShrink(acl_lockfree_mempool_t* aMemPool)
     acp_rc_t             sRC;
     acl_safelist_node_t* sNode = NULL;
     acp_sint64_t         sChunkHeader;
+
+    ACP_UNUSED(sChunkHeader);
 
     while (aMemPool->mEmptyCount >= aMemPool->mEmptyHighLimit)
     {
@@ -954,6 +959,8 @@ ACP_EXPORT acp_rc_t aclLFMemPoolFree(acl_lockfree_mempool_t* aMemPool,
     acp_uint8_t*             sChunk = NULL;
     aclLFMemPoolAllocResults sResult;
     acl_safelist_node_t*     sNode = NULL;
+
+    ACP_UNUSED(sChunkHeader);
 
     ACP_TEST_RAISE((aMemPool == NULL || aPtr == NULL), E_NULL);
 
