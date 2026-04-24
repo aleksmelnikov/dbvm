@@ -444,6 +444,8 @@ ACP_EXPORT acp_rc_t    aclSafeListPopHead(
     acp_rc_t                sRC;
     acl_safelist_node_t*    sNode = NULL;
 
+    ACP_UNUSED(sNode);
+
     ACP_TEST_RAISE(aList == NULL, ENULL);
 
     sRC = aclSafeListNext(aList, &(aList->mHead), aPopNode);
