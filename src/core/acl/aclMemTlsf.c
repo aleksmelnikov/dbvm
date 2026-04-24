@@ -120,7 +120,7 @@ static void *aclMemTlsfMallocHuge(acp_size_t aSize, void *aPrimaryPool)
     acl_mem_tlsf_bhdr_t *sInitBlock = NULL;
     acl_mem_tlsf_bhdr_t *sBlock = NULL;
     acl_mem_tlsf_bhdr_t *sLastBlock = NULL;
-        
+
     sAreaSize = aSize + ACL_TLSF_BHDR_OVRHD * 10;
 
     sMmapArea = aclMemTlsfGetNewArea(&sAreaSize);
@@ -222,6 +222,8 @@ ACP_EXPORT acp_rc_t aclMemReallocTlsf(acl_mem_alloc_t *aAllocator,
     acp_size_t sOldSize;
     void* sAddr = NULL;
     acp_rc_t sRC;
+
+    ACP_UNUSED(sTlsf);
 
     if(*aAddr != NULL)
     {
