@@ -2333,6 +2333,7 @@ acp_sint32_t aciConvConvertWcToMb4Gbkextinv( void         * aSrc,
     acp_uint16_t             sWc;
 
     aSrcRemain = 0;
+    ACP_UNUSED(aSrcRemain);
 
     ACICONV_UTF16BE_TO_WC( sWc, aSrc );
 

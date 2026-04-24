@@ -74,6 +74,7 @@ acp_sint32_t aciConvConvertMbToWc4Cp936ext( void         * aSrc,
     acp_uint16_t   sWc;
 
     aDestRemain = 0;
+    ACP_UNUSED(aDestRemain);
 
     /* 1) CP936EXT ПЁ РќДо */
     if ( ( sSrcCharPtr[0] == 0xa6 ) || ( sSrcCharPtr[0] == 0xa8 ) )
@@ -172,6 +173,7 @@ acp_sint32_t aciConvConvertWcToMb4Cp936ext( void         * aSrc,
     acp_uint16_t   sWc;
 
     aSrcRemain = 0;
+    ACP_UNUSED(aSrcRemain);
 
     ACICONV_UTF16BE_TO_WC( sWc, aSrc );
 

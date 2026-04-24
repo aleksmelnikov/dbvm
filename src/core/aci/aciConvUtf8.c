@@ -45,6 +45,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertMbToWc4Utf8( void    * aSrc,
     acp_uint16_t    wc;
 
     aDestRemain = 0;
+    ACP_UNUSED(aDestRemain);
     
     if (sSrcCharPtr[0] < 0x80)
     {
@@ -147,6 +148,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertWcToMb4Utf8( void    * aSrc,
     acp_uint16_t              wc;
 
     aSrcRemain = 0;
+    ACP_UNUSED(aSrcRemain);
     
     ACICONV_UTF16BE_TO_WC( wc, aSrc );
     

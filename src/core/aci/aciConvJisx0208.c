@@ -2370,6 +2370,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertMbToWc4Jisx0208( void   * aSrc,
     acp_uint16_t    wc;
 
     aDestRemain = 0;
+    ACP_UNUSED(aDestRemain);
     
     if( ((sSrcCharPtr[0] >= 0x21) && (sSrcCharPtr[0] <= 0x28)) || 
         ((sSrcCharPtr[0] >= 0x30) && (sSrcCharPtr[0] <= 0x74)) )
@@ -2462,6 +2463,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertWcToMb4Jisx0208( void   * aSrc,
     acp_uint16_t        wc;
 
     aSrcRemain = 0;
+    ACP_UNUSED(aSrcRemain);
     
     ACICONV_UTF16BE_TO_WC( wc, aSrc );
     

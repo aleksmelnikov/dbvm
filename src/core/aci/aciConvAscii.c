@@ -41,6 +41,8 @@ ACP_EXPORT acp_sint32_t aciConvConvertMbToWc4Ascii( void   * aSrc,
 
     aSrcRemain = 0;
     aDestRemain = 0;
+    ACP_UNUSED(aSrcRemain);
+    ACP_UNUSED(aDestRemain);
 
     sChar = *(acp_uint8_t*) aSrc;
 
@@ -78,6 +80,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertWcToMb4Ascii( void   * aSrc,
     acp_sint32_t     sRet;
 
     aDestRemain = aSrcRemain = 0;
+    ACP_UNUSED(aDestRemain);
     
     if( ACICONV_IS_UTF16_ASCII_PTR(aSrc) == ACP_TRUE )
     {
@@ -113,6 +116,7 @@ ACP_EXPORT acp_sint32_t aciConvCopyAscii( void    * aSrc,
     acp_sint32_t     sRet;
 
     aDestRemain = aSrcRemain = 0;
+    ACP_UNUSED(aDestRemain);
 
     if ( *sSrcCharPtr < 0x80 )
     {

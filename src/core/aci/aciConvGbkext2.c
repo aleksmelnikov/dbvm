@@ -1168,6 +1168,7 @@ acp_sint32_t aciConvConvertMbToWc4Gbkext2( void         * aSrc,
     acp_uint16_t   sWc;
 
     aDestRemain = 0;
+    ACP_UNUSED(aDestRemain);
 
     if ( ( sSrcCharPtr[0] >= 0xa8 ) && ( sSrcCharPtr[0] <= 0xfe ) )
     {

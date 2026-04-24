@@ -164,6 +164,7 @@ ACP_EXPORT acp_sint32_t aciConvCopyEuckr( void    * aSrc,
     acp_sint32_t      sRet;
 
     aDestRemain = 0;
+    ACP_UNUSED(aDestRemain);
 
     /* Code set 0 (ASCII or KS C 5636-1993) */
     if ( sSrcCharPtr[0] < 0x80)

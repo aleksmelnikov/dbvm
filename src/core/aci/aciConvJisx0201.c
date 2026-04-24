@@ -40,6 +40,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertMbToWc4Jisx0201( void   * aSrc,
     acp_uint16_t    wc;
 
     aSrcRemain = aDestRemain = 0;
+    ACP_UNUSED(aSrcRemain);
     
     if( sSrcCharPtr[0] < 0x80 )
     {
@@ -98,6 +99,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertWcToMb4Jisx0201( void   * aSrc,
     acp_sint32_t      sRet;
 
     aSrcRemain = aDestRemain = 0;
+    ACP_UNUSED(aSrcRemain);
     
     ACICONV_UTF16BE_TO_WC( wc, aSrc );
     

@@ -1697,6 +1697,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertMbToWc4Uhc1( void    * aSrc,
     acp_uint32_t      sIndex;
 
     aDestRemain = 0;
+    ACP_UNUSED(aDestRemain);
     
     if ((sSrcCharPtr[0] >= 0x81 && sSrcCharPtr[0] <= 0xa0))
     {
@@ -1782,6 +1783,7 @@ ACP_EXPORT acp_sint32_t aciConvConvertWcToMb4Uhc1( void    * aSrc,
     acp_uint16_t              wc;
 
     aSrcRemain = 0;
+    ACP_UNUSED(aSrcRemain);
     
     ACICONV_UTF16BE_TO_WC( wc, aSrc );
     
