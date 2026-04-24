@@ -260,6 +260,8 @@ ACP_EXPORT acp_rc_t actPerfFrameworkRun(acp_char_t *aLogFileName,
         sCount++;
     }
 
+    ACP_UNUSED(sCount);
+
     ACT_BARRIER_DESTROY(&gActBarrier);
 
     ACP_TEST(actPerfFrameworkCloseLog() != ACP_RC_SUCCESS);
