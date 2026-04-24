@@ -2296,6 +2296,8 @@ IDE_RC qcgPlan::isMatchedPlanProperty( qcStatement    * aStatement,
         /* Nothing to do */
     }
 
+    ACP_UNUSED(sMatchedCount);
+
     IDE_EXCEPTION_CONT( NOT_MATCHED );
 
     *aIsMatched = sIsMatched;
@@ -2772,6 +2774,8 @@ IDE_RC qcgPlan::rebuildPlanProperty( qcStatement    * aStatement,
 
     // BUG-38148 프로퍼티 추가작업시 실수를 하면 DASSERT 에 걸리도록 한다.
     IDE_DASSERT( sRebuildCount == PLAN_PROPERTY_MAX );
+
+    ACP_UNUSED(sRebuildCount);
 
     return IDE_SUCCESS;
 }
