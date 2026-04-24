@@ -772,6 +772,8 @@ ACP_EXPORT void aclLogLock(acl_log_t *aLog)
 {
     acp_rc_t sRC;
 
+    ACP_UNUSED(sRC);
+
     if ((aLog->mFlag & ACL_LOG_TSHARED) != 0)
     {
         sRC = acpThrMutexLock(&aLog->mMutex);
@@ -804,6 +806,8 @@ ACP_EXPORT void aclLogLock(acl_log_t *aLog)
 ACP_EXPORT void aclLogUnlock(acl_log_t *aLog)
 {
     acp_rc_t sRC;
+
+    ACP_UNUSED(sRC);
 
     aLog->mLockCount--;
 
@@ -1018,12 +1022,17 @@ ACP_EXPORT void aclLogDebugWriteWithArgs(acl_log_t        *aLog,
 ACP_EXPORT void aclLogDebugWriteBlank(acl_log_t        *aLog,
                                       const acp_char_t *aFormat, ...)
 {
+    ACP_UNUSED(aLog);
+    ACP_UNUSED(aFormat);
 }
 
 ACP_EXPORT void aclLogDebugWriteWithArgsBlank(acl_log_t        *aLog,
                                               const acp_char_t *aFormat,
                                               va_list           aArgs)
 {
+    ACP_UNUSED(aLog);
+    ACP_UNUSED(aFormat);
+    ACP_UNUSED(aArgs);
 }
 
 #endif
