@@ -1738,6 +1738,8 @@ IDE_RC qdbCreate::executeCreateTablePartition(qcStatement   * aStatement,
     smiSegStorageAttr         sSegStoAttr;
     UInt                      sPartType = 0;
 
+    ACP_UNUSED(sColumnCount);
+
     IDU_LIMITPOINT("qdbCreate::executeCreateTablePartition::malloc1");
     IDE_TEST(STRUCT_ALLOC_WITH_SIZE(aStatement->qmxMem,
                                     SChar,
