@@ -259,6 +259,8 @@ qmgShardInsert::optimize( qcStatement * aStatement, qmgGraph * aGraph )
         }
     }
 
+    ACP_UNUSED(sParamCount);
+
     sLen += 1;
     IDE_TEST_RAISE( sLen + 1 >= ID_SIZEOF(sMyGraph->shardQueryBuf),
                     ERR_QUERY_BUFFER_OVERFLOW );
