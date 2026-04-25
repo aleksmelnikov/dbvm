@@ -1217,6 +1217,7 @@ IDE_RC qdsd::executeShardDrop( qcStatement * aStatement )
             }
         }
         IDE_DASSERT( sMainReplicaSet != NULL );
+        ACP_UNUSED(sMainReplicaSet);
 
         /* ResetShardMeta */
         ideLog::log(IDE_SD_0,"[SHARD_DROP_FORCE] RESET SHARD META START");
