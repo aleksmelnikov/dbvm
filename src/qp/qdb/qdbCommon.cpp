@@ -12041,6 +12041,8 @@ IDE_RC qdbCommon::moveRowForInplaceAlterPartition(
     smOID                 sPartOID          = SMI_NULL_OID;
     ULong                 sProgressCnt      = 0;
 
+    ACP_UNUSED(sSrcColCount);
+
     // PROJ-1362
     sParseTree = (qdTableParseTree *)aStatement->myPlan->parseTree;
 
