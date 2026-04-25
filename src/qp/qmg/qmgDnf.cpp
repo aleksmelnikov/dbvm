@@ -153,6 +153,8 @@ qmgDnf::optimize( qcStatement * aStatement, qmgGraph * aGraph )
     IDE_DASSERT( aStatement != NULL );
     IDE_DASSERT( aGraph != NULL );
 
+    ACP_UNUSED(aStatement);
+
     sMyGraph = (qmgDNF*) aGraph;
 
     //------------------------------------------
