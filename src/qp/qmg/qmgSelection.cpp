@@ -2060,6 +2060,8 @@ IDE_RC qmgSelection::makeParallelScan(qcStatement* aStatement,
                  != IDE_SUCCESS);
     }
 
+    ACP_UNUSED(sPRLQCount);
+
     /*
      * ----------------------------------------------------------
      * make PSCRD 
