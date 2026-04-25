@@ -402,6 +402,8 @@ qmgMove::makePlan( qcStatement     * aStatement,
 
     // 최상위 plan이다.
     IDE_DASSERT( aParent == NULL );
+
+    ACP_UNUSED(aParent);
     
     IDE_TEST( qmoOneNonPlan::initMOVE( aStatement ,
                                        &sPlan )
