@@ -113,6 +113,9 @@ IDE_RC qdbAlter::validateAddCol(qcStatement * aStatement)
     qcmCompressionColumn * sCompColumn = NULL;
     qcmCompressionColumn * sCompPrev = NULL;
 
+    ACP_UNUSED(sCompColumn);
+    ACP_UNUSED(sCompPrev);
+
     sParseTree = (qdTableParseTree *)aStatement->myPlan->parseTree;
 
     // ALTER TABLE 구문의 공통적인 validation 수행
@@ -4120,6 +4123,8 @@ IDE_RC qdbAlter::validateDropPartition( qcStatement * aStatement )
     mtdCharType            * sFindPartKeyCondMaxValueStr;
 
     idBool                   sIsEmptyPart = ID_FALSE;
+
+    ACP_UNUSED(sIsFound);
 
     IDU_LIMITPOINT("qdbAlter::validateDropPartition::malloc1");
     IDE_TEST( STRUCT_ALLOC( QC_QMP_MEM(aStatement),
