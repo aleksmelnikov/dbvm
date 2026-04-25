@@ -86,6 +86,8 @@ IDE_RC qcsModule::finalize( void )
 IDE_RC qcsModule::openModule( SChar  * aModule,
                               SChar  * aModuleLibrary )
 {
+    ACP_UNUSED(aModuleLibrary);
+
     SChar   * sError;
     SChar     sErrorMsg[QCS_ERROR_MSG_SIZE + 1];
     
@@ -543,6 +545,8 @@ IDE_RC qcsModule::encrypt( mtcEncryptInfo * aInfo,
                            UChar          * aCipher,
                            UShort         * aCipherSize )
 {
+    ACP_UNUSED(aInfo);
+
     IDE_TEST_RAISE( gQcsIsInitialized == ID_FALSE,
                     ERR_INVALID_MODULE );
 
@@ -595,6 +599,8 @@ IDE_RC qcsModule::decrypt( mtcEncryptInfo * aInfo,
                            UChar          * aPlain,
                            UShort         * aPlainSize )
 {
+    ACP_UNUSED(aInfo);
+
     IDE_TEST_RAISE( gQcsIsInitialized == ID_FALSE,
                     ERR_INVALID_MODULE );
 
@@ -646,6 +652,8 @@ IDE_RC qcsModule::encodeECC( mtcECCInfo * aInfo,
                              UChar      * aCipher,
                              UShort     * aCipherSize )
 {
+    ACP_UNUSED(aInfo);
+
     IDE_TEST_RAISE( gQcsIsInitialized == ID_FALSE,
                     ERR_INVALID_MODULE );
 
@@ -871,9 +879,15 @@ IDE_RC qcsModule::verifyPolicyCode( SChar   * aPolicyName,
                                     UShort    aPolicyCodeLength,
                                     idBool  * aIsValid )
 {
+    ACP_UNUSED(aPolicyName);
+    ACP_UNUSED(aPolicyCode);
+
     UChar           sCipher[QCS_POLICY_CODE_SIZE + 1];
     UShort          sCipherSize;
-    
+
+    ACP_UNUSED(sCipher);
+    ACP_UNUSED(sCipherSize);
+
     IDE_TEST_RAISE( gQcsIsInitialized == ID_FALSE,
                     ERR_INVALID_MODULE );
 
@@ -1540,6 +1554,10 @@ IDE_RC qcsModule::checkSecurityPrivilege( qcStatement   * aStatement,
     SChar  * sTableName;
     SChar  * sColumnName;
 
+    ACP_UNUSED(aAccessPriv);
+    ACP_UNUSED(aEncryptPriv);
+    ACP_UNUSED(aDecryptPriv);
+
     IDE_DASSERT( aStatement != NULL );
     IDE_DASSERT( aTableInfo != NULL );
     IDE_DASSERT( aColumn != NULL );
@@ -1556,11 +1574,18 @@ IDE_RC qcsModule::checkSecurityPrivilege( qcStatement   * aStatement,
     sIpAddr   = QCG_GET_SESSION_LOGIN_IP( aStatement );
     sUserName = QCG_GET_SESSION_USER_NAME( aStatement );
 
+    ACP_UNUSED(sIpAddr);
+    ACP_UNUSED(sUserName);
+
     // column info
     sTableOwnerName = aTableInfo->tableOwnerName;
     sTableName      = aTableInfo->name;
     sColumnName     = aColumn->name;
     
+    ACP_UNUSED(sTableOwnerName);
+    ACP_UNUSED(sTableName);
+    ACP_UNUSED(sColumnName);
+
     switch ( gQcsModuleProvider )
     {
         case QCS_MODULE_ALTIBASE:
@@ -1592,6 +1617,12 @@ IDE_RC qcsModule::hashB64( SChar  * aHashType,
                            UChar  * aHash,
                            UShort * aHashSize )
 {
+    ACP_UNUSED(aHashType);
+    ACP_UNUSED(aPlain);
+    ACP_UNUSED(aPlainSize);
+    ACP_UNUSED(aHash);
+    ACP_UNUSED(aHashSize);
+
     IDE_TEST_RAISE( gQcsIsInitialized == ID_FALSE,
                     ERR_INVALID_MODULE );
 
@@ -1618,6 +1649,12 @@ IDE_RC qcsModule::hashStr( SChar  * aHashType,
                            UChar  * aHash,
                            UShort * aHashSize )
 {
+    ACP_UNUSED(aHashType);
+    ACP_UNUSED(aPlain);
+    ACP_UNUSED(aPlainSize);
+    ACP_UNUSED(aHash);
+    ACP_UNUSED(aHashSize);
+
     IDE_TEST_RAISE( gQcsIsInitialized == ID_FALSE,
                     ERR_INVALID_MODULE );
 
