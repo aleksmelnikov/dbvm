@@ -155,6 +155,8 @@ IDE_RC qmcThrObjFinal(qmcThrMgr* aMgr)
     }
     IDE_DASSERT(i == aMgr->mThrCnt);
 
+    ACP_UNUSED(i);
+
     aMgr->mThrCnt = 0;
 
     return IDE_SUCCESS;
@@ -281,6 +283,8 @@ IDE_RC qmcThrJoin(qmcThrMgr* aMgr)
         i++;
     }
     IDE_DASSERT(i == aMgr->mThrCnt);
+
+    ACP_UNUSED(i);
 
     return IDE_SUCCESS;
 
