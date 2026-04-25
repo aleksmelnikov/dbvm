@@ -197,6 +197,8 @@ qmgInsert::optimize( qcStatement * aStatement, qmgGraph * aGraph )
     IDE_DASSERT( aStatement != NULL );
     IDE_DASSERT( aGraph != NULL );
 
+    ACP_UNUSED(aStatement);
+
     //---------------------------------------------------
     // 기본 초기화
     //---------------------------------------------------
@@ -401,6 +403,8 @@ qmgInsert::makePlan( qcStatement     * aStatement,
 
     // 최상위 plan이다.
     IDE_DASSERT( aParent == NULL );
+
+    ACP_UNUSED(aParent);
     
     IDE_TEST( qmoOneNonPlan::initINST( aStatement ,
                                        &sPlan )
