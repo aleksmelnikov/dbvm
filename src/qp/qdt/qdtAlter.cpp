@@ -1098,6 +1098,8 @@ IDE_RC qdtAlter::executeDropFile(qcStatement * aStatement)
         sFileNames = sFileNames->next;
     }
 
+    ACP_UNUSED(sRemoveCnt);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION_END;
