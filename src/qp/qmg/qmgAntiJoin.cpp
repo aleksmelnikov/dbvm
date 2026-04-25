@@ -76,6 +76,8 @@ qmgAntiJoin::init( qcStatement * aStatement,
     IDE_DASSERT( aRightGraph != NULL );
     IDE_DASSERT( aGraph != NULL );
 
+    ACP_UNUSED(aStatement);
+
     //---------------------------------------------------
     // Anti Join Graph를 위한 기본 초기화
     //---------------------------------------------------
