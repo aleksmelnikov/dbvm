@@ -265,6 +265,8 @@ qmcDiskSort::insert( qmcdDiskSortTemp * aTempTable, void * aRow )
     // 따라서, aRow의 값은 항상 일정하여야 한다.
     IDE_DASSERT( aRow == aTempTable->recordNode->dstTuple->row );
 
+    ACP_UNUSED(aRow);
+
     // PROJ-1597 Temp record size 제약 제거
     // 매 row마다 smiValue를 재구성한다.
     IDE_TEST( makeInsertSmiValue(aTempTable) != IDE_SUCCESS );
