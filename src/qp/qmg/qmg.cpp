@@ -137,6 +137,8 @@ qmg::printGraph( qcStatement  * aStatement,
     IDE_DASSERT( aGraph != NULL );
     IDE_DASSERT( aString != NULL );
 
+    ACP_UNUSED(aStatement);
+
     //-----------------------------------
     // Graph 종류의 출력
     //-----------------------------------
