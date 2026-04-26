@@ -384,6 +384,8 @@ qmnFILT::doItAllFalse( qcTemplate * /* aTemplate */,
     // 적합성 검사
     IDE_DASSERT( sCodePlan->constantFilter != NULL );
 
+    ACP_UNUSED(sCodePlan);
+
     // 데이터 없음을 Setting
     *aFlag &= ~QMC_ROW_DATA_MASK;
     *aFlag |= QMC_ROW_DATA_NONE;
@@ -476,6 +478,8 @@ qmnFILT::firstInit( qmncFILT   * aCodePlan,
     // 적합성 검사
     IDE_DASSERT( aCodePlan->constantFilter != NULL ||
                  aCodePlan->filter != NULL );
+
+    ACP_UNUSED(aCodePlan);
 
     //---------------------------------
     // 초기화 완료를 표기
