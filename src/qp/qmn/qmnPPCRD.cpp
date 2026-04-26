@@ -597,6 +597,8 @@ IDE_RC qmnPPCRD::doItAllFalse( qcTemplate * aTemplate,
     IDE_DASSERT( ( *sDataPlan->flag & QMND_PPCRD_ALL_FALSE_MASK )
                  == QMND_PPCRD_ALL_FALSE_TRUE );
 
+    ACP_UNUSED(sDataPlan);
+
     // 데이터 없음을 Setting
     *aFlag &= ~QMC_ROW_DATA_MASK;
     *aFlag |= QMC_ROW_DATA_NONE;
