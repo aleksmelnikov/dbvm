@@ -813,6 +813,8 @@ qmnLMST::doItAllFalse( qcTemplate * /*aTemplate*/,
 
     IDE_DASSERT( sCodePlan->limitCnt == 0 );
 
+    ACP_UNUSED(sCodePlan);
+
     // 데이터 없음을 Setting
     *aFlag &= ~QMC_ROW_DATA_MASK;
     *aFlag |= QMC_ROW_DATA_NONE;
