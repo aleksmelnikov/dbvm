@@ -394,6 +394,8 @@ qmnCNTR::doItAllFalse( qcTemplate * /* aTemplate */,
     // 적합성 검사
     IDE_DASSERT( sCodePlan->stopFilter != NULL );
 
+    ACP_UNUSED(sCodePlan);
+
     // 데이터 없음을 Setting
     *aFlag &= ~QMC_ROW_DATA_MASK;
     *aFlag |= QMC_ROW_DATA_NONE;
