@@ -1026,8 +1026,13 @@ qmnSCAN::doItAllFalse( qcTemplate * aTemplate,
     IDE_DASSERT( (sCodePlan->method.constantFilter != NULL) ||
                  ((QCG_CHECK_SHARD_DML_CONSISTENCY( aTemplate->stmt ) == ID_TRUE ) &&
                   (sCodePlan->tableRef->tableInfo->mIsUsable == ID_FALSE)) )
+
+    ACP_UNUSED(sCodePlan);
+
     IDE_DASSERT( ( *sDataPlan->flag & QMND_SCAN_ALL_FALSE_MASK )
                  == QMND_SCAN_ALL_FALSE_TRUE );
+
+    ACP_UNUSED(sDataPlan);
 
     // 데이터 없음을 Setting
     *aFlag &= ~QMC_ROW_DATA_MASK;
@@ -1418,6 +1423,8 @@ qmnSCAN::firstInit( qcTemplate * aTemplate,
     // Key Filter는 Fixed KeyFilter와 Variable KeyFilter가 혼용될 수 없다.
     IDE_DASSERT( (sMethod->fixKeyFilter == NULL) ||
                  (sMethod->varKeyFilter == NULL) );
+
+    ACP_UNUSED(sMethod);
 
     //---------------------------------
     // SCAN 고유 정보의 초기화
@@ -2564,6 +2571,8 @@ IDE_RC qmnSCAN::readRowFromGRID( qcTemplate * aTemplate,
 
     IDE_DASSERT( ( sCodePlan->flag & QMNC_SCAN_FORCE_RID_SCAN_MASK )
                  == QMNC_SCAN_FORCE_RID_SCAN_TRUE );
+
+    ACP_UNUSED(sCodePlan);
 
     IDE_DASSERT( ( *sDataPlan->flag & QMND_SCAN_CURSOR_MASK )
                  == QMND_SCAN_CURSOR_OPEN );
