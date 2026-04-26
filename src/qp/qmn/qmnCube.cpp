@@ -756,6 +756,9 @@ IDE_RC qmnCUBE::execAggregation( qcTemplate * aTemplate,
         else
         {
             IDE_DASSERT( i < aCodePlan->distNodeCount );
+ 
+            ACP_UNUSED(aCodePlan);
+
             if ( aDataPlan->distNode[aGroupIndex][i].isDistinct == ID_TRUE )
             {
                 IDE_TEST( qtc::aggregate( sNode->dstNode, aTemplate )
