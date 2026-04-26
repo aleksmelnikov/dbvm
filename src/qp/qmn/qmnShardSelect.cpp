@@ -520,7 +520,12 @@ IDE_RC qmnSDSE::doItAllFalse( qcTemplate * aTemplate,
 
     // 적합성 검사
     IDE_DASSERT( sCodePlan->constantFilter != NULL );
+
+    ACP_UNUSED(sCodePlan);
+
     IDE_DASSERT( ( *sDataPlan->flag & QMND_SDSE_ALL_FALSE_MASK ) == QMND_SDSE_ALL_FALSE_TRUE );
+
+    ACP_UNUSED(sDataPlan);
 
     // 데이터 없음을 Setting
     *aFlag &= ~QMC_ROW_DATA_MASK;
