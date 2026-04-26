@@ -515,6 +515,8 @@ qmnCUNT::firstInit( qcTemplate * aTemplate,
     IDE_DASSERT( sMethod->fixKeyFilter == NULL ||
                  sMethod->varKeyFilter == NULL );
 
+    ACP_UNUSED(sMethod);
+
     //---------------------------------
     // CUNT 고유 정보의 초기화
     //---------------------------------
