@@ -258,6 +258,8 @@ IDE_RC qmnSREC::firstInit( qmncSREC   * aCodePlan,
     IDE_DASSERT( aCodePlan->plan.left->type == QMN_VMTR );
     IDE_DASSERT( aCodePlan->recursiveChild->type == QMN_VSCN );
 
+    ACP_UNUSED(aCodePlan);
+
     //---------------------------------
     // 초기화 완료를 표기
     //---------------------------------
