@@ -483,6 +483,8 @@ IDE_RC qmnCNBY::doItAllFalse( qcTemplate * aTemplate,
     IDE_DASSERT( ( *sDataPlan->flag & QMND_CNBY_ALL_FALSE_MASK ) ==
                  QMND_CNBY_ALL_FALSE_TRUE );
 
+    ACP_UNUSED(sDataPlan);
+
     *aFlag &= ~QMC_ROW_DATA_MASK;
     *aFlag |= QMC_ROW_DATA_NONE;
 
