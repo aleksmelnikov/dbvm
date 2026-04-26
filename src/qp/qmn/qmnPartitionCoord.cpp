@@ -734,6 +734,8 @@ qmnPCRD::doItAllFalse( qcTemplate * aTemplate,
     IDE_DASSERT( ( *sDataPlan->flag & QMND_PCRD_ALL_FALSE_MASK )
                  == QMND_PCRD_ALL_FALSE_TRUE );
 
+    ACP_UNUSED(sDataPlan);
+
     // 데이터 없음을 Setting
     *aFlag &= ~QMC_ROW_DATA_MASK;
     *aFlag |= QMC_ROW_DATA_NONE;
@@ -2210,6 +2212,8 @@ qmnPCRD::storeCursor( qcTemplate * aTemplate,
     IDE_DASSERT( ( sCodePlan->flag & QMNC_SCAN_INDEX_TABLE_SCAN_MASK )
                  == QMNC_SCAN_INDEX_TABLE_SCAN_TRUE );
 
+    ACP_UNUSED(sCodePlan);    
+
     IDE_DASSERT( (*sDataPlan->flag & QMND_PCRD_INDEX_CURSOR_MASK)
                  == QMND_PCRD_INDEX_CURSOR_OPEN );
 
@@ -2248,6 +2252,8 @@ qmnPCRD::restoreCursor( qcTemplate * aTemplate,
     // 적합성 검사
     IDE_DASSERT( ( sCodePlan->flag & QMNC_SCAN_INDEX_TABLE_SCAN_MASK )
                  == QMNC_SCAN_INDEX_TABLE_SCAN_TRUE );
+
+    ACP_UNUSED(sCodePlan);
 
     IDE_DASSERT( (*sDataPlan->flag & QMND_PCRD_INDEX_CURSOR_MASK)
                  == QMND_PCRD_INDEX_CURSOR_OPEN );
