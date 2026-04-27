@@ -2766,6 +2766,8 @@ qmoOneNonPlan::makeGRBY( qcStatement      * aStatement ,
     sFlag &= ~QMC_MTR_GROUPING_MASK;
     sFlag |= QMC_MTR_GROUPING_TRUE;
 
+    ACP_UNUSED(sFlag);
+
     sGRBY->baseTableCount = 0;
 
     for ( sItrAttr  = aPlan->resultDesc;
