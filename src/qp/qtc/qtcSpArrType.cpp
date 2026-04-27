@@ -156,6 +156,8 @@ void mtdSetNull( const mtcColumn * /*aColumn*/,
         sRc = qsxArray::truncateArray( sArrayInfo );
 
         IDE_DASSERT( sRc == IDE_SUCCESS );
+
+        ACP_UNUSED(sRc);
     }
     else
     {
