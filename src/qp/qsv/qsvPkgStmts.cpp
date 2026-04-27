@@ -463,6 +463,8 @@ IDE_RC qsvPkgStmts::validateSpecBlock( qcStatement       * aStatement,
 
     IDE_DASSERT( sParseTree->block->bodyStmts == NULL ) ;
     IDE_DASSERT( sParseTree->block->exception == NULL ) ;
+  
+    ACP_UNUSED(sParseTree);
 
     aStatement->spvEnv->currStmt = NULL;
 
