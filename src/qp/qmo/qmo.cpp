@@ -2220,6 +2220,8 @@ void qmo::makeResultCacheStack( qcStatement      * aStatement,
         }
     }
 
+    ACP_UNUSED(aPlanID);
+
     IDE_EXCEPTION_CONT( normal_exit );
 }
 
