@@ -3677,6 +3677,8 @@ qmoUnnesting::genCorrPredicates( qcStatement  * aStatement,
             sArgCount++;
         }
 
+        ACP_UNUSED(sArgCount);
+
         SET_EMPTY_POSITION( sEmptyPosition );
 
         if( ( aNode->node.module == &mtfNotEqual ) ||
