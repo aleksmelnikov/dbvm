@@ -1544,6 +1544,8 @@ qsxUtil::arrayReturnToInto( qcTemplate         * aTemplate,
                  != IDE_SUCCESS );
     } // end for
 
+    ACP_UNUSED(sSrcColumn);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION(err_index_overflow);
@@ -1622,6 +1624,8 @@ qsxUtil::recordReturnToInto( qcTemplate         * aTemplate,
 
         sTargetCount++;
     }
+
+    ACP_UNUSED(sSrcColumn);
 
     /* INTO Clause */
     sReturnIntoNode = aReturnIntoValue->returningInto;
@@ -1750,6 +1754,8 @@ qsxUtil::primitiveReturnToInto( qcTemplate         * aTemplate,
                                         ID_FALSE )
                  != IDE_SUCCESS );
     } // end for
+
+    ACP_UNUSED(sSrcColumn);
 
     return IDE_SUCCESS;
 
