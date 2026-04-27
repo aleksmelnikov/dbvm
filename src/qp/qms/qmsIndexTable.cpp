@@ -1443,6 +1443,8 @@ qmsIndexTable::insertIndexTable4OneRow( smiStatement      * aSmiStmt,
         IDE_TEST( sCursor.close() != IDE_SUCCESS );
     }
 
+    ACP_UNUSED(i);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION_END;
@@ -1591,6 +1593,8 @@ qmsIndexTable::updateIndexTable4OneRow( smiStatement      * aSmiStmt,
         IDE_TEST( sCursor.close() != IDE_SUCCESS );
     }
 
+    ACP_UNUSED(i);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION( ERR_RID_NOT_FOUND )
@@ -1704,6 +1708,8 @@ qmsIndexTable::deleteIndexTable4OneRow( smiStatement      * aSmiStmt,
         sCursorOpened = ID_FALSE;
         IDE_TEST( sCursor.close() != IDE_SUCCESS );
     }
+
+    ACP_UNUSED(i);
 
     return IDE_SUCCESS;
 
