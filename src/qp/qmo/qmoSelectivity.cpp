@@ -4988,6 +4988,8 @@ SDouble qmoSelectivity::getEnhanceSelectivity4Join( qcStatement  * aStatement,
     IDE_DASSERT( aStatInfo->isValidStat == ID_TRUE );
     IDE_DASSERT( QTC_IS_COLUMN( aStatement, aNode ) == ID_TRUE );
 
+    ACP_UNUSED(aStatement);
+
     if( aGraph != NULL )
     {
         qtc::dependencySet( aNode->node.table,
