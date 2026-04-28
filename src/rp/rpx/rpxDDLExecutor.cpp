@@ -35,6 +35,14 @@ void rpxDDLExecutor::finalizeThread()
 
 IDE_RC rpxDDLExecutor::initialize( cmiProtocolContext * aProtocolContext, rpdVersion * aVersion )
 { 
+
+    /*
+     * FIXME: mHBTResource is currently unused in DDL executor, but reserved
+     * for future distributed DDL support (see rpnMessenger::initialize).
+     * Added (void) cast to suppress -Wunused-private-field.
+     */
+    ACP_UNUSED(mHBTResource);
+
     mEventFlag = ID_ULONG(0);
 
     IDE_DASSERT( aProtocolContext != NULL );
