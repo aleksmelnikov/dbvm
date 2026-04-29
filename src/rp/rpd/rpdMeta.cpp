@@ -1564,6 +1564,9 @@ IDE_RC rpdMeta::equalItemsAndMakeDummy( smiStatement    * aSmiStatement,
         aLocalMeta->mReplication.mItemCount = 0;
         aLocalMeta->mDictTableCount = 0;
     }
+
+    ACP_UNUSED(sDictTableCount);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION(ERR_MEMORY_ALLOC_ITEMS);
