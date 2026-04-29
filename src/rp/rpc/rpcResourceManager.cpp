@@ -365,6 +365,9 @@ void rpcResourceManager::ddlSyncException( rpcDDLSyncManager    * aDDLSyncMgr,
     IDE_RC              sIsSignalErr = IDE_FAILURE;
     SChar               sErrMsg[RP_MAX_MSG_LEN + 1] = { 0, };
 
+    ACP_UNUSED(sDDLReplInfo);
+    ACP_UNUSED(sNode);
+
     IDE_DASSERT( aDDLSyncMgr != NULL );
 
     ideLog::log( IDE_RP_0, "[DDLSyncManager] DDL sync exception start" );
