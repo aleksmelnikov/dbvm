@@ -8018,7 +8018,9 @@ IDE_RC rpcManager::makeTempSyncItemList( void              * aQcStatement,
             sSyncItemList       = sSyncItem;
         }
     }
-    
+
+    ACP_UNUSED(i);
+
     *aItemList = sSyncItemList;
 
     return IDE_SUCCESS;
