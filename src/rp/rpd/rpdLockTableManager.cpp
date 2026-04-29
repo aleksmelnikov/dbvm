@@ -248,6 +248,8 @@ IDE_RC rpdLockTableManager::equalMetaItemArray( rpdMetaItem   * aMetaItemArray1,
     // rpdReplications 으로 먼저 검사 완료
     IDE_DASSERT( aMetaItemArrayCount1 == aMetaItemArrayCount2 );
 
+    ACP_UNUSED(aMetaItemArrayCount2);
+
     for ( i = 0; i < aMetaItemArrayCount1; i++ )
     {
         IDE_TEST( equalReplItem( &(aMetaItemArray1[i].mItem),
