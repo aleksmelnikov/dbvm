@@ -2113,6 +2113,8 @@ IDE_RC sdtHashModule::buildSubHash( sdtHashSegHdr * aWASegment )
         }
     }
 
+    ACP_UNUSED(sLoop);
+
     IDE_DASSERT( aWASegment->mSubHashWCBPtr->mWPState != SDT_WA_PAGESTATE_INIT );
     aWASegment->mSubHashWCBPtr->mWPState = SDT_WA_PAGESTATE_DIRTY;
 
