@@ -1365,6 +1365,8 @@ IDE_RC smnbBTree::drop( smnIndexHeader * aIndex )
                      sDestroyFailCnt );
     }
 
+    ACP_UNUSED(s_cSlot);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION_END;
@@ -8870,6 +8872,8 @@ restart:
     {
         /* nothing to do */
     }
+
+    ACP_UNUSED(sState);
 
     a_pIterator->slot            = a_pIterator->highFence + 1;
     a_pIterator->curRecPtr       = NULL;
