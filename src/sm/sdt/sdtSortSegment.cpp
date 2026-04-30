@@ -475,6 +475,9 @@ IDE_RC sdtSortSegment::truncateSortSegment( sdtSortSegHdr* aWASegment )
 
         sWCBPtr = sNxtWCBPtr;
     }
+    
+    ACP_UNUSED(sCount);
+
     aWASegment->mUsedWCBPtr      = SDT_USED_PAGE_PTR_TERMINATED;
     aWASegment->mCurFreeWAExtent = aWASegment->mWAExtentInfo.mHead;
     aWASegment->mCurrFreePageIdx = 0;
