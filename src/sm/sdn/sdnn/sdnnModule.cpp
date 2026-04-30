@@ -1741,6 +1741,8 @@ retry:
 
     goto retry;
 
+    ACP_UNUSED(sFixPageCount);
+
     IDE_EXCEPTION_CONT( err_no_more_row );
 
     IDE_ASSERT( sState == 0 );
