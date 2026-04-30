@@ -13142,6 +13142,8 @@ IDE_RC sdi::resetShardMetaWithDummyStmt()
     sSmiStmtFlag &= ~SMI_STATEMENT_CURSOR_MASK;
     sSmiStmtFlag |= SMI_STATEMENT_MEMORY_CURSOR;
 
+    ACP_UNUSED(sSmiStmtFlag);
+
     IDE_TEST( sTrans.initialize() != IDE_SUCCESS );
     sStage = 1;
 
@@ -13274,6 +13276,8 @@ IDE_RC sdi::closeSessionForShardDrop( qcStatement * aQcStmt )
 
     sSmiStmtFlag &= ~SMI_STATEMENT_CURSOR_MASK;
     sSmiStmtFlag |= SMI_STATEMENT_MEMORY_CURSOR;
+
+    ACP_UNUSED(sSmiStmtFlag);
 
     sShardDBInfo = sdi::getShardDBInfo();
 
