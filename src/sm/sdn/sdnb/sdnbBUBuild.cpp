@@ -1308,6 +1308,8 @@ IDE_RC sdnbBUBuild::storeSortedRun( UInt    aHead,
                   != IDE_SUCCESS );
     }
 
+    ACP_UNUSED(sAllocatedPageCnt);
+
     sState = 0;
     IDE_TEST( sdrMiniTrans::commit(&sMtx) != IDE_SUCCESS );
 
