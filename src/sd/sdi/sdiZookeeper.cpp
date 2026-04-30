@@ -2522,7 +2522,7 @@ IDE_RC sdiZookeeper::dropNodeAfterCommit( ULong     aSMN )
 
     /* failover history */
 
-    if( sNewFailoverHistory != NULL )
+    if( idlOS::strlen( sNewFailoverHistory ) > 0 )
     {
         zoo_set_op_init( &sOp[1],
                          sPath[1],
@@ -2837,7 +2837,7 @@ IDE_RC sdiZookeeper::dropForceAfterCommit( ULong     aSMN )
 
     /* failover history */
 
-    if( sNewFailoverHistory != NULL )
+    if( idlOS::strlen( sNewFailoverHistory ) > 0 )
     {
         zoo_set_op_init( &sOp[1],
                          sPath[1],
