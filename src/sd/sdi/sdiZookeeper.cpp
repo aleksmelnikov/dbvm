@@ -3433,6 +3433,9 @@ IDE_RC sdiZookeeper::failoverForWatcher( SChar * aNodeName )
     /* for check */
     IDE_DASSERT( i == sDeadNodeCnt );
 
+    ACP_UNUSED(sDeadNodeCnt);
+    ACP_UNUSED(i);
+
     if ( sIsAlloc == ID_TRUE )
     {
         sIsAlloc = ID_FALSE;
