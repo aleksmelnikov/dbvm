@@ -1423,6 +1423,7 @@ void smrLogFile::touchMMapArea()
        아무 의미 없음.*/
     return sum;
 #endif
+    ACP_UNUSED(sum);
 }
 
 /***********************************************************************
