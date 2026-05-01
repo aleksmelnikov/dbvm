@@ -802,6 +802,8 @@ IDE_RC smxOIDList::processOIDList4LegacyTx( smLSN   * aLSN,
         sCurOIDNode = sCurOIDNode->mNxtNode;
     }//While
 
+    ACP_UNUSED(sAgingCnt);
+
     /* OID List를 Ager가 처리하고 Free시키기 때문에
        OID LIst Header를 단순히 초기화한다.*/
     init();
