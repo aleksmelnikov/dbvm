@@ -387,6 +387,8 @@ IDE_RC encodeBinarySelf( const mtdModule  * aModule,
     }
     idlOS::printf("\'");
 
+    ACP_UNUSED(aLength);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION_END;
