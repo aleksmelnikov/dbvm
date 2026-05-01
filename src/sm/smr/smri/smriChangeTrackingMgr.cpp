@@ -1543,6 +1543,8 @@ IDE_RC smriChangeTrackingMgr::initBmpExtLatch( smriCTBody * aCTBody )
         sState++;
     }
 
+    ACP_UNUSED(sState);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION_END;
