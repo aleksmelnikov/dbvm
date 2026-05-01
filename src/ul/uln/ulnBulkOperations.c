@@ -1113,6 +1113,8 @@ ACI_RC ulnBulkInsert(ulnFnContext *aFnContext,
     }
 #endif
 
+    ACP_UNUSED(sRowErrCount);
+
     ACI_EXCEPTION_CONT(NO_UPDATE_ROWS_EXCEPTION_CONT);
 
     return ACI_SUCCESS;
