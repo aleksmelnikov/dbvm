@@ -317,6 +317,8 @@ void altibase_clean_locator (cdbcABRes *aABRes)
 
     CDBCLOG_OUT();
 
+    ACP_UNUSED(sRC);
+
     #undef CDBC_FUNC_NAME
 }
 
