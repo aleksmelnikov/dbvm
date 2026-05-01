@@ -642,6 +642,8 @@ ACI_RC ulnSetPosUpdate(ulnFnContext *aFnContext,
     }
 #endif
 
+    ACP_UNUSED(sRowErrCount);
+
     ACI_EXCEPTION_CONT(NO_UPDATE_ROWS_EXCEPTION_CONT);
 
     return ACI_SUCCESS;
@@ -956,6 +958,8 @@ ACI_RC ulnSetPosDelete(ulnFnContext *aFnContext,
         }
     }
 #endif
+
+    ACP_UNUSED(sRowErrCount);
 
     ACI_EXCEPTION_CONT(NO_DELETE_ROWS_EXCEPTION_CONT);
 
@@ -1376,6 +1380,8 @@ ACI_RC ulnSetPosInsert(ulnFnContext *aFnContext,
         }
     }
 #endif
+ 
+    ACP_UNUSED(sRowErrCount);
 
     ACI_EXCEPTION_CONT(NO_INSERT_ROWS_EXCEPTION_CONT);
 
