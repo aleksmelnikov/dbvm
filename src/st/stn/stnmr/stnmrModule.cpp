@@ -1258,6 +1258,8 @@ void stnmrRTree::propagate( stnmrHeader*    aHeader,
         }
     }
 
+    ACP_UNUSED(sCount);
+
 }
 
 void stnmrRTree::split( stnmrHeader*    aHeader,
