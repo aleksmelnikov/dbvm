@@ -1882,6 +1882,8 @@ IDE_RC stndrBUBuild::storeSortedRun( UInt             aHead,
                                                           mKeyMap[i] );
     }
 
+    ACP_UNUSED(sAllocatedPageCnt);
+
     sState = 0;
     IDE_TEST( sdrMiniTrans::commit( &sMtx ) != IDE_SUCCESS );
 
