@@ -409,6 +409,8 @@ iSQLExecuteCommand::DisplayFixedTableList(const SChar * a_PrefixName,
     m_ISPApi->StmtClose4Meta();
     EndTran(sAutocommit);
 
+    ACP_UNUSED(i);
+
     return IDE_SUCCESS;
 
     IDE_EXCEPTION(error);
