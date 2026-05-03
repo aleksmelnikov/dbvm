@@ -30,15 +30,16 @@ cmd: $(ILO_SRC_DIR)/iloCommandParser.cpp $(ILO_SRC_DIR)/iloCommandLexer.cpp
 cmdclean:
 	$(Q) $(RM) $(ILO_SRC_DIR)/iloCommandParser.cpp $(ILO_SRC_DIR)/iloCommandParser.cpp.h $(ILO_SRC_DIR)/iloCommandParser.hpp $(ILO_SRC_DIR)/iloCommandParser.output $(ILO_SRC_DIR)/iloCommandParser.cpp.output $(ILO_SRC_DIR)/iloCommandLexer.cpp $(ILO_SRC_DIR)/iloCommandLexer.h
 
+
 $(ILO_SRC_DIR)/iloCommandParser.cpp: $(ILO_SRC_DIR)/iloCommandParser.y
 ifeq "$(BISON_ENV_NEEDED)" "yes"
 	$(MAKE) $@ BISON_SIMPLE=$(BISON_SIMPLE_PATH) BISON_HAIRY=$(BISON_HAIRY_PATH) BISON_ENV_NEEDED=no
 else
-	$(YACC) $(YACCFLAGS) -p iloCommandParser -o $(ILO_SRC_DIR)/iloCommandParser.cpp $(ILO_SRC_DIR)/iloCommandParser.y
+	cd $(ILO_SRC_DIR) && $(YACC) $(YACCFLAGS) -p iloCommandParser -o iloCommandParser.cpp iloCommandParser.y
 endif
 
-$(ILO_SRC_DIR)/iloCommandLexer.cpp:
-	$(LEX) $(LEXFLAGS) -o$(ILO_SRC_DIR)/iloCommandLexer.cpp $(ILO_SRC_DIR)/iloCommandLexer.l
+$(ILO_SRC_DIR)/iloCommandLexer.cpp: $(ILO_SRC_DIR)/iloCommandLexer.l
+	cd $(ILO_SRC_DIR) && $(LEX) $(LEXFLAGS) -oiloCommandLexer.cpp iloCommandLexer.l
 	$(SED) s,$(FLEX_REPLACE_BEFORE),$(FLEX_REPLACE_AFTER), < $(ILO_SRC_DIR)/iloCommandLexer.cpp > $(ILO_SRC_DIR)/iloCommandLexer.cpp.old
 	$(COPY) $(ILO_SRC_DIR)/iloCommandLexer.cpp.old $(ILO_SRC_DIR)/iloCommandLexer.cpp
 	$(RM) $(ILO_SRC_DIR)/iloCommandLexer.cpp.old
@@ -57,12 +58,11 @@ $(ILO_SRC_DIR)/iloFormParser.cpp: $(ILO_SRC_DIR)/iloFormParser.y
 ifeq "$(BISON_ENV_NEEDED)" "yes"
 	$(MAKE) $@ BISON_SIMPLE=$(BISON_SIMPLE_PATH) BISON_HAIRY=$(BISON_HAIRY_PATH) BISON_ENV_NEEDED=no
 else
-	$(YACC) $(YACCFLAGS) -p Form -o $(ILO_SRC_DIR)/iloFormParser.cpp $(ILO_SRC_DIR)/iloFormParser.y
+	cd $(ILO_SRC_DIR) && $(YACC) $(YACCFLAGS) -p Form -o iloFormParser.cpp iloFormParser.y
 endif
 
-$(ILO_SRC_DIR)/iloFormLexer.cpp:
-	$(LEX) $(FORMLEXFLAGS) -o$(ILO_SRC_DIR)/iloFormLexer.cpp $(ILO_SRC_DIR)/iloFormLexer.l
+$(ILO_SRC_DIR)/iloFormLexer.cpp: $(ILO_SRC_DIR)/iloFormLexer.l
+	cd $(ILO_SRC_DIR) && $(LEX) $(FORMLEXFLAGS) -oiloFormLexer.cpp iloFormLexer.l
 	$(SED) s,$(FLEX_REPLACE_BEFORE),$(FLEX_REPLACE_AFTER), < $(ILO_SRC_DIR)/iloFormLexer.cpp > $(ILO_SRC_DIR)/iloFormLexer.cpp.old
 	$(COPY) $(ILO_SRC_DIR)/iloFormLexer.cpp.old $(ILO_SRC_DIR)/iloFormLexer.cpp
 	$(RM) $(ILO_SRC_DIR)/iloFormLexer.cpp.old
-
