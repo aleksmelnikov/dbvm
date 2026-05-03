@@ -46,7 +46,7 @@ $(GENOBJS): $(GENSRCS)
 $(TARGET_DIR)/ut/altiWrap/src/altiWrapParseMgr.$(OBJEXT): $(GENHEADERS)
 
 %.cpp: %.l
-	$(LEX)  $(LEXFLAGS)  -o$*.cpp $*.l
+	cd $(dir $<) && $(LEX) $(LEXFLAGS) -o$(notdir $@) $(notdir $<)
 	$(SED) s,$(FLEX_REPLACE_BEFORE),$(FLEX_REPLACE_AFTER), < $*.cpp > $*.cpp.old
 	$(RM) -f $*.cpp
 	mv $*.cpp.old $*.cpp
@@ -55,7 +55,7 @@ $(TARGET_DIR)/ut/altiWrap/src/altiWrapParseMgr.$(OBJEXT): $(GENHEADERS)
 ifeq "$(BISON_ENV_NEEDED)" "yes"
 	$(MAKE) $@ BISON_SIMPLE=$(BISON_SIMPLE_PATH) BISON_HAIRY=$(BISON_HAIRY_PATH) BISON_ENV_NEEDED=no
 else
-	$(YACC) $(YACCFLAGS) -p $(subst y.cpp,,$(notdir $@)) -o $*.cpp $*.y
+	cd $(dir $<) && $(YACC) $(YACCFLAGS) -p $(subst y.cpp,,$(notdir $@)) -o $(notdir $@) $(notdir $<)
 endif
 
 ifeq "$(OS_TARGET)" "HP_HPUX"
