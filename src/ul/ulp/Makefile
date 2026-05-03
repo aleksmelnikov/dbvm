@@ -62,34 +62,37 @@ $(DIRS):
 genparser: $(foreach file, $(ULP_GEN_SRCS), $(notdir $(file)))
 
 #=========== Lexer ==========#
-ulpCompl.cpp: ulpCompl.l
-	$(LEX) $(LEXFLAGS) -o$*.cpp $*.l
-ulpPreprocl.cpp: ulpPreprocl.l
-	$(LEX) $(LEXFLAGS) -o$*.cpp $*.l
-ulpPreprocifl.cpp: ulpPreprocifl.l
-	$(LEX) $(LEXFLAGS) -o$*.cpp $*.l
+$(UL_DIR)/ulp/ulpCompl.cpp: ulpCompl.l
+	cd $(dir $<) && $(LEX) $(LEXFLAGS) -o$(notdir $@) $(notdir $<)
+
+$(UL_DIR)/ulp/ulpPreprocl.cpp: ulpPreprocl.l
+	cd $(dir $<) && $(LEX) $(LEXFLAGS) -o$(notdir $@) $(notdir $<)
+
+$(UL_DIR)/ulp/ulpPreprocifl.cpp: ulpPreprocifl.l
+	cd $(dir $<) && $(LEX) $(LEXFLAGS) -o$(notdir $@) $(notdir $<)
 
 #=========== Parser ==========#
-ulpPreprocy.cpp: ulpPreprocy.y
+$(UL_DIR)/ulp/ulpPreprocy.cpp: ulpPreprocy.y
 ifeq "$(BISON_ENV_NEEDED)" "yes"
 	$(MAKE) $@ BISON_SIMPLE=$(BISON_SIMPLE_PATH) BISON_HAIRY=$(BISON_HAIRY_PATH) BISON_ENV_NEEDED=no
 else
-	$(YACC) $(YACCFLAGS) -p PP -o $*.cpp $*.y
+	cd $(dir $<) && $(YACC) $(YACCFLAGS) -p PP -o $(notdir $@) $(notdir $<)
 endif
 
-ulpPreprocify.cpp: ulpPreprocify.y
+$(UL_DIR)/ulp/ulpPreprocify.cpp: ulpPreprocify.y
 ifeq "$(BISON_ENV_NEEDED)" "yes"
 	$(MAKE) $@ BISON_SIMPLE=$(BISON_SIMPLE_PATH) BISON_HAIRY=$(BISON_HAIRY_PATH) BISON_ENV_NEEDED=no
 else
-	$(YACC) $(YACCFLAGS) -p PPIF -o $*.cpp $*.y
+	cd $(dir $<) && $(YACC) $(YACCFLAGS) -p PPIF -o $(notdir $@) $(notdir $<)
 endif
 
-ulpCompy.cpp: ulpCompy.y
+$(UL_DIR)/ulp/ulpCompy.cpp: ulpCompy.y
 ifeq "$(BISON_ENV_NEEDED)" "yes"
 	$(MAKE) $@ BISON_SIMPLE=$(BISON_SIMPLE_PATH) BISON_HAIRY=$(BISON_HAIRY_PATH) BISON_ENV_NEEDED=no
 else
-	$(YACC) $(YACCFLAGS) -p COMP -o $*.cpp $*.y
+	cd $(dir $<) && $(YACC) $(YACCFLAGS) -p COMP -o $(notdir $@) $(notdir $<)
 endif
+
 #=============================#
 
 archive: $(ULPARC)
