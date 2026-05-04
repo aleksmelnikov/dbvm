@@ -2587,7 +2587,7 @@ void COMPerror( const SChar* aErrMsg)
                       "parse error");
         if (idlOS::strlen(aErrMsg) > 12)
         {
-            printf(aErrMsg+12);
+            idlOS::printf("%s", aErrMsg + 12);
         }
         idlOS::printf("]\n");
     }
@@ -2607,7 +2607,7 @@ void COMPerror( const SChar* aErrMsg)
             idlOS::printf( "File  : %s\nLine  : %d\nOffset: %d-%d\nError_token:%s\n\n",
                            gUlpProgOption.mIncludeFileList[gUlpProgOption.mIncludeFileIndex].mFileName,
                            yylineno, gFirstcolumnC, gLastcolumnC,
-                           yytext);
+                           yytext ? yytext : "NULL");
         }
         else
         {
@@ -2618,7 +2618,7 @@ void COMPerror( const SChar* aErrMsg)
                                gUlpCOMPHeaderPath,
                                yylineno - gUlpCOMPHeaderLine,
                                gFirstcolumnC, gLastcolumnC,
-                               yytext );
+                               yytext ? yytext : "NULL");
             }
             else
             {
@@ -2626,7 +2626,7 @@ void COMPerror( const SChar* aErrMsg)
                                gUlpProgOption.mInFile,
                                yylineno - gUlpCOMPSumHeaderLine,
                                gFirstcolumnC, gLastcolumnC,
-                               yytext );
+                               yytext ? yytext : "NULL");
             }
         }
     }

@@ -1512,7 +1512,7 @@ void PPerror( const SChar* aErrMsg)
                       "parse error");
         if (idlOS::strlen(aErrMsg) > 12)
         {
-            printf(aErrMsg+12);
+            idlOS::printf("%s", aErrMsg + 12);
         }
         idlOS::printf("]\n");
     }
@@ -1532,14 +1532,14 @@ void PPerror( const SChar* aErrMsg)
                        gUlpProgOption.mIncludeFileList[gUlpProgOption.mIncludeFileIndex].mFileName,
                        yylineno, gFirstcolumnP, gLastcolumnP,
                        // 아래와 같이 안하면 sun장비에서 segmetation fault
-                       yytext);
+                       yytext ? yytext : "NULL");
         }
         else
         {
             idlOS::printf( "File  : %s\nLine  : %d\nOffset: %d-%d\nError_token:%s\n\n",
                        gUlpProgOption.mInFile,
                        yylineno, gFirstcolumnP, gLastcolumnP,
-                       yytext);
+                       yytext ? yytext : "NULL");
         }
     }
 
