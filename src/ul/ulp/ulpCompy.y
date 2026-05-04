@@ -11453,7 +11453,7 @@ indicator
                             // 肋给等 indicator type error 贸府
                             ulpSetErrorCode( &gUlpParseInfo.mErrorMgr,
                                              ulpERR_ABORT_COMP_Wrong_IndicatorType_Error,
-                                             sFieldSymNode->mElement.mName );
+                                             gUlpIndNode->mName );
                             gUlpCOMPErrCode = ulpGetErrorSTATE( &gUlpParseInfo.mErrorMgr );
                             COMPerror( ulpGetErrorMSG(&gUlpParseInfo.mErrorMgr) );
                         }
