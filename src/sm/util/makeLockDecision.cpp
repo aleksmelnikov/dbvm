@@ -38,6 +38,10 @@ const SChar  gHelpMsg[] =
 
 int main(void /*int argc, char* argv[]*/)
 {
+    ACP_UNUSED(gHomeDir);
+    ACP_UNUSED(gConfFile);
+    ACP_UNUSED(gHelpMsg);
+
     SInt         i;
     smlLockMode  s_lockMode;
     SChar        s_strLockMode[][100] = {"SML_NLOCK",
