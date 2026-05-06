@@ -1202,7 +1202,10 @@ IDE_RC iduFile::syncUntilSuccess(iduEmergencyFuncType aSetEmergencyFunc,
                 }
                 else
                 {
+
+#ifdef ALTIBASE_FIT_CHECK
                     IDE_EXCEPTION_CONT( exception_test );
+#endif
 
                     IDE_WARNING(IDE_SERVER_0, "File Sync Failed. : "
                                 "The disk space has been exhausted.\n");
