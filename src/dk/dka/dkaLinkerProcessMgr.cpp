@@ -1018,7 +1018,6 @@ IDE_RC  dkaLinkerProcessMgr::getTargetInfo( SChar            *aTargetName,
                 {
                     idlOS::strncpy( aInfo->mRemoteServerPasswd, sTarget->mPassword, DK_USER_PW_LEN + 1 );
                     aInfo->mRemoteServerPasswd[DK_USER_PW_LEN] = '\0';
-;
                 }
                 else
                 {
@@ -1029,7 +1028,6 @@ IDE_RC  dkaLinkerProcessMgr::getTargetInfo( SChar            *aTargetName,
                     idlOS::strncpy( aInfo->mXADataSourceClassName,
                                 sTarget->mXADataSourceClassName, DK_PATH_LEN + 1 );
                     aInfo->mXADataSourceClassName[DK_PATH_LEN]= '\0';
-0;
                 }
                 else
                 {
@@ -1041,7 +1039,6 @@ IDE_RC  dkaLinkerProcessMgr::getTargetInfo( SChar            *aTargetName,
                     idlOS::strncpy( aInfo->mXADataSourceUrlSetterName,
                                     sTarget->mXADataSourceUrlSetterName, DK_NAME_LEN + 1 );
                     aInfo->mXADataSourceUrlSetterName[DK_NAME_LEN] = '\0';
-0;
                 }
                 else
                 {
