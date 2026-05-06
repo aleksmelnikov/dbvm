@@ -1195,7 +1195,7 @@ void   idvManager::applyStatisticsToSystem(idvSession *aCurr, idvSession *aOld)
 
     for (i = IDV_STAT_INDEX_BEGIN;
          i < IDV_STAT_INDEX_MAX;
-         (UInt)i ++)
+         i++)
     {
         if ( (mStatName[i].mAttr  & IDV_ATTR_ACCUM) != 0)
         {
@@ -1264,7 +1264,7 @@ void idvManager::applyOpTimeToSession(
     {
         for (i = IDV_STAT_INDEX_BEGIN_STMT_TO_SESS;
                 i < IDV_STAT_INDEX_MAX;
-                (UInt)i ++)
+                i++)
         {
             if ( (mStatName[i].mAttr & IDV_ATTR_ACCUM) != 0)
             {
