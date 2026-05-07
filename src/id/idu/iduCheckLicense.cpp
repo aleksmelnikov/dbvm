@@ -31,7 +31,10 @@
 #include <iduVersion.h>
 #include <idt.h>
 
+/*
+FIXME: currently unused
 static const SChar * const DEFAULT_LICENSE = IDL_FILE_SEPARATORS"conf"IDL_FILE_SEPARATORS"license";
+*/
 
 acp_mac_addr_t  iduLicense::mMacAddr[ID_MAX_HOST_ID_NUM];
 UInt            iduLicense::mNoMac;
