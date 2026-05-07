@@ -308,7 +308,7 @@ private:
     iduFXStackInfo*         mFDStackInfo;
 
     /* IO 통계정보가 동시에 갱신되는 것을 방지 */
-    iduMutex                mIOStatMutex;
+    /* iduMutex                mIOStatMutex; */ // FIXME: currently unused
 
     /* FD갯수 정보에 대한 동시성 제어를 위해서 추가됨 */
     iduMutex                mIOOpenMutex;
