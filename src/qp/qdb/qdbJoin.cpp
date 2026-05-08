@@ -1151,12 +1151,14 @@ IDE_RC qdbJoin::executeJoinTable( qcStatement * aStatement )
     {
         IDE_SET( ideSetErrorCode( qpERR_ABORT_MEMORY_ALLOCATION ) );
     }
+#ifdef ALTIBASE_FIT_CHECK
     IDE_EXCEPTION( ERR_FIT_TEST )
     {
         IDE_SET( ideSetErrorCode( qpERR_ABORT_QMC_UNEXPECTED_ERROR,
                                   "qdbJoin::executeJoinTable",
                                   "FIT test" ) );
     }
+#endif
     IDE_EXCEPTION_END;
     
     if ( sNewPartitionInfoArr != NULL )
