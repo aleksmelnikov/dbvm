@@ -698,12 +698,14 @@ IDE_RC qdbDisjoin::executeDisjoinTable( qcStatement * aStatement )
     {
         IDE_SET( ideSetErrorCode( qpERR_ABORT_MEMORY_ALLOCATION ) );
     }
+#ifdef ALTIBASE_FIT_CHECK
     IDE_EXCEPTION( ERR_FIT_TEST )
     {
         IDE_SET( ideSetErrorCode( qpERR_ABORT_QMC_UNEXPECTED_ERROR,
                                   "qdbDisjoin::executeDisjoinTable",
                                   "FIT test" ) );
     }
+#endif
     IDE_EXCEPTION_END;
 
     // 실패 시 새로 만든 table info를 삭제한다.
