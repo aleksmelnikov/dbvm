@@ -1641,7 +1641,7 @@ IDE_RC mmcTrans::commit( mmcTransObj *aTrans,
     IDU_FIT_POINT( "mmcTrans::commit::BeforeCommitLocal" );
 
     // BUG-48697
-    IDU_FIT_POINT_RAISE( "mmcTrans::commit::CommitError", ERR_COMMTI_FAIL );
+    IDU_FIT_POINT_RAISE( "mmcTrans::commit::CommitError", ERR_COMMIT_FAIL );
 
     IDE_TEST( commitLocal( aTrans, aSession, aTransReleasePolicy, ID_FALSE )
               != IDE_SUCCESS );
@@ -1678,10 +1678,12 @@ IDE_RC mmcTrans::commit( mmcTransObj *aTrans,
 
     return IDE_SUCCESS;
 
-    IDE_EXCEPTION( ERR_COMMTI_FAIL )
+#ifdef ALTIBASE_FIT_CHECK
+    IDE_EXCEPTION( ERR_COMMIT_FAIL )
     {
         IDE_SET( ideSetErrorCode( mmERR_ABORT_COMMIT_ERROR, "commitError" ) );
     }
+#endif
 
     IDE_EXCEPTION_END;
 
@@ -1911,10 +1913,12 @@ IDE_RC mmcTrans::rollback( mmcTransObj *aTrans,
 
     return IDE_SUCCESS;
 
+#ifdef ALTIBASE_FIT_CHECK
     IDE_EXCEPTION( ERR_ROLLBACK_FAIL )
     {
         IDE_SET( ideSetErrorCode( mmERR_ABORT_ROLLBACK_ERROR, "rollbackError" ) );
     }
+#endif
 
     IDE_EXCEPTION( ERR_PARTIAL_ROLLBACK )
     {
