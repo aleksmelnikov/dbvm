@@ -129,7 +129,8 @@ IDE_RC qcsModule::openModule( SChar  * aModule,
     }
         
     return IDE_SUCCESS;
-    
+
+/* FIXME: currently unused
     IDE_EXCEPTION( ERR_DLOPEN );
     {
         sError = idlOS::dlerror();
@@ -149,6 +150,7 @@ IDE_RC qcsModule::openModule( SChar  * aModule,
         //fix BUG-18226.
         errno = 0;
     }
+*/
     IDE_EXCEPTION( ERR_INVALID_MODULE );
     {
         IDE_SET( ideSetErrorCode( qpERR_ABORT_INVALID_MODULE ) );
