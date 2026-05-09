@@ -456,10 +456,6 @@ void rpdLogBufferMgr::updateMinReadPtr()
     IDE_ASSERT(mBufInfoMutex.unlock() == IDE_SUCCESS);
 
     return;
-
-    IDE_EXCEPTION_END;
-
-    return;
 }
 
 /***********************************************************************
