@@ -14925,10 +14925,6 @@ void rpcManager::waitAfterCommitInEager( idvSQL       * /*aStatistics*/,
     RP_LABEL(NORMAL_EXIT);
 
     return;
-
-    IDE_EXCEPTION_END;
-
-    return;
 }
 
 void rpcManager::waitAfterCommitInConsistent( const smTID    aTID,
@@ -15006,10 +15002,6 @@ void rpcManager::servicesWaitAfterCommit( const smTID    aTID,
     IDU_FIT_POINT( "1.BUG-27482@rpcManager::waitForReplicationAfterCommit" );
 
     RP_LABEL(NORMAL_EXIT);
-
-    return;
-
-    IDE_EXCEPTION_END;
 
     return;
 }
