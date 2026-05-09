@@ -1503,8 +1503,6 @@ void rpdXLogfileMgr::sleepReader()
 
     IDE_ASSERT( mReadWaitMutex.unlock() == IDE_SUCCESS );
 
-    IDE_EXCEPTION_END;
-
     return;
 }
 
@@ -1526,8 +1524,6 @@ void rpdXLogfileMgr::wakeupReader()
     }
 
     IDE_ASSERT( mReadWaitMutex.unlock() == IDE_SUCCESS );
-
-    IDE_EXCEPTION_END;
 
     return;
 }
