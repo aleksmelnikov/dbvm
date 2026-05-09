@@ -341,8 +341,6 @@ void rpdXLogfileFlusher::wakeupFlusher()
 
     IDE_ASSERT( mThreadWaitMutex.unlock() == IDE_SUCCESS );
 
-    IDE_EXCEPTION_END;
-
     return;
 }
 
