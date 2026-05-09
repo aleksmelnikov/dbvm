@@ -4725,11 +4725,13 @@ IDE_RC rpnComm::recvAckA7( iduMemAllocator    * /*aAllocator*/,
         IDE_SET( ideSetErrorCode( rpERR_ABORT_RP_WRONG_OPERATION_TYPE,
                                   sOpCode ) );
     }
+#ifdef ALTIBASE_FIT_CHECK
     IDE_EXCEPTION(ERR_EXIT);
     {
         IDE_ERRLOG( IDE_RP_0 );
         IDE_SET(ideSetErrorCode(rpERR_IGNORE_EXIT_FLAG_SET));
     }
+#endif
     IDE_EXCEPTION_END;
 
     return IDE_FAILURE;
