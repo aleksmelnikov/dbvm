@@ -733,11 +733,13 @@ IDE_RC rpxReceiver::initialize( cmiProtocolContext * aProtocolContext,
     {
         IDE_SET(ideSetErrorCode(rpERR_ABORT_ROLE_NOT_SUPPORT_RECEIVER));
     }
+#ifdef ALTIBASE_FIT_CHECK
     IDE_EXCEPTION(ERR_TRANS_COMMIT);
     {
         IDE_ERRLOG(IDE_RP_0);
         IDE_SET(ideSetErrorCode(rpERR_ABORT_TX_COMMIT));
     }
+#endif
     IDE_EXCEPTION( ERR_COND_INIT );
     {
         IDE_SET( ideSetErrorCode( rpERR_FATAL_ThrCondInit ) );
