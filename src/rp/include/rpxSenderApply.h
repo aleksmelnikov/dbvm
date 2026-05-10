@@ -112,7 +112,7 @@ private:
     idBool           *mApplyFaultFlag;
     idBool           *mSenderStopFlag;
     idBool            mExitFlag;
-    SInt              mRole;            // PROJ-1537
+/*  SInt              mRole;            // PROJ-1537 *//* FIXME: currently unused. Using mMeta->mReplication.mRole */
     smSN              mPrevRestartSN;
 
     /*PROJ-1608*/
