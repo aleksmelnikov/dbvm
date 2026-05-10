@@ -272,6 +272,9 @@ ACP_EXPORT void aclMemTlsfExtractBlock(acl_mem_tlsf_bhdr_t *aBlock,
     aBlock -> mPtr.mFreePtr.mNext = NULL;
 }
 
+#if defined(ACP_CFG_DEBUG) || \
+    defined(ACP_CFG_DOXYGEN) || \
+    defined(__STATIC_ANALYSIS_DOING__)
 /*
  * Refer BUG-32954
  * An wrong pointer can be passed into tlsf matrix.
@@ -305,7 +308,7 @@ static acp_bool_t aclMemTlsfCheckBlockPointer(acl_mem_tlsf_t *aTlsf,
 
     return ACP_FALSE;
 }
-
+#endif
 
 /*
  * Function inserts memory block into list of free blocks
