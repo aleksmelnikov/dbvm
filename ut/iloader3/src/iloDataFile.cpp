@@ -4067,7 +4067,7 @@ IDE_RC iloDataFile::PrintOneLOBColToSepLOBFile( ALTIBASE_ILOADER_HANDLE  aHandle
         IDE_TEST_RAISE(CloseLOBFile(sHandle) != IDE_SUCCESS, OpenOrCloseLOBFileError);
 
         /* 데이터 파일에 LOB indicator 출력. */
-        (UInt)idlOS::fprintf(aWriteFp, "%s/%09"ID_UINT32_FMT".lob",       //BUG-24583
+        (void)idlOS::fprintf(aWriteFp, "%s/%09"ID_UINT32_FMT".lob",       //BUG-24583
                              sTmpFilePath, aRowNo);
     }
     else /* (mLOB->GetLOBLength() == 0) */
