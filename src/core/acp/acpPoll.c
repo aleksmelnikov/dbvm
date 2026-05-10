@@ -159,6 +159,9 @@ ACP_INLINE void acpPollRemoveObj(acp_poll_set_t *aPollSet, acp_sock_t *aSock)
     aPollSet->mCurCount--;
 }
 
+#if defined(ACP_POLL_USES_DEVPOLL) || \
+    defined(ACP_POLL_USES_KQUEUE)  || \
+    defined(ACP_POLL_USES_POLLSET)
 /*
  * Extract an object from aPollSet
  */
@@ -183,6 +186,7 @@ ACP_INLINE void acpPollGetObj(acp_poll_set_t *aPollSet,
     aObj->mSock     = sObjTmp->mSock;
     aObj->mUserData = sObjTmp->mUserData;
 }
+#endif
 
 #endif
 
