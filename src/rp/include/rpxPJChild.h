@@ -54,7 +54,7 @@ private:
     UInt               mNumber;
     UInt               mStatus;
     rpxPJMgr         * mParent;
-    rpdMetaItem      * mTable;
+/*  rpdMetaItem      * mTable; *//* FIXME: currently unused. Using aSyncItem->mTable */
     iduList          * mSyncList;
 
     rpdMeta          * mMeta;
