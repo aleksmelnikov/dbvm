@@ -177,7 +177,7 @@ ACP_EXPORT acp_rc_t acpThrCreate(acp_thr_t      *aThr,
 
     sRet = pthread_create(&aThr->mHandle,
                           (aAttr != NULL) ? &aAttr->mAttr : NULL,
-                          (void *(*)(void *))aFunc,
+                          (void *(*)(void *))(void *)aFunc,
                           aArg);
 
     if (sRet == 0)
