@@ -182,7 +182,7 @@ ACP_EXPORT void aclReadLineSetComplete(aclReadLineCallbackFunc_t *aFunc)
     /* rl_completion_entry_function is defined in 
      * acl/libedit/src/readline.c. Its type is Function
      * declared in acl/libedit/include/readline.h. */
-    rl_completion_entry_function = (Function *)aFunc;
+    rl_completion_entry_function = (Function *)(void *)aFunc;
 #endif
 }
 
