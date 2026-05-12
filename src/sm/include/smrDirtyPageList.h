@@ -101,7 +101,7 @@ private:
     scGRID*           mArrPageGRID;
 
     iduCond           mCV;
-    PDL_Time_Value    mTV;
+/*  PDL_Time_Value    mTV; *//* FIXME: currently unused. Using local variable sTV. */
     iduMutex          mMutex;
 
 };
