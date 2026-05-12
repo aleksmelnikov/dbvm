@@ -39,7 +39,7 @@ class smmPLoadChild : public smtPJChild
     scPageID         mFirstPID;
     scPageID         mLastPID;
     ULong            mLoadPageCount;
-    smmRestoreOption mRestoreOption;
+/*  smmRestoreOption mRestoreOption; *//* FIXME: currently unused. */
 
     
 public:
