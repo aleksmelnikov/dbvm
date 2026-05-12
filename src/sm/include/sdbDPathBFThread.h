@@ -40,7 +40,7 @@ public:
     virtual void run();
 
 private:
-    PDL_Time_Value    mTV;
+/*  PDL_Time_Value    mTV; *//* FIXME: currently unused. Using local variable sTV. */
     idBool            mFinish;
 
     /* Direct Path Insert시  필요한 정보 */
