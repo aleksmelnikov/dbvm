@@ -62,11 +62,11 @@ private:
     rpxReceiverApplyStatus  mStatus;
 
     smSN                    mProcessedSN;
-    smSN                    mLastCommitSN;
+/*  smSN                    mLastCommitSN; *//* FIXME: currently unused. Using mApply.getLastCommitSN() */
 
     UInt                    mProcessedLogCount;
 
-    SInt                    mAssignedXLogCount;
+/*  SInt                    mAssignedXLogCount; *//* FIXME: currently unused. Using mQueue.getSize() */
 
     idBool                  mIsDoneInitializeThread;
 
