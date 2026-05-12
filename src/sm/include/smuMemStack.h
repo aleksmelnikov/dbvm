@@ -103,7 +103,7 @@ private:
     UInt         mDataSize;
     UInt         mInitCount;
     UInt         mNodeCount;
-    UInt         mNodeCountOtherSize;
+/*  UInt         mNodeCountOtherSize; *//* FIXME: currently unused. */
     iduMemoryClientIndex   mMemoryIndex;
     iduMutex     mMutex;
 };
