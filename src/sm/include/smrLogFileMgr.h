@@ -251,7 +251,7 @@ private:
     iduMutex     mMtxList;
 
     // 현재 열려있는 로그파일 갯수
-    UInt         mOpenLogFileCount;
+/*  UInt         mOpenLogFileCount; *//* FIXME: currently unused. */
     
     // 현재 열려있는 로그파일의 linked list
     // 이 링크드 리스트의 동작방식은
