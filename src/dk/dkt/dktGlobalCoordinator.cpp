@@ -2918,7 +2918,7 @@ IDE_RC  dktGlobalCoordinator::findRemoteTxNStmt( SLong            aRemoteStmtId,
 
     *aRemoteStmt = NULL;
 
-    if ( &mRTxList != NULL )
+    if ( IDU_LIST_IS_EMPTY( &mRTxList ) != ID_TRUE )
     {
         IDU_LIST_ITERATE( &mRTxList, sIterator )
         {
