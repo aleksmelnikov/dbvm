@@ -2222,6 +2222,8 @@ void stdMethod::fill2DCoordString( SChar      * aBuffer,
 
     IDE_DASSERT( aBufSize > 100 );
 
+    ACP_UNUSED(aBufSize);
+
     sTempOffset = 0;
 
     //--------------------------------
