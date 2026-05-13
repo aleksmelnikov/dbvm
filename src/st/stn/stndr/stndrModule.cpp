@@ -12132,6 +12132,8 @@ UInt stndrRTree::getMinimumKeyValueLength( smnIndexHeader * aIndexHeader )
 
     IDE_DASSERT( aIndexHeader != NULL );
 
+    ACP_UNUSED(aIndexHeader);
+
     sTotalSize = ID_SIZEOF( stdMBR );
 
     
@@ -13487,6 +13489,8 @@ IDE_RC stndrRTree::makeVRowFromRow( stndrHeader         * aIndex,
 
     IDE_DASSERT( checkFetchColumnList( aIndex, aFetchColumnList ) 
                  == IDE_SUCCESS );
+
+    ACP_UNUSED(aIndex);
 
     IDE_TEST( sdcRow::fetch( aStatistics,
                              aMtx,
