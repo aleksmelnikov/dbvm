@@ -106,6 +106,8 @@ IDE_RC stndrUpdate::redo_SDR_STNDR_UPDATE_INDEX_KEY( SChar       * aLogPtr,
     IDE_DASSERT( aSize != 0 );
     IDE_DASSERT( aRecPtr != NULL );
 
+    ACP_UNUSED(aSize);
+
     sIKey = (stndrIKey*)aRecPtr;
         
     idlOS::memcpy( &sMBR, aLogPtr, (UInt)ID_SIZEOF(sMBR) );
