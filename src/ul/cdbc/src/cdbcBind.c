@@ -993,6 +993,7 @@ typedef enum
     CDBC_BIND_CHECK_CHANGED = 2
 } CDBC_BIND_CHECK;
 
+#if defined(USE_CDBCLOG)
 CDBC_INLINE
 acp_char_t * cdbc_bind_check_string (CDBC_BIND_CHECK aCheck)
 {
@@ -1009,6 +1010,7 @@ acp_char_t * cdbc_bind_check_string (CDBC_BIND_CHECK aCheck)
 
     #undef CASE_RETURN_STR
 }
+#endif
 
 /**
  * 파라미터 바인드를 수행한다.
