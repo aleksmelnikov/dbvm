@@ -842,6 +842,8 @@ IDE_RC stndrBUBuild::main( idvSQL          *aStatistics,
     IDE_DASSERT( aTotalMergePageCnt > 0 );
     IDE_DASSERT( aThreadCnt > 0 );
 
+    ACP_UNUSED(aTrans);
+
     sMergePageCnt      = aTotalMergePageCnt / aThreadCnt;
     sSortAreaSize      = aTotalSortAreaSize / aThreadCnt;
     sAvailablePageSize = getAvailablePageSize();
