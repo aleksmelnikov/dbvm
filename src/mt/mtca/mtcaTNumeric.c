@@ -179,13 +179,13 @@ acp_sint32_t mtaTNumeric( mtaTNumericType* t, acp_sint64_t l )
 {
     if( l < 0 ){
         if( l == -ACP_SINT64_LITERAL(9223372036854775807)-ACP_SINT64_LITERAL(1) ){
-            mtaTNumeric( t, (acp_uint64_t)(ACP_UINT64_LITERAL(9223372036854775807) + ACP_UINT64_LITERAL(1)));
+            mtaTNumeric2( t, (acp_uint64_t)(ACP_UINT64_LITERAL(9223372036854775807) + ACP_UINT64_LITERAL(1)));
         }else{
-            mtaTNumeric( t, (acp_uint64_t)(-l) );
+            mtaTNumeric2( t, (acp_uint64_t)(-l) );
         }
         MTA_TNUMERIC_SET_NEGATIVE(t);
     }else{
-        mtaTNumeric( t, (acp_uint64_t)l );
+        mtaTNumeric2( t, (acp_uint64_t)l );
     }
 	
     return ACI_SUCCESS;
