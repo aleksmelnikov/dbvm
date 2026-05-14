@@ -43,8 +43,8 @@
 #define GENMSG_MSG_FORMAT_TAIL                  \
     "\n"
 
-
-
+#if 0
+/* FIXME: currently unused. */
 ACP_INLINE void genmsgFileBase(acp_str_t          *aFilePath,
                                genmsgParseContext *aParseContext)
 {
@@ -94,6 +94,7 @@ ACP_INLINE void genmsgFileBase(acp_str_t          *aFilePath,
         GENMSG_EXIT_IF_FAIL(acpStrCpy(aFilePath, &aParseContext->mFilePath));
     }
 }
+#endif
 
 ACP_INLINE void genmsgFileDir(acp_str_t          *aFilePath,
                               genmsgParseContext *aParseContext)
@@ -120,7 +121,8 @@ ACP_INLINE void genmsgFileDir(acp_str_t          *aFilePath,
     }
 }
 
-
+#if 0
+/* FIXME: currently unused. */
 ACP_INLINE void genmsgPrintMessageAsMacro(acp_std_file_t *aFile,
                                           acp_str_t      *aMessage)
 {
@@ -168,7 +170,7 @@ ACP_INLINE void genmsgPrintMessageAsMacro(acp_std_file_t *aFile,
         }
     }
 }
-
+#endif
 
 static void genmsgGenerateMsgFormatArray(acp_std_file_t     *aFile,
                                          genmsgParseContext *aParseContext,

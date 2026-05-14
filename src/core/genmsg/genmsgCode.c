@@ -294,7 +294,8 @@ ACP_INLINE void genmsgFileDir(acp_str_t          *aFilePath,
     }
 }
 
-
+/*
+FIXME: currently unused.
 ACP_INLINE void genmsgPrintMessageAsMacro(acp_std_file_t *aFile,
                                           acp_str_t      *aMessage)
 {
@@ -342,6 +343,7 @@ ACP_INLINE void genmsgPrintMessageAsMacro(acp_std_file_t *aFile,
         }
     }
 }
+*/
 
 static void genmsgGenerateHeader(genmsgParseContext *aParseContext)
 {
