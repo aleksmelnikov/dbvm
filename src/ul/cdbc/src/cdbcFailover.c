@@ -115,6 +115,8 @@ SQLUINTEGER altibase_cli_failover_callback (
     CDBC_DASSERT(aDBC == sABConn->mHdbc);
     CDBC_DASSERT(sABConn->mFOCallbackFunc);
 
+    ACP_UNUSED(aDBC);
+
     sRE = sABConn->mFOCallbackFunc(sABConn,
                                    sABConn->mFOAppContext,
                                    (ALTIBASE_FAILOVER_EVENT) aFailOverEvent);
