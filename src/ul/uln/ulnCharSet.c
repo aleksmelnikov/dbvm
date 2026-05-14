@@ -19,11 +19,14 @@
 #include <ulnCharSet.h>
 #include <ulnConv.h>    // for ulnConvGetEndianFunc
 
+/*
+FIXME: currently unused.
 static ulnCharSetValidFunc * const ulnCharSetValidMap[ULN_CHARACTERSET_VALIDATION_MAX] =
 {
     ulnCharSetValidOff,
     ulnCharSetValidOn,
 };
+*/
 
 ACI_RC ulnCharSetValidOff(const mtlModule *aSrcCharSet,
                           acp_uint8_t     *aSourceIndex,
