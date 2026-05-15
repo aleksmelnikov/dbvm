@@ -246,8 +246,8 @@ protected:  friend class utAtbRow;
 /* BUG-45909 Improve LOB Processing */
 class utAtbLob : Object
 {
-    SQLHDBC      mDbc;
-    SQLHSTMT     mStmt;
+/*  SQLHDBC      mDbc; *//* FIXME: currently unused. */
+/*  SQLHSTMT     mStmt; *//* FIXME: currently unused. */
     SQLSMALLINT  mSourceCType;
     SInt         mLocatorCType;
     SQLUINTEGER  mOffset;
