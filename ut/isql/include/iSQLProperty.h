@@ -249,7 +249,7 @@ private:
     idBool          m_Timing;
     idBool          m_Vertical; // BUG-22685
     idBool          m_Heading;
-    idBool          m_IsDisplayComment;
+/*  idBool          m_IsDisplayComment; *//* FIXME: currently unused. */
     idBool          m_ShowCheckConstraints; /* PROJ-1107 Check Constraint Áö¿ø */
     idBool          m_ShowForeignKeys;
     idBool          m_ShowPartitions; /* BUG-43516 */
