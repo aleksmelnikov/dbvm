@@ -88,8 +88,11 @@ IDE_RC qcsModule::openModule( SChar  * aModule,
 {
     ACP_UNUSED(aModuleLibrary);
 
+/*
+    // FIXME: currently unused.
     SChar   * sError;
     SChar     sErrorMsg[QCS_ERROR_MSG_SIZE + 1];
+*/
     
     IDE_DASSERT( aModule != NULL );
     IDE_DASSERT( aModuleLibrary != NULL );
