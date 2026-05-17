@@ -114,7 +114,7 @@ ACI_RC cmnLinkListenListenTCP(cmnLinkListen *aLink, cmnLinkListenArg *aListenArg
 
     acp_rc_t              sRet = 0;
     acp_inet_addr_info_t *sAddr = NULL;
-    acp_char_t           *sErrStr = NULL;
+    const acp_char_t     *sErrStr = NULL;
     acp_char_t            sErrMsg[256];
 
     sErrMsg[0] = '\0';

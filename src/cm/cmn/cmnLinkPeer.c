@@ -52,7 +52,7 @@ ACI_RC cmnGetAddrInfo(acp_inet_addr_info_t **aAddr,
     acp_sint32_t           sFoundIdx    = 0;
     acp_char_t             sPortStr[ACP_INET_IP_PORT_MAX_LEN];
     acp_rc_t               sRC          = ACP_RC_SUCCESS;
-    acp_char_t            *sErrStr      = NULL;
+    const acp_char_t      *sErrStr      = NULL;
     acp_char_t             sErrMsg[256] = {'\0', };
 
     /* sun 2.8 not defined */

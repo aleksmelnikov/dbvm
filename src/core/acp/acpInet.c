@@ -581,7 +581,7 @@ ACP_EXPORT acp_rc_t acpInetGetServInfo(const acp_sock_addr_t *aSockAddr,
  */
 
 ACP_EXPORT acp_rc_t acpInetGetStrError(acp_sint32_t  aErrCode,
-                                       acp_char_t  **aErrStr)
+                                       const acp_char_t  **aErrStr)
 {
 #if defined(AF_INET6) 
 

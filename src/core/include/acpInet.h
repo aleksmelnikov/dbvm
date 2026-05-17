@@ -397,7 +397,7 @@ ACP_EXPORT acp_rc_t acpInetGetServInfo(const acp_sock_addr_t *aSockAddr,
                                        acp_sint32_t aFlag);
 
 ACP_EXPORT acp_rc_t acpInetGetStrError(acp_sint32_t  aErrCode,
-                                       acp_char_t  **aErrStr);
+                                       const acp_char_t  **aErrStr);
 
 ACP_EXTERN_C_END
 

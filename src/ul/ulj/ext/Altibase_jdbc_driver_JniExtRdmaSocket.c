@@ -136,7 +136,7 @@ JNIEXPORT void JNICALL Java_Altibase_jdbc_driver_JniExtRdmaSocket_rbind(
 {
     const acp_char_t     *sAddr;
     acp_inet_addr_info_t *sAddrInfo = NULL;
-    acp_char_t           *sErrStr = NULL;
+    const acp_char_t     *sErrStr = NULL;
     acp_char_t            sErrMsg[256];
     acp_rc_t              sRC;
 
@@ -224,7 +224,7 @@ JNIEXPORT void JNICALL Java_Altibase_jdbc_driver_JniExtRdmaSocket_rconnect(
     const acp_char_t     *sAddr;
     acp_inet_addr_info_t *sAddrInfo = NULL;
     acp_char_t            sPort[10];
-    acp_char_t           *sErrStr = NULL;
+    const acp_char_t     *sErrStr = NULL;
     acp_char_t            sErrMsg[256];
     acp_rc_t              sRC;
 

@@ -562,7 +562,7 @@ void testGetStrError(void)
 {
 
     acp_rc_t    sRC;
-    acp_char_t *sErrorStr = NULL;
+    const acp_char_t *sErrorStr = NULL;
 
     sRC = acpInetGetStrError(ACP_RC_EAI_AGAIN, NULL);
     ACT_CHECK(ACP_RC_IS_EINVAL(sRC));
