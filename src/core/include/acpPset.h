@@ -115,7 +115,7 @@ typedef struct acp_pset_t
 } acp_pset_t;
 
 
-ACP_INLINE acp_uint32_t acpPsetIsset(acp_pset_t *aPsets, acp_uint32_t aNumber)
+ACP_INLINE acp_uint32_t acpPsetIsset(const acp_pset_t *aPsets, acp_uint32_t aNumber)
 {
     acp_uint64_t sNumber;
     acp_uint64_t sMask;
