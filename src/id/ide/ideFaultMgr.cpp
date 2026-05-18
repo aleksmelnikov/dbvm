@@ -241,4 +241,3 @@ void ideLogFTMacro(const SChar *aFunction,
              aFile, aLine,
              "Lv-%-4"ID_INT32_FMT" %-20s", aCallLevel, aFTMacro);
 }
-

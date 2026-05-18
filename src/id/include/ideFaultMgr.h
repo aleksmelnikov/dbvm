@@ -108,7 +108,8 @@ idBool ideCanFaultTolerate();
 
 void   ideNonLocalJumpForFaultTolerance();
 
-#ifndef GEN_ERR_MSG
+#ifndef GEN_ERR_MSG /* GEN_ERR_MSG */
+#ifdef DEBUG
 void   ideLogFT(const SChar *aFunction,
                 const SChar *aFile,
                 SInt         aLine,
@@ -120,7 +121,9 @@ void   ideLogFTMacro(const SChar *aFunction,
                      SInt         aLine,
                      SInt         aCallLevel,
                      const SChar *aFTMacro);
-#else
+#endif
+#else /* GEN_ERR_MSG */
+#ifdef DEBUG
 static
 void   ideLogFT(const SChar *aFunction,
                 const SChar *aFile,
@@ -148,6 +151,7 @@ void   ideLogFTMacro(const SChar *aFunction,
     PDL_UNUSED_ARG(aFTMacro);
 }
 #endif
+#endif /* GEN_ERR_MSG */
 
 #endif /* _O_IDEFAULTMGR_H_ */
 
