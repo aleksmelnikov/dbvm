@@ -89,41 +89,33 @@ mtdCompareFunc      mtk::mInternalCompareFuncs[] = {
 extern "C" SInt
 compareRangeFunc( const void* aElem1, const void* aElem2 )
 {
-    smiCallBackFunc sElem1 = ((mtkRangeFuncIndex*)aElem1)->rangeFunc;
-    smiCallBackFunc sElem2 = ((mtkRangeFuncIndex*)aElem2)->rangeFunc;
-    
-    if ( sElem1 > sElem2 )
-    {
-        return 1;
-    }
-    else if ( sElem1 < sElem2 )
-    {
-        return -1;
-    }
-    else
-    {
-        return 0;
-    }
+    /* Convert void pointers to struct pointers safely */
+    smiCallBackFunc sElem1 = PDL_static_cast(const mtkRangeFuncIndex*, aElem1)->rangeFunc;
+    smiCallBackFunc sElem2 = PDL_static_cast(const mtkRangeFuncIndex*, aElem2)->rangeFunc;
+
+    /* Cast function pointers to integers for safe comparison */
+    acp_size_t v1 = PDL_reinterpret_cast(acp_size_t, sElem1);
+    acp_size_t v2 = PDL_reinterpret_cast(acp_size_t, sElem2);
+
+    /* Compact way to return comparison result:
+       Returns 1 if v1 > v2, -1 if v1 < v2, 0 if v1 == v2 */
+    return (v1 > v2) - (v1 < v2);
 }
 
 extern "C" SInt
 compareCompareFunc( const void* aElem1, const void* aElem2 )
 {
-    mtdCompareFunc sElem1 = ((mtkCompareFuncIndex*)aElem1)->compareFunc;
-    mtdCompareFunc sElem2 = ((mtkCompareFuncIndex*)aElem2)->compareFunc;
-    
-    if ( sElem1 > sElem2 )
-    {
-        return 1;
-    }
-    else if ( sElem1 < sElem2 )
-    {
-        return -1;
-    }
-    else
-    {
-        return 0;
-    }
+    /* Convert void pointers to struct pointers safely */
+    mtdCompareFunc sElem1 = PDL_static_cast(const mtkCompareFuncIndex*, aElem1)->compareFunc;
+    mtdCompareFunc sElem2 = PDL_static_cast(const mtkCompareFuncIndex*, aElem2)->compareFunc;
+
+    /* Cast function pointers to integers for safe comparison */
+    acp_size_t v1 = PDL_reinterpret_cast(acp_size_t, sElem1);
+    acp_size_t v2 = PDL_reinterpret_cast(acp_size_t, sElem2);
+
+    /* Compact way to return comparison result:
+       Returns 1 if v1 > v2, -1 if v1 < v2, 0 if v1 == v2 */
+    return (v1 > v2) - (v1 < v2);
 }
 
 IDE_RC mtk::initialize( smiCallBackFunc ** aExtRangeFuncGroup,
