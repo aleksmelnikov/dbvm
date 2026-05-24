@@ -472,7 +472,8 @@ typedef IDE_RC (*sdpstFixAndGetHdrFunc)( idvSQL       * aStatistics,
 typedef sdpstBMPHdr * (*sdpstGetBMPHdrFunc)( UChar * aPagePtr );
 
 /* SlotCnt 또는 PageCnt를 가져온다. */
-typedef UShort (*sdpstGetSlotOrPageCntFunc)( UChar * aPagePtr );
+typedef SShort (*sdpstGetSlotOrPageCntFunc)( UChar      * aPagePtr,
+                                             sdpstWM    * aHWM );
 
 /* depth별로 stack간의 거리차를 구한다. */
 typedef SShort (*sdpstGetDistInDepthFunc)( sdpstPosItem * aLHS,
