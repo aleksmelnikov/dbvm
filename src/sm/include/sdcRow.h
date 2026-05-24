@@ -501,7 +501,7 @@ public:
                           const smiDMLRetryInfo * aDMLRetryInfo,
                           smSCN                   aCSInfiniteSCN,
                           sdcColInOutMode       * aValueModeList,
-                          ULong                 * aModifyIdxBit,
+                          ULong                   aModifyIdxBit,
                           idBool                  aForbiddenToRetry );
 
     static IDE_RC remove( idvSQL               * aStatistics,

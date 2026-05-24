@@ -6306,7 +6306,7 @@ IDE_RC sdcLob::updateLobCol( idvSQL         * aStatistics,
                               NULL,     /*aDMLRetryInfo*/
                               aLobViewEnv->mInfinite,
                               &sValueMode,
-                              NULL,     /*aModifyIdxBit*/
+                              0,        /*aModifyIdxBit*/
                               ID_FALSE )/* aForbiddenToRetry */
               != IDE_SUCCESS );
 

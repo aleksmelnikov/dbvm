@@ -1684,7 +1684,7 @@ IDE_RC sdcRow::update( idvSQL               * aStatistics,
                        const smiDMLRetryInfo* aDMLRetryInfo,
                        smSCN                  aCSInfiniteSCN,
                        sdcColInOutMode      * aValueModeList,
-                       ULong                * /*aModifyIdxBit*/,
+                       ULong                  /*aModifyIdxBit*/,
                        idBool                 aForbiddenToRetry )
 {
     sdcRowUpdateStatus   sUpdateStatus;
