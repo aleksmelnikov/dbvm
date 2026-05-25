@@ -3147,7 +3147,7 @@ void ulpCodeGen::ulpGenSharedPtr( ulpSymTElement *aSymNode )
         }
     }
 
-    if( sStr != NULL )
+    if( sStr[0] != '\0' )
         ulpGenNString ( sStr, idlOS::strlen(sStr) );
 }
 
