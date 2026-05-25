@@ -1146,7 +1146,7 @@ switch( gUlpCOMPStartCond )
 <EMSQL,EJ,EP,EN>DISCONNECT        { WRITESTR2QUERYCOMP( yytext ); return TR_DISCONNECT;        }
 <EMSQL,EJ,EP,EN>DISTINCT          { WRITESTR2QUERYCOMP( yytext ); return TR_DISTINCT;          }
 <EMSQL,EJ,EP,EN>DESCRIBE          { WRITESTR2QUERYCOMP( yytext ); return TR_DESCRIBE;          }
-<EMSQL,EJ,EP,EN>DESCRIPTOR        { WRITESTR2QUERYCOMP( yytext ); return TR_DESCRIPTOR;        }
+<EMSQL>DESCRIPTOR                 { WRITESTR2QUERYCOMP( yytext ); return TR_DESCRIPTOR;        }
 <EMSQL,EJ,EP,EN>DROP              { WRITESTR2QUERYCOMP( yytext ); return TR_DROP;              }
 <EMSQL,EJ,EP,EN>EACH              { WRITESTR2QUERYCOMP( yytext ); return TR_EACH;              }
 <EMSQL,EJ,EP,EN>ELSE              { WRITESTR2QUERYCOMP( yytext ); return TR_ELSE;              }
@@ -1349,7 +1349,7 @@ switch( gUlpCOMPStartCond )
 <EMSQL,EJ,EP,EN>CLOB_FILE                {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_CLOB_FILE); }
 <EMSQL,EJ,EP,EN>CUBE                     {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_CUBE);  }
 <EMSQL,EJ,EP,EN>DEALLOCATE               {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_DEALLOCATE); }
-<EMSQL,EJ,EP,EN>DESCRIPTOR               {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_DESCRIPTOR); }
+<EJ,EP,EN>DESCRIPTOR                     {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_DESCRIPTOR); }
 <EMSQL,EJ,EP,EN>DO                       {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_DO); }
 <EMSQL,EJ,EP,EN>FIRST                    {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_FIRST); }
 <EMSQL,EJ,EP,EN>FOUND                    {  WRITESTR2QUERYCOMP( yytext ); return(SES_V_FOUND); }
