@@ -789,7 +789,7 @@ typedef IDE_RC (*sdpsVerifyFunc)( idvSQL     * aStatistics,
                                   scPageID     aUsedLimit );
 
 /* Segment 자료구조를 출력 */
-typedef IDE_RC (*sdpsDumpFunc) ( scSpaceID    aSpaceID,
+typedef void (*sdpsDumpFunc) ( scSpaceID    aSpaceID,
                                  void        *aSegDesc,
                                  idBool       aDisplayAll );
 

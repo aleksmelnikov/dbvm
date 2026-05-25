@@ -45,7 +45,8 @@
 IDE_RC sdpscCache::initialize( sdpSegHandle * aSegHandle,
                                scSpaceID      aSpaceID,
                                sdpSegType     aSegType,
-                               smOID          aTableOID )
+                               smOID          aTableOID,
+                               UInt         /*aIndexID*/ )
 {
     sdpSegInfo          sSegInfo;
     sdpscSegCache     * sSegCache;

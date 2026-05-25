@@ -38,7 +38,8 @@ public:
     static IDE_RC initialize( sdpSegHandle * aSegHandle,
                               scSpaceID      aSpaceID,
                               sdpSegType     aSegType,
-                              smOID          aObjectID );
+                              smOID          aObjectID,
+                              UInt         /*aIndexID*/);
 
     // [ INTERFACE ] Segment Handle¿« Cache «ÿ¡¶
     static IDE_RC destroy( sdpSegHandle * aSegHandle );
