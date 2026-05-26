@@ -215,7 +215,7 @@ const acp_char_t * altibase_host_info (ALTIBASE aABConn)
                             sAppInfo, ACI_SIZEOF(sAppInfo), NULL);
     CDBC_TEST_RAISE(CDBC_CLI_NOT_SUCCEEDED(sRC), DBCError);
 
-    if (sAppInfo != NULL)
+    if (sAppInfo[0] != '\0')
     {
         sRC = acpSnprintf(sABConn->mHostInfo, ACI_SIZEOF(sABConn->mHostInfo),
                           "%s/%s:%d/%s",
