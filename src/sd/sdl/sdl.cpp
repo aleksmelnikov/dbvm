@@ -1743,7 +1743,7 @@ IDE_RC sdl::addExecuteCallback( void           ** aCallback,
 
     sdi::initAffectedRow( aConnectInfo );
 
-    if ( ( aNode->mBuffer != NULL ) &&
+    if ( ( aNode->mBuffer[aNodeIndex] != NULL ) &&
          ( aNode->mOffset != NULL ) &&
          ( aNode->mMaxByteSize != NULL ) )
     {
