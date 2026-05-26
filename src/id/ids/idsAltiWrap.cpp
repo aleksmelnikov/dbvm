@@ -814,7 +814,7 @@ IDE_RC idsAltiWrap::doBase64Decoding( idsAltiWrapInfo * aAltiWrapInfo )
     aAltiWrapInfo->mCompTextLen = idlOS::atoi((SChar*)sResult);
     IDE_TEST_RAISE( aAltiWrapInfo->mCompTextLen == 0 , ERR_INVALIDE_ENCRYPTED_TEXT );
     // BUG-48436
-    IDE_TEST_RAISE( aAltiWrapInfo->mCompTextLen > sLen - IDS_SHA1_TEXT_LEN, ERR_INVALIDE_ENCRYPTED_TEXT );
+    IDE_TEST_RAISE( sLen < 0 || aAltiWrapInfo->mCompTextLen + IDS_SHA1_TEXT_LEN > (UInt)sLen, ERR_INVALIDE_ENCRYPTED_TEXT );
 
     /* for text length */
     idlOS::memset( sResult, 0x00, sLen + 1 );
