@@ -1777,38 +1777,22 @@ IDE_RC qmnMRGE::setBindParam( qcTemplate * aTemplate,
  *
  ***********************************************************************/
 
-    if ( & aDataPlan->updateStatement != NULL )
+    if ( aDataPlan != NULL )
     {
         aDataPlan->updateStatement.pBindParam      = aTemplate->stmt->pBindParam;
         aDataPlan->updateStatement.pBindParamCount = aTemplate->stmt->pBindParamCount;
-    }
-    else
-    {
-        /* Nothing to do */
-    }
 
-    if ( & aDataPlan->insertStatement != NULL )
-    {
         aDataPlan->insertStatement.pBindParam      = aTemplate->stmt->pBindParam;
         aDataPlan->insertStatement.pBindParamCount = aTemplate->stmt->pBindParamCount;
-    }
-    else
-    {
-        /* Nothing to do */
-    }
 
-    if ( & aDataPlan->insertNoRowsStatement != NULL )
-    {
         aDataPlan->insertNoRowsStatement.pBindParam      = aTemplate->stmt->pBindParam;
         aDataPlan->insertNoRowsStatement.pBindParamCount = aTemplate->stmt->pBindParamCount;
     }
     else
     {
-        /* Nothing to do */
+        return IDE_FAILURE;
     }
 
     return IDE_SUCCESS;
-
-    return IDE_FAILURE;
 }
 
