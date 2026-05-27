@@ -426,7 +426,7 @@ void ulnMetaBuild4IpdByStmt(ulnStmt      *aStmt,
     sDescRecIpd = ulnStmtGetIpdRec(aStmt, aRecNumber);
     ACE_ASSERT( sDescRecIpd != NULL );
 
-    if (&sDescRecIpd->mMeta != NULL)
+    if (sDescRecIpd != NULL)
     {
         sMetaMTYPE = ulnMetaGetMTYPE(&sDescRecIpd->mMeta);
 
@@ -540,7 +540,7 @@ void ulnMetaAdjustIpdByStmt(ulnDbc       *aDbc,
 
     ACE_ASSERT( sDescRecIpd != NULL );
 
-    if (&sDescRecIpd->mMeta != NULL)
+    if (sDescRecIpd != NULL)
     {
         sMetaMTYPE = ulnMetaGetMTYPE(&sDescRecIpd->mMeta);
 
