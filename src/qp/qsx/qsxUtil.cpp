@@ -605,7 +605,7 @@ IDE_RC qsxUtil::assignValue (
             sPrevKey = sKey;
         }
      
-        if ( sCount != (sKey + 1) )
+        if ( sCount != (UInt)(sKey + 1) )
         {
             sHasNull = 1;
         }
