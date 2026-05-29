@@ -2776,10 +2776,10 @@ IDE_RC smnbBTree::splitInternalNode(smnbHeader      * a_pIndexHeader,
 
     a_pINode->nextSPtr = a_pNewINode;
 
-    if ( a_nSlotPos <= SMNB_INTERNAL_SLOT_SPLIT_COUNT( a_pIndexHeader ) )
+    if ( a_nSlotPos <= (SShort)SMNB_INTERNAL_SLOT_SPLIT_COUNT( a_pIndexHeader ) )
     {
         /* PROJ-2433 */
-        if ( SMNB_INTERNAL_SLOT_SPLIT_COUNT(a_pIndexHeader) <= ( a_pINode->mSlotCount - 1 ) )
+        if ( (SShort)SMNB_INTERNAL_SLOT_SPLIT_COUNT(a_pIndexHeader) <= ( a_pINode->mSlotCount - 1 ) )
         {
             copyInternalSlots( a_pNewINode,
                                0,
@@ -2819,7 +2819,7 @@ IDE_RC smnbBTree::splitInternalNode(smnbHeader      * a_pIndexHeader,
     else
     {
         /* PROJ-2433 */
-        if ( SMNB_INTERNAL_SLOT_SPLIT_COUNT(a_pIndexHeader) <= ( a_nSlotPos - 1 ) )
+        if ( (SShort)SMNB_INTERNAL_SLOT_SPLIT_COUNT(a_pIndexHeader) <= ( a_nSlotPos - 1 ) )
         {
             copyInternalSlots( a_pNewINode,
                                0,
@@ -2923,10 +2923,10 @@ IDE_RC smnbBTree::splitLeafNode( smnbHeader    * a_pIndexHeader,
 
     a_pLeafNode->nextSPtr = a_pNewLeafNode;
 
-    if ( a_nSlotPos <= SMNB_LEAF_SLOT_SPLIT_COUNT( a_pIndexHeader ) )
+    if ( a_nSlotPos <= (SShort)SMNB_LEAF_SLOT_SPLIT_COUNT( a_pIndexHeader ) )
     {
         /* PROJ-2433 */
-        if ( SMNB_LEAF_SLOT_SPLIT_COUNT( a_pIndexHeader ) <= ( a_pLeafNode->mSlotCount - 1 ) )
+        if ( (SShort)SMNB_LEAF_SLOT_SPLIT_COUNT( a_pIndexHeader ) <= ( a_pLeafNode->mSlotCount - 1 ) )
         {
             copyLeafSlots( a_pNewLeafNode,
                            0,
@@ -2948,7 +2948,7 @@ IDE_RC smnbBTree::splitLeafNode( smnbHeader    * a_pIndexHeader,
     else
     {
         /* PROJ-2433 */
-        if ( SMNB_LEAF_SLOT_SPLIT_COUNT( a_pIndexHeader ) <= ( a_pLeafNode->mSlotCount - 1 ) )
+        if ( (SShort)SMNB_LEAF_SLOT_SPLIT_COUNT( a_pIndexHeader ) <= ( a_pLeafNode->mSlotCount - 1 ) )
         {
             copyLeafSlots( a_pNewLeafNode,
                            0,
