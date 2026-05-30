@@ -5,7 +5,7 @@
 include ../../utEnv.mk
 include objs.mk
 
-java_version = 1.5
+java_version = 1.8
 JAVAC = $(JAVA_HOME)/bin/javac
 JAR = $(JAVA_HOME)/bin/jar
 

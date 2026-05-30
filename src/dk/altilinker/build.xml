@@ -31,7 +31,7 @@
 	            destdir="${bin.dir}"
 	            includeantruntime="false"
 	            fork="true"
-	            source="1.4"
+	            source="1.8"
 	            debug="@{debug}"
 	            classpathref="class.path"
 	        />

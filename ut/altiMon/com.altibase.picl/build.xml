@@ -21,7 +21,7 @@
     
     <target name="compile">
         <copy file="${hdb.dir}/hdbUtil.jar" todir="${lib.dir}"/>        
-        <javac srcdir="${src.dir}" destdir="${class.dir}" includeantruntime="false" debug="on" target="1.5">
+        <javac srcdir="${src.dir}" destdir="${class.dir}" includeantruntime="false" debug="on" target="1.8">
             <classpath refid="compile.classpath" />
         </javac>
     </target>

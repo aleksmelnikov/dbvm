@@ -30,7 +30,7 @@
     	</copy>
         -->
         <mkdir dir="classes"/>
-    	<javac sourcepath="" debug="true" srcdir="src" destdir="classes" classpathref="classpath" source="1.5" target="1.5" fork="true">    		
+        <javac sourcepath="" debug="true" srcdir="src" destdir="classes" classpathref="classpath" source="1.8" target="1.8" fork="true">
     	</javac>
     </target>
 	
