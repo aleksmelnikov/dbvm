@@ -104,11 +104,11 @@ ACP_INLINE acp_char_t *acpPathAlloc(acp_path_pool_t *aPool, acp_size_t aSize)
     }
 }
 
-ACP_INLINE acp_char_t *acpPathMake(acp_char_t      *aStr,
-                                   acp_path_pool_t *aPool,
-                                   acp_sint32_t     aLocation,
-                                   acp_sint32_t     aLength,
-                                   acp_bool_t       aChangeDirSep)
+ACP_INLINE acp_char_t *acpPathMake(const acp_char_t      *aStr,
+                                         acp_path_pool_t *aPool,
+                                         acp_sint32_t     aLocation,
+                                         acp_sint32_t     aLength,
+                                         acp_bool_t       aChangeDirSep)
 {
     if (aStr[aLocation + aLength] == '\0'
 #if defined(ALTI_CFG_OS_WINDOWS)
@@ -116,7 +116,7 @@ ACP_INLINE acp_char_t *acpPathMake(acp_char_t      *aStr,
 #endif
         )
     {
-        return aStr + aLocation;
+        return (acp_char_t*)(aStr + aLocation);
     }
     else
     {
@@ -171,8 +171,8 @@ ACP_INLINE acp_char_t *acpPathMake(acp_char_t      *aStr,
  * @return a filesystem-specific representation of @a aStr
  * as C style null-terminated string
  */
-ACP_INLINE acp_char_t *acpPathFull(acp_char_t      *aStr,
-                                   acp_path_pool_t *aPool)
+ACP_INLINE acp_char_t *acpPathFull(const acp_char_t      *aStr,
+                                         acp_path_pool_t *aPool)
 {
     if (aStr == NULL)
     {
