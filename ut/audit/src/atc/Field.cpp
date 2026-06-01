@@ -555,7 +555,7 @@ IDE_RC Field::bindColumn(SInt aType, void * )
     if( mRow -> mArrayCount > 1 )
     {
         // BUG-33629 Codesonar warning - 189575.1380117-8
-        IDE_ASSERT( sLen * (mRow -> mArrayCount) < ID_vULONG_MAX );
+        IDE_ASSERT( (vULong)sLen *(vULong)(mRow -> mArrayCount) < ID_vULONG_MAX );
         
         if( mValue == NULL )
         {
