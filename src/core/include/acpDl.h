@@ -53,7 +53,7 @@ typedef struct acp_dl_t
 
 ACP_EXPORT acp_rc_t          acpDlOpen(acp_dl_t    *aDl,
                                        acp_char_t  *aDir,
-                                       acp_char_t  *aName,
+                                       const acp_char_t  *aName,
                                        acp_bool_t   aIsLibrary);
 ACP_EXPORT acp_rc_t          acpDlClose(acp_dl_t *aDl);
 

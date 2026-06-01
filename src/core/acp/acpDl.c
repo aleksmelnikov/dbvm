@@ -210,7 +210,7 @@ ACP_EXPORT const acp_char_t *acpDlError(acp_dl_t *aDl)
  */
 ACP_EXPORT acp_rc_t acpDlOpen(acp_dl_t    *aDl,
                               acp_char_t  *aDir,
-                              acp_char_t  *aName,
+                              const acp_char_t  *aName,
                               acp_bool_t   aIsLibrary)
 {
     acp_path_pool_t sPool;
