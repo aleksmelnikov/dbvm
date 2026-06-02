@@ -97,6 +97,37 @@ typedef SLong mtdBigintType;
 # define MTD_BIGINT_MAXIMUM ((mtdBigintType)ID_LONG(0x7FFFFFFFFFFFFFFF))
 # define MTD_BIGINT_MINIMUM ((mtdBigintType)ID_LONG(0x8000000000000001))
 
+/*
+ * Floating Point Boundaries for Integer Range Validation
+ *
+ * Purpose:
+ *   These constants represent the exact power-of-two boundaries for integer types.
+ *   They are used to determine if a floating-point value falls within the
+ *   representable range of integer types.
+ *
+ * Technical Note:
+ *   Each LIMIT is 2^(N-1), which is exactly representable in IEEE 754.
+ *
+ * Critical Design Note for MTD Types:
+ *   Standard integer minimums are strictly reserved as system NULL markers:
+ *     - MTD_SMALLINT_NULL : ((mtdSmallintType)0x8000)           -> -32768
+ *     - MTD_INTEGER_NULL  : ((mtdIntegerType)0x80000000)        -> -2147483648
+ *     - MTD_BIGINT_NULL   : ((mtdBigintType)0x8000000000000000) -> -9223372036854775808
+ *   Consequently, the actual numeric minimum for valid data shifts up by 1.
+ *
+ * Usage logic for MTD Signed Types:
+ *   - Upper Bound: (val >= LIMIT)  -> OUT OF RANGE (value is >= MAX + 1)
+ *   - Lower Bound: (val <= -LIMIT) -> OUT OF RANGE (value is <= NULL_MARKER)
+ *
+ *   Using a non-strict inequality (<=) on the lower bound guarantees that any
+ *   floating-point value exactly matching the NULL marker is safely rejected
+ *   as out-of-range, preventing accidental data-to-NULL conversion during casting.
+ */
+#define MTD_FP_ZERO                           (0.0L)
+#define MTD_SMALLINT_LIMIT                (32768.0L)
+#define MTD_INTEGER_LIMIT            (2147483648.0L)
+#define MTD_BIGINT_LIMIT    (9223372036854775808.0L)
+
 typedef SFloat mtdRealType;
 # define MTD_REAL_EXPONENT_MASK (0x7F800000)
 # define MTD_REAL_FRACTION_MASK (0x007FFFFF)
