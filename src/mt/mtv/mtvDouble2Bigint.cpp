@@ -114,8 +114,8 @@ IDE_RC mtvCalculate_Double2Bigint( mtcNode*,
     else
     {
         sDouble = *(mtdDoubleType*)aStack[1].value;
-        IDE_TEST_RAISE( sDouble > MTD_BIGINT_MAXIMUM ||
-                        sDouble < MTD_BIGINT_MINIMUM,
+        IDE_TEST_RAISE( sDouble >=  MTD_BIGINT_LIMIT ||
+                        sDouble <= -MTD_BIGINT_LIMIT,
                         ERR_VALUE_OVERFLOW );
         *(mtdBigintType*)aStack[0].value = (mtdBigintType)sDouble;
     }

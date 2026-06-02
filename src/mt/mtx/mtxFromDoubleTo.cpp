@@ -105,8 +105,8 @@ static IDE_RC mtxFromDoubleToBigint( mtxEntry ** aEntry )
     }
     else
     {
-        IDE_TEST_RAISE( ( *sArg1Val > MTD_BIGINT_MAXIMUM ) ||
-                        ( *sArg1Val < MTD_BIGINT_MINIMUM ),
+        IDE_TEST_RAISE( ( *sArg1Val >=  MTD_BIGINT_LIMIT ) ||
+                        ( *sArg1Val <= -MTD_BIGINT_LIMIT ),
                         ERR_VALUE_OVERFLOW );
 
         *sReturn = *(mtdBigintType *)sArg1Val;
