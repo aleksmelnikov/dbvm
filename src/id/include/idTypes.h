@@ -517,6 +517,8 @@ typedef struct id_host_id_t
 #define ID_MAX_HOST_ID_NUM 256
 #define ID_MAX_HOST_NAME_LEN 29
 
+
+#if 0 /* BEGIN OF OLD VERSION */
 /* BUG-21307: VS6.0에서 Compile Error발생.
  *
  * ULong이 double로 casting시 win32에서 에러 발생 */
@@ -553,6 +555,31 @@ typedef struct id_host_id_t
             ((d) < 0) ? (ULong) 0 : (ULong)(d) )
 #  endif
 #endif
+#endif /* END OF OLD VERSION */
+
+
+#ifdef _MSC_VER
+#  define UINT64_TO_DOUBLE(u) ( ((u) > 9223372036854775807LLU) ? \
+            (SDouble)(SLong)((u) - 9223372036854775807LLU - 1) + 9223372036854775808.0L : \
+            (SDouble)(SLong)(u) )
+
+#  define DOUBLE_TO_UINT64(d) ( ((d) >= 18446744073709551616.0L) ? \
+            (ULong) 0xffffffffffffffffLLU : \
+            ((d) < 0.0L) ? (ULong) 0 : \
+            ((d) >= 9223372036854775808.0L) ? \
+            (ULong) ((d) - 9223372036854775808.0L) + 9223372036854775807LLU + 1 : \
+            (ULong)(d) )
+#else
+#  define UINT64_TO_DOUBLE(u) ((SDouble)(u))
+#  if defined(__BORLANDC__) || defined(__WATCOMC__) || defined(__TICCSC__)
+/* double_to_uint64 defined only for MSVC and UNIX */
+#  else
+#  define DOUBLE_TO_UINT64(d) ( ((d) >= 18446744073709551616.0L) ? \
+            (ULong) 0xffffffffffffffffLLU : \
+            ((d) < 0.0L) ? (ULong) 0 : (ULong)(d) )
+#  endif
+#endif
+
 
 #define ID_1_BYTE_ASSIGN(dst, src){           \
      *((UChar*) (dst))    = *((UChar*) (src));     \
