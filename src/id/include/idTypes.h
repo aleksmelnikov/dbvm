@@ -386,6 +386,43 @@ typedef uint32_t      vULong;  /* variable Unsigned [32],64-bits */
 #define ID_vSLONG_MAX (0x7FFFFFFF)
 #endif
 
+/*
+ * Floating Point Boundaries for Integer Range Validation
+ *
+ * Purpose:
+ *   These constants represent the exact power-of-two boundaries for integer types.
+ *   They are used to determine if a floating-point value falls within the
+ *   representable range of integer types.
+ *
+ * Technical Note:
+ *   Each ID_SMAX_LIMIT is 2^(N-1), which is exactly representable in IEEE 754.
+ *
+ * Usage logic for Signed Types:
+ *   - Upper Bound: (val >= LIMIT)      -> OUT OF RANGE (value is >= MAX + 1)
+ *   - Lower Bound: (val < -LIMIT)      -> OUT OF RANGE (value is < MIN)
+ *
+ * Usage logic for Unsigned Types:
+ *   - Upper Bound: (val >= LIMIT)      -> OUT OF RANGE (value is >= MAX + 1)
+ *   - Lower Bound: (val < ID_FP_ZERO)  -> OUT OF RANGE (negative value)
+ */
+#define ID_FP_ZERO                          (0.0L)
+#define ID_SCHAR_LIMIT                    (128.0L)
+#define ID_UCHAR_LIMIT                    (256.0L)
+#define ID_SSHORT_LIMIT                 (32768.0L)
+#define ID_USHORT_LIMIT                 (65536.0L)
+#define ID_SINT_LIMIT              (2147483648.0L)
+#define ID_UINT_LIMIT              (4294967296.0L)
+#define ID_SLONG_LIMIT    (9223372036854775808.0L)
+#define ID_ULONG_LIMIT   (18446744073709551616.0L)
+/* Dynamic boundaries for variable-width LONG types based on target architecture */
+#ifdef COMPILE_64BIT
+#define ID_vSLONG_LIMIT   (9223372036854775808.0L)
+#define ID_vULONG_LIMIT  (18446744073709551616.0L)
+#else
+#define ID_vSLONG_LIMIT            (2147483648.0L)
+#define ID_vULONG_LIMIT            (4294967296.0L)
+#endif
+
 typedef enum idBool
 {
     ID_FALSE = 0,
