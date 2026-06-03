@@ -6617,7 +6617,7 @@ ULong  qcg::getTotalCost(qcStatement * aStatement )
     {
         // To fix BUG-14503
         // totalAllCost가 SLong의 MAX보다 크면 보정.
-        if( aStatement->myPlan->graph->costInfo.totalAllCost > ID_SLONG_MAX )
+        if( aStatement->myPlan->graph->costInfo.totalAllCost >= ID_SLONG_LIMIT )
         {
             sCost = ID_SLONG_MAX;
         }
