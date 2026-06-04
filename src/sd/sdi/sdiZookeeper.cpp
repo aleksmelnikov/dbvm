@@ -6418,8 +6418,8 @@ IDE_RC sdiZookeeper::checkAllNodeAlive( idBool   * aIsAlive )
     SChar           sConnPath[] = SDI_ZKC_PATH_CONNECTION_INFO;
     SChar           sNodePath[] = SDI_ZKC_PATH_NODE_META;
     SChar           sCheckPath[] = SDI_ZKC_PATH_META_LOCK;
-    SInt            sAllNodeCnt = 0;
-    SInt            sAliveNodeCnt = 0;
+    UInt            sAllNodeCnt = 0;
+    UInt            sAliveNodeCnt = 0;
     String_vector   sChildren;
     idBool          sIsInited = ID_FALSE;
 
