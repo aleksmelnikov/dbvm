@@ -47,12 +47,12 @@
    //    used".
 
 #    define PDL_RCSID(path, file, id) \
-      inline const char* get_rcsid_ ## path ## _ ## file (const char*) \
+      static inline const char* get_rcsid_ ## path ## _ ## file (const char* const*) \
       { \
         return id ; \
       } \
-      static const char* rcsid_ ## path ## _ ## file = \
-        get_rcsid_ ## path ## _ ## file ( rcsid_ ## path ## _ ## file ) ;
+      static const char* volatile rcsid_ ## path ## _ ## file = \
+        get_rcsid_ ## path ## _ ## file ( (const char* const*)&rcsid_ ## path ## _ ## file ) ;
 
 #  endif /* #if ! defined (PDL_RCSID) */
 #else
