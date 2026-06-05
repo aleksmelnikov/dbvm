@@ -3220,7 +3220,7 @@ IDE_RC smuProperty::callbackMaxTotalWASize( idvSQL * /*aStatistics*/,
 
 #if defined(_SC_PHYS_PAGES) && defined(_SC_PAGESIZE)
     IDE_TEST_RAISE( sNewMaxSize >
-                    ( idlOS::sysconf(_SC_PHYS_PAGES) * idlOS::sysconf(_SC_PAGESIZE) ),
+                    ( (ULong)idlOS::sysconf(_SC_PHYS_PAGES) * (ULong)idlOS::sysconf(_SC_PAGESIZE) ),
                     ERR_ABORT_INTERNAL_MAXSIZE );
 #endif
 

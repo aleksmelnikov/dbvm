@@ -50,7 +50,7 @@ IDE_RC sdtWAExtentMgr::initializeStatic()
 
 #if defined(_SC_PHYS_PAGES) && defined(_SC_PAGESIZE)
     IDE_TEST_RAISE( smuProperty::getMaxTotalWASize() >
-                    ( idlOS::sysconf(_SC_PHYS_PAGES) * idlOS::sysconf(_SC_PAGESIZE) ),
+                    ( (ULong)idlOS::sysconf(_SC_PHYS_PAGES) * (ULong)idlOS::sysconf(_SC_PAGESIZE) ),
                     ERR_ABORT_INTERNAL_MAXSIZE );
 #endif
 
@@ -262,7 +262,7 @@ IDE_RC sdtWAExtentMgr::resizeWAExtentPool( ULong aNewSize )
 
 #if defined(_SC_PHYS_PAGES) && defined(_SC_PAGESIZE)
     IDE_TEST_RAISE( aNewSize >
-                    ( idlOS::sysconf(_SC_PHYS_PAGES) * idlOS::sysconf(_SC_PAGESIZE) ),
+                    ( (ULong)idlOS::sysconf(_SC_PHYS_PAGES) * (ULong)idlOS::sysconf(_SC_PAGESIZE) ),
                     ERR_ABORT_INTERNAL_MAXSIZE );
 #endif
 
