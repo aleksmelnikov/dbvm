@@ -461,78 +461,97 @@ ACP_EXPORT acp_rc_t aclLFMemPoolCreate(acl_lockfree_mempool_t *aMemPool,
                                        acp_uint32_t           aEmptyLowLimit,
                                        acp_uint32_t           aSegmentChunks)
 {
-    acp_rc_t                sRC;
-    acl_safelist_node_t*    sNode = NULL;
-    acl_lockfree_segment_t* sSegment = NULL;
+    acp_rc_t                sRC;             /* Return code */
+    acl_safelist_node_t*    sNode = NULL;    /* List node for chunk */
+    acl_lockfree_segment_t* sSegment = NULL; /* Memory segment (for SHMEM/MMAP) */
 
     /* Check parameters */
     ACP_TEST_RAISE(aEmptyHighLimit < aEmptyLowLimit, E_WRONG_PARAM);
 
-    aMemPool->mType           = aType;
-    aMemPool->mBlockSize      = ACP_ALIGN8(aBlockSize);
-    aMemPool->mEmptyHighLimit = aEmptyHighLimit;
-    aMemPool->mEmptyLowLimit  = aEmptyLowLimit;
+    /* Initialize pool fields */
+    aMemPool->mType           = aType;                  /* Pool type: HEAP/SHMEM/MMAP */
+    aMemPool->mBlockSize      = ACP_ALIGN8(aBlockSize); /* Block size, 8-byte aligned  */
+    aMemPool->mEmptyHighLimit = aEmptyHighLimit;        /* Upper limit of empty chunks (shrink trigger) */
+    aMemPool->mEmptyLowLimit  = aEmptyLowLimit;         /* Lower limit of empty chunks (pre-alloc trigger) */
 
+    /* Set chunks per segment */
     if (aSegmentChunks > 0)
     {
-        aMemPool->mSegmentChunks  = aSegmentChunks;
+        aMemPool->mSegmentChunks  = aSegmentChunks; /* Use provided value */
     }
     else
     {
-        aMemPool->mSegmentChunks = ACL_LFMEMPOOL_DEFAULT_SEGMENT_CHUNKS;
+        aMemPool->mSegmentChunks = ACL_LFMEMPOOL_DEFAULT_SEGMENT_CHUNKS; /* Use default value */
     }
 
+    /* Create main free chunks list */
     sRC = aclSafeListCreate(&(aMemPool->mList));
     ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_LIST_CREATE_FAILED);
 
+    /* Configure alloc/free functions based on pool type */
     switch (aMemPool->mType)
     {
         case ACL_LOCKFREE_MEMPOOL_HEAP:
+            /* Heap mode */
             aMemPool->mFuncs.mChunkAlloc = *aclLFMemPoolChunkAllocHeap;
             aMemPool->mFuncs.mChunkFree = *aclLFMemPoolChunkFreeHeap;
             break;
         case ACL_LOCKFREE_MEMPOOL_SHMEM:
         case ACL_LOCKFREE_MEMPOOL_MMAP:
+            /* SHMEM/MMAP mode */
             aMemPool->mFuncs.mChunkAlloc = *aclLFMemPoolChunkAllocSegment;
             aMemPool->mFuncs.mChunkFree = *aclLFMemPoolChunkFreeSegment;
+
+            /* Create segments List (required for SHMEM/MMAP) */
             sRC = aclSafeListCreate(&(aMemPool->mSegmentList));
             ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_LIST_CREATE_FAILED);
 
+            /* Allocate memory for segment structure */
             sRC = acpMemAlloc((void **)&sSegment,
                               sizeof(acl_lockfree_segment_t));
             ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_MALLOC);
 
+            /* Create and add first segment */
             if (ACP_RC_IS_SUCCESS(aclLFMemPoolAddSegment(aMemPool, sSegment)))
             {
+                /* Allocate List node for adding segment to mSegmentList */
                 sRC = acpMemAlloc((void **)&sNode, sizeof(acl_safelist_node_t));
                 ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_NODE_MALLOC);
 
+                /* Bind segment to List node */
                 sNode->mData = (void *)sSegment;
 
+                /* Add node to segment List */
                 sRC = aclSafeListPushBack(&(aMemPool->mSegmentList), sNode);
-                ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_LIST_PUSH_FAILED);
+                ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_SEGMENT_LIST_PUSH_FAILED);
             }
             else
             {
+                /* Segment creation failed: free allocated memory */
                 acpMemFree(sSegment);
             }
             break;
         case ACL_LOCKFREE_MEMPOOL_UNINITIALIZED:
         default:
+            /* Invalid pool type */
             ACP_RAISE(E_WRONG_PARAM);
             break;
     }
 
+    /* Pre-allocated initial empty chunks */
     for (aMemPool->mEmptyCount = 0;
          aMemPool->mEmptyCount < aEmptyLowLimit;
          aMemPool->mEmptyCount++)
     {
+        /* Allocate List node */
         sRC = acpMemAlloc((void **)&sNode, sizeof(acl_safelist_node_t));
         ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_MALLOC);
 
+        /* Allocate chunk via corresponding function */
         sRC = aMemPool->mFuncs.mChunkAlloc(aMemPool, &(sNode->mData));
         ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_CHUNK_ALLOC_FAILED);
 
+        /* Add chunk to free List */
         sRC = aclSafeListPushBack(&(aMemPool->mList), sNode);
         ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_LIST_PUSH_FAILED);
     }
@@ -541,33 +560,43 @@ ACP_EXPORT acp_rc_t aclLFMemPoolCreate(acl_lockfree_mempool_t *aMemPool,
 
     ACP_EXCEPTION(E_LIST_CREATE_FAILED)
     {
-        /* Passthroufgh */
+        /* List creation failed: error code already set, exit. */
+        /* Passthrough */
     }
 
     ACP_EXCEPTION(E_WRONG_PARAM)
     {
-        sRC = ACP_RC_EINVAL;
+        sRC = ACP_RC_EINVAL; /* Invalid parameter */
     }
 
     ACP_EXCEPTION(E_MALLOC)
     {
-        sRC = ACP_RC_ENOMEM;
+        sRC = ACP_RC_ENOMEM; /* Out of memory */
     }
 
     ACP_EXCEPTION(E_NODE_MALLOC)
     {
+        /* Node allocation failed after successful segment creation */
+        /* Delete segment (detach and destroy) before exit. */
+        (void)aclLFMemPoolDeleteSegment(aMemPool, sSegment);
+        /* Free segment memory */
         acpMemFree(sSegment);
         sRC = ACP_RC_ENOMEM;
     }
 
     ACP_EXCEPTION(E_SEGMENT_LIST_PUSH_FAILED)
     {
+        /* Triggered on error adding node to mSegmentList (SHMEM/MMAP mode) */
+        /* Delete segment (detach and destroy) before exit. */
+        (void)aclLFMemPoolDeleteSegment(aMemPool, sSegment);
+        /* Free segment memory and node */
         acpMemFree(sSegment);
         acpMemFree(sNode);
     }
 
     ACP_EXCEPTION(E_CHUNK_ALLOC_FAILED)
     {
+        /* Chunk allocation failed: free node and all previously allocated chunks */
         acpMemFree(sNode);
         while (ACP_RC_NOT_ENOENT(aclSafeListPopHead(&(aMemPool->mList),
                                                     &sNode)))
@@ -575,11 +604,12 @@ ACP_EXPORT acp_rc_t aclLFMemPoolCreate(acl_lockfree_mempool_t *aMemPool,
             (void)aMemPool->mFuncs.mChunkFree(sNode->mData);
             acpMemFree(sNode);
         }
-        aMemPool->mEmptyCount = 0;
+        aMemPool->mEmptyCount = 0; /* Reset empty chunk counter */
     }
 
     ACP_EXCEPTION(E_LIST_PUSH_FAILED)
     {
+        /* List push failed: rollback all allocated resources */
         (void)aMemPool->mFuncs.mChunkFree(sNode->mData);
         acpMemFree(sNode);
         while (ACP_RC_NOT_ENOENT(aclSafeListPopHead(&(aMemPool->mList),
@@ -588,7 +618,7 @@ ACP_EXPORT acp_rc_t aclLFMemPoolCreate(acl_lockfree_mempool_t *aMemPool,
             (void)aMemPool->mFuncs.mChunkFree(sNode->mData);
             acpMemFree(sNode);
         }
-        aMemPool->mEmptyCount = 0;
+        aMemPool->mEmptyCount = 0; /* Reset empty chunk counter */
     }
 
     ACP_EXCEPTION_END;
