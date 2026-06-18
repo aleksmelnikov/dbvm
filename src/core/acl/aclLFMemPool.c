@@ -634,6 +634,9 @@ ACP_EXPORT acp_rc_t aclLFMemPoolDestroy(acl_lockfree_mempool_t *aMemPool)
     sRC = aclSafeListPopHead(&(aMemPool->mList), &sAnchor);
     while (sRC != ACP_RC_ENOENT)
     {
+        /* PopHead calls DeleteNode internally, which can return EINTR
+         * (node was modified during deletion). Treat EINTR as error. */
+        ACP_TEST_RAISE(ACP_RC_IS_EINTR(sRC), E_NODE_DEL_FAILED);
         sRC = aMemPool->mFuncs.mChunkFree(sAnchor->mData);
         ACP_TEST_RAISE(ACP_RC_NOT_SUCCESS(sRC), E_CHUNK_FREE_FAILED);
         acpMemFree(sAnchor);
