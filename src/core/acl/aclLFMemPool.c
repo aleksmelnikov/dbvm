@@ -794,16 +794,40 @@ ACP_EXPORT acp_rc_t aclLFMemPoolAlloc(acl_lockfree_mempool_t* aMemPool,
 
     ACP_TEST_RAISE(aMemPool == NULL, E_NULL);
 
-
     do
     {
-        while (ACP_RC_NOT_SUCCESS(aclSafeListFirst(&(aMemPool->mList),
-                                                   &sNode)));
+        /* Attempt to retrieve a chunk from the free list. */
+        sRC = aclSafeListFirst(&(aMemPool->mList), &sNode);
+        if (ACP_RC_NOT_SUCCESS(sRC))
+        {
+            /*
+             * List is empty.
+             * Check if creating new chunks is allowed.
+             * If mEmptyLowLimit == 0, it means "no empty chunks should be kept in reserve",
+             * so we will not create new ones -> Raise E_GET_CHUNK.
+             */
+            if (aMemPool->mEmptyLowLimit == 0)
+            {
+                ACP_TEST_RAISE(ACP_TRUE, E_GET_CHUNK);
+            }
+
+            /*
+             * If mEmptyLowLimit > 0, the system must attempt to create a new chunk
+             * (or wait for another thread to create one).
+             */
+            continue;
+        }
+
+        /* Attempt to allocate a block from this chunk */
+        if (ACP_RC_IS_SUCCESS(aclLFMemPoolAllocFromChunk(sNode->mData,
+                                                      aMemPool->mBlockSize,
+                                                      aPtr,
+                                                      &sResult)))
+        {
+            break;  /* Allocation successful */
+        }
     }
-    while(ACP_RC_NOT_SUCCESS(aclLFMemPoolAllocFromChunk(sNode->mData,
-                                                        aMemPool->mBlockSize,
-                                                        aPtr,
-                                                        &sResult)));
+    while (ACP_TRUE);
 
     if (sResult == ACL_LOCKFREE_MEMPOOL_FULL)
     {
