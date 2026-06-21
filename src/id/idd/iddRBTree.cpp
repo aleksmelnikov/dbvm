@@ -32,17 +32,26 @@
 
 void* iddRBTree::node::getKey(void) const
 {
-    return (this==NULL)? NULL:(void*)mKey;
+    /* In C++, 'this' cannot be NULL in well-defined code, but these checks
+       are preserved for historical compatibility and safety. */
+    volatile const node* self = this;
+    return (self == NULL) ? NULL : (void*)self->mKey;
 }
 
 void* iddRBTree::node::getData(void) const
 {
-    return (this==NULL)? NULL:(void*)mData;
+    /* In C++, 'this' cannot be NULL in well-defined code, but these checks
+       are preserved for historical compatibility and safety. */
+    volatile const node* self = this;
+    return (self == NULL) ? NULL : (void*)self->mData;
 }
 
 iddRBTree::color iddRBTree::node::getColor(void) const
 {
-    return (this==NULL)? IDD_BLACK:mColor;
+    /* In C++, 'this' cannot be NULL in well-defined code, but these checks
+       are preserved for historical compatibility and safety. */
+    volatile const node* self = this;
+    return (self == NULL) ? IDD_BLACK : self->mColor;
 }
 
 void iddRBTree::node::setColor(const iddRBTree::color aColor)
@@ -54,15 +63,15 @@ void iddRBTree::node::setColor(const iddRBTree::color aColor)
 
 iddRBTree::node* iddRBTree::node::setParent(iddRBTree::node* aParent)
 {
-    iddRBTree::node* sOldParent;
-    if(this != NULL)
+    /* In C++, 'this' cannot be NULL in well-defined code, but these checks
+       are preserved for historical compatibility and safety. */
+    volatile node* self = this;
+    node* sOldParent = NULL;
+
+    if (self != NULL)
     {
-        sOldParent = mParent;
-        mParent = aParent;
-    }
-    else
-    {
-        sOldParent = NULL;
+        sOldParent = self->mParent;
+        self->mParent = aParent;
     }
 
     return sOldParent;
