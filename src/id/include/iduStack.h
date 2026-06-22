@@ -41,7 +41,8 @@ typedef struct iduSignalDef
     SChar           mName[64];  /* Signal name */
     SChar           mDesc[128]; /* Signal description */
     UInt            mFlags;     /* Signal flags */
-    iduHandler*     mFunc;      /* Signal handler function */
+    iduHandler*     mFunc;      /* SA_SIGINFO handler (3 args) */
+    void*           mSimpleFunc;/* SIMPLE handler for SIG_IGN/SIG_DFL (1 arg) */
 } iduSignalDef;
 #endif
 

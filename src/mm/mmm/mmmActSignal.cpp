@@ -54,47 +54,56 @@ const static iduSignalDef gSignals[] =
     {
         SIGHUP,   "SIGHUP",   "Hangup",
         SIGOTHERFLAG,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     {
         SIGINT,   "SIGINT",   "Interrupt(^C)",
         SIGOTHERFLAG,
-        (iduHandler*)mmmExitHandler
+        (iduHandler*)mmmExitHandler,
+        NULL
     },
     {
         SIGQUIT,  "SIGQUIT",  "Quit",
         SIGOTHERFLAG,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     {
         SIGILL,   "SIGILL",   "Illegal instruction",
         SIGFLAG_FT,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     {
         SIGTRAP,  "SIGTRAP",  "Trace trap",
         SIGOTHERFLAG,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     {
         SIGABRT,  "SIGABRT",  "Abort",
         SIGOTHERFLAG,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     {
         SIGIOT,   "SIGIOT",   "IOT trap",
         SIGOTHERFLAG,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     {
         SIGBUS,   "SIGBUS",   "BUS error",
         SIGFLAG_FT,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     {
         SIGFPE,   "SIGFPE",   "Floating-point exception",
         SIGFLAG_FT,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     /* Not catchable in signal handler
     { SIGKILL,  "SIGKILL",  "Kill, unblockable",            (iduHandler*)mmmSignalHandler    },
@@ -105,7 +114,8 @@ const static iduSignalDef gSignals[] =
     {
         SIGSEGV,  "SIGSEGV",  "Segmentation violation",
         SIGFLAG_FT,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     /* Not used 
     { SIGUSR2,  "SIGUSR2",  "User-defined signal 2",        (iduHandler*)mmmSignalHandler    },
@@ -114,7 +124,8 @@ const static iduSignalDef gSignals[] =
     {
         SIGPIPE,  "SIGPIPE",  "Broken pipe",
         SIGPIPEFLAG,
-        (iduHandler*)SIG_IGN
+        NULL,           /* mFunc - not used */
+        (void*)SIG_IGN  /* mSimpleFunc */
     },
     /* Ignore
     { SIGALRM,  "SIGALRM",  "Alarm clock",                  (iduHandler*)mmmSignalHandler    },
@@ -122,7 +133,8 @@ const static iduSignalDef gSignals[] =
     {
         SIGTERM,  "SIGTERM",  "Termination",
         SIGOTHERFLAG,
-        (iduHandler*)mmmSignalHandler
+        (iduHandler*)mmmSignalHandler,
+        NULL
     },
     /*
      * BUG-42824
@@ -131,16 +143,19 @@ const static iduSignalDef gSignals[] =
     {
         SIGCHLD,  "SIGCHLD",  "Child status has changed",
         SIGCHILDFLAG,
-        (iduHandler*)mmmChildHandler
+        (iduHandler*)mmmChildHandler,
+        NULL
     },
     {
         SIGCLD,   "SIGCLD",   "Same as SIGCHLD",
         SIGCHILDFLAG,
-        (iduHandler*)mmmChildHandler
+        (iduHandler*)mmmChildHandler,
+        NULL
     },
     {   SIGRTMIN,  "SIGRTMIN",  "Real Time Signal",  /*BUG-45182*/ 
         SIGFLAG4RT,
-        (iduHandler*)mmmDumpCallstack    
+        (iduHandler*)mmmDumpCallstack,
+        NULL
     },
     /* Do not handle 
     { SIGCONT,  "SIGCONT",  "Continue",                     (iduHandler*)mmmSignalHandler    },
@@ -166,6 +181,7 @@ const static iduSignalDef gSignals[] =
     {
         -1,       "UNKNOWN",  "Unknown Signal",
         0,
+        NULL,
         NULL
     }
 };
@@ -367,6 +383,7 @@ static IDE_RC mmmPhaseActionSignal(mmmPhase         /*aPhase*/,
     SInt                i;
     struct sigaction    sAction;
     typedef void sHandler(int, siginfo_t*, void*);
+    typedef void sSimpleHandler(int);
 
 #if defined(DEBUG)
     SInt    sCoreDump;
@@ -384,9 +401,16 @@ static IDE_RC mmmPhaseActionSignal(mmmPhase         /*aPhase*/,
         for (i = 0; gSignals[i].mNo != -1; i++)
         {
             (void) idlOS::sigemptyset(&sAction.sa_mask);
-            sAction.sa_sigaction = (sHandler*)gSignals[i].mFunc;
-            sAction.sa_sigaction = (sHandler*)gSignals[i].mFunc;
-            sAction.sa_flags     =            gSignals[i].mFlags;
+            sAction.sa_flags = gSignals[i].mFlags;
+
+            if (sAction.sa_flags & SA_SIGINFO)
+            {
+                sAction.sa_sigaction = (sHandler*)gSignals[i].mFunc;
+            }
+            else
+            {
+                sAction.sa_handler = (sSimpleHandler*)gSignals[i].mSimpleFunc;
+            }
 #ifdef ALTI_CFG_OS_AIX
    	    /* 
              * BUG-48201 
