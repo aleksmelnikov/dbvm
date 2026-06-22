@@ -174,6 +174,8 @@ class dmlQuery : public Object
     Row         * mRow;
     
 public:
+    using Object::initialize;
+
     dmlQuery();
     ~dmlQuery();
 
@@ -288,6 +290,8 @@ class utScanner: public Object
     void   commitSyncEach( bool aIsLastCommit, UShort aServerId );
 
 public:
+    using Object::initialize;
+
     utScanner();
     IDE_RC initialize(Connection * aConnA,      // Master connection
                       Connection * aConnB,      // Slave  connection

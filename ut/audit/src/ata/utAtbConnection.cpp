@@ -89,7 +89,7 @@ IDE_RC utAtbConnection::connect()
     {
         mQuery =  new utAtbQuery(this);
         IDE_TEST(mQuery == NULL);
-        IDE_TEST(mQuery->initialize() != IDE_SUCCESS);
+        IDE_TEST(mQuery->initialize(0) != IDE_SUCCESS);
     }
 
     idlOS::snprintf(sDateFormatString, ID_SIZEOF(sDateFormatString), "\'%s\'", DATE_FMT);

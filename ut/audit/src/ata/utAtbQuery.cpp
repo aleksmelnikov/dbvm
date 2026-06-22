@@ -107,7 +107,7 @@ IDE_RC utAtbQuery::initialize(UInt)
     // BUG-40205 insure++ warning 어떤 값으로 초기값 설정???
     lobCompareMode  = ID_FALSE;
 
-    return Query::initialize();
+    return Query::initialize(0);
 
     IDE_EXCEPTION_END;
 

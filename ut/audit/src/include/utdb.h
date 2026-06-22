@@ -141,6 +141,8 @@ class dbDriver : public Object
     SChar       *          mURL; // own memory for the keep copy of URL and Lib Name
 
 public:
+    using Object::initialize;
+
     dbDriver();
     virtual ~dbDriver();
 
@@ -158,6 +160,8 @@ public:
 class metaColumns : public Object
 {
 public:
+    using Object::initialize;
+
     metaColumns();
     virtual ~metaColumns();
 
@@ -207,6 +211,8 @@ class Connection : public  Object
     PDL_mutex_t mLock;
 
 public:
+    using Object::initialize;
+
     Connection(dbDriver *);
 
     virtual ~Connection(void);
@@ -282,6 +288,8 @@ class Query : public Object
 {
 
 public:
+    using Object::initialize;
+
     virtual ~Query();
     virtual IDE_RC clear   (void) =0;
     virtual IDE_RC close   (void) =0;
@@ -417,6 +425,8 @@ protected: friend class Query;
 class  Field : public Object
 {
 public:
+    using Object::initialize;
+
     bool isName(SChar *);
 
     virtual IDE_RC bindColumn(SInt,void* = NULL); // mType SQL type of field

@@ -96,6 +96,8 @@ protected: friend class utAtbQuery;
 class utAtbQuery : Query
 {
 public:
+    using Query::bind;
+
     utAtbQuery( utAtbConnection *);
     IDE_RC close   (void);
     IDE_RC clear   (void);
@@ -259,6 +261,8 @@ class utAtbLob : Object
     utAtbQuery  *mQuery; 
 
 public:
+    using Object::initialize;
+
     IDE_RC initialize(utAtbQuery *aQuery,
                       SInt        aSqlType,
                       SQLUBIGINT  aLobLoc);
