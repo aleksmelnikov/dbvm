@@ -359,40 +359,58 @@ ACP_EXPORT acp_rc_t acpDirClose(acp_dir_t *aDir)
 ACP_EXPORT acp_rc_t acpDirRead(acp_dir_t *aDir, acp_char_t **aEntryName)
 {
     struct dirent *sEntry = NULL;
-    acp_sint32_t   sRet;
 
     ACP_RC_SET_OS_ERROR(ACP_RC_SUCCESS);
 
-    sRet  = readdir_r(aDir->mHandle, aDir->mEntry, &sEntry);
+#if defined(ACP_LACKS_READDIR_R)
+    /*
+     * readdir_r is deprecated or unavailable.
+     * Use readdir(), which is thread-safe on modern OSes.
+     */
+    errno = 0;
+    sEntry = readdir(aDir->mHandle);
+
+    if (sEntry == NULL && errno != 0)
+    {
+        return ACP_RC_GET_OS_ERROR();
+    }
+#else
+    /*
+     * Legacy Linux (glibc < 2.24): readdir() is not thread-safe
+     * when sharing a directory stream. Use readdir_r with an explicit buffer.
+     */
+    acp_sint32_t sRet;
+
+    sRet = readdir_r(aDir->mHandle, aDir->mEntry, &sEntry);
 
     if (sRet != 0)
     {
-#if defined(ALTI_CFG_OS_AIX)
-        if (ACP_RC_GET_OS_ERROR() != ACP_RC_SUCCESS)
-        {
-            return ACP_RC_GET_OS_ERROR();
-        }
-        else
-        {
-            return ACP_RC_EOF;
-        }
-#else
-        return sRet;
+        /* readdir_r returns the error code directly instead of setting errno */
+        errno = sRet;
+        return ACP_RC_GET_OS_ERROR();
+    }
 #endif
-    }
-    else
-    {
-        if (sEntry == NULL)
-        {
-            return ACP_RC_EOF;
-        }
-        else
-        {
-            *aEntryName = sEntry->d_name;
 
-            return ACP_RC_SUCCESS;
-        }
+    /* Handle End-Of-File (EOF) case */
+    if (sEntry == NULL)
+    {
+        return ACP_RC_EOF;
     }
+
+#if defined(ACP_LACKS_READDIR_R)
+    /*
+     * Copy the result to the internal buffer to preserve the memory contract.
+     * This prevents data corruption on subsequent acpDirRead calls,
+     * as readdir() returns a pointer to a shared static buffer.
+     */
+    strcpy(aDir->mEntry->d_name, sEntry->d_name);
+    *aEntryName = aDir->mEntry->d_name;
+#else
+    /* In readdir_r, sEntry already points inside aDir->mEntry */
+    *aEntryName = sEntry->d_name;
+#endif
+
+    return ACP_RC_SUCCESS;
 }
 
 /**

@@ -257,4 +257,34 @@ extern int getkerninfo(int, struct kinfo_ndd*, int *, int32long64_t);
 extern int mread_real_time(timebasestruct_t *, size_t);
 #endif
 
+/*
+ * ACP_LACKS_READDIR_R
+ * Defined for platforms where readdir_r is unavailable, deprecated,
+ * or where readdir() is guaranteed to be thread-safe.
+ *
+ * By default: modern and safe readdir() is preferred.
+ * Exception: legacy Linux (glibc < 2.24), where readdir_r is used.
+ */
+#if !defined(ALTI_CFG_OS_WINDOWS)
+#  if defined(ALTI_CFG_OS_LINUX)
+#    if defined(__GLIBC__)
+       /* Check GNU libc version */
+#      if __GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 24)
+         /* Legacy Linux with glibc < 2.24: use readdir_r */
+         /* ACP_LACKS_READDIR_R is intentionally left undefined */
+#      else
+         /* Modern Linux (glibc >= 2.24): readdir_r is deprecated */
+#        define ACP_LACKS_READDIR_R 1
+#      endif
+#    else
+       /* Non-glibc Linux (e.g., musl on Alpine, Bionic on Android): */
+       /* readdir() is thread-safe by default */
+#      define ACP_LACKS_READDIR_R 1
+#    endif
+#  else
+     /* All other UNIX-like platforms (macOS, FreeBSD, modern AIX/Solaris) */
+#    define ACP_LACKS_READDIR_R 1
+#  endif
+#endif
+
 #endif
