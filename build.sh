@@ -12,39 +12,53 @@ set -e  # Exit immediately if a command exits with a non-zero status
 #   |__/ \___/_/  /____/_/\____/_/ /_/____/  OF DEPENDENCIES
 #===============================================================================
 
-declare -r bison_ver="2.4.1"
-declare -r flex_ver="2.5.35"
-declare -r ncurses_ver="6.4"
-declare -r openssl_ver="1.0.2o"
-declare -r re2c_ver="1.0.1"
+readonly bison_ver="2.4.1"
+readonly flex_ver="2.5.35"
+readonly ncurses_ver="6.4"
+readonly openssl_ver="1.0.2o"
+readonly re2c_ver="1.0.1"
 
 #===============================================================================
 
 # Path definitions
-declare -r current_directory=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-declare -r thirdparty_directory=${current_directory}/3rdparty
-declare -r dep_build_directory=${current_directory}/target
-declare -r dep_install_directory=${current_directory}/target/dep
+readonly current_directory="$(cd "$(dirname "$0")" && pwd)"
+readonly thirdparty_directory="${current_directory}/3rdparty"
+readonly dep_build_directory="${current_directory}/target"
+readonly dep_install_directory="${current_directory}/target/dep"
 
 # Environment setup
+# Use ${VAR:+:${VAR}} to safely append existing path only if not empty
 export LC_ALL=C
-export PATH=${dep_install_directory}/bin:${PATH}
-export LIBRARY_PATH=${dep_install_directory}/lib:${dep_install_directory}/lib64:${LIBRARY_PATH}
-export CPATH=${dep_install_directory}/include:${CPATH}
+export PATH="${dep_install_directory}/bin${PATH:+:${PATH}}"
+export LIBRARY_PATH="${dep_install_directory}/lib:${dep_install_directory}/lib64${LIBRARY_PATH:+:${LIBRARY_PATH}}"
+export CPATH="${dep_install_directory}/include${CPATH:+:${CPATH}}"
 
-# Database build environment (Java check)
-command -v javac >/dev/null 2>&1 || { echo "Error: javac not found in PATH"; exit 1; }
-export JAVA_HOME=$(dirname $(dirname $(readlink -f $(command -v javac))))
-export ADAPTER_JAVA_HOME=${JAVA_HOME}
-export ALTIDEV_HOME=${current_directory}
-export ALTIBASE_DEV=${ALTIDEV_HOME}
-export ALTIBASE_HOME=${ALTIDEV_HOME}/altibase_home
-export THIRDPARTY_DIR=${ALTIDEV_HOME}/3rdparty
-export ALTIBASE_PORT_NO=17730
-export ALTIBASE_NLS_USE=UTF8
-export PATH=${current_directory}:${ALTIBASE_HOME}/bin:${JAVA_HOME}/bin:${PATH}
-export CLASSPATH=${current_directory}:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib:${ALTIBASE_HOME}/lib/Altibase.jar:${CLASSPATH}
-export LD_LIBRARY_PATH=${ADAPTER_JAVA_HOME}/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
+# Java check
+if [ -z "${JAVA_HOME}" ]; then
+    command -v javac >/dev/null 2>&1 || { echo "Error: javac not found in PATH and JAVA_HOME is not set" >&2; exit 1; }
+    JAVAC_PATH=$(command -v javac)
+    while [ -L "${JAVAC_PATH}" ]; do
+        DIR=$(dirname -- "${JAVAC_PATH}")
+        JAVAC_PATH=$(readlink -- "${JAVAC_PATH}")
+        case "${JAVAC_PATH}" in
+            /*) ;;
+            *) JAVAC_PATH="${DIR}/${JAVAC_PATH}" ;;
+        esac
+    done
+    export JAVA_HOME="$(dirname -- "$(dirname -- "${JAVAC_PATH}")")"
+fi
+
+# Database build environment
+export ADAPTER_JAVA_HOME="${JAVA_HOME}"
+export ALTIDEV_HOME="${current_directory}"
+export ALTIBASE_DEV="${ALTIDEV_HOME}"
+export ALTIBASE_HOME="${ALTIDEV_HOME}/altibase_home"
+export THIRDPARTY_DIR="${ALTIDEV_HOME}/3rdparty"
+export ALTIBASE_PORT_NO=${ALTIBASE_PORT_NO:-17730}
+export ALTIBASE_NLS_USE=${ALTIBASE_NLS_USE:-UTF8}
+export PATH="${current_directory}:${ALTIBASE_HOME}/bin:${JAVA_HOME}/bin${PATH:+:${PATH}}"
+export CLASSPATH="${current_directory}:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib:${ALTIBASE_HOME}/lib/Altibase.jar${CLASSPATH:+:${CLASSPATH}}"
+export LD_LIBRARY_PATH="${ADAPTER_JAVA_HOME}/lib/server:${ADAPTER_JAVA_HOME}/jre/lib/amd64/server:${ALTIBASE_HOME}/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
 
 # Check if the installed version of GNU Make supports output synchronization (Make 4.0+)
 # This prevents interleaved output from different threads during parallel builds
@@ -58,7 +72,7 @@ fi
 #===============================================================================
 
 # Default values
-jobs="$(nproc)"
+jobs=$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo "${NUMBER_OF_PROCESSORS:-2}")
 do_unittest="no"
 build_mode="release"
 partial_build="no"
@@ -124,26 +138,28 @@ fi
 # Universal Dependency Build Function
 #===============================================================================
 build_dep() (
-    local name=$1
-    local ver=$2
-    local extra_flags=$3
-    local conf_script=${4:-"./configure"}
-    local install_target=${5:-"install"}
+    name=$1
+    ver=$2
+    extra_flags=$3
+    conf_script="${4:-"./configure"}"
+    install_target="${5:-"install"}"
 
     # Prepare build directory
     mkdir -p "${dep_build_directory}"
     
     # Go to the dep's source
-    cd "${thirdparty_directory}/${name}-${ver}"
+    cd "${thirdparty_directory}/${name}-${ver}" || exit 1
 
     # Clean up previous build if exists
-    [ -f Makefile ] && make distclean
+    if [ -f Makefile ]; then make distclean; fi
 
     # Specific fix for Flex
-    [ "$name" == "flex" ] && autoupdate
+    if [ "$name" = "flex" ] && command -v autoupdate >/dev/null 2>&1; then
+        autoupdate
+    fi
 
     # Configuration and Compilation
-    $conf_script --prefix="${dep_install_directory}" $extra_flags
+    "$conf_script" --prefix="${dep_install_directory}" $extra_flags
     make -j"${jobs}" ${sync_opt}
     make "$install_target"
 )
@@ -153,7 +169,7 @@ build_dep() (
 #===============================================================================
 
 # 1. Build Dependencies (unless partial build is requested)
-if [ "${partial_build}" == "yes" ]; then
+if [ "${partial_build}" = "yes" ]; then
   echo "==> Partial build: skipping 3rdparty..."
 else
   echo "==> Cleaning dependencies directory..."
