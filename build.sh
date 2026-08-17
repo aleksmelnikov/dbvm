@@ -158,6 +158,11 @@ build_dep() (
         autoupdate
     fi
 
+    # Specific fix for Openssl-1.0.2o
+    if [ "$name" = "openssl" ]; then
+        ./patches/apply_patches.sh
+    fi
+
     # Configuration and Compilation
     "$conf_script" --prefix="${dep_install_directory}" $extra_flags
     make -j"${jobs}" ${sync_opt}

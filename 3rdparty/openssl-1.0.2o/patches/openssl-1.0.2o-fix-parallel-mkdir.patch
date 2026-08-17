@@ -1,0 +1,29 @@
+Index: openssl-1.0.2o/util/mk1mf.pl
+===================================================================
+--- openssl-1.0.2o.orig/util/mk1mf.pl
++++ openssl-1.0.2o/util/mk1mf.pl
+@@ -164,7 +164,7 @@ $inc_def="outinc";
+ $tmp_def="tmp";
+ 
+ $perl="perl" unless defined $perl;
+-$mkdir="-mkdir" unless defined $mkdir;
++$mkdir="-mkdir -p" unless defined $mkdir;
+ 
+ ($ssl,$crypto)=("ssl","crypto");
+ $ranlib="echo ranlib";
+Index: openssl-1.0.2o/util/mkdir-p.pl
+===================================================================
+--- openssl-1.0.2o.orig/util/mkdir-p.pl
++++ openssl-1.0.2o/util/mkdir-p.pl
+@@ -29,6 +29,10 @@ sub do_mkdir_p {
+     do_mkdir_p($parent);
+   }
+ 
+-  mkdir($dir, 0777) || die "Cannot create directory $dir: $!\n";
++  # Only die if the directory wasn't created between when we last checked
++  # and when we attempted to create it.
++  if (!mkdir($dir, 0777)) {
++    die "Cannot create directory $dir: $!\n" unless -d $dir;
++  }
+   print "created directory `$dir'\n";
+ }
