@@ -100,7 +100,7 @@ jdbc: genErrMsg_check jdbc_trace_jar jdbc_jar
 genErrMsg_check:
 	@VERSION_STR=`$(ALTI_HOME)/bin/genErrMsg -f`;
 
-jdbc_jar: class-clean jdbc_compile copy_service_provider
+jdbc_jar: class-clean jdbc_trace_jar jdbc_compile copy_service_provider
 	$(S_)echo "[JDBC JAR]"
 	$(S_)$(JAR) -cmf  $(DRIVER_DIR)/MANIFEST.MF  $(JDBC_JAR) -C $(JDBC_OUTPUT) $(DRIVER_DIR) -C $(JDBC_OUTPUT) META-INF
 
@@ -108,7 +108,7 @@ jdbc_trace_jar:  class-clean jdbc_trace_compile copy_service_provider
 	$(S_)echo "[JDBC Trace JAR]"
 	$(S_)$(JAR) -cmf  $(DRIVER_DIR)/MANIFEST.MF  $(JDBC_TRACE_JAR) -C $(JDBC_OUTPUT) $(DRIVER_DIR) -C $(JDBC_OUTPUT) META-INF
 
-jdbc_compile: $(VERSION_SRC) $(SQLSTATEMAP_SRC) trace_flag_false
+jdbc_compile: $(VERSION_SRC) $(SQLSTATEMAP_SRC) trace_flag_false jdbc_trace_jar
 	$(S_)echo "[JDBC compile]"
 	$(S_)mkdir -p $(JDBC_OUTPUT)
 	$(S_)$(JAVAC) $(JDBC_SRC) $(JDBC_SHARD_SRC) -d $(JDBC_OUTPUT)
@@ -125,7 +125,7 @@ copy_service_provider:
 
 # A4, A5 support both JDBC.
 
-jdbc4was: jdbc4was_jar
+jdbc4was: jdbc jdbc4was_jar
 
 jdbc4was_jar: jdbc4was_compile copy_service_provider
 	$(S_)echo "[JDBC2WAS JAR]"
@@ -166,6 +166,8 @@ TRACEFLAG = false
 
 trace_flag_true : TRACEFLAG = true
 trace_flag_false : TRACEFLAG = false
+
+trace_flag_false: trace_flag_true
 
 trace_flag_true trace_flag_false :
 	$(S_)$(RM) $(TRACEFLAG_SRC)
@@ -257,6 +259,7 @@ unittest_compile:
 class-clean :
 	$(S_)echo "[JDBC class clean]"
 	$(S_)$(RM) $(JDBC_OUTPUT)
+	$(S_)$(RM) $(JDBC_JAR) $(JDBC_TRACE_JAR) $(JDBC_JAR4WAS)
 
 clean: version-clean sqlstatemap-clean traceflag-clean
 	$(S_)echo "[JDBC clean]"
@@ -276,5 +279,8 @@ doc:
 	$(S_)javadoc $(JDBC_SRC) $(JDBC_SHARD_SRC) -d $(JDBC_DOC) -package
 
 # Prevent parallel build.
-.NOTPARALLEL: compile
-
+# .NOTPARALLEL: compile
+# NOTE: .NOTPARALLEL was here but does not work as intended — it only prevents
+# the named target from running in parallel with other targets, not its own
+# prerequisites. The parallel build race condition between jdbc_trace_jar and
+# jdbc_jar is fixed by making jdbc_jar depend on jdbc_trace_jar.
