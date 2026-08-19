@@ -75,30 +75,36 @@ fi
 jobs=$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo "${NUMBER_OF_PROCESSORS:-2}")
 do_unittest="no"
 build_mode="release"
-partial_build="no"
+skip_dep="no"
+skip_cfg="no"
+skip_bld="no"
 
 # Function to display help message
 show_help() {
-  echo "Usage: $0 [-j jobs] [-t] [-m mode] [-p] [-h]"
+  echo "Usage: $0 [-j jobs] [-t] [-m mode] [-d] [-c] [-b] [-h]"
   echo ""
   echo "Options:"
   echo "  -j JOBS       Number of parallel build jobs (default: number of CPU cores)"
   echo "  -t            Enable unit tests (DO_UNITTEST=yes) (default: no)"
   echo "  -m MODE       Build mode: debug or release (default: release)"
-  echo "  -p            Partial build: skipping 3rdparty"
+  echo "  -d            Skip dependencies build (skip-dep)"
+  echo "  -c            Skip configuration step (skip-cfg)"
+  echo "  -b            Skip databsae build     (skip-bld)"
   echo "  -h            Show this help message and exit"
   echo ""
   echo "Example:"
-  echo "  $0 -j 4 -t -p -m debug"
+  echo "  $0 -j 4 -t -dc -m debug"
 }
 
-# Parse flags: -j (jobs), -t (unittests), -m (build_mode), -p (partial), and -h (help)
+# Parse flags: -j (jobs), -t (unittests), -m (build_mode), -d (skip-dep), -c(skip-cfg), -b(skip-bld)  and -h (help)
 # A leading colon ':' enables silent error mode
-while getopts ":j:thm:p" opt; do
+while getopts ":j:thm:dcb" opt; do
   case "${opt}" in
     j) jobs="${OPTARG}" ;;
     t) do_unittest="yes" ;;
-    p) partial_build="yes" ;;
+    d) skip_dep="yes" ;;
+    c) skip_cfg="yes" ;;
+    b) skip_bld="yes" ;;
     m) 
       if [ "${OPTARG}" != "debug" ] && [ "${OPTARG}" != "release" ]; then
         echo "Error: Invalid build mode '${OPTARG}'. Use 'debug' or 'release'." >&2
@@ -174,9 +180,7 @@ build_dep() (
 #===============================================================================
 
 # 1. Build Dependencies (unless partial build is requested)
-if [ "${partial_build}" = "yes" ]; then
-  echo "==> Partial build: skipping 3rdparty..."
-else
+if [ "${skip_dep}" = "no" ]; then
   echo "==> Cleaning dependencies directory..."
   rm -rf "${dep_install_directory}"
   mkdir -p "${dep_install_directory}"
@@ -190,6 +194,8 @@ else
     build_dep "openssl" "${openssl_ver}" "-fPIC shared" "./config" "install_sw"
     build_dep "ncurses" "${ncurses_ver}" "--without-ada --without-manpages --without-tests --disable-db-install --without-debug --enable-overwrite --without-progs CFLAGS=-fPIC"
   } > "${current_directory}/build.dep.log" 2>&1
+else
+  echo "==> Partial build: skipping 3rdparty..."
 fi
 
 # 2. Build Database
@@ -197,9 +203,13 @@ echo "==> Building Database: MODE=[${build_mode}], JOBS=[${jobs}], UNITTEST=[${d
 echo "    (logging to build.db.log)"
 {
   cd "${ALTIDEV_HOME}"
-  ./configure --with-build-mode="${build_mode}"
-  make clean
+  if [ "${skip_cfg}" = "no" ]; then
+     ./configure --with-build-mode="${build_mode}"
+     make clean
+  fi
+  if [ "${skip_bld}" = "no" ]; then
   make SILENT_MODE=false DO_UNITTEST="${do_unittest}" build -j"${jobs}" ${sync_opt}
+  fi
 } > "${current_directory}/build.db.log" 2>&1
 
 # 3. The end
