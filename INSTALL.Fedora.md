@@ -8,7 +8,7 @@ Installing Build Toolchain
 
 Install the core C++ development tools:
 ```bash
-dnf install gcc14 gcc14-c++ make autoconf gawk
+dnf install gcc14 gcc14-c++ make autoconf gawk cmake
 ```
 
 Register gcc/g++-14:
