@@ -1,0 +1,48 @@
+filedate License
+================
+
+Copyright (c) 2026 dbvm
+
+Permission to use, copy, and distribute this software is granted under the
+following terms:
+
+
+1. FREE USE FOR DBVM OPEN-SOURCE PROJECTS
+------------------------------------------
+
+This software may be freely used, copied, modified, and distributed within
+open-source software products developed by dbvm, provided that:
+
+  (a) The software is used solely as part of a dbvm open-source project.
+
+  (b) This license notice is included in all copies or substantial portions
+      of the software.
+
+  (c) The software is not distributed as a standalone product outside of
+      a dbvm open-source project.
+
+
+2. COMMERCIAL USE
+-----------------
+
+Any use of this software outside of dbvm open-source projects, including but
+not limited to:
+
+  - Use in proprietary or closed-source software
+  - Use by companies, organizations, or individuals not affiliated with dbvm
+  - Redistribution as part of a commercial product
+  - SaaS or hosted service offerings
+
+requires a separate commercial license. Contact dbvm to obtain one.
+
+
+3. DISCLAIMER
+-------------
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

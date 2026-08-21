@@ -188,6 +188,9 @@ if [ "${skip_dep}" = "no" ]; then
   echo "==> Building Dependencies..."
   echo "    (logging to build.dep.log)"
   {
+    echo "-= Fix mtime for Dependencies =-"
+    ./3rdparty/fix_mtime_for_deps.sh
+
     build_dep "bison"   "${bison_ver}"
     build_dep "flex"    "${flex_ver}"    "--enable-shared=no"
     build_dep "re2c"    "${re2c_ver}"
