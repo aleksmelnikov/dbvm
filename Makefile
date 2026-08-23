@@ -651,19 +651,24 @@ ALTI_PKG_IB_XML_NAME_VP=./ut/Installer/clientValuepack.xml
 
 # ex) 5,5,1  /  5_5_1
 
+# Parse package string "<platform>-<bit>-<ver.dotted>-<mode>-<compiler>"
+# with pure GNU-make text functions. A single genErrMsg run replaces
+# many shell pipelines (no awk needed).
+# SPARC_SOLARIS has an extra "-compat*" field in the string
+# (see iduMkSystemInfoString() in src/id/idu/iduVersion.cpp).
+PGM_PACKAGE_INFO = $(shell $(GENERRMSG) -k)
+
 ifeq "$(OS_TARGET)" "SPARC_SOLARIS"
-PGM_MAJOR_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$4}'|awk -F'.' '{print $$1}')
-PGM_MINOR_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$4}'|awk -F'.' '{print $$2}')
-PGM_TERM_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$4}'|awk -F'.' '{print $$3}')
-PGM_TAGSET_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$4}'|awk -F'.' '{print $$4}')
-PGM_TAG_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$4}'|awk -F'.' '{print $$5}')
+PGM_VER_DOTTED = $(word 4,$(subst -, ,$(PGM_PACKAGE_INFO)))
 else
-PGM_MAJOR_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$3}'|awk -F'.' '{print $$1}')
-PGM_MINOR_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$3}'|awk -F'.' '{print $$2}')
-PGM_TERM_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$3}'|awk -F'.' '{print $$3}')
-PGM_TAGSET_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$3}'|awk -F'.' '{print $$4}')
-PGM_TAG_VER=$(shell $(GENERRMSG) -k|awk -F'-' '{print $$3}'|awk -F'.' '{print $$5}')
+PGM_VER_DOTTED = $(word 3,$(subst -, ,$(PGM_PACKAGE_INFO)))
 endif
+
+PGM_MAJOR_VER  = $(word 1,$(subst ., ,$(PGM_VER_DOTTED)))
+PGM_MINOR_VER  = $(word 2,$(subst ., ,$(PGM_VER_DOTTED)))
+PGM_TERM_VER   = $(word 3,$(subst ., ,$(PGM_VER_DOTTED)))
+PGM_TAGSET_VER = $(word 4,$(subst ., ,$(PGM_VER_DOTTED)))
+PGM_TAG_VER    = $(word 5,$(subst ., ,$(PGM_VER_DOTTED)))
 
 PKG_VERSION_INFO="$(PGM_MAJOR_VER).$(PGM_MINOR_VER).$(PGM_TERM_VER)"
 PKG_VERSION_INFO_PKGNAME="$(PGM_MAJOR_VER)_$(PGM_MINOR_VER)_$(PGM_TERM_VER)"
@@ -680,7 +685,7 @@ endif
 
 PKG_PLATFORM_INFO=$(ALTI_CFG_OS)-$(ALTI_CFG_CPU)-$(ALTI_CFG_BITTYPE)bit-$(BUILD_MODE)
 PKG_REVISION_INFO=$(shell LC_ALL=C svn info | grep Revision)
-PKG_REVISION_NUM=$(shell echo $(PKG_REVISION_INFO) | awk -F' ' '{print $$2}')
+PKG_REVISION_NUM=$(word 2,$(PKG_REVISION_INFO))
 
 ifeq "$(USE_HEAPMIN)" "no"
   UNOFFICIAL_SERVER_DIST_NAME="altibase-server-$(PKG_FULL_VERSION_INFO)-$(ALTI_CFG_OS)-$(ALTI_CFG_CPU)-$(ALTI_CFG_BITTYPE)bit-UNOFFICIAL-R$(PKG_REVISION_NUM)_noheapmin"
