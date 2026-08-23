@@ -26,7 +26,10 @@ JDBC_JAR       := $(ALTI_HOME)/lib/Altibase.jar
 JDBC_TRACE_JAR := $(ALTI_HOME)/lib/Altibase_t.jar
 DRIVER_DIR     := Altibase/jdbc/driver
 
-VERSION_STR     = $(shell echo `$(ALTI_HOME)/bin/genErrMsg -f` | awk -F"." -v OFS="_" '{print $$1, $$2}')
+# Package version for WebSphere-flavored artifact names:
+# "7.3.0.0.0" -> "7_3" (see genErrMsg -f / iduMkSystemInfoString()).
+JDBC_VER_LIST   = $(subst ., ,$(shell $(ALTI_HOME)/bin/genErrMsg -f))
+VERSION_STR     = $(word 1,$(JDBC_VER_LIST))_$(word 2,$(JDBC_VER_LIST))
 JDBC_JAR4WAS    = $(ALTI_HOME)/lib/Altibase$(VERSION_STR).jar
 DRIVER_DIR4WAS  = Altibase$(VERSION_STR)/jdbc/driver
 
