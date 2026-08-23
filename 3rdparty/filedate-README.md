@@ -105,7 +105,7 @@ Both files and directories are included.
 
 - C89 compiler (gcc, clang, MSVC)
 - POSIX: `utime`, `stat` (Linux, macOS, *BSD)
-- Windows: `FindFirstFileA`, `_utime` (limited UTF-8 support)
+- Windows: `FindFirstFileA`, `_utime`, `SetFileTime` for directories (limited UTF-8 support)
 
 ## Platform notes
 

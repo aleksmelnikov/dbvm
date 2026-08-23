@@ -15,18 +15,63 @@
  */
 
 #include <stdio.h>
+#if defined(__STRICT_ANSI__)
+/* snprintf() is C99; strict C90 modes (-std=c89, -ansi) hide its
+ * prototype although every supported libc provides the symbol.
+ * Declare it here so -std=c89 -pedantic builds cleanly.
+ * (MSVC never defines __STRICT_ANSI__, so this stays inactive there.) */
+extern int snprintf(char *s, size_t n, const char *fmt, ...);
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <utime.h>
 #include <sys/stat.h>
 
 #ifdef _WIN32
 #include <windows.h>
+#include <sys/utime.h>
+/* MSVC lacks the POSIX S_ISDIR() test macro; synthesize it from the
+ * CRT's _S_IFMT/_S_IFDIR mode bits. (MinGW already defines S_ISDIR,
+ * hence the #ifndef guard.) */
+#ifndef S_ISDIR
+#define S_ISDIR(m) (((m) & _S_IFMT) == _S_IFDIR)
+#endif
 #define PATH_SEP '\\'
+/* MSVC exposes the POSIX time APIs under underscore-prefixed names. */
+#define FILEDATE_UTIMBUF struct _utimbuf
+#define FILEDATE_UTIME   _utime
+
+/* _utime() cannot open directories on Windows; the documented way to
+ * touch a directory's times is CreateFile with FILE_FLAG_BACKUP_SEMANTICS
+ * plus SetFileTime(). No administrator rights are required. */
+static int fd_set_dir_mtime(const char *path, time_t epoch) {
+    HANDLE h;
+    FILETIME ft;
+    ULONGLONG wintime = ((ULONGLONG)epoch + 11644473600ULL) * 10000000ULL;
+    int ok;
+
+    ft.dwLowDateTime  = (DWORD)(wintime & 0xFFFFFFFFULL);
+    ft.dwHighDateTime = (DWORD)(wintime >> 32);
+
+    h = CreateFileA(path, FILE_WRITE_ATTRIBUTES,
+                    FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
+                    OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS, NULL);
+    if (h == INVALID_HANDLE_VALUE) {
+        fprintf(stderr, "Warning: cannot open directory: %s\n", path);
+        return 0;
+    }
+    ok = SetFileTime(h, NULL, &ft, &ft);   /* access + write times */
+    CloseHandle(h);
+    if (!ok)
+        fprintf(stderr, "Warning: cannot set time: %s\n", path);
+    return ok ? 1 : 0;
+}
 #else
+#include <utime.h>
 #include <dirent.h>
 #define PATH_SEP '/'
+#define FILEDATE_UTIMBUF struct utimbuf
+#define FILEDATE_UTIME   utime
 #endif
 
 static int g_verbose;
@@ -57,8 +102,8 @@ static time_t my_timegm(struct tm *t) {
 }
 
 /* Write one timestamp|path line to the metafile (skipped if out is NULL). */
-static void write_entry(FILE *out, const char *path, const struct stat *st) {
-    struct tm *tm = gmtime(&st->st_mtime);
+static void write_entry(FILE *out, const char *path, time_t mtime) {
+    struct tm *tm = gmtime(&mtime);
     char date_str[32];
     if (!tm) return;
     snprintf(date_str, sizeof(date_str),
@@ -79,7 +124,7 @@ static int apply_entry(const char *dir, const char *ts, const char *relpath) {
     struct stat st;
     char fullpath[4096];
     time_t epoch;
-    struct utimbuf ut;
+    FILEDATE_UTIMBUF ut;
 
     memset(&t, 0, sizeof(t));
     if (sscanf(ts, "%4d-%2d-%2dT%2d:%2d:%2d",
@@ -116,12 +161,30 @@ static int apply_entry(const char *dir, const char *ts, const char *relpath) {
     if (g_dryrun)
         return 1;
 
+#ifdef _WIN32
+    /* Directory times need the SetFileTime() path (_utime fails on dirs). */
+    if (stat(fullpath, &st) == 0 && S_ISDIR(st.st_mode))
+        return fd_set_dir_mtime(fullpath, epoch);
+#endif
+
     ut.actime  = epoch;
     ut.modtime = epoch;
-    return (utime(fullpath, &ut) == 0) ? 1 : 0;
+    if (FILEDATE_UTIME(fullpath, &ut) != 0) {
+        fprintf(stderr, "Warning: cannot set time: %s\n", fullpath);
+        return 0;
+    }
+    return 1;
 }
 
 /* ---------- iterative walk (heap stack) ---------- */
+
+/* Portable string duplication (strdup is non-standard on MSVC). */
+static char *fd_strdup(const char *s) {
+    size_t n = strlen(s) + 1;
+    char *p = (char *)malloc(n);
+    if (p) memcpy(p, s, n);
+    return p;
+}
 
 /* Dynamic string stack for iterative directory traversal. */
 typedef struct {
@@ -143,7 +206,7 @@ static void stack_push(strstack *s, const char *path) {
         s->cap *= 2;
         s->items = (char **)realloc(s->items, s->cap * sizeof(char *));
     }
-    s->items[s->top++] = strdup(path);
+    s->items[s->top++] = fd_strdup(path);
 }
 
 /* Pop and return the top string (caller must free). */
@@ -172,7 +235,11 @@ static void walk(const char *base, FILE *out, int *count) {
         char *rel = stack_pop(&stack);
         char dirpath[4096];
         char pattern[4096];
+        char newrel[4096];
+        char fullpath[4096];
+        char filepath[4096];
         WIN32_FIND_DATAA fd;
+        struct _stat st;
         HANDLE h;
 
         if (rel[0])
@@ -189,32 +256,26 @@ static void walk(const char *base, FILE *out, int *count) {
             if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
                 if (strcmp(fd.cFileName, ".") == 0 || strcmp(fd.cFileName, "..") == 0)
                     continue;
-                char newrel[4096];
                 if (rel[0])
                     snprintf(newrel, sizeof(newrel), "%s%c%s", rel, PATH_SEP, fd.cFileName);
                 else
                     snprintf(newrel, sizeof(newrel), "%s", fd.cFileName);
 
-                char fullpath[4096];
                 snprintf(fullpath, sizeof(fullpath), "%s%c%s", base, PATH_SEP, newrel);
-                struct _stat st;
                 if (_stat(fullpath, &st) == 0)
-                    write_entry(out, newrel, (const struct stat *)&st);
+                    write_entry(out, newrel, st.st_mtime);
 
                 stack_push(&stack, newrel);
             } else {
-                char filepath[4096];
                 if (rel[0])
                     snprintf(filepath, sizeof(filepath), "%s%c%s", rel, PATH_SEP, fd.cFileName);
                 else
                     snprintf(filepath, sizeof(filepath), "%s", fd.cFileName);
 
-                char fullpath[4096];
                 snprintf(fullpath, sizeof(fullpath), "%s%c%s", base, PATH_SEP, filepath);
-                struct _stat st;
                 if (_stat(fullpath, &st) != 0) continue;
 
-                write_entry(out, filepath, (const struct stat *)&st);
+                write_entry(out, filepath, st.st_mtime);
                 (*count)++;
             }
         } while (FindNextFileA(h, &fd));
@@ -222,7 +283,7 @@ static void walk(const char *base, FILE *out, int *count) {
         free(rel);
     }
 
-    free(stack.items);
+    stack_free(&stack);
 }
 
 #else
@@ -236,8 +297,12 @@ static void walk(const char *base, FILE *out, int *count) {
     while (stack.top > 0) {
         char *rel = stack_pop(&stack);
         char dirpath[4096];
+        char newrel[4096];
+        char fullpath[4096];
+        char filepath[4096];
         DIR *d;
         struct dirent *ent;
+        struct stat st;
 
         if (rel[0])
             snprintf(dirpath, sizeof(dirpath), "%s%c%s", base, PATH_SEP, rel);
@@ -251,29 +316,25 @@ static void walk(const char *base, FILE *out, int *count) {
             if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
                 continue;
 
-            char fullpath[4096];
             snprintf(fullpath, sizeof(fullpath), "%s%c%s", dirpath, PATH_SEP, ent->d_name);
 
-            struct stat st;
             if (stat(fullpath, &st) != 0) continue;
 
             if (S_ISDIR(st.st_mode)) {
-                char newrel[4096];
                 if (rel[0])
                     snprintf(newrel, sizeof(newrel), "%s%c%s", rel, PATH_SEP, ent->d_name);
                 else
                     snprintf(newrel, sizeof(newrel), "%s", ent->d_name);
 
-                write_entry(out, newrel, &st);
+                write_entry(out, newrel, st.st_mtime);
                 stack_push(&stack, newrel);
             } else {
-                char filepath[4096];
                 if (rel[0])
                     snprintf(filepath, sizeof(filepath), "%s%c%s", rel, PATH_SEP, ent->d_name);
                 else
                     snprintf(filepath, sizeof(filepath), "%s", ent->d_name);
 
-                write_entry(out, filepath, &st);
+                write_entry(out, filepath, st.st_mtime);
                 (*count)++;
             }
         }
@@ -281,7 +342,7 @@ static void walk(const char *base, FILE *out, int *count) {
         free(rel);
     }
 
-    free(stack.items);
+    stack_free(&stack);
 }
 
 #endif
@@ -312,22 +373,25 @@ static int save_dates(const char *dir, const char *metafile) {
 
 /* Read metafile and restore timestamps for all listed files/dirs. */
 static int restore_dates(const char *dir, const char *metafile) {
-    FILE *fp = fopen(metafile, "r");
+    FILE *fp;
+    int count = 0;
+    size_t len;
+    char line[4096];
+    char *pipe;
+
+    fp = fopen(metafile, "r");
     if (!fp) {
         fprintf(stderr, "Error: cannot read %s\n", metafile);
         return 1;
     }
 
-    int count = 0;
-    char line[4096];
-
     while (fgets(line, sizeof(line), fp)) {
-        size_t len = strlen(line);
+        len = strlen(line);
         while (len > 0 && (line[len-1] == '\n' || line[len-1] == '\r'))
             line[--len] = 0;
         if (len == 0) continue;
 
-        char *pipe = strchr(line, '|');
+        pipe = strchr(line, '|');
         if (!pipe) continue;
         *pipe = 0;
 
