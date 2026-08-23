@@ -28,7 +28,9 @@ if(WIN32)
     set(BIN "${BIN}.exe")
 endif()
 
-if(NOT EXISTS "${BIN}")
+# Rebuild filedate when the binary is missing or older than the source
+# (mtime comparison, same semantics as make).
+if(NOT EXISTS "${BIN}" OR "${SRC}" IS_NEWER_THAN "${BIN}")
     find_program(CC cc gcc cl clang REQUIRED)
     get_filename_component(CC_NAME "${CC}" NAME)
     if(CC_NAME MATCHES "^cl")
