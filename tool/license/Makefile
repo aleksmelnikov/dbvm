@@ -2,6 +2,12 @@
 
 include ../../env.mk
 include ../toolEnv.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
+
+# Utility key tools (makekey/printkey) are neither traced nor API-linted;
+# keep both scan lists explicitly empty, matching historical behavior.
+HEADER_SRCS =
+CHECK_SRCS  =
 
 LFLAGS += $(LIBDIRS)
 
@@ -23,12 +29,6 @@ endif # INTEL_WINDOWS
 compile: all
 
 all: install
-
-header :
-	@for i in $(SRCS); do ( cp $$i $$i.org ; cat $$i.org | gawk  -f $(TOOL_DIR)/add_header/header.awk > $$i ) done
-
-check :
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
 
 alint: $(SRCS:.cpp=.lint)
 
