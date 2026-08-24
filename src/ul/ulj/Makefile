@@ -69,6 +69,23 @@ INCLUDES += $(IDROPT)$(UL_DIR_JDBC)/include       \
 include jdbc_jdk18.mk
 include jdbc_shard.mk
 
+# Incremental JDBC build: the full pipeline (trace jar, main jar, WAS
+# jar, JNI library) runs only when some input is newer than the final
+# Altibase.jar. Inputs cover every source list, the Makefiles that
+# define build flags and generated-file recipes, service files, the
+# version templates with their upstream headers, and the generated
+# Java sources themselves.
+# NOTE: the Altibase$(VERSION_STR) trees used by the WAS flavor are
+# derived copies refreshed after the jars on every pass, so they must
+# NOT be watched; their real sources below are.
+JDBC_SENTINEL := $(JDBC_JAR)
+JDBC_INPUTS   := Makefile jdbc_jdk18.mk jdbc_shard.mk \
+                 $(JDBC_SRC) $(JDBC_SHARD_SRC) \
+                 $(VERSION_HEADER_SRC) $(VERSION_TAIL_SRC) $(VERSION_SRC) \
+                 $(SQLSTATEMAP_HEADER_SRC) $(SQLSTATEMAP_TAIL_SRC) \
+                 $(DRIVER_DIR)/MANIFEST.MF $(DRIVER_DIR)/java.sql.Driver \
+                 ../../id/include/iduVersionDef.h ${CM_DIR}/include/cmuVersion.h
+
 ifeq  "$(debug)"  "0"
 JAVAC = $(JDK)/bin/javac -g:none -O -nowarn -encoding euc-kr
 else
@@ -96,7 +113,17 @@ else
      sure: jdbc_jni
 endif
 
-compile: jdbc jdbc4was jdbc_jni
+compile:
+	$(S_)if [ ! -f $(JDBC_JAR) ] || [ ! -f $(JDBC_TRACE_JAR) ] || \
+	    [ ! -f $(JDBC_JAR4WAS) ] || [ ! -f $(EXT_SHLIB) ] || \
+	    [ ! -d $(JDBC_OUTPUT)/Altibase ] || \
+	    [ -n "$$(find $(JDBC_INPUTS) -newer $(JDBC_SENTINEL) -print 2>/dev/null | head -n 1)" ] ; \
+	then \
+	    echo "[JDBC build]" ; \
+	    $(MAKE) jdbc jdbc4was jdbc_jni ; \
+	else \
+	    echo "[JDBC build] up-to-date" ; \
+	fi
 
 jdbc: genErrMsg_check jdbc_trace_jar jdbc_jar
 
@@ -144,9 +171,9 @@ jdbc4was_compile: $(VERSION_SRC) $(SQLSTATEMAP_SRC) trace_flag_false
 	$(S_)$(JAVAC) $(JDBC_SRC4WAS) $(JDBC_SHARD_SRC4WAS)  -d $(JDBC_OUTPUT)
 	$(S_)$(RM) $(JDBC_OUTPUT)/Altibase$(VERSION_STR)/jdbc/driver/logging
 
-# JDBC version generation
-
-$(VERSION_SRC):
+# Version generation
+# Plain make dependencies: regenerated only when a real input changes.
+$(VERSION_SRC): $(VERSION_HEADER_SRC) $(VERSION_TAIL_SRC) ../../id/include/iduVersionDef.h ${CM_DIR}/include/cmuVersion.h
 	$(S_)echo "[JDBC Version generate]"
 	$(S_)cat ${VERSION_HEADER_SRC} > $(VERSION_SRC)
 	$(S_)echo "    public static final String ALTIBASE_VERSION_STRING   = \"$(shell $(ALTI_HOME)/bin/genErrMsg -j)\";" >> ${VERSION_SRC};
