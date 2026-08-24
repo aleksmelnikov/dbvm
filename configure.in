@@ -535,12 +535,12 @@ case "${host}" in
 
     i[36]86-apple-darwin* )
         OS_TARGET="X86_64_DARWIN"
-        OS_MAJORVER=`uname -r | gawk -F . '{print $2}'`
-        OS_MINORVER=`uname -r | gawk -F . '{print $3}'`
+        OS_MAJORVER=`uname -r | cut -d . -f 2`
+        OS_MINORVER=`uname -r | cut -d . -f 3`
         ALTI_CFG_CPU=X86
         ALTI_CFG_OS=DARWIN
-        ALTI_CFG_OS_MAJOR=`uname -r | gawk -F . '{print $2}'`
-        ALTI_CFG_OS_MINOR=`uname -r | gawk -F . '{print $3}'`
+        ALTI_CFG_OS_MAJOR=`uname -r | cut -d . -f 2`
+        ALTI_CFG_OS_MINOR=`uname -r | cut -d . -f 3`
         ;;
 
 esac
@@ -676,7 +676,7 @@ AC_ARG_VAR([JAVA_HOME], [location of JDK (required)])
 
 # Check Java version
 AC_MSG_CHECKING([Java version])
-JAVA_VERSION=[`$JAVA_HOME/bin/java -version 2>&1 | awk -F '"' '/version/ {print $2}'`]
+JAVA_VERSION=[`$JAVA_HOME/bin/java -version 2>&1 | head -n 1 | tr -d '"' | cut -d ' ' -f3`]
 JAVA_VERSION_MAJOR=[`echo $JAVA_VERSION | cut -f1 -d'.'`]
 JAVA_VERSION_MINOR=[`echo $JAVA_VERSION | cut -f2 -d'.'`]
 AC_MSG_RESULT([$JAVA_VERSION])
@@ -1502,8 +1502,8 @@ AC_SUBST(ALTI_CFG_EDITION)
 
 if test "$ALTI_CFG_OS" = LINUX; then
     result=`uname -r`
-    ALTI_CFG_OS_MAJOR=`echo $result | $GAWK -F . '{print $1}'`
-    ALTI_CFG_OS_MINOR=`echo $result | $GAWK -F . '{print $2}'`
+    ALTI_CFG_OS_MAJOR=`echo $result | cut -d . -f 1`
+    ALTI_CFG_OS_MINOR=`echo $result | cut -d . -f 2`
 fi
 
 # Check the OS and decide which library and binary extension to use.
