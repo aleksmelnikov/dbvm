@@ -40,7 +40,13 @@ ifneq "$(OS_TARGET)" "ELDK_LINUX"
 ifeq  ($(CROSS_COMPILE),)
 $(GENERRMSG): genErrMsg.$(OBJEXT)
 	$(COMPILE.cc) $(DEFINES_ERR) $(DEFINES_BUILD_FOR_UTIL) $(INCLUDES) $(SRCS)
-	$(LD) $(LFLAGS) $(LDOUT)$@ $(subst .cpp,.$(OBJEXT),$^) $(OBJS) $(LIBDIRS) $(LIBOPT)pd$(LIBAFT) $(LIBS)
+# Atomic install: msg rules in other directories execute this binary
+# concurrently (MAKEFLAGS propagates -j into the makemsg wave), and an
+# in-place relink truncates the file mid-read, producing empty generated
+# headers. Link to a temporary name and rename within the same directory,
+# so readers always see a complete binary.
+	$(LD) $(LFLAGS) $(LDOUT)$@.tmp $(subst .cpp,.$(OBJEXT),$^) $(OBJS) $(LIBDIRS) $(LIBOPT)pd$(LIBAFT) $(LIBS)
+	mv -f $@.tmp $@
 else # CROSS_COMPILE 
 	$(COPY) ~/$(PRODUCT_PREFIX)genErrMsg$(BINEXT) $(ALTI_HOME)/bin
 endif # CROSS_COMPILE
