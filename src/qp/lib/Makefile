@@ -4,6 +4,7 @@
 
 include ../qpEnv.mk
 include ./qp_objs.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 TARGET = $(ALTI_HOME)/lib/$(LIBPRE)qp.$(LIBEXT)
 SHTARGET = $(ALTI_HOME)/lib/$(LIBPRE)qp_so.$(SOEXT)
@@ -27,9 +28,7 @@ $(TARGET): $(QP_OBJS)
 
 $(SHTARGET): $(QP_SHOBJS)
 
-check :
-	@for i in $(QP_SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
-
+CHECK_SRCS = $(QP_SRCS)
 clean:
 	$(RM) core .dependency $(OBJS) *.d SunWS_cache lib*.a $(TARGET) $(SHTARGET)
 

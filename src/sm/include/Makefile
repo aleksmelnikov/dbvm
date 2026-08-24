@@ -1,5 +1,9 @@
 include ../smEnv.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
-check:
-	@for i in `ls -1 *.h`; do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
+# Header-only directory: lint every header on disk instead of $(SRCS).
+CHECK_SRCS = $(wildcard *.h)
 
+# Keep `check` as the default goal: it was the only target here before
+# the shared include introduced others.
+.DEFAULT_GOAL := check

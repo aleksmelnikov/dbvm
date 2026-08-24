@@ -1,6 +1,7 @@
 # $Id: Makefile 82136 2018-01-26 04:20:33Z emlee $ #
 
 include ../smEnv.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 BINS = $(ALTI_HOME)/bin/dumpla$(BINEXT) \
        $(ALTI_HOME)/bin/dumplf$(BINEXT) $(ALTI_HOME)/bin/oidInfo$(BINEXT) \
@@ -40,12 +41,6 @@ all: $(COMPILE) install
 all_after: $(BINS_AFTER)
 
 compile:  $(OBJS) $(BINS)
-
-header :
-	@for i in $(SRCS); do ( cp $$i $$i.org ; cat $$i.org | gawk  -f $(TOOL_DIR)/add_header/header.awk > $$i ) done
-
-check :
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
 
 alint: $(SRCS:.cpp=.lint)
 

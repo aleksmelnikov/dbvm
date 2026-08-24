@@ -4,6 +4,7 @@
 
 include ../sdEnv.mk
 include ./sd_objs.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 TARGET = $(ALTI_HOME)/lib/$(LIBPRE)sd.$(LIBEXT)
 SHTARGET = $(ALTI_HOME)/lib/$(LIBPRE)sd_so.$(SOEXT)
@@ -27,9 +28,7 @@ $(TARGET): $(SD_OBJS)
 
 $(SHTARGET): $(SD_SHOBJS)
 
-check :
-	@for i in $(SD_SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
-
+CHECK_SRCS = $(SD_SRCS)
 clean:
 	$(RM) core .dependency $(OBJS) *.d SunWS_cache lib*.a $(TARGET) $(SHTARGET)
 

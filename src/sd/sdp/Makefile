@@ -3,6 +3,7 @@
 #
 
 include ../sdEnv.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 ifneq "$(OS_LINUX_PACKAGE)" "ARM_WINCE"
 INCLUDES += $(foreach i,/usr/local/include $(QP_DIR)/include $(SD_DIR)/include,$(IDROPT)$(i))
@@ -44,12 +45,6 @@ ifeq "$(OS_LINUX_PACKAGE)" "ARM_WINCE"
 endif # ARM_WINCE
 
 compile: $(GENOBJS) $(OBJS)
-
-header :
-	@for i in $(SRCS); do ( cp $$i $$i.org ; cat $$i.org | gawk  -f $(TOOL_DIR)/add_header/header.awk > $$i ) done
-
-check :
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
 
 alint: $(SRCS:.cpp=.lint)
 

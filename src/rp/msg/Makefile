@@ -4,6 +4,13 @@
 
 include ../rpEnv.mk
 
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
+
+# Generated message catalogs (.msg -> .msb/.ih): there is nothing to
+# trace or API-lint here, keep both scan lists explicitly empty.
+HEADER_SRCS =
+CHECK_SRCS  =
+
 # NLS 중 영어 에러 메시지 화일 정의 
 E_RP_US_MSG    = E_RP_US7ASCII.msg
 ALLMSG         = $(E_RP_US_MSG)
@@ -17,7 +24,6 @@ ALLMSB         = $(ALTI_HOME)/msg/E_RP_US7ASCII.msb $(ALTI_HOME)/msg/E_RP_KO16KS
 E_RP_HEADER    = rpErrorCode.ih
 
 ALL_HEADER      = $(E_RP_HEADER)
-
 
 all: compile
 
@@ -33,10 +39,6 @@ $(ALLMSB): $(E_RP_US_MSB)
 
 manual:
 	$(GENERRMSGMANUAL) -i $(E_RP_US_MSG) > $(ALTI_HOME)/msg/$(E_RP_US_TXT)
-
-
-check :
-	@echo "no check"
 
 clean:
 	$(RM) core .dependency $(BINS) $(OBJS) *.d SunWS_cache *~ *.msb *.ih

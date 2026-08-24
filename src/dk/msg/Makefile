@@ -4,6 +4,13 @@
 
 include ../dkEnv.mk
 
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
+
+# Generated message catalogs (.msg -> .msb/.ih): there is nothing to
+# trace or API-lint here, keep both scan lists explicitly empty.
+HEADER_SRCS =
+CHECK_SRCS  =
+
 # NLS 중 영어 에러 메시지 화일 정의 
 E_DK_US_MSG    = E_DK_US7ASCII.msg
 ALLMSG         = $(E_DK_US_MSG)
@@ -33,10 +40,6 @@ $(ALLMSB): $(E_DK_US_MSB)
 
 manual:
 	$(GENERRMSGMANUAL) -i $(E_DK_US_MSG) > $(ALTI_HOME)/msg/$(E_DK_US_TXT)
-
-
-check :
-	@echo "no check"
 
 clean:
 	$(RM) core .dependency $(BINS) $(OBJS) *.d SunWS_cache *~ *.msb *.ih *.ic

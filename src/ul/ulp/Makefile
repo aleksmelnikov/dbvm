@@ -6,6 +6,7 @@
 include ../ulEnv.mk
 include $(DEV_DIR)/alticore.mk
 include ./ulp_objs.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 DIRS = lib
 
@@ -110,12 +111,6 @@ install: $(BINS) $(ULPARC)
 	$(COPY) $(BINS) $(ALTI_HOME)/bin/$(BINS) 
 	$(COPY) $(BINS) $(ALTI_HOME)/bin/sesc$(BINEXT) 
 	$(RM)  $(BINS)
-header:
-	@for i in $(SRCS); do ( $(COPY) $$i $$i.org ; cat $$i.org | gawk -f $(TOOL_DIR)/add_header/header.awk > $$i ) done
-
-check:
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
-
 alint: $(SRCS:.cpp=.lint)
 
 clean:

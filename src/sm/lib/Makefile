@@ -5,6 +5,7 @@
 
 include ../smEnv.mk
 include ./sm_objs.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 TARGET = $(ALTI_HOME)/lib/$(LIBPRE)sm.$(LIBEXT)
 SHTARGET = $(ALTI_HOME)/lib/$(LIBPRE)sm_so.$(SOEXT)
@@ -27,12 +28,6 @@ sm_dynamic: $(SHTARGET)
 $(TARGET): $(SM_OBJS)
 
 $(SHTARGET): $(SM_SHOBJS)
-
-header :
-	@for i in $(SRCS); do ( cp $$i $$i.org ; cat $$i.org | gawk  -f $(TOOL_DIR)/add_header/header.awk > $$i ) done
-
-check :
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
 
 clean:
 	-$(RM) core *.a *.so createdb destroydb SunWS_cache $(TARGET) $(SHTARGET)

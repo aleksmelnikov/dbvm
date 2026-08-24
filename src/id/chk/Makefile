@@ -2,6 +2,7 @@
 
 include ../idEnv.mk
 include $(DEV_DIR)/alticore.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 SRCS    = checkEnv.cpp
 BINS	= $(ALTI_HOME)/bin/checkEnv$(BINEXT)
@@ -65,9 +66,6 @@ $(ALTI_HOME)/bin/checkCond: $(TARGET_DIR)/src/id/chk/checkCond.$(OBJEXT) $(TARGE
 
 $(ALTI_HOME)/bin/checkType: $(TARGET_DIR)/src/id/chk/checkType.$(OBJEXT) $(TARGET_DIR)/src/id/idl/idl_utl.$(OBJEXT)
 	$(CXX) $(CCFLAGS) $(CPPFLAGS) $(DEFINES) $(PTDIRS) $(INCLUDES) $(LFLAGS) $(LIBDIRS) -o $@ $< $(TARGET_DIR)/src/id/idl/idl_utl.$(OBJEXT) $(ID_DIR)/idu/iduVersion.cpp -lpd $(LIBS)
-
-check :
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
 
 clean:
 	$(RM) core $(TARGET_DIR)/src/id/chk/*.$(OBJEXT) *.d $(ALTI_HOME)/bin/checkEnv$(BINEXT) SunWS_cache  *.msb *.ih *~ .shobj *.txt

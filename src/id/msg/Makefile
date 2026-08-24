@@ -1,6 +1,7 @@
 # $Id: Makefile 90822 2021-05-13 04:45:36Z kclee $
 
 include ../idEnv.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 ALLMSB         = $(ALTI_HOME)/msg/E_ID_US7ASCII.msb $(ALTI_HOME)/msg/E_ID_KO16KSC5601.msb
 
@@ -98,9 +99,6 @@ $(ALLMSB): E_ID_US7ASCII.msb
 manual: $(GENERRMSGMANUAL)
 	$(GENERRMSGMANUAL) -i E_ID_US7ASCII.msg  > $(ALTI_HOME)/msg/E_ID_US7ASCII.txt
 
-
-check :
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
 
 alint: $(SRCS:.cpp=.lint)
 

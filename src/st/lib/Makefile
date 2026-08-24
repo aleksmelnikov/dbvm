@@ -4,6 +4,7 @@
 
 include ../stEnv.mk
 include ./st_objs.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 TARGET = $(ALTI_HOME)/lib/$(LIBPRE)st.$(LIBEXT)
 STUBTARGET = $(ALTI_HOME)/lib/$(LIBPRE)ststub.$(LIBEXT)
@@ -33,9 +34,7 @@ $(STUBTARGET): $(ST_STUB_OBJS)
 
 $(SHTARGET): $(ST_SHOBJS)
 
-check :
-	@for i in $(ST_SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
-
+CHECK_SRCS = $(ST_SRCS)
 clean:
 	$(RM) $(TARGET_DIR)/src/st core .dependency *.d SunWS_cache $(LIBPRE)*.$(LIBEXT) $(TARGET) $(STUBTARGET) $(SHTARGET)
 

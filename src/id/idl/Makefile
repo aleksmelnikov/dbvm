@@ -4,6 +4,7 @@
 #
 
 include ../idEnv.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 INCLUDES += $(IDROPT)./
 
@@ -14,9 +15,6 @@ all: ofiles
 
 ofiles:	$(OBJS)
 shobjs: $(VSHOBJS)
-
-check :
-	@for i in $(SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
 
 alint: $(SRCS:.cpp=.lint)
 

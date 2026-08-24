@@ -3,6 +3,7 @@
 #
 
 include ../dkEnv.mk
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
 
 TARGET = $(ALTI_HOME)/lib/$(LIBPRE)dk.$(LIBEXT) 
 STUBTARGET = $(ALTI_HOME)/lib/$(LIBPRE)dkstub.$(LIBEXT) 
@@ -32,9 +33,7 @@ $(STUBTARGET): $(DK_STUB_OBJS)
 
 $(SHTARGET): $(DK_SHOBJS)
 
-check :
-	@for i in $(QP_SRCS); do (gawk -v API_INPUT=$(TOOL_DIR)/coding_chk/API.txt -v SRC_INPUT=$$i -f $(TOOL_DIR)/coding_chk/apiCheck.awk ) done
-
+CHECK_SRCS = $(QP_SRCS)
 clean:
 	$(RM) core .dependency $(OBJS) *.d SunWS_cache lib*.a $(TARGET) $(STUBTARGET) $(SHTARGET)
 

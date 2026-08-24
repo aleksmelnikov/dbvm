@@ -2,6 +2,13 @@
 
 include ../smEnv.mk
 
+include $(ALTIDEV_HOME)/makefiles/devtools.mk
+
+# Generated message catalogs (.msg -> .msb/.ih): there is nothing to
+# trace or API-lint here, keep both scan lists explicitly empty.
+HEADER_SRCS =
+CHECK_SRCS  =
+
 #SRCS    = genErrMsg.cpp
 #BINS	= genErrMsg
 
@@ -22,7 +29,6 @@ install: $(BINS)
 #	$(LD) $(LFLAGS) -o $@ $< $(ID_DIR)/idl/idl.cpp $(LIBS)
 #	@cp $(BINS) ../bin
 
-
 ErrorFiles : $(ALLMSB)
 
 E_SM_US7ASCII.msb : E_SM_US7ASCII.msg $(GENERRMSG)
@@ -35,13 +41,6 @@ $(ALLMSB): E_SM_US7ASCII.msb
 
 manual:
 	$(GENERRMSGMANUAL) -i E_SM_US7ASCII.msg  > $(ALTI_HOME)/msg/E_SM_US7ASCII.txt
-
-header :
-	@echo "no header"
-
-check :
-	@echo "no check"
-
 
 clean:
 	$(RM) core $(OBJS) *.d genErrMsg  SunWS_cache  *.msb *.ih *~
