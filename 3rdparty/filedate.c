@@ -11,7 +11,7 @@
  *         filedate restore <directory> <metafile>
  *
  * Copyright (c) 2026 dbvm
- *
+ * Licensed under the filedate License.
  */
 
 #include <stdio.h>
@@ -406,6 +406,16 @@ static int restore_dates(const char *dir, const char *metafile) {
     return 0;
 }
 
+/* Print help text (with copyright) to the given stream. */
+static void print_usage(FILE *out) {
+    fprintf(out,
+        "filedate - save/restore file and directory timestamps\n"
+        "Copyright (c) 2026 dbvm\n"
+        "\n"
+        "Usage: filedate save [-v] [--dry-run] <directory> <metafile>\n"
+        "       filedate restore [-v] [--dry-run] <directory> <metafile>\n");
+}
+
 /* Entry point: dispatch to save or restore based on arguments. */
 int main(int argc, char *argv[]) {
     int i;
@@ -431,9 +441,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (!action || !directory || !metafile) {
-        fprintf(stderr,
-            "Usage: filedate save [-v] [--dry-run] <directory> <metafile>\n"
-            "       filedate restore [-v] [--dry-run] <directory> <metafile>\n");
+        print_usage(stderr);
         return 1;
     }
 
@@ -442,6 +450,7 @@ int main(int argc, char *argv[]) {
     if (strcmp(action, "restore") == 0)
         return restore_dates(directory, metafile);
 
-    fprintf(stderr, "Unknown action: %s\n", action);
+    fprintf(stderr, "Unknown action: %s\n\n", action);
+    print_usage(stderr);
     return 1;
 }
