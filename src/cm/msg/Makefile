@@ -17,16 +17,16 @@ E_CM_HEADER    = cmErrorCode.ih
 ALL_HEADER      =  $(E_CM_HEADER)
 
 
-all: $(ALLMSB) $(E_CM_US_C)
+all: $(ALLMSB) $(CM_DIR)/cmi/$(E_CM_US_C)
 
 $(E_CM_US_MSB) : $(E_CM_US_MSG) $(GENERRMSG)
 	$(GENERRMSG) -i $(E_CM_US_MSG) -o $(E_CM_HEADER)
 	cp -f CM_TRC_CODE.ih CM_TRC_CODE.ic $(E_CM_HEADER) ../include
 	sync
 
-$(E_CM_US_C) : $(E_CM_US_MSG)
+$(CM_DIR)/cmi/$(E_CM_US_C) : $(E_CM_US_MSG)
 	$(GENERRMSG) -m -c -i $(E_CM_US_MSG) -o $(E_CM_HEADER)
-	mv -f $@ $(CM_DIR)/cmi
+	mv -f $(E_CM_US_C) $@
 
 $(ALLMSB): $(E_CM_US_MSB)
 	$(COPY) $^ $@
