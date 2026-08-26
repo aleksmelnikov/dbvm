@@ -9,7 +9,7 @@ include ./env.mk
 #
 ###################################################################
 
-DIRS=$(CORE_DIR) $(PD_DIR) $(ID_DIR) $(CM_DIR) $(SM_DIR) $(MT_DIR) $(QP_DIR) $(SD_DIR) $(DK_DIR) $(RP_DIR) $(MM_DIR) $(UL_DIR) $(UT_DIR) $(TOOL_DIR) $(ST_DIR) $(ID_DIR)/util $(QP_DIR)/util $(RP_DIR)/util
+DIRS=$(CORE_DIR) $(PD_DIR) $(ID_DIR) $(CM_DIR) $(SM_DIR) $(MT_DIR) $(QP_DIR) $(SD_DIR) $(DK_DIR) $(RP_DIR) $(MM_DIR) $(UL_DIR) $(UT_DIR) $(TOOL_DIR) $(ST_DIR) $(QP_DIR)/util $(RP_DIR)/util
 
 SODIRS=$(PD_DIR) $(ID_DIR) $(CM_DIR) $(SM_DIR) $(MT_DIR) $(QP_DIR) $(SD_DIR) $(DK_DIR) $(RP_DIR) $(ST_DIR) $(MM_DIR)
 
