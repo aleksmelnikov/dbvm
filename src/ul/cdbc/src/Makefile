@@ -87,9 +87,11 @@ else
 	$(MAKE) cdbc_shared_build
 endif
 
-cdbc_shared_build: $(CDBC_SHOBJS)
-	$(Q) echo " SO $(CDBC_SHLIB_PATH)"
-	$(Q) $(SOLINK.c) $(SOOUT)$(CDBC_SHLIB_PATH) $(CDBC_SHOBJS) $(LIBDIRS) $(CLFLAGS) $(CDBC_SHDEFLIBS)
+cdbc_shared_build: $(CDBC_SHLIB_PATH)
+
+$(CDBC_SHLIB_PATH): $(CDBC_SHOBJS)
+	$(Q) echo " SO $@"
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(CDBC_SHOBJS) $(LIBDIRS) $(CLFLAGS) $(CDBC_SHDEFLIBS)
 
 #############################
 # clean
