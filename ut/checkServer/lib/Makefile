@@ -66,12 +66,14 @@ else
 	$(MAKE) chksvr_shared_build
 endif
 
-chksvr_shared_build: $(SHOBJS) $(DEP_SHOBJS)
-	$(Q) echo " SO $(CHKSERV_SHLIB_PATH)"
+chksvr_shared_build: $(CHKSERV_SHLIB_PATH)
+
+$(CHKSERV_SHLIB_PATH): $(SHOBJS) $(DEP_SHOBJS)
+	$(Q) echo " SO $@"
 ifeq "$(OS_TARGET)" "X86_64_DARWIN"
-	$(Q) $(SOLINK.cc) $(SOOUT)$(CHKSERV_SHLIB_PATH) $^ $(LIBDIRS) $(CLFLAGS) $(CHKSERV_DEP_SHLIBS)
+	$(Q) $(SOLINK.cc) $(SOOUT)$@ $^ $(LIBDIRS) $(CLFLAGS) $(CHKSERV_DEP_SHLIBS)
 else
-	$(Q) $(SOLINK.c) $(SOOUT)$(CHKSERV_SHLIB_PATH) $^ $(LIBDIRS) $(CLFLAGS) $(CHKSERV_DEP_SHLIBS)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $^ $(LIBDIRS) $(CLFLAGS) $(CHKSERV_DEP_SHLIBS)
 endif
 
 #################################
