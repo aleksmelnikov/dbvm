@@ -91,7 +91,7 @@ YACCFLAGS = -d -v
 
 all: compile
 
-compile: $(DEV_DIR)/ut/isql/src/iSQLParser.cpp $(DEV_DIR)/ut/isql/src/iSQLConnectParser.cpp $(DEV_DIR)/ut/isql/src/iSQLParamParser.cpp $(TARGET_DIR)/ut/isql/src/iSQLPreLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLScanLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLConnectLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLParamLexer.$(OBJEXT) archive $(BINS) install
+compile: $(DEV_DIR)/ut/isql/src/iSQLParser.cpp $(DEV_DIR)/ut/isql/src/iSQLConnectParser.cpp $(DEV_DIR)/ut/isql/src/iSQLParamParser.cpp $(DEV_DIR)/ut/isql/src/iSQLPreLexer.cpp $(DEV_DIR)/ut/isql/src/iSQLScanLexer.cpp $(DEV_DIR)/ut/isql/src/iSQLParamLexer.cpp $(DEV_DIR)/ut/isql/src/iSQLConnectLexer.cpp $(DEV_DIR)/ut/isql/src/iSQLLexer.cpp $(TARGET_DIR)/ut/isql/src/iSQLPreLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLScanLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLConnectLexer.$(OBJEXT) $(TARGET_DIR)/ut/isql/src/iSQLParamLexer.$(OBJEXT) archive $(BINS) install
 
 $(DEV_DIR)/ut/isql/src/iSQLParser.cpp: iSQLParser.y
 ifeq "$(BISON_ENV_NEEDED)" "yes"
@@ -155,7 +155,7 @@ install: $(BINS)
 alint: $(SRCS:.cpp=.lint)
 
 clean:
-	$(RM) core $(TARGET_DIR)/ut/isql/dbc $(TARGET_DIR)/ut/isql/src *.d SunWS_cache iSQLPreLexer.cpp iSQLScanLexer.cpp iSQLParamLexer.cpp iSQLParamParser.cpp iSQLParamParser.cpp.h iSQLParamParser.hpp iSQLParamParser.output iSQLSriptParser.cpp.output iSQLLexer.cpp iSQLParser.cpp iSQLParser.cpp.h iSQLParser.hpp iSQLParser.output iSQLParser.cpp.output iSQLConnectLexer.cpp iSQLConnectParser.cpp iSQLConnectParser.cpp.h iSQLConnectParser.hpp iSQLConnectParser.output iSQLConnectParser.cpp.output $(ISQLARC) $(BINS)
+	$(RM) core $(TARGET_DIR)/ut/isql/dbc $(TARGET_DIR)/ut/isql/src *.d SunWS_cache iSQLParamParser.cpp iSQLParamParser.cpp.h iSQLParamParser.hpp iSQLParamParser.output iSQLSriptParser.cpp.output iSQLParser.cpp iSQLParser.cpp.h iSQLParser.hpp iSQLParser.output iSQLParser.cpp.output iSQLConnectParser.cpp iSQLConnectParser.cpp.h iSQLConnectParser.hpp iSQLConnectParser.output iSQLConnectParser.cpp.output $(ISQLARC) $(BINS)
 
 clean_cli:
 	$(RM) $(CLI_OBJ_DIR) $(CLI_SHOBJ_DIR)
