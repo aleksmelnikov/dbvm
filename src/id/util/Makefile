@@ -19,11 +19,9 @@ clean:
 install: $(BINS)
 
 $(DUMPMAP_BIN): $(TARGET_DIR)/src/id/util/dumpmap.$(OBJEXT) $(ALTI_HOME)/bin/altibase.map
-	$(RM) map.ic 
 	$(LD) $(INCLUDES) $(CFLAGS) $(LFLAGS) $(LDOUT)$@ $< $(LIBDIRS) $(LIBS) $(SERVER_LIBS)
 
 $(ALTICRC_BIN): $(TARGET_DIR)/src/id/util/alticrc.$(OBJEXT)
-	$(RM) alticrc.txt
 	$(LD) $(INCLUDES) $(CFLAGS) $(LFLAGS) $(LDOUT)$@ $< $(LIBDIRS) $(LIBS) $(SERVER_LIBS)
 
 alticrc.txt: $(ALTICRC_BIN)
@@ -43,8 +41,6 @@ else
 endif
 
 $(DUMPTRC_BIN): $(TARGET_DIR)/src/id/util/dumptrc.$(OBJEXT)
-	$(DUMPMAP_BIN) > map.ic
-	$(ALTICRC_BIN) > alticrc.txt
 	$(LD) $(INCLUDES) $(CFLAGS) $(LFLAGS) $(LDOUT)$@ $< $(LIBDIRS) $(LIBS) $(SERVER_LIBS)
 
 DEP_DIR=$(CURDIR:$(DEV_DIR)%=$(TARGET_DIR)%)
