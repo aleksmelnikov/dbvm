@@ -72,6 +72,21 @@ Start the server daemon:
 $ALTIBASE_HOME/bin/server start
 ```
 
+Installing Standard Packages
+----------------------------
+
+After the server is started (SERVICE phase), install the standard PL/SQL packages (DBMS_OUTPUT, DBMS_LOCK, DBMS_RANDOM, etc.):
+```bash
+$ALTIBASE_HOME/bin/is -sysdba -f $ALTIBASE_HOME/packages/catproc.sql
+```
+
+> **Note:** `catproc.sql` must be run **after** `server start`, not after `server create`. The server must be fully in SERVICE phase.
+>
+> Verification: `SELECT SYS_CONTEXT('USERENV','SESSION_USER') FROM DUAL;` should return `SYS`.
+
+Work
+----
+
 Use the `ISQL` utility to connect to the server and execute a test query:
 ```bash
 $ALTIBASE_HOME/bin/is
