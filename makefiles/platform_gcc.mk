@@ -120,7 +120,14 @@ LD     = $(LD_CC)
 AR     = ar
 NM     = nm
 COV    = gcov
-GCC_VERSION := $(shell $(CC) -dumpversion)
+# gcc_version is generated once by configure; reading it from disk avoids
+# a $(shell) fork of $(CC) -dumpversion in every recursive sub-make.
+GCC_VERSION_FILE := $(ALTIDEV_HOME)/gcc_version
+ifneq ($(wildcard $(GCC_VERSION_FILE)),)
+  GCC_VERSION := $(file <$(GCC_VERSION_FILE))
+else
+  GCC_VERSION := $(shell $(CC) -dumpversion)
+endif
 
 #
 # Compiler options

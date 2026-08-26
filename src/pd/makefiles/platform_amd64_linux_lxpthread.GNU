@@ -38,7 +38,15 @@ CXX_BACKWARD_FLAGS = -Wno-deprecated \
                      -Wno-deprecated-declarations \
                      -Wno-register
 # Set compiler-specific flag for literal suffixes
-COMPILER := $(shell $(CXX) --version | grep --ignore-case --quiet clang && echo clang || echo gcc)
+# The compiler type is probed once and cached in ALTIDEV_HOME; probing on
+# every sub-make costs two forks (g++ --version + grep) per directory.
+COMPILER_CACHE := $(ALTIDEV_HOME)/compiler_type
+ifneq ($(wildcard $(COMPILER_CACHE)),)
+  COMPILER := $(file <$(COMPILER_CACHE))
+else
+  COMPILER := $(shell $(CXX) --version | grep --ignore-case --quiet clang && echo clang || echo gcc)
+  $(shell mkdir -p $(dir $(COMPILER_CACHE)); printf %s "$(COMPILER)" > $(COMPILER_CACHE).tmp && mv $(COMPILER_CACHE).tmp $(COMPILER_CACHE) 2>/dev/null)
+endif
 ifeq ($(COMPILER),gcc)
     # for GCC
     CXX_BACKWARD_FLAGS += -Wno-literal-suffix
