@@ -66,9 +66,7 @@ cli:$(ILOADER_BINS)
 
 compile: cmd archive install
 
-archive:
-	$(MAKE) archive_iloader
-	$(MAKE) archive_shardloader
+archive: archive_iloader archive_shardloader
 
 archive_iloader: $(ILOADERARC)
 
@@ -110,9 +108,7 @@ else
 endif
 	$(Q) $(LD) $(LFLAGS) $(LIBDIRS) $(LDOUT)$@ $^ $(SHARDLOADER_DEP_LIBS)
 
-install:
-	$(MAKE) install_iloader
-	$(MAKE) install_shardloader
+install: install_iloader install_shardloader
 
 install_iloader: $(ILOADER_BINS)
 	$(COPY) $(ILOADER_BAN) $(ALTI_HOME)/msg

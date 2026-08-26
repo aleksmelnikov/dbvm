@@ -42,8 +42,10 @@ LIB_IDPD_SHOBJS =  $(PD_SHOBJS) $(ID_SHOBJS)
 
 compile: cmd iloaderapi_static iloaderapi_shared
 
-iloaderapi_static: $(LIB_IDPD_OBJS) $(LIB_AR_OBJS)
-	 $(Q) $(AR) $(ARFLAGS) $(AROUT)$(ILOADERAPI_LIB_PATH) $(LIB_IDPD_OBJS) $(LIB_AR_OBJS)
+iloaderapi_static: $(ILOADERAPI_LIB_PATH)
+
+$(ILOADERAPI_LIB_PATH): $(LIB_IDPD_OBJS) $(LIB_AR_OBJS)
+	 $(Q) $(AR) $(ARFLAGS) $(AROUT)$@ $^
 
 #################################
 # BUG-30728
@@ -55,13 +57,13 @@ ifeq "$(OS_TARGET)" "INTEL_WINDOWS"
   ifeq "$(OS_TARGET2)" "WINCE"
 	echo "SKIP Shared Library Build";
   else
-	$(MAKE) iloaderapi_shared_build
+iloaderapi_shared: $(ILOADERAPI_SHLIB_PATH)
   endif
 else
   ifeq "$(NEED_SHARED_LIBRARY)" "no" # defined in pd/makefiles2/*.mk : only aix 4.x no
 	echo "SKIP Shared Library Build";
   else
-	$(MAKE) iloaderapi_shared_build
+iloaderapi_shared: $(ILOADERAPI_SHLIB_PATH)
   endif
 endif
 
