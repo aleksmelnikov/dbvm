@@ -66,26 +66,27 @@ all: picl_lib
 
 $(foreach i,$(sort $(PICL_SHOBJS)),$(eval $(call ListRuleFunc,$i)))
 
-picl_lib: $(PICL_SHOBJS_TARGET) $(PICL_SHOBJS)
-	$(Q) -$(RM) $(PICL_SHLIB_PATH)
+picl_lib: $(PICL_SHLIB_PATH)
+
+$(PICL_SHLIB_PATH): $(PICL_SHOBJS_TARGET) $(PICL_SHOBJS)
 ifeq "$(NEED_INDIRECTION_BUILD)" "yes" # now only windows use indirection build
 ifeq "$(OS_TARGET)" "INTEL_WINDOWS"
 ifeq "$(OS_TARGET2)" "WINCE"
-	$(SOLINK.cc) $(LIBDIRS) $(PICL_SHOBJS) $(SOOUT)$(PICL_SHLIB_PATH)
+	$(SOLINK.cc) $(LIBDIRS) $(PICL_SHOBJS) $(SOOUT)$@
 else
-	$(SOLINK.cc) $(LIBDIRS) $(PICL_SHOBJS) $(SOOUT)$(PICL_SHLIB_PATH)
+	$(SOLINK.cc) $(LIBDIRS) $(PICL_SHOBJS) $(SOOUT)$@
 endif # WIN_CE
 endif # INTEL_WINDOWS
 else
-	$(Q) echo " SO $(PICL_SHLIB_PATH)"
+	$(Q) echo " SO $@"
 ifeq "$(OS_TARGET)" "IBM_AIX"
     ifeq ($(compile64),1)
-	$(Q) $(SOLINK.c) $(SOOUT)$(PICL_SHLIB_PATH) $(PICL_SHOBJS) -lperfstat -lodm -lcfg
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(PICL_SHOBJS) -lperfstat -lodm -lcfg
     else
-	$(Q) $(SOLINK.c) $(LIBDIRS) $(SOOUT)$(PICL_SHLIB_PATH) $(PICL_SHOBJS) $(LIBOPT)gcc_s$(LIBAFT) -lperfstat -lodm -lcfg
+	$(Q) $(SOLINK.c) $(LIBDIRS) $(SOOUT)$@ $(PICL_SHOBJS) $(LIBOPT)gcc_s$(LIBAFT) -lperfstat -lodm -lcfg
     endif # compile64=1
 else
-	$(Q) $(SOLINK.c) $(SOOUT)$(PICL_SHLIB_PATH) $(PICL_SHOBJS) $(CLFLAGS)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(PICL_SHOBJS) $(CLFLAGS)
 endif # IBM_AIX
 endif # NEED_INDIRECTION_BUILD
 

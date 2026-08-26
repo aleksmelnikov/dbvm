@@ -64,15 +64,22 @@ all: compile
 
 compile: picl_jar os_jni
 
-picl_jar: classes
-	$(Q) echo "make $(PICL_JAR)"
-	$(Q) $(JAR) cfm $(PICL_JAR) $(MANIFEST) -C $(DEST_DIR) .
+PICL_STAMP = .picl-built
 
-classes: $(PICL_SRCS)
+$(PICL_STAMP): $(PICL_SRCS) $(MANIFEST) Makefile
 	$(Q) echo "compile ..."
 	$(Q) $(RM) $(DEST_DIR)
 	$(Q) mkdir $(DEST_DIR)
 	$(Q) $(JAVAC) $(JFLAGS) $(CLASSPATH) $(PICL_SRCS) -d $(DEST_DIR)
+	$(Q) echo "make $(PICL_JAR)"
+	$(Q) $(JAR) cfm $(PICL_JAR) $(MANIFEST) -C $(DEST_DIR) .
+	@touch $@
+
+picl_jar: $(PICL_STAMP)
+
+# legacy alias: class compilation is now part of the stamp recipe
+classes: $(PICL_STAMP)
+.PHONY: classes
 
 os_jni:
 ifeq "$(OS_DIR)" ""
@@ -82,7 +89,7 @@ else
 endif
 
 clean:
-	$(RM) $(DEST_DIR) $(PICL_JAR)
+	$(RM) $(DEST_DIR) $(PICL_JAR) $(PICL_STAMP)
 ifeq "$(OS_DIR)" ""
 	$(Q) echo "Unsupported OS."
 else
