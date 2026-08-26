@@ -51,9 +51,16 @@ YACCFLAGS = -d -v
 
 all: compile
 
-compile: $(DIRS) archive $(BINS) install
+APRE_STAMP = .apre-built
 
-parser: $(DIRS) genparser archive $(BINS) install
+compile: $(DIRS) archive $(APRE_STAMP)
+
+# legacy alias: install steps are now part of the stamp recipe
+install: $(APRE_STAMP)
+
+$(BINS): $(APRE_STAMP)
+
+parser: $(DIRS) genparser $(APRE_STAMP)
 
 $(ULP_GEN_OBJS): $(ULP_GEN_SRCS)
 
@@ -100,21 +107,20 @@ archive: $(ULPARC)
 
 $(ULPARC): $(ULP_GEN_OBJS) $(ULP_BIN_OBJS)
 
-$(BINS): $(ULP_GEN_OBJS) $(ULP_BIN_OBJS)
-	@echo " LD $@"
-	@$(LD) $(LFLAGS) $(LDOUT)$@ $^ $(ULP_DEP_LIBS)
+$(APRE_STAMP): $(ULP_GEN_OBJS) $(ULP_BIN_OBJS) $(ULPARC)
+	@echo " LD apre"
+	@$(LD) $(LFLAGS) $(LDOUT)apre $^ $(ULP_DEP_LIBS)
+	$(COPY) apre $(ALTI_HOME)/bin/$(BINS)
+	$(COPY) apre $(ALTI_HOME)/bin/sesc$(BINEXT)
+	@touch $@
 
 $(TARGET_DIR)/%.$(OBJEXT): $(DEV_DIR)/%.cpp
 	$(COMPILE_IT)
 
-install: $(BINS) $(ULPARC)
-	$(COPY) $(BINS) $(ALTI_HOME)/bin/$(BINS) 
-	$(COPY) $(BINS) $(ALTI_HOME)/bin/sesc$(BINEXT) 
-	$(RM)  $(BINS)
 alint: $(SRCS:.cpp=.lint)
 
 clean:
-	$(RM) $(TARGET_DIR)/src/ul/ulp core .dependency *.d SunWS_cache $(ULPARC) $(BINS)
+	$(RM) $(TARGET_DIR)/src/ul/ulp core .dependency *.d SunWS_cache $(ULPARC) $(BINS) $(APRE_STAMP)
 	$(MAKE) $(S) $(DIRS) SUBDIR_TARGET=clean
 
 -include $(OBJS:.$(OBJEXT)=.d)
