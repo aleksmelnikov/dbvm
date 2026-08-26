@@ -51,15 +51,22 @@ all: compile
 
 compile: altimon_jar
 
-altimon_jar: classes
-	$(Q) echo "make $(ALTIMON_JAR)"
-	$(Q) $(JAR) cfm $(ALTIMON_JAR) $(MANIFEST) -C $(DEST_DIR) .
+ALTIMON_STAMP = .altimon-built
 
-classes: $(ALTIMON_SRCS)
+$(ALTIMON_STAMP): $(ALTIMON_SRCS) lib/com.altibase.picl.jar Makefile
 	$(Q) echo "compile ..."
 	$(Q) $(RM) $(DEST_DIR)
 	$(Q) mkdir $(DEST_DIR)
 	$(Q) $(JAVAC) $(JFLAGS) $(CLASSPATH) $(ALTIMON_SRCS) -d $(DEST_DIR)
+	$(Q) echo "make $(ALTIMON_JAR)"
+	$(Q) $(JAR) cfm $(ALTIMON_JAR) $(MANIFEST) -C $(DEST_DIR) .
+	@touch $@
+
+altimon_jar: $(ALTIMON_STAMP)
+
+# legacy alias: class compilation is now part of the stamp recipe
+classes: $(ALTIMON_STAMP)
+.PHONY: classes
 
 package: compile
 	$(Q) echo "package $(ALTIMON_TARBALL)"
@@ -84,5 +91,5 @@ package: compile
 #	$(Q) $(RM) $(DIST_DIR) bin
 	
 clean:
-	$(RM) $(DEST_DIR) $(ALTIMON_JAR) $(ALTIMON_TARBALL) $(DIST_DIR) bin
+	$(RM) $(DEST_DIR) $(ALTIMON_JAR) $(ALTIMON_TARBALL) $(DIST_DIR) bin $(ALTIMON_STAMP)
 
