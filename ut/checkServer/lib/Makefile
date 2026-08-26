@@ -63,7 +63,7 @@ chksvr_shared:
 ifeq "$(NEED_SHARED_LIBRARY)" "no"
 	echo "SKIP Shared Library Build";
 else
-	$(MAKE) chksvr_shared_build
+chksvr_shared: $(CHKSERV_SHLIB_PATH)
 endif
 
 chksvr_shared_build: $(CHKSERV_SHLIB_PATH)
