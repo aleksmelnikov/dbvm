@@ -36,45 +36,18 @@ all: msg lib
 msg:
 	$(MAKE) -C ../msg/
 
-lib:
-	$(MAKE) odbccli
-	$(MAKE) acslib
-	$(MAKE) alalib
-	$(MAKE) shardcli
+STAMP_ODBC  = .odbccli-built
+STAMP_SHARD = .shardcli-built
+STAMP_ACS   = .acs-built
+STAMP_ALA   = .ala-built
 
-#BUG-22936
+lib: $(STAMP_ALA) $(UNIX_ODBC_SHLIB_PATH)
 ifeq ($(compile64),1)
-	$(MAKE) unix_odbc64
+lib: $(UNIX_ODBC64_SHLIB_PATH)
 endif
-	$(MAKE) unix_odbc
 
-# sort for removing duplicate rules
-$(foreach i,$(sort $(ODBCCLI_SHOBJS) $(SHARDCLI_SHOBJS) $(ACS_SHOBJS) $(ALA_SHOBJS) $(ALA_OBJS) ),$(eval $(call ListRuleFunc,$i)))
-
-odbccli:
-	$(MAKE) odbccli_static
-	$(MAKE) odbccli_shared
-
-shardcli:
-	$(MAKE) shardcli_static
-	$(MAKE) shardcli_shared
-
-acslib:
-	$(MAKE) acslib_static
-#	make acslib_shared    # BUG-15883
-
-alalib:
-	$(MAKE) alalib_static
-	$(MAKE) alalib_shared
-
-#################
-# static CLI 網萄
-#################
-odbccli_static:
-	$(Q) -$(RM) $(ALTIBASE_HOME)/lib/$(LIBPRE)odbccli.$(LIBEXT)
-	$(MAKE) odbccli_static_build
-
-odbccli_static_build: $(ODBCCLI_LIB_PATH)
+$(STAMP_ODBC): $(ODBCCLI_OBJS) $(ODBCCLI_SHOBJS)
+	$(Q) -$(RM) $(ODBCCLI_LIB_PATH)
 ifeq "$(OS_TARGET)" "IBM_AIX"
   # BUG-31759
   # AIX needs X64 or X32 flag according to the compile bit
@@ -86,44 +59,24 @@ ifeq "$(OS_TARGET)" "IBM_AIX"
 else # ifneq "$(OS_TARGET)" "IBM_AIX"
 	$(Q) $(AR) -x $(ALTICORE_LIBDIR)/$(LIBPRE)alticore.$(LIBEXT)
 endif
-	$(Q) $(AR) $(ARFLAGS) $(ALTIBASE_HOME)/lib/$(LIBPRE)odbccli.$(LIBEXT) *.$(OBJEXT) > /dev/null
+	$(Q) $(AR) $(ARFLAGS) $(ODBCCLI_LIB_PATH) *.$(OBJEXT) > /dev/null
 	$(Q) -$(RM) *.$(OBJEXT)
-
-$(ODBCCLI_LIB_PATH): $(ODBCCLI_OBJS)
-
-#################
-# shared CLI 網萄
-#################
-odbccli_shared:
-ifeq "$(NEED_SHARED_LIBRARY)" "no" # defined in pd/makefiles2/*.mk : only aix 4.x no
-	echo "SKIP Shared Library Build";
-else
-	$(MAKE) odbccli_shared_build
-endif
-
-odbccli_shared_build: $(ODBCCLI_SHOBJS)
-	$(Q) -$(RM) $(ODBCCLI_SHLIB_PATH)
+	$(Q) $(AR) $(ARFLAGS) $(ODBCCLI_LIB_PATH) $(ODBCCLI_OBJS) > /dev/null
 	$(Q) echo " SO $(ODBCCLI_SHLIB_PATH)"
 ifeq "$(OS_TARGET)" "IBM_AIX"
     # BUG-31647
     ifeq ($(compile64),1)
 	$(Q) $(SOLINK.c) $(SOOUT)$(ODBCCLI_SHLIB_PATH) $(ODBCCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(LIBOPT)curses$(LIBAFT) $(CLFLAGS)
     else
-	$(Q) $(SOLINK.c) $(LIBDIRS) $(SOOUT)$(ODBCCLI_SHLIB_PATH) $(ODBCCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(LIBOPT)curses$(LIBAFT) $(LIBOPT)gcc_s$(LIBAFT) $(CLFLAGS)
+	$(Q) $(SOLINK.cc) $(LIBDIRS) $(SOOUT)$(ODBCCLI_SHLIB_PATH) $(ODBCCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(LIBOPT)curses$(LIBAFT) $(LIBOPT)gcc_s$(LIBAFT) $(CLFLAGS)
     endif # compile64=1
 else
 	$(Q) $(SOLINK.c) $(SOOUT)$(ODBCCLI_SHLIB_PATH) $(ODBCCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(CLFLAGS)
 endif # IBM_AIX
+	$(Q) touch $@
 
-#################
-# static CLI for Shard 網萄
-#################
-shardcli_static:
-	$(Q) -$(RM) $(ALTIBASE_HOME)/lib/$(LIBPRE)shardcli.$(LIBEXT)
-	$(MAKE) shardcli_static_build
-
-
-shardcli_static_build: $(SHARDCLI_LIB_PATH)
+$(STAMP_SHARD): $(STAMP_ODBC) $(SHARDCLI_OBJS) $(SHARDCLI_SHOBJS)
+	$(Q) -$(RM) $(SHARDCLI_LIB_PATH)
 ifeq "$(OS_TARGET)" "IBM_AIX"
   ifeq ($(compile64),1)
 	$(Q) $(AR) -x -X64 $(ALTICORE_LIBDIR)/$(LIBPRE)alticore.$(LIBEXT)
@@ -133,135 +86,125 @@ ifeq "$(OS_TARGET)" "IBM_AIX"
 else # ifneq "$(OS_TARGET)" "IBM_AIX"
 	$(Q) $(AR) -x $(ALTICORE_LIBDIR)/$(LIBPRE)alticore.$(LIBEXT)
 endif
-	$(Q) $(AR) $(ARFLAGS) $(ALTIBASE_HOME)/lib/$(LIBPRE)shardcli.$(LIBEXT) *.$(OBJEXT) > /dev/null
+	$(Q) $(AR) $(ARFLAGS) $(SHARDCLI_LIB_PATH) *.$(OBJEXT) > /dev/null
 	$(Q) -$(RM) *.$(OBJEXT)
-
-$(SHARDCLI_LIB_PATH): $(SHARDCLI_OBJS)
-
-#################
-# shared CLI for Shard 網萄
-#################
-shardcli_shared: $(SHARDCLI_SHOBJS)
-	$(Q) -$(RM) $(SHARDCLI_SHLIB_PATH)
+	$(Q) $(AR) $(ARFLAGS) $(SHARDCLI_LIB_PATH) $(SHARDCLI_OBJS) > /dev/null
 	$(Q) echo " SO $(SHARDCLI_SHLIB_PATH)"
 ifeq "$(OS_TARGET)" "IBM_AIX"
     # BUG-31647
     ifeq ($(compile64),1)
 	$(Q) $(SOLINK.c) $(SOOUT)$(SHARDCLI_SHLIB_PATH) $(SHARDCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(LIBOPT)curses$(LIBAFT) $(CLFLAGS)
     else
-	$(Q) $(SOLINK.c) $(LIBDIRS) $(SOOUT)$(SHARDCLI_SHLIB_PATH) $(SHARDCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(LIBOPT)curses$(LIBAFT) $(LIBOPT)gcc_s$(LIBAFT) $(CLFLAGS)
+	$(Q) $(SOLINK.cc) $(LIBDIRS) $(SOOUT)$(SHARDCLI_SHLIB_PATH) $(SHARDCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(LIBOPT)curses$(LIBAFT) $(LIBOPT)gcc_s$(LIBAFT) $(CLFLAGS)
     endif # compile64=1
 else
 	$(Q) $(SOLINK.c) $(SOOUT)$(SHARDCLI_SHLIB_PATH) $(SHARDCLI_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(CLFLAGS)
 endif # IBM_AIX
+	$(Q) touch $@
 
-############################################
-# ACS LIB 網萄
-############################################
-
-#################
-# static acslib 網萄
-#################
-
-acslib_static: $(ACS_LIB_PATH)
-
-$(ACS_LIB_PATH): $(ACS_OBJS)
-
-#################
-# shared acslib 網萄
-#################
-
-acslib_shared:
-ifeq "$(NEED_SHARED_LIBRARY)" "no" # defined in pd/makefiles2/*.mk : only aix 4.x no
-	echo "SKIP Shared Library Build";
-else
-	$(MAKE) acs_shared_build
-endif
-
-acs_shared_build: $(ACS_SHOBJS)
-	$(Q) -$(RM) $(ACS_SHLIB_PATH)
+$(STAMP_ACS): $(STAMP_SHARD) $(ACS_OBJS) $(ACS_SHOBJS)
 	$(Q) echo " SO $(ACS_SHLIB_PATH)"
-	$(SOLINK.c) $(SOOUT)$(ACS_SHLIB_PATH) $(ACS_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(CLFLAGS)
-
-############################################
-# ALA LIB 網萄
-############################################
-
-#################
-# static alalib 網萄
-#################
+	$(Q) $(SOLINK.c) $(SOOUT)$(ACS_SHLIB_PATH) $(ACS_SHOBJS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT) $(CLFLAGS)
+	$(Q) touch $@
 
 ifeq "$(OS_TARGET)" "IBM_AIX"
-alalib_static: $(ALA_LIB_PATH) $(ALA_OBJS)
+$(STAMP_ALA): $(STAMP_ACS) $(ALA_OBJS) $(ALA_SHOBJS)
+	$(Q) -$(RM) $(ALA_LIB_PATH)
 	$(Q) $(AR) $(ARFLAGS) $(ALA_LIB_PATH) $(ALA_OBJS)
 ifeq ($(compile64),1)
 	$(Q) $(AR) -x -X64 $(ALTICORE_LIBDIR)/$(LIBPRE)alticore.$(LIBEXT)
 else
 	$(Q) $(AR) -x -X32 $(ALTICORE_LIBDIR)/$(LIBPRE)alticore.$(LIBEXT)
 endif
-	$(Q) $(AR) $(ARFLAGS) $(ALTIBASE_HOME)/lib/$(LIBPRE)ala.$(LIBEXT) *.$(OBJEXT) > /dev/null
+	$(Q) $(AR) $(ARFLAGS) $(ALA_LIB_PATH) *.$(OBJEXT) > /dev/null
 	$(Q) $(RM) *.$(OBJEXT)
+	$(Q) echo " SO $(ALA_SHLIB_PATH)"
+	$(Q) $(SOLINK.c) $(SOOUT)$(ALA_SHLIB_PATH) $(ALA_SHOBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) touch $@
 else
-alalib_static: $(ALA_LIB_PATH)
+$(STAMP_ALA): $(STAMP_ACS) $(ALA_OBJS) $(ALA_SHOBJS)
+	$(Q) -$(RM) $(ALA_LIB_PATH)
 	$(Q) $(AR) -x $(ALTICORE_LIBDIR)/$(LIBPRE)alticore.$(LIBEXT)
-	$(Q) $(AR) $(ARFLAGS) $(ALTIBASE_HOME)/lib/$(LIBPRE)ala.$(LIBEXT) *.$(OBJEXT) > /dev/null
+	$(Q) $(AR) $(ARFLAGS) $(ALA_LIB_PATH) *.$(OBJEXT) > /dev/null
 	$(Q) $(RM) *.$(OBJEXT)
-
-$(ALA_LIB_PATH): $(ALA_OBJS)
+	$(Q) $(AR) $(ARFLAGS) $(ALA_LIB_PATH) $(ALA_OBJS) > /dev/null
+	$(Q) echo " SO $(ALA_SHLIB_PATH)"
+	$(Q) $(SOLINK.c) $(SOOUT)$(ALA_SHLIB_PATH) $(ALA_SHOBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) touch $@
 endif
 
-#################
-# shared alalib 網萄
-#################
+# ---------------------------------------------------------------
+#  Legacy developer targets: thin aliases kept for compatibility.
+#  All of them resolve to the file-based rules above, so they stay
+#  no-op on idle incremental runs just like the stamps do.
+# ---------------------------------------------------------------
+.PHONY: odbccli odbccli_static odbccli_static_build
+.PHONY: odbccli_shared odbccli_shared_build
+.PHONY: shardcli shardcli_static shardcli_static_build shardcli_shared
+.PHONY: acslib acslib_static acslib_shared acs_shared_build
+.PHONY: alalib alalib_static alalib_shared ala_shared_build ala_shared_build_aix
 
-alalib_shared:
+odbccli: $(STAMP_ODBC)
+odbccli_static: $(ODBCCLI_LIB_PATH)
+odbccli_static_build: $(ODBCCLI_LIB_PATH)
+odbccli_shared: $(ODBCCLI_SHLIB_PATH)
+odbccli_shared_build: $(ODBCCLI_SHLIB_PATH)
+
+shardcli: $(STAMP_SHARD)
+shardcli_static: $(SHARDCLI_LIB_PATH)
+shardcli_static_build: $(SHARDCLI_LIB_PATH)
+shardcli_shared: $(SHARDCLI_SHLIB_PATH)
+
+acslib: $(STAMP_ACS)
+
+acslib_static: $(ACS_LIB_PATH)
+
+$(ACS_LIB_PATH): $(ACS_OBJS)
+
+acslib_shared:
 ifeq "$(NEED_SHARED_LIBRARY)" "no" # defined in pd/makefiles2/*.mk : only aix 4.x no
 	echo "SKIP Shared Library Build";
 else
-#ifeq "$(OS_TARGET)" "IBM_AIX"
-#	make ala_shared_build_aix
-#else
-	$(MAKE) ala_shared_build
-#endif
+acs_shared_build: $(ACS_SHLIB_PATH)
 endif
 
-ala_shared_build_aix: $(ALA_SHOBJS)
-	$(Q) -$(RM) $(ALA_SHLIB_PATH)
-	$(Q) echo " SO $(ALA_SHLIB_PATH)"
-	$(Q) $(SOLINK.c) $(SOOUT)$(ALA_SHLIB_PATH) $(ALA_SHOBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
-
-ala_shared_build: $(ALA_SHOBJS)
-	$(Q) -$(RM) $(ALA_SHLIB_PATH)
-	$(Q) echo " SO $(ALA_SHLIB_PATH)"
-	$(Q) $(SOLINK.c) $(SOOUT)$(ALA_SHLIB_PATH) $(ALA_SHOBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+alalib: $(ALA_LIB_PATH) $(ALA_SHLIB_PATH)
+alalib_static: $(ALA_LIB_PATH)
+alalib_shared: $(ALA_SHLIB_PATH)
+ala_shared_build: $(ALA_SHLIB_PATH)
+ala_shared_build_aix: $(ALA_SHLIB_PATH)
 
 ################
-# Unix ODBC 網萄
+# Unix ODBC
 ################
-unix_odbc: $(UNIX_ODBC_OBJS)
-	$(Q) -$(RM) $(UNIX_ODBC_SHLIB_PATH)
-	$(Q) echo " SO $(UNIX_ODBC_SHLIB_PATH)"
+# Unix ODBC 嚙踝蕭嚙踝蕭
+################
+unix_odbc: $(UNIX_ODBC_SHLIB_PATH)
+
+$(UNIX_ODBC_SHLIB_PATH): $(UNIX_ODBC_OBJS)
+	$(Q) echo " SO $@"
 ifeq "$(OS_TARGET)" "X86_SOLARIS"
-	$(Q) $(SOLINK.c) $(SOOUT)$(UNIX_ODBC_SHLIB_PATH) $(UNIX_ODBC_OBJS) $(CLFLAGS) -lxnet -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(UNIX_ODBC_OBJS) $(CLFLAGS) -lxnet -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
 else
 ifeq "$(OS_TARGET)" "SPARC_SOLARIS"
-	$(Q) $(SOLINK.c) $(SOOUT)$(UNIX_ODBC_SHLIB_PATH) $(UNIX_ODBC_OBJS) $(CLFLAGS) -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(UNIX_ODBC_OBJS) $(CLFLAGS) -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
 else
-	$(Q) $(SOLINK.c) $(SOOUT)$(UNIX_ODBC_SHLIB_PATH) $(UNIX_ODBC_OBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(UNIX_ODBC_OBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
 endif
 endif
 
 #BUG-22936
-unix_odbc64: $(UNIX_ODBC64_OBJS)
-	$(Q) -$(RM) $(UNIX_ODBC64_SHLIB_PATH)
-	$(Q) echo " SO $(UNIX_ODBC64_SHLIB_PATH)"
+unix_odbc64: $(UNIX_ODBC64_SHLIB_PATH)
+
+$(UNIX_ODBC64_SHLIB_PATH): $(UNIX_ODBC64_OBJS)
+	$(Q) echo " SO $@"
 ifeq "$(OS_TARGET)" "X86_SOLARIS"
-	$(Q) $(SOLINK.c) $(SOOUT)$(UNIX_ODBC64_SHLIB_PATH) $(UNIX_ODBC64_OBJS) $(CLFLAGS) -lxnet -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(UNIX_ODBC64_OBJS) $(CLFLAGS) -lxnet -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
 else
 ifeq "$(OS_TARGET)" "SPARC_SOLARIS"
-	$(Q) $(SOLINK.c) $(SOOUT)$(UNIX_ODBC64_SHLIB_PATH) $(UNIX_ODBC64_OBJS) $(CLFLAGS) -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(UNIX_ODBC64_OBJS) $(CLFLAGS) -lc -lnsl -lsocket $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
 else
-	$(Q) $(SOLINK.c) $(SOOUT)$(UNIX_ODBC64_SHLIB_PATH) $(UNIX_ODBC64_OBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
+	$(Q) $(SOLINK.c) $(SOOUT)$@ $(UNIX_ODBC64_OBJS) $(CLFLAGS) $(LDROPT)$(ALTICORE_LIBDIR) $(ALTICORE_LIBDIR)/$(LIBPRE)alticore_pic.$(LIBEXT)
 endif
 endif
 
@@ -421,6 +364,7 @@ $(TARGET_DIR)/%_64.$(OBJEXT): $(DEV_DIR)/%.c
 
 clean:
 	-$(RM) core $(OBJS) *.d SunWS_cache .shobj
+	-$(RM) $(STAMP_ODBC) $(STAMP_SHARD) $(STAMP_ACS) $(STAMP_ALA)
 #	-$(RM) $(ODBCCLI_OBJS)
 #	-$(RM) $(ODBCCLI_SHOBJS)
 #	-$(RM) $(UNIX_ODBC_OBJS)
