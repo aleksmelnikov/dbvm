@@ -65,9 +65,9 @@ START ?/packages/dbms_shard.sql
 START ?/packages/dbms_shard_get_diagnostics.sql
 
 START ?/packages/dbms_shard.plb
-START ?/packages/dbms_shard_get_diagnositcs.plb
+START ?/packages/dbms_shard_get_diagnostics.plb
 
 -- BUG-47355
 START ?/packages/sys_context.sql
 START ?/packages/dbms_metadata.sql
-START ?/packages/dbms_metadata_body.sql
+START ?/packages/dbms_metadata.plb
