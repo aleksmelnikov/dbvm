@@ -28,20 +28,119 @@
 iduProperty::iduPropertyStore *iduProperty::mProperties = &iduProperty::mStaticProperties;
 iduProperty::iduPropertyStore  iduProperty::mStaticProperties =
 {
-    ID_SCALABILITY_CLIENT_CPU,  // mScalabilityPerCPU
-    ID_SCALABILITY_CLIENT_MAX,  // mMaxScalability
-    IDL_NET_CONN_IP_STACK_V4,   // mNetConnIpStack
-    IDL_NET_CONN_IP_STACK_V4,   // mRpNetConnIpStack
-    0,                          // mErrorValidationLevel
-    1,                          // mWriteErrorTrace
-    0,                          // mWritePstack
-    1,                          // mUseSigAltStack
-    10,                         // mLogCollectCount
-    1,                          // mCollectDumpInfo
-    1,                          // mWriteWindowsMinidump
-    3 * 1048576,                // mDefaultThreadStackSize
-    1,                          // mUseMemoryPool
-    ID_FALSE,                   // mInspectionLargeHeapThresholdInitialized
+    ID_SCALABILITY_CLIENT_CPU,  // UInt mScalabilityPerCPU
+    ID_SCALABILITY_CLIENT_MAX,  // UInt mMaxScalability
+    IDL_NET_CONN_IP_STACK_V4,   // UInt mNetConnIpStack
+    IDL_NET_CONN_IP_STACK_V4,   // UInt mRpNetConnIpStack
+    0,                          // UInt mErrorValidationLevel
+    1,                          // UInt mWriteErrorTrace
+    0,                          // UInt mWritePstack
+    1,                          // UInt mUseSigAltStack
+    10,                         // UInt mLogCollectCount
+    1,                          // UInt mCollectDumpInfo
+    1,                          // UInt mWriteWindowsMinidump
+    3 * 1048576,                // UInt mDefaultThreadStackSize
+    1,                          // UInt mUseMemoryPool
+    0,                          // UInt mUseDumpCallstacks
+    ID_FALSE,                   // idBool mInspectionLargeHeapThresholdInitialized
+    0,                          // UInt mXLatchUseSignal
+    0,                          // UInt mMutexType
+    0,                          // UInt mCheckMutexDurationTimeEnable
+    0,                          // UInt mTimedStatistics
+    0,                          // UInt mLatchType
+    0,                          // UInt mMutexSpinCount
+    0,                          // UInt mNativeMutexSpinCount
+    0,                          // UInt mNativeMutexSpinCount4Logging
+    0,                          // UInt mLatchSpinCount
+    0,                          // UInt mProtocolDump
+    0,                          // UInt mServerTrcFlag
+    0,                          // UInt mSmTrcFlag
+    0,                          // UInt mQpTrcFlag
+    0,                          // UInt mJobTrcFlag
+    0,                          // UInt mSdTrcFlag
+    0,                          // UInt mSdTrcEnable
+    0,                          // UInt mRpTrcFlag
+    0,                          // UInt mRpConflictTrcFlag
+    0,                          // UInt mRpConflictTrcEnable
+    0,                          // UInt mDkTrcFlag
+    0,                          // UInt mXaTrcFlag
+    0,                          // UInt mCmTrcFlag
+    0,                          // UInt mLbTrcFlag
+    0,                          // UInt mMmTrcFlag
+    0,                          // UInt mSourceInfo
+    0,                          // UInt mAllMsglogFlush
+    0,                          // UInt mDirectIOEnabled
+    0,                          // ULong mQMPMemMaxSize
+    0,                          // ULong mQMXMemMaxSize
+    0,                          // UInt mQueryProfFlag
+    0,                          // UInt mQueryProfBufSize
+    0,                          // UInt mQueryProfBufFullSkip
+    0,                          // UInt mQueryProfBufFlushSize
+    0,                          // UInt mQueryProfFileSize
+    { 0 },                      // SChar mQueryProfLogDir
+    0,                          // UInt mAuditBufferSize
+    0,                          // UInt mAuditBufferFullSkip
+    0,                          // UInt mAuditBufferFlushSize
+    0,                          // UInt mAuditFileSize
+    { 0 },                      // SChar mAuditLogDir
+    0,                          // UInt mAuditOutputMethod
+    { 0 },                      // SChar mAuditTagNameInSyslog
+    0,                          // UInt mDirectIOPageSize
+    0,                          // UInt mEnableRecoveryTest
+    0,                          // UInt mShowMutexLeakList
+    0,                          // UInt mMutexPoolMaxSize
+    { 0 },                      // SChar mMemDBDir
+    { 0 },                      // SChar mDefaultDiskDBDir
+    { 0 },                      // SChar mLogDir
+    { 0 },                      // SChar mArchiveDir
+    { 0 },                      // SChar mServerMsglogDir
+    { 0 },                      // SChar mLogAnchorDir
+    { 0 },                      // SChar mXLogDir
+    0,                          // UInt mPortNo
+    0,                          // UInt mSNMPEnable
+    0,                          // UInt mSNMPPortNo
+    0,                          // UInt mSNMPTrapPortNo
+    0,                          // UInt mSNMPRecvTimeout
+    0,                          // UInt mSNMPSendTimeout
+    0,                          // UInt mSNMPTrcFlag
+    0,                          // UInt mSNMPAlarmQueryTimeout
+    0,                          // UInt mSNMPAlarmUtransTimeout
+    0,                          // UInt mSNMPAlarmFetchTimeout
+    0,                          // UInt mSNMPAlarmSessionFailureCount
+    0,                          // ULong mDiskMaxDBSize
+    0,                          // UInt mMinMemPoolChunkSlotCnt
+    0,                          // UInt mShmMemoryPolicy
+    0,                          // ULong mShmMaxSize
+    0,                          // UInt mShmLock
+    0,                          // UInt mShmAlignSize
+    0,                          // UInt mShmChunkSize
+    0,                          // UInt mShmStartUpSize
+    0,                          // UInt mShmDBKey
+    0,                          // UInt mShmLogging
+    0,                          // UInt mShmLatchSpinLockCount
+    0,                          // UInt mShmLatchYieldCount
+    0,                          // UInt mShmLatchMaxYieldCount
+    0,                          // UInt mShmLatchSleepDuration
+    0,                          // UInt mUserProcessCpuAffinity
+    0,                          // UInt mMaxClient
+    0,                          // UInt mJobThreadCount
+    0,                          // UInt mConcExecDegreeMax
+    0,                          // UInt mExtprocAgentCallRetryCount
+    0,                          // UInt mLatchMinSleep
+    0,                          // UInt mLatchMaxSleep
+    0,                          // UInt mLatchSleepType
+    0,                          // UInt mInspectionLargeHeapThreshold
+    0,                          // UInt mExtprocAgentConnectTimeout
+    0,                          // UInt mExtprocAgentIdleTimeout
+    0,                          // ULong mQpMemChunkSize
+    0,                          // UInt mMemAllocatorUsePrivate
+    0,                          // ULong mMemPrivatePoolSize
+    0,                          // UInt mQueryHashStringLengthMax
+    0,                          // UInt mFaultToleranceEnable
+    0,                          // UInt mFaultToleranceTrace
+    NULL,                       // SChar *mExtprocAgentSocketFilepath
+    0,                          // UInt mThreadReuseEnable
+    0,                          // ULong mMathTempMemMax
 };
 
 IDE_RC iduProperty::load()
