@@ -41,11 +41,11 @@ for arg in "$@"; do
             echo "  --with-bins      add bundled binaries (target/dep/bin) to PATH"
             echo "  --with-headers   add bundled headers (target/dep/include) to CPATH"
             echo "  Flags may be combined; default uses only system libraries."
-            return 0
+            if [ "${BASH_SOURCE[0]}" = "$0" ]; then exit 0; else return 0; fi
             ;;
         *)
             echo "dbenv.sh: unknown argument: $arg" >&2
-            return 1
+            if [ "${BASH_SOURCE[0]}" = "$0" ]; then exit 1; else return 1; fi
             ;;
     esac
 done
