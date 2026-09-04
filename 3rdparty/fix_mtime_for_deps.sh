@@ -18,6 +18,7 @@ cmake -DPROJECT_DIR=ncurses-6.4 -DACTION=restore -DVERBOSE=ON -P git-time-extern
 
 echo "restore for openssl"
 cmake -DPROJECT_DIR=openssl-1.0.2o -DACTION=restore -DVERBOSE=ON -P git-time-external.cmake
+cmake -DPROJECT_DIR=openssl-3.5.0 -DACTION=restore -DVERBOSE=ON -P git-time-external.cmake
 
 echo "restore for re2c"
 cmake -DPROJECT_DIR=re2c-1.0.1 -DACTION=restore -DVERBOSE=ON -P git-time-external.cmake
