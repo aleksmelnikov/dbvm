@@ -165,7 +165,7 @@ build_dep() (
     fi
 
     # Specific fix for Openssl-1.0.2o
-    if [ "$name" = "openssl" ]; then
+    if [ "$name" = "openssl" ] && [ "$ver" = "1.0.2o" ]; then
         ./patches/apply_patches.sh
     fi
 
