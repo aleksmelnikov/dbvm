@@ -75,7 +75,7 @@ export ALTIBASE_NLS_USE=UTF8
 export PATH=${current_directory}:${ALTIBASE_HOME}/bin:${JAVA_HOME}/bin:${PATH}
 export CLASSPATH=${current_directory}:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib:${ALTIBASE_HOME}/lib/Altibase.jar:${CLASSPATH}
 if [ ${USE_DEP_LIBS} -eq 1 ]; then
-    export LD_LIBRARY_PATH=${dep_install_directory}/lib:${ADAPTER_JAVA_HOME}/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${dep_install_directory}/lib:${dep_install_directory}/lib64:${ADAPTER_JAVA_HOME}/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
 else
     export LD_LIBRARY_PATH=${ADAPTER_JAVA_HOME}/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
 fi
