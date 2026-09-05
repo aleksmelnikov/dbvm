@@ -173,6 +173,13 @@ build_dep() (
     "$conf_script" --prefix="${dep_install_directory}" $extra_flags
     make -j"${jobs}" ${sync_opt}
     make "$install_target"
+
+    # Specific fix for Openssl-3.x: `make install_sw` does not create the
+    # OPENSSLDIR directory nor install openssl.cnf into it; that is done by
+    # the install_ssldirs target, which exists only in OpenSSL 3.x.
+    if [ "$name" = "openssl" ] && [ "${ver%%.*}" = "3" ]; then
+        make install_ssldirs
+    fi
 )
 
 #===============================================================================
