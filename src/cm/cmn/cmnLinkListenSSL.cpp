@@ -95,7 +95,7 @@ IDE_RC cmnLinkListenInitializeSSL(cmnLink *aLink)
 {
     cmnLinkListenSSL *sLink = (cmnLinkListenSSL *)aLink;
 
-    SSL_METHOD *sMethod = NULL;
+    const SSL_METHOD *sMethod = NULL;
     SSL_CTX    *sSslCtx = NULL;
     SInt        sRet = 0;
     SChar      *sServerKeyFile = NULL;
@@ -145,7 +145,7 @@ IDE_RC cmnLinkListenInitializeSSL(cmnLink *aLink)
     sServerCertFile = cmuProperty::getSslCert();
 
     /* Create and set up the SSL Context structure(SSL_CTX) */
-    sMethod = (SSL_METHOD*)cmnOpenssl::mFuncs.TLSv1_server_method(); /* tLSv1 hello messages. */
+    sMethod = cmnOpenssl::mFuncs.TLS_server_method(); /* TLS hello messages. */
     sSslCtx = cmnOpenssl::mFuncs.SSL_CTX_new(sMethod); /* create new context from method */
     IDE_TEST_RAISE(sSslCtx == NULL, FailedToCreateSslCtx);
 
@@ -586,7 +586,7 @@ IDE_RC cmnLinkListenAcceptSSL(cmnLinkListen *aLink, cmnLinkPeer **aLinkPeer)
 
 
     /* check client's certificate */
-    sPeerCert = cmnOpenssl::mFuncs.SSL_get_peer_certificate(sDesc->mSslHandle);
+    sPeerCert = cmnOpenssl::mFuncs.SSL_get1_peer_certificate(sDesc->mSslHandle);
     if (sPeerCert != NULL)
     {   
         /* The peer has a certificate */

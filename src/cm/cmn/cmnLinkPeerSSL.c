@@ -62,7 +62,7 @@ static ACI_RC cmnLinkPeerInitializeSslCtx( cmnLinkPeer *aLink,
 {
     cmnLinkPeerSSL *sLink = (cmnLinkPeerSSL *)aLink;
 
-    SSL_METHOD *sMethod = NULL;
+    const SSL_METHOD *sMethod = NULL;
     SSL_CTX    *sSslCtx = NULL;
     acp_char_t *sCa     = aConnectArg->mSSL.mCa;
     acp_char_t *sCaPath = aConnectArg->mSSL.mCaPath;
@@ -76,8 +76,8 @@ static ACI_RC cmnLinkPeerInitializeSslCtx( cmnLinkPeer *aLink,
 
     ACI_TEST_RAISE(gOpenssl == NULL, NoSslLibrary);
 
-    /* secure client using TLSv1 */
-    sMethod = (SSL_METHOD *)gOpenssl->mFuncs.TLSv1_client_method();
+    /* secure client using TLS */
+    sMethod = gOpenssl->mFuncs.TLS_client_method();
 
     /* create new context from the method */
     sSslCtx = gOpenssl->mFuncs.SSL_CTX_new(sMethod);
@@ -233,8 +233,7 @@ ACI_RC cmnLinkPeerFinalizeSSL(cmnLink *aLink)
     /* BUG-44547 */
     ACI_TEST_RAISE(gOpenssl == NULL, NoSslLibraryLoaded);
 
-    /* Clean up the thread's local error queue */
-    gOpenssl->mFuncs.ERR_remove_state(0); 
+    /* OpenSSL 3.x: thread-local error queue is cleaned up automatically */
 
     ACI_EXCEPTION_CONT( NoSslLibraryLoaded );
 

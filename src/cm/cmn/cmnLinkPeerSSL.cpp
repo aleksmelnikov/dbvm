@@ -33,7 +33,7 @@ typedef struct cmnLinkPeerSSL
 
 static IDE_RC cmnLinkPeerInitializeSslCtx( SSL_CTX **aSslCtx )
 {
-    SSL_METHOD *sMethod = NULL;
+    const SSL_METHOD *sMethod = NULL;
 
     SChar      *sCa     = cmuProperty::getSslCa();
     SChar      *sCaPath = cmuProperty::getSslCaPath();
@@ -44,8 +44,8 @@ static IDE_RC cmnLinkPeerInitializeSslCtx( SSL_CTX **aSslCtx )
 
     SInt sRet = 0;
 
-    /* secure client using TLSv1 */
-    sMethod = (SSL_METHOD *)cmnOpenssl::mFuncs.TLSv1_client_method(); 
+    /* secure client using TLS */
+    sMethod = cmnOpenssl::mFuncs.TLS_client_method();
 
     /* create a new context from the method */
     sSslCtx = cmnOpenssl::mFuncs.SSL_CTX_new(sMethod); 
@@ -203,8 +203,7 @@ IDE_RC cmnLinkPeerFinalizeSSL(cmnLink *aLink)
 
     if (sLink->mDesc.mSslCtx != NULL)
     {
-        /* Clean up the thread's local error queue */
-        cmnOpenssl::mFuncs.ERR_remove_state(0);
+        /* OpenSSL 3.x: thread-local error queue is cleaned up automatically */
     }
     else
     {
@@ -348,7 +347,7 @@ IDE_RC cmnLinkPeerGetPeerCertSubject(cmnLinkPeer *aLink,
     SChar               sBuf[512]; /* Temporal buffer for X509 messages */
     SInt                sRet = 0;
 
-    sPeerCert = cmnOpenssl::mFuncs.SSL_get_peer_certificate(sLink->mDesc.mSslHandle);
+    sPeerCert = cmnOpenssl::mFuncs.SSL_get1_peer_certificate(sLink->mDesc.mSslHandle);
     if (sPeerCert != NULL)
     {   
         /* The peer has a certificate */
@@ -391,7 +390,7 @@ IDE_RC cmnLinkPeerGetPeerCertIssuer(cmnLinkPeer *aLink,
     SChar               sBuf[512]; /* Temporal buffer for X509 messages */
     SInt                sRet = 0;
 
-    sPeerCert = cmnOpenssl::mFuncs.SSL_get_peer_certificate(sLink->mDesc.mSslHandle);
+    sPeerCert = cmnOpenssl::mFuncs.SSL_get1_peer_certificate(sLink->mDesc.mSslHandle);
     if (sPeerCert != NULL)
     {   
         /* The peer has a certificate */
@@ -763,13 +762,16 @@ IDE_RC cmnLinkPeerConnectSSL(cmnLinkPeer       *aLink,
         sSslRet = cmnOpenssl::mFuncs.SSL_get_verify_result(sSsl);
         IDE_TEST_RAISE(sSslRet != X509_V_OK, FailedToVerifyPeerCertificate);
 
-        sPeer = cmnOpenssl::mFuncs.SSL_get_peer_certificate(sSsl);
+        sPeer = cmnOpenssl::mFuncs.SSL_get1_peer_certificate(sSsl);
         cmnOpenssl::mFuncs.X509_NAME_get_text_by_NID(cmnOpenssl::mFuncs.X509_get_subject_name(sPeer),
                                                      NID_commonName, 
                                                      sPeerCN, 
                                                      sizeof(sPeerCN));
 
         sRet = idlOS::strcasecmp(sPeerCN, aConnectArg->mSSL.mAddr);
+
+        cmnOpenssl::mFuncs.X509_free(sPeer);   /* free peer certificate to avoid memory leak */
+
         IDE_TEST_RAISE(sRet != 0, FailedToVerifyPeerCertificate);
     }
     else

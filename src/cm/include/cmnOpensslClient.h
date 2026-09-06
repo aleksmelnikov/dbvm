@@ -21,16 +21,12 @@
 
 #include <cmnOpensslDefClient.h>
 
-/* BUG-45235 */
 typedef struct cmnOpenssl
 {
     acp_dl_t         mSslHandle;
     acp_dl_t         mCryptoHandle;
     cmnOpensslFuncs  mFuncs;
     acp_bool_t       mLibInitialized;
-
-    acp_thr_mutex_t *mMutex;         /* for Crypto locking */
-    acp_sint32_t     mMutexCount;
 } cmnOpenssl;
 
 ACI_RC cmnOpensslInitialize(cmnOpenssl **aOpenssl);

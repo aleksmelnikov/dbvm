@@ -29,10 +29,6 @@ public:
     static PDL_SHLIB_HANDLE mCryptoHandle;
     static idBool           mLibInitialized;
 
-    /* BUG-45235 */
-    static PDL_thread_mutex_t *mMutex;           /* for Crypto locking */
-    static SInt                mMutexCount;
-
 public:
     static IDE_RC initialize();
     static IDE_RC destroy();
@@ -51,10 +47,6 @@ public:
     {
         return mFuncs.SSL_CIPHER_get_name(mFuncs.SSL_get_current_cipher(aSslHandle));
     }
-
-    /* BUG-45235 */
-    static ULong callbackCryptoThreadId();
-    static void callbackCryptoLocking(SInt aMode, SInt aType, const SChar *aFile, SInt aLine);
 
 }; /* end of class */
 
