@@ -15,7 +15,7 @@ set -e  # Exit immediately if a command exits with a non-zero status
 readonly bison_ver="2.4.1"
 readonly flex_ver="2.5.35"
 readonly ncurses_ver="6.4"
-readonly openssl_ver="1.0.2o"
+readonly openssl_ver="3.5.0"
 readonly re2c_ver="1.0.1"
 
 #===============================================================================
