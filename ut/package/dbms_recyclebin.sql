@@ -3,7 +3,7 @@
  * All rights reserved.
  **********************************************************************/
 
-CREATE PACKAGE DBMS_RECYCLEBIN AUTHID CURRENT_USER AS
+CREATE OR REPLACE PACKAGE DBMS_RECYCLEBIN AUTHID CURRENT_USER AS
 
 PROCEDURE PURGE_USER_RECYCLEBIN;
 
