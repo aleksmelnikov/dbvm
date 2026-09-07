@@ -1126,9 +1126,19 @@ SInt iloProgOption::ReadProgOptionInteractive()
 
     if (m_bExist_P == SQL_FALSE)
     {
-        m_bExist_P = SQL_TRUE;
+        SChar *sPassword;
 
-        idlOS::strcpy(m_Password, getpass("Write Password : "));
+        sPassword = getpass("Write Password : ");
+
+        if (sPassword == NULL)
+        {
+            idlOS::printf("[ERR-5100A : Invalid authorization specification. A password has not been provided, or is simply NULL.]\n");
+            return SQL_FALSE;
+        }
+
+        idlOS::strcpy(m_Password, sPassword);
+
+        m_bExist_P = SQL_TRUE;
     }
 
     // BUG-26287: 可记 贸府规过 烹老

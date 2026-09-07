@@ -85,7 +85,10 @@ int main(int argc, char** argv)
    
     if ( idlOS::strcasecmp( gProgOption.mOper, "OUT" ) == 0 )
     {
-        gProgOption.ReadProgOptionInteractive();
+        if ( gProgOption.ReadProgOptionInteractive() != IDE_SUCCESS )
+        {
+            exit(1);
+        }
 
         // BUG-40271 Replace the default character set from predefined value (US7ASCII) to DB character set.
         IDE_TEST_RAISE(gProgOption.setNls() != SQL_SUCCESS,

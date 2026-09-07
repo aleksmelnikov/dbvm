@@ -33,7 +33,7 @@ public:
 
     IDE_RC getProperties();
     IDE_RC ParsingCommandLine(SInt argc, SChar **argv);
-    void   ReadProgOptionInteractive();
+    IDE_RC ReadProgOptionInteractive();
 
     /* BUG-47652 Set file permission */
     // BUG-26287: 可记 贸府规过 烹老

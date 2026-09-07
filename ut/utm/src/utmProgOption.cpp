@@ -913,7 +913,7 @@ void utmProgOption::ReadServerProperties()
     IDE_EXCEPTION_END;
 }
 
-void utmProgOption::ReadProgOptionInteractive()
+IDE_RC utmProgOption::ReadProgOptionInteractive()
 {
     SChar szInStr[WORD_LEN];
 
@@ -980,7 +980,17 @@ void utmProgOption::ReadProgOptionInteractive()
 
     if (m_bExist_P == ID_FALSE)
     {
-        idlOS::strcpy(m_Password, getpass("Write Password : "));
+        SChar *sPassword;
+
+        sPassword = getpass("Write Password : ");
+
+        if (sPassword == NULL)
+        {
+            idlOS::printf("[ERR-5100A : Invalid authorization specification. A password has not been provided, or is simply NULL.]\n");
+            return IDE_FAILURE;
+        }
+
+        idlOS::strcpy(m_Password, sPassword);
 
         m_bExist_P = ID_TRUE;
     }
@@ -993,6 +1003,8 @@ void utmProgOption::ReadProgOptionInteractive()
         idlOS::strncpy(mNLS, "US7ASCII", ID_SIZEOF(mNLS));
         mbExistNLS = ID_TRUE;
     } */
+
+    return IDE_SUCCESS;
 }
 
 // BUG-40271 Replace the default character set from predefined value (US7ASCII) to DB character set.

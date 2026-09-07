@@ -653,8 +653,18 @@ IDE_RC iSQLProgOption::ReadProgOptionInteractive()
 
     if (m_bExist_P == ID_FALSE && m_bExist_UserAID == ID_FALSE)
     {
+        SChar *sPassword;
+
+        sPassword = getpass("Write Password : ");
+
+        if (sPassword == NULL)
+        {
+            idlOS::printf("[ERR-5100A : Invalid authorization specification. A password has not been provided, or is simply NULL.]\n");
+            return IDE_FAILURE;
+        }
+
         idlOS::snprintf(m_Password, ID_SIZEOF(m_Password), "%s",
-                        getpass("Write Password : "));
+                        sPassword);
         m_bExist_P = ID_TRUE;
 
         gProperty.SetPasswd(m_Password);

@@ -29,6 +29,21 @@ SChar * getpass(const SChar *prompt);
 SChar * altipasswd_toupper(SChar *aPasswd);
 IDE_RC checkPrevPassword(SChar *aPasswordFile, SChar *aPassword);
 
+static SChar * readPassword()
+{
+    SChar *sPasswd;
+
+    sPasswd = getpass("");
+
+    if (sPasswd == NULL)
+    {
+        idlOS::fprintf(stderr, "[ERR-5100A : Invalid authorization specification. A password has not been provided, or is simply NULL.]\n");
+        exit(1);
+    }
+
+    return sPasswd;
+}
+
 int main(int /*__ argc __*/ , char* /*__ argv __*/ [])
 {
     SChar      *sHomeDir;
@@ -46,7 +61,7 @@ int main(int /*__ argc __*/ , char* /*__ argv __*/ [])
 
     idlOS::printf("Previous Password : ");
     idlOS::fflush(stdout);
-    strcpy(sPrevPasswd, getpass(""));
+    strcpy(sPrevPasswd, readPassword());
 
     altipasswd_toupper(sPrevPasswd);
 
@@ -61,13 +76,13 @@ int main(int /*__ argc __*/ , char* /*__ argv __*/ [])
 
     idlOS::printf("New Password : ");
     idlOS::fflush(stdout);
-    strcpy(sNewPasswd1, getpass(""));
+    strcpy(sNewPasswd1, readPassword());
 
     altipasswd_toupper(sNewPasswd1);
 
     idlOS::printf("Retype New Password : ");
     idlOS::fflush(stdout);
-    strcpy(sNewPasswd2, getpass(""));
+    strcpy(sNewPasswd2, readPassword());
 
     altipasswd_toupper(sNewPasswd2);
 

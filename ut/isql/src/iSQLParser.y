@@ -703,8 +703,17 @@ CONNECT_STAT
              }
              if ( g_NeedPass == ID_TRUE )
              {
-                 idlOS::snprintf(pass, WORD_LEN, "%s",
-                             getpass("Write Password : "));
+                 SChar *sPassword;
+
+                 sPassword = getpass("Write Password : ");
+
+                 if (sPassword == NULL)
+                 {
+                     idlOS::printf("[ERR-5100A : Invalid authorization specification. A password has not been provided, or is simply NULL.]\n");
+                     YYABORT;
+                 }
+
+                 idlOS::snprintf(pass, WORD_LEN, "%s", sPassword);
                  gCommand->SetPasswd(pass);
              }
              gCommand->mExecutor = iSQLCommand::executeConnect;

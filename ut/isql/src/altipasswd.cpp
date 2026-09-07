@@ -32,6 +32,21 @@ IDE_RC checkPrevPassword(SChar *aPasswordFile, SChar *aPassword);
 /* BUG-47889 Case sensitive password */
 IDE_RC GetIsCaseSensitivePasswd ( idBool* aIsCaseSensitivePasswd );
 
+static SChar * readPassword()
+{
+    SChar *sPasswd;
+
+    sPasswd = getpass("");
+
+    if (sPasswd == NULL)
+    {
+        idlOS::fprintf(stderr, "[ERR-5100A : Invalid authorization specification. A password has not been provided, or is simply NULL.]\n");
+        exit(1);
+    }
+
+    return sPasswd;
+}
+
 int main(int /*__ argc __*/ , char* /*__ argv __*/ [])
 {
     SChar      *sHomeDir;
@@ -56,7 +71,7 @@ int main(int /*__ argc __*/ , char* /*__ argv __*/ [])
 
     idlOS::printf("Previous Password : ");
     idlOS::fflush(stdout);
-    strcpy(sPrevPasswd, getpass(""));
+    strcpy(sPrevPasswd, readPassword());
 
     if (sIsCaseSensitivePasswd == ID_FALSE) 
     {
@@ -74,7 +89,7 @@ int main(int /*__ argc __*/ , char* /*__ argv __*/ [])
 
     idlOS::printf("New Password : ");
     idlOS::fflush(stdout);
-    strcpy(sNewPasswd1, getpass(""));
+    strcpy(sNewPasswd1, readPassword());
 
     if (sIsCaseSensitivePasswd == ID_FALSE) 
     {
@@ -83,7 +98,7 @@ int main(int /*__ argc __*/ , char* /*__ argv __*/ [])
 
     idlOS::printf("Retype New Password : ");
     idlOS::fflush(stdout);
-    strcpy(sNewPasswd2, getpass(""));
+    strcpy(sNewPasswd2, readPassword());
 
     if (sIsCaseSensitivePasswd == ID_FALSE) 
     {
