@@ -36,7 +36,10 @@
 #   - rows are really stored encrypted (a WHERE on the plaintext found, a WHERE
 #     on the encrypted form not found);
 #   - negative cases fail properly (unknown policy, non-CHAR/VARCHAR column,
-#     ECC-only policy).
+#     ECC-only policy);
+#   - the data dictionary marks every column of the table as either ENCRYPTED
+#     with its policy or PLAIN (SYS_TABLES_ + SYS_COLUMNS_ +
+#     SYS_ENCRYPTED_COLUMNS_ + V$DATATYPE).
 #
 # Usage: bash script/column_encryption_test.sh
 #
@@ -170,6 +173,20 @@ DELETE FROM t_enc_test WHERE id = 1;
 COMMIT;
 SELECT 'OUT_DEL' AS m, id FROM t_enc_test WHERE id = 1;
 SELECT 'OUT_CNT' AS m, COUNT(*) AS n FROM t_enc_test;
+SELECT 'OUT_CAT_COL' AS m,
+       'NAME'||':'||c.column_name||':'||dt.type_name||':'||
+       CASE WHEN e.column_id IS NOT NULL THEN 'ENCRYPTED:'||e.policy_name ELSE 'PLAIN' END AS v
+FROM system_.sys_columns_ c,
+     system_.sys_tables_ t,
+     v$datatype dt,
+     system_.sys_encrypted_columns_ e
+WHERE t.table_name = 'T_ENC_TEST'
+  AND t.table_id = c.table_id
+  AND dt.data_type = c.data_type
+  AND e.table_id (+) = c.table_id
+  AND e.column_id (+) = c.column_id
+ORDER BY c.column_order;
+SELECT 'OUT_CAT_TAB' AS m, 'NAME:TABLE_NAME:'||table_name AS v FROM system_.sys_tables_ WHERE table_name = 'T_ENC_TEST';
 EOF
 )
 
@@ -200,6 +217,28 @@ if echo "${IS_OUT}" | grep -q "OUT_DEL"; then
     fail "DELETE did not remove the row"
 else
     pass "DELETE on encrypted column works"
+fi
+
+# --- data dictionary checks ------------------------------------------------
+# OUT_CAT_TAB: the table itself is visible in the dictionary (SYS_TABLES_)
+if echo "${IS_OUT}" | grep -q "OUT_CAT_TAB" \
+   && echo "${IS_OUT}" | grep -q "T_ENC_TEST"; then
+    pass "dictionary: SYS_TABLES_ lists the encrypted table"
+else
+    fail "dictionary: SYS_TABLES_ did not list the encrypted table"
+fi
+
+# OUT_CAT_COL: SYS_COLUMNS_ + SYS_ENCRYPTED_COLUMNS_ + V$DATATYPE mark every
+#   column of the table as ENCRYPTED:<policy> or PLAIN
+#   expected: ID:INTEGER:PLAIN, NAME:EVARCHAR:ENCRYPTED:reverse,
+#             CODE:ECHAR:ENCRYPTED:shift
+if echo "${IS_OUT}" | grep -q "OUT_CAT_COL" \
+   && echo "${IS_OUT}" | grep -q "NAME:ID:INTEGER:PLAIN" \
+   && echo "${IS_OUT}" | grep -q "NAME:NAME:EVARCHAR:ENCRYPTED:reverse" \
+   && echo "${IS_OUT}" | grep -q "NAME:CODE:ECHAR:ENCRYPTED:shift"; then
+    pass "dictionary: SYS_COLUMNS_ marks PLAIN vs ENCRYPTED:<policy> columns"
+else
+    fail "dictionary: SYS_COLUMNS_ did not mark PLAIN vs ENCRYPTED:<policy> columns"
 fi
 
 # ---------------------------------------------------------------------------
