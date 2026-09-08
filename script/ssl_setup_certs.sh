@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# Copyright (c) 2026 DBVM (dbvm.com). All rights reserved.
+#
 # Setup / cleanup SSL certificates and config for the Altibase server,
 # following doc/ssl-certificates.md (variant B: own CA + signed server &
 # client certificates with mutual authentication).
@@ -38,6 +40,18 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 ROOT_DIR=$(cd "${SCRIPT_DIR}/.." && pwd)
 
 # ---------------------------------------------------------------------------
+# Shared helper functions (identical across all SSL test scripts)
+# ---------------------------------------------------------------------------
+stop_server() {
+    echo ">> stopping server..."
+    if ${ALTIBASE_HOME}/bin/server status >/dev/null 2>&1 \
+       && ps aux | grep -v grep | grep -q "${SERVER_BIN}"; then
+        ${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
+        sleep 3
+    fi
+}
+
+# ---------------------------------------------------------------------------
 # environment
 # ---------------------------------------------------------------------------
 source "${ROOT_DIR}/dbenv.sh" --with-libs
@@ -46,6 +60,7 @@ CONF="${ALTIBASE_HOME}/conf/altibase.properties"
 RELEASE="${ALTIBASE_HOME}/conf/altibase.properties.release"
 CA_DIR="${SCRIPT_DIR}/cert-ca"
 CERT_DIR="${ALTIBASE_HOME}/cert"
+SERVER_BIN="${ALTIBASE_HOME}/bin/altibase"
 
 # Prefer the bundled openssl CLI (same openssl tree the server links against),
 # fall back to the system one.
@@ -157,12 +172,7 @@ fi
 # ---------------------------------------------------------------------------
 # setup
 # ---------------------------------------------------------------------------
-echo ">> stopping server if running..."
-if ${ALTIBASE_HOME}/bin/server status >/dev/null 2>&1 \
-   && ps aux | grep -v grep | grep -q "${ALTIBASE_HOME}/bin/altibase"; then
-    ${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
-    sleep 3
-fi
+stop_server
 
 echo ">> resetting SSL section in config to default..."
 reset_ssl_section

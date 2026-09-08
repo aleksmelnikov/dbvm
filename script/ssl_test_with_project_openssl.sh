@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# Copyright (c) 2026 DBVM (dbvm.com). All rights reserved.
+#
 # SSL test (project/bundled OpenSSL): run the server with the BUNDLED OpenSSL
 # (loaded from target/dep/lib or target/dep/lib64 via `dbenv.sh --with-libs`),
 # connect an SSL client (`is`), and verify in V$SESSION that the session is
@@ -22,6 +24,34 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 ROOT_DIR=$(cd "${SCRIPT_DIR}/.." && pwd)
 
 # ---------------------------------------------------------------------------
+# Shared helper functions (identical across all SSL test scripts)
+# ---------------------------------------------------------------------------
+stop_server() {
+    echo ">> stopping server..."
+    if ${ALTIBASE_HOME}/bin/server status >/dev/null 2>&1 \
+       && ps aux | grep -v grep | grep -q "${SERVER_BIN}"; then
+        ${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
+        sleep 3
+    fi
+}
+
+start_server() {
+    if ${ALTIBASE_HOME}/bin/server status >/dev/null 2>&1 \
+       && ps aux | grep -v grep | grep -q "${SERVER_BIN}"; then
+        echo ">> server already running"
+    else
+        echo ">> starting server..."
+        START_OUT=$(${ALTIBASE_HOME}/bin/server start 2>&1)
+        if ! echo "${START_OUT}" | grep -q "STARTUP Process SUCCESS"; then
+            echo "${START_OUT}"
+            echo "[FAIL] server did not start cleanly" >&2
+            exit 1
+        fi
+        sleep 2
+    fi
+}
+
+# ---------------------------------------------------------------------------
 # Step 0: environment (project/bundled OpenSSL via --with-libs)
 # ---------------------------------------------------------------------------
 source "${ROOT_DIR}/dbenv.sh" --with-libs
@@ -31,6 +61,8 @@ echo "SSL TEST : PROJECT OpenSSL (bundled from target/dep/lib or lib64, via dben
 echo "ALTIBASE_HOME: ${ALTIBASE_HOME}"
 echo "LD_LIBRARY_PATH: ${LD_LIBRARY_PATH}"
 echo "=============================================================="
+
+SERVER_BIN="${ALTIBASE_HOME}/bin/altibase"
 
 # The server resolves "libssl.so" via LD_LIBRARY_PATH/dlopen, so make sure the
 # bundled library is actually present. It may be installed under target/dep/lib
@@ -101,27 +133,13 @@ if [ "${SSL_CLIENT_AUTH}" = "1" ]; then
 fi
 
 # ---------------------------------------------------------------------------
-# Step 2: stop the server if it is running
+# Step 2: restart the server
 # ---------------------------------------------------------------------------
-if ${ALTIBASE_HOME}/bin/server status >/dev/null 2>&1 \
-   && ps aux | grep -v grep | grep -q "${ALTIBASE_HOME}/bin/altibase"; then
-    echo ">> server is running, stopping it..."
-    ${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
-    sleep 3
-fi
+stop_server
+start_server
 
-# ---------------------------------------------------------------------------
-# Step 3: start the server
-# ---------------------------------------------------------------------------
-echo ">> starting server..."
-START_OUT=$(${ALTIBASE_HOME}/bin/server start 2>&1)
-echo "${START_OUT}"
-if ! echo "${START_OUT}" | grep -q "Listener started : SSL on port" 2>/dev/null; then
-    echo "[WARN] no SSL listener line found in startup output" >&2
-fi
-
-# Find the running server PID and report which libssl/libcrypto it actually loaded
-SERVER_PID=$(pgrep -f "${ALTIBASE_HOME}/bin/altibase" | head -1)
+# Report which libssl/libcrypto the server actually loaded
+SERVER_PID=$(pgrep -f "${SERVER_BIN}" | head -1)
 if [ -n "${SERVER_PID}" ] && [ -r "/proc/${SERVER_PID}/maps" ]; then
     echo ">> libraries actually loaded by server pid ${SERVER_PID}:"
     grep -E "/(libssl|libcrypto)" "/proc/${SERVER_PID}/maps" 2>/dev/null \
@@ -133,7 +151,7 @@ SSL_PORT=$(get_cfg SSL_PORT_NO)
 SSL_PORT=${SSL_PORT:-20443}
 
 # ---------------------------------------------------------------------------
-# Step 4: SSL client connection and V$SESSION check
+# Step 3: SSL client connection and V$SESSION check
 # ---------------------------------------------------------------------------
 CHECK_SQL=$(mktemp)
 cat > "${CHECK_SQL}" <<'EOF'
@@ -159,12 +177,12 @@ echo "${IS_OUT}"
 # Verify: connection went over SSL and reports a real cipher
 if echo "${IS_OUT}" | grep -q "ERR-91015"; then
     echo "[FAIL] SSL communication failure (ERR-91015)" >&2
-    ${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
+    stop_server
     exit 1
 fi
 if ! echo "${IS_OUT}" | grep -q "SSL 127.0.0.1"; then
     echo "[FAIL] no SSL session found in V\$SESSION (comm_name does not start with SSL)" >&2
-    ${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
+    stop_server
     exit 1
 fi
 if echo "${IS_OUT}" | grep -qE "TLS_|SSL_"; then
@@ -172,15 +190,13 @@ if echo "${IS_OUT}" | grep -qE "TLS_|SSL_"; then
     echo "[PASS] PROJECT OpenSSL (bundled): SSL session established, cipher reported above."
 else
     echo "[FAIL] no TLS/SSL cipher reported in the session" >&2
-    ${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
+    stop_server
     exit 1
 fi
 
 # ---------------------------------------------------------------------------
-# Step 5: stop the server
+# Step 4: stop the server
 # ---------------------------------------------------------------------------
-echo ">> stopping server..."
-${ALTIBASE_HOME}/bin/server stop >/dev/null 2>&1 || true
-sleep 2
+stop_server
 
 echo "[DONE] Project OpenSSL test finished."
