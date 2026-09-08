@@ -1330,7 +1330,7 @@ IDE_RC qcsModule::encryptColumn( qcStatement   * aStatement,
     sCharValue  = (mtdCharType*) aSrcValue;
     sEcharValue = (mtdEcharType*) aDestValue;
     
-    if ( aDestColumn->policy[0] != '\0' )
+    if ( aDestColumn->mColumnAttr.mEncAttr.mPolicy[0] != '\0' )
     {
         if ( sCharValue->length > 0 )
         {
@@ -1342,7 +1342,7 @@ IDE_RC qcsModule::encryptColumn( qcStatement   * aStatement,
                       != IDE_SUCCESS );
 
             IDE_TEST( encryptCallback( & sInfo,
-                                       aDestColumn->policy,
+                                       aDestColumn->mColumnAttr.mEncAttr.mPolicy,
                                        sCharValue->value,
                                        sCharValue->length,
                                        sEcharValue->mValue,
@@ -1350,7 +1350,7 @@ IDE_RC qcsModule::encryptColumn( qcStatement   * aStatement,
                       != IDE_SUCCESS );
             
             IDE_ASSERT( sEcharValue->mCipherLength <=
-                        aDestColumn->encPrecision );
+                        aDestColumn->mColumnAttr.mEncAttr.mEncPrecision );
 
             // encode ecc value
             if ( aDestColumn->module->id == MTD_ECHAR_ID )
@@ -1383,7 +1383,7 @@ IDE_RC qcsModule::encryptColumn( qcStatement   * aStatement,
             
             IDE_ASSERT( sEcharValue->mCipherLength +
                         sEcharValue->mEccLength <=
-                        aDestColumn->encPrecision );
+                        aDestColumn->mColumnAttr.mEncAttr.mEncPrecision );
         }
         else
         {
@@ -1403,7 +1403,7 @@ IDE_RC qcsModule::encryptColumn( qcStatement   * aStatement,
                            sEcharValue->mCipherLength );
             
             IDE_ASSERT( sEcharValue->mCipherLength <=
-                        aDestColumn->encPrecision );
+                        aDestColumn->mColumnAttr.mEncAttr.mEncPrecision );
             
             if ( aDestColumn->module->id == MTD_ECHAR_ID )
             {
@@ -1436,7 +1436,7 @@ IDE_RC qcsModule::encryptColumn( qcStatement   * aStatement,
             
             IDE_ASSERT( sEcharValue->mCipherLength +
                         sEcharValue->mEccLength <=
-                        aDestColumn->encPrecision );
+                        aDestColumn->mColumnAttr.mEncAttr.mEncPrecision );
         }
         else
         {
@@ -1487,7 +1487,7 @@ IDE_RC qcsModule::decryptColumn( qcStatement   * aStatement,
     sEcharValue = (mtdEcharType*) aSrcValue;
     sCharValue  = (mtdCharType*) aDestValue;
 
-    if ( aSrcColumn->policy[0] != '\0' )
+    if ( aSrcColumn->mColumnAttr.mEncAttr.mPolicy[0] != '\0' )
     {
         // decrypt cipher value
         if ( sEcharValue->mCipherLength > 0 )
@@ -1499,7 +1499,7 @@ IDE_RC qcsModule::decryptColumn( qcStatement   * aStatement,
                       != IDE_SUCCESS );
             
             IDE_TEST( decryptCallback( & sInfo,
-                                       aSrcColumn->policy,
+                                       aSrcColumn->mColumnAttr.mEncAttr.mPolicy,
                                        sEcharValue->mValue,
                                        sEcharValue->mCipherLength,
                                        sCharValue->value,

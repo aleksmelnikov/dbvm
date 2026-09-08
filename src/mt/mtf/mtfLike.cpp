@@ -1951,7 +1951,7 @@ IDE_RC mtfLikeFormatInfo( mtcNode            * aNode,
         {
             // format은 상수이므로 반드시 default policy이다.
             IDE_ASSERT_MSG( sFormatColumn->mColumnAttr.mEncAttr.mPolicy[0] == '\0',
-                            "sFormatColumn->policy : %c \n",
+                            "sFormatColumn->mColumnAttr.mEncAttr.mPolicy : %c \n",
                             sFormatColumn->mColumnAttr.mEncAttr.mPolicy[0] );
             
             sEcharFormat = (const mtdEcharType *)

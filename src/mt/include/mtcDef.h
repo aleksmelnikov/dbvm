@@ -1514,9 +1514,6 @@ struct mtcColumn {
 
     const mtdModule * module;
     const mtlModule * language; // PROJ-1361 : add language module
-
-    SInt              encPrecision;
-    SChar             policy[MTC_POLICY_NAME_SIZE+1];
 };
 
 // mtcColumn에서 필요한 부분만 복사한다.
