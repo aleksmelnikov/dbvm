@@ -594,7 +594,7 @@ IDE_RC smiReadLogByOrder::setFirstReadLogPos( smLSN aInitLSN )
 {
     void      * sQueueData;
     idBool      sOverflow   = ID_FALSE;
-    smLSN       sLstWriteLSN;
+    smLSN       sLstWriteLSN = { 0, 0 };
     SChar       sErrMsg[512] = { 0, };
     smLSN       sEndLSN;
 #ifdef DEBUG

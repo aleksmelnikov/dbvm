@@ -97,7 +97,7 @@ SQLRETURN ulsdModuleExecute_META(ulnFnContext *aFnContext,
                                  ulnStmt      *aStmt)
 {
     ulsdDbc      *sShard;
-    acp_uint16_t  sNodeDbcIndex;
+    acp_uint16_t  sNodeDbcIndex = 0;
     acp_uint16_t  sOnTransactionNodeIndex;
     acp_bool_t    sIsValidOnTransactionNodeIndex;
     SQLRETURN     sNodeResult;

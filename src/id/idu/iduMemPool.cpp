@@ -131,7 +131,7 @@ IDE_RC iduMemPool::initialize(iduMemoryClientIndex aIndex,
                               idBool               aHWCacheLine,
                               iduMemPoolType       aType)
 {
-    UInt  i, j;
+    UInt  i = 0, j = 0;
     ULong sMinSlotCnt = iduProperty::getMinMemPoolSlotCount();
 
     IDE_DASSERT( aName != NULL );

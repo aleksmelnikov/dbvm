@@ -1890,7 +1890,7 @@ IDE_RC smiGetLastValidLSN( smLSN *aLSN )
  **********************************************************************/
 IDE_RC smiWaitAndGetLastValidGSN( smSN *aSN )
 {
-    smLSN           sLstWriteLSN;
+    smLSN           sLstWriteLSN = { 0, 0 };
     smLSN           sUncompletedLstWriteLSN;
     UInt            sIntervalUSec  = smuProperty::getUCLSNChkThrInterval();
     PDL_Time_Value  sTimeOut;
@@ -2591,7 +2591,7 @@ const void * smiGetCompressionColumnLight( const void * aRow,
                                            UInt         aFlag,
                                            UInt       * aLength )
 {
-    smiColumn sColumn;
+    smiColumn sColumn = { 0 };
 
     sColumn.colSpace = aColSpace;
     sColumn.flag     = aFlag;

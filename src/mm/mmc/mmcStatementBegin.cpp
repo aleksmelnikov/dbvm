@@ -52,8 +52,8 @@ IDE_RC mmcStatement::beginDDL(mmcStatement *aStmt)
     mmcSession  *sSession  = aStmt->getSession();
     mmcTransObj *sTrans;
     UInt         sFlag = 0;
-    UInt         sTxIsolationLevel;
-    UInt         sTxTransactionMode;
+    UInt         sTxIsolationLevel = 0;
+    UInt         sTxTransactionMode = 0;
     idBool       sIsReadOnly = ID_FALSE;
     idBool       sTxBegin = ID_TRUE;
     idBool       sIsDummyBegin = ID_FALSE;

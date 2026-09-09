@@ -234,7 +234,7 @@ static ACI_RC ulnFailoverCore( ulnFnContext        * aFnContext,
     ACI_RC                 sRC            = ACI_FAILURE;
     ulnFailoverServerInfo *sOldServerInfo = ulnDbcGetCurrentServer(sDbc);
     ulnFailoverServerInfo *sNewServerInfo = NULL;
-    acp_uint32_t           sChosen;
+    acp_uint32_t           sChosen = 0;
     acp_uint32_t           i;
 
     ACI_TEST_RAISE(sDbc == NULL, InvalidHandleException);

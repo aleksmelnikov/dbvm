@@ -1378,7 +1378,7 @@ rpdCatalog::insertReplHost( smiStatement  * aSmiStmt,
     SChar   sBuffer[QD_MAX_SQL_LENGTH];
     vSLong  sRowCnt = 0;
     const SChar  *sConnTypeStr;
-    const SChar  *sIBLatencyStr;
+    const SChar  *sIBLatencyStr = NULL;
 
     sConnTypeStr = ConnTypeEnumToString( aReplHosts->mConnType );
 

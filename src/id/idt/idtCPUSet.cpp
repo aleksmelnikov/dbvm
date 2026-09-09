@@ -136,7 +136,7 @@ IDE_RC idtCPUSet::initializeStatic(void)
     struct dirent*   sNodeEnt;
     struct dirent*   sCPUEnt;
     SInt             sSocketID;
-    SInt             sCoreID;
+    SInt             sCoreID = 0;
     SInt             sCoreLen;
     SInt             sModelLen;
     SInt             sIndex;

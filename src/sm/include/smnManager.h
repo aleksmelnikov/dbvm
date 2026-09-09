@@ -397,7 +397,7 @@ inline IDE_RC smnManager::checkSCN( smiIterator *aIterator,
     smSCN     sCreateSCN;
     smSCN     sLimitSCN;
     smSCN     sCreateSCNTmp;
-    smSCN     sLimitSCNTmp;
+    smSCN     sLimitSCNTmp = 0;
     smSCN     sRowSCN;
     smSCN     sNxtSCN;
     smTID     sRowTID = SM_NULL_TID;

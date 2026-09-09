@@ -388,7 +388,7 @@ IDE_RC mmtServiceThread::shardNodeReport( cmiProtocolContext *aProtocolContext,
     mmcSession          *sSession;
     UInt                 sType;
     UInt                 sNodeId;
-    UChar                sDestination;
+    UChar                sDestination = 0;
 
     CMI_RD4( aProtocolContext, &sType );
 

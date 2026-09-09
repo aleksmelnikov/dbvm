@@ -1358,7 +1358,7 @@ IDE_RC mmtServiceThread::shardTransactionProtocol(cmiProtocolContext *aProtocolC
     mmtServiceThread    *sThread = (mmtServiceThread *)aUserContext;
     mmcSession          *sSession;
 
-    UChar                sOperation;
+    UChar                sOperation = 0;
     UInt                 sTouchNodeArr[SDI_NODE_MAX_COUNT];
     UShort               sTouchNodeCount;
     UShort               i;

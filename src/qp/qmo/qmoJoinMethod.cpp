@@ -61,7 +61,7 @@ qmoJoinMethodMgr::init( qcStatement    * aStatement,
  *
  ***********************************************************************/
 
-    qmoJoinMethodCost       * sJoinMethodCost;
+    qmoJoinMethodCost       * sJoinMethodCost = NULL;
     qmoJoinLateralDirection   sLateralDirection;
     UInt                      sJoinMethodCnt = 0;
     UInt                      sCount;

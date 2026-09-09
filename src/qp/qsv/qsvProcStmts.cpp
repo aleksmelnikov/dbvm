@@ -4907,7 +4907,7 @@ IDE_RC qsvProcStmts::makeBindVar( qcStatement     * aQcStmt,
 {
     qtcNode        * sUsingNode;
     qsUsingParam   * sUsingParam;
-    SInt             i;
+    SInt             i = 0;
     UInt             sMtdModuleID; 
     qcTemplate     * sTemplate;
     mtcColumn      * sMtcColumn;

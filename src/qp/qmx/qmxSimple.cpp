@@ -5442,7 +5442,7 @@ IDE_RC qmxSimple::executeFastDelete( smiTrans     * aSmiTrans,
     smiStatement          sFastSmiStmt;
     smiStatement        * sSmiStmt = &sFastSmiStmt;
     UInt                  sSmiStmtFlag = 0;
-    smiStatement        * sSmiStmtOrg;
+    smiStatement        * sSmiStmtOrg = NULL;
     smiStatement          sSmiStmtNew;
     idBool                sBegined = ID_FALSE;
     idBool                sOpened = ID_FALSE;

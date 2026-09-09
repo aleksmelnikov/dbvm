@@ -88,7 +88,7 @@ ACP_EXPORT
 acp_bool_t aciVaFdeof(acp_file_t *aFile)
 {
     acp_offset_t sEndPos;
-    acp_offset_t sCurPos;
+    acp_offset_t sCurPos = 0;
     acp_stat_t sStat;
     acp_bool_t   sResult;
 

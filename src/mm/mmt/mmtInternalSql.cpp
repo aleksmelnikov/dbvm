@@ -375,9 +375,9 @@ mmtInternalSql::paramInfoSet( void * aUserContext )
 {
     qciSQLParamInfoContext * sArg;
     mmcStatement           * sStatement;
-    UShort                   sParamCount;
+    UShort                   sParamCount   = 0;
     qciBindParam           * sBindParam;
-    UShort                   sParamNumber;
+    UShort                   sParamNumber  = 0;
 
     sArg = (qciSQLParamInfoContext*)aUserContext;
     sStatement = (mmcStatement*)sArg->mmStatement;

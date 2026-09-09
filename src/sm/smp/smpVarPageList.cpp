@@ -1466,7 +1466,7 @@ IDE_RC smpVarPageList::nextOIDallForRefineDB( scSpaceID          aSpaceID,
     scPageID           sNxtPID;
     smpPersPage*       sPage;
     SChar*             sNxtVCPiecePtr;
-    smOID              sNxtVCPieceOID;
+    smOID              sNxtVCPieceOID = SM_NULL_OID;
     SChar*             sFence;
     smpFreePageHeader* sFreePageHeader;
     UInt               sIdx = 0;

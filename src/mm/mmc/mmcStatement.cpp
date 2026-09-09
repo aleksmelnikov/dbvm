@@ -3286,7 +3286,7 @@ void mmcStatement::makePlanTreeBeforeCloseCursor( mmcStatement * aStatement,
     // 3. fetchEnd에서 cursor close전에 호출
     
     IDE_RC         sRet;
-    iduVarString * sPlanString;
+    iduVarString * sPlanString = NULL;
     mmcTransObj  * sTrans = NULL;
     smTID          sTransID;
 

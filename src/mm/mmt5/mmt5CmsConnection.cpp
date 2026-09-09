@@ -242,7 +242,7 @@ IDE_RC mmtServiceThread::connectProtocolA5(cmiProtocolContext *aProtocolContext,
     cmpArgDBConnectA5  *sArg    = CMI_PROTOCOL_GET_ARG(*aProtocol, DB, Connect);
     mmcTask          *sTask   = (mmcTask *)aSessionOwner;
     mmtServiceThread *sThread = (mmtServiceThread *)aUserContext;
-    mmcSession       *sSession;
+    mmcSession       *sSession = NULL;
     qciUserInfo       sUserInfo;
     SChar             sUserName[QC_MAX_OBJECT_NAME_LEN + 1];
     SChar             sPassword[QC_MAX_NAME_LEN + 1];

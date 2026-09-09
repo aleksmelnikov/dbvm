@@ -211,7 +211,7 @@ IDE_RC qci::initializeStmtListInfo( qcStmtListInfo * aStmtListInfo )
 // BUG-43158 Enhance statement list caching in PSM
 IDE_RC qci::finalizeStmtListInfo( qcStmtListInfo * aStmtListInfo )
 {
-    IDE_RC  sRet;
+    IDE_RC  sRet = IDE_SUCCESS;
     UInt    i;
     UInt    sErrorCode;
     SChar * sErrorMsg;

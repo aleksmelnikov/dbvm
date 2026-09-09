@@ -198,7 +198,7 @@ static IDE_RC answerParamDataOutList(mmtCmsExecuteContext *aExecuteContext,
     UChar                 sTemp;
 
     mmcTransObj          *sTrans = NULL;
-    smTID                 sTransID;
+    smTID                 sTransID = 0;
     idvProfBind           sProfBind;
     cmiWriteCheckState    sWriteCheckState = CMI_WRITE_CHECK_DEACTIVATED;
     UShort                sOrgWriteCursor    = CMI_GET_CURSOR(sCtx);
@@ -1563,7 +1563,7 @@ IDE_RC mmtServiceThread::executeProtocol(cmiProtocolContext *aProtocolContext,
 {
     UInt        sStatementID;
     UInt        sRowNumber;
-    UChar       sOption;
+    UChar       sOption = 0;
 
     mmcTask          *sTask          = (mmcTask *)aSessionOwner;
     mmtServiceThread *sThread        = (mmtServiceThread *)aUserContext;

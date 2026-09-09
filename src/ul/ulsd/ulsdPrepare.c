@@ -266,7 +266,7 @@ ACI_RC ulsdCallbackAnalyzeResult(cmiProtocolContext *aProtocolContext,
 
     /* PROJ-2655 Composite shard key */
     acp_uint8_t            sIsSubKeyExists;
-    acp_uint8_t            sShardSubSplitMethod;
+    acp_uint8_t            sShardSubSplitMethod = 0;
     acp_uint32_t           sShardSubKeyDataType;
     acp_uint16_t           sShardSubValueCnt = 0;
     acp_uint16_t           sShardSubValueIdx = 0;
