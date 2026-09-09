@@ -2033,6 +2033,16 @@ else
 fi
 echo -n "$RAW_VER" > gcc_version
 echo -n "$GCC_LD_OPTIONS" > gcc_ld_options
+
+# --- Compiler Type Detection (expected by the make system) ---
+if test "$COMPILER_NAME" = "GCC"; then
+    COMPILER_TYPE=gcc
+else
+    COMPILER_TYPE=clang
+fi
+echo -n "$COMPILER_TYPE" > compiler_type
+
+
 # --- Compiler Version Detection ---
 
 AC_SUBST(COMPILER_NAME)
