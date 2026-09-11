@@ -12,7 +12,16 @@
 
 #include <idl.h>
 #include <ide.h>
-#include <idtContainer.h>
+
+/* PROJ-2118 sigaltstack */
+#ifdef SA_ONSTACK
+#include <signal.h>
+#if defined(AMD64_LINUX) || defined(XEON_LINUX) || defined(X86_64_LINUX)
+#define SIGALTSTK_SIZE (16384)
+#else
+#define SIGALTSTK_SIZE SIGSTKSZ
+#endif
+#endif
 
 #define IDU_DUMPSTACKS_PREFIX           "[DUMPSTACKS]"
 #define IDU_DUMPSTACKS_PREFIX_LEN       idlOS::strlen(IDU_DUMPSTACKS_PREFIX)

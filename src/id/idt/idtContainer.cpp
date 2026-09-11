@@ -46,16 +46,6 @@
 
 #include <acpSpinWait.h>
 
-/* PROJ-2118 sigaltstack */
-#ifdef SA_ONSTACK
-#include <signal.h>
-#if defined(AMD64_LINUX) || defined(XEON_LINUX) || defined(X86_64_LINUX)
-#define SIGALTSTK_SIZE (16384)
-#else
-#define SIGALTSTK_SIZE SIGSTKSZ
-#endif
-#endif
-
 /*
  * On SPARC Solaris, I found IDT_SPIN_YIELD worked slightly better for
  * createThread() and join() methods, but ACP_SPIN_WAIT worked order
