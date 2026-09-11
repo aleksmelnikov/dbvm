@@ -291,7 +291,7 @@ ACP_INLINE void acpThrYield(void)
     (void)pthread_yield_np();
 #elif defined(ALTI_CFG_OS_WINDOWS)
     /*
-     * Reliquishes the remainder of it's time slice
+     * Relinquishes the remainder of its time slice
      * to any other thread of equal priority that is
      * ready to run.
      */

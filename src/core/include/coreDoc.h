@@ -154,7 +154,6 @@
  * <tr><td>pthread_rwlock_wrlock</td><td>acpThrRwlockLockWrite()</td></tr>
  * <tr><td>pthread_self</td><td>acpThrGetSelfID()</td></tr>
  * <tr><td>pthread_sigmask</td><td>acpSignalBlockAll() acpSignalBlockDefault() acpSignalBlock() acpSignalUnblock()</td></tr>
- * <tr><td>pthread_yield</td><td>acpThrYield()</td></tr>
  * <tr><td>putenv</td><td>acpEnvSet()</td></tr>
  * <tr><td>rand</td><td>acpRand()</td></tr>
  * <tr><td>read</td><td>acpFileRead()</td></tr>
