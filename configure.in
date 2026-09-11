@@ -2035,10 +2035,14 @@ echo -n "$RAW_VER" > gcc_version
 echo -n "$GCC_LD_OPTIONS" > gcc_ld_options
 
 # --- Compiler Type Detection (expected by the make system) ---
-if test "$COMPILER_NAME" = "GCC"; then
-    COMPILER_TYPE=gcc
-else
+# Mirror the probe in src/pd/makefiles/platform_amd64_linux_lxpthread.GNU:
+# the compiler binary name (e.g. g++ via ccache) may not reflect the
+# actual compiler behind it, so probe the version output.
+COMPILER_CMD=${CXX:-g++}
+if `$COMPILER_CMD --version | grep --ignore-case --quiet clang`; then
     COMPILER_TYPE=clang
+else
+    COMPILER_TYPE=gcc
 fi
 echo -n "$COMPILER_TYPE" > compiler_type
 
