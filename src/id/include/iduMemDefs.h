@@ -238,10 +238,10 @@ typedef struct iduMemClientInfo
     do {                                                                    \
         idlOS::sleep(sInterval);                                            \
         sRC = aSentence;                                                    \
-        if ( (sRC == IDE_FAILURE) && (sTimeOut != NULL) ) {                 \
+        if ( (sRC == IDE_FAILURE) && (sTimeOut.microsec() > 0) ) {          \
             sTimeOut -= sInterval; }                                        \
         else { }                                                            \
-    } while( (sRC == IDE_FAILURE) && (sTimeOut < sInterval) );              \
+    } while( (sRC == IDE_FAILURE) && (sTimeOut > sInterval) );              \
     IDE_TEST( sRC == IDE_FAILURE );                                         \
     return sMemPtr;                                                         \
     IDE_EXCEPTION_END;                                                      \
@@ -274,10 +274,10 @@ typedef struct iduMemClientInfo
     do {                                                                    \
         idlOS::sleep(sInterval);                                            \
         sRC = aSentence;                                                    \
-        if ( (sRC == IDE_FAILURE) && (sTimeOut != NULL) ) {                 \
+        if ( (sRC == IDE_FAILURE) && (sTimeOut.microsec() > 0) ) {          \
             sTimeOut -= sInterval; }                                        \
         else { }                                                            \
-    } while( (sRC == IDE_FAILURE) && (sTimeOut < sInterval) );              \
+    } while( (sRC == IDE_FAILURE) && (sTimeOut > sInterval) );              \
     IDE_TEST( sRC == IDE_FAILURE );                                         \
     return IDE_SUCCESS;                                                     \
     IDE_EXCEPTION_END;                                                      \
