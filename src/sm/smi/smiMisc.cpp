@@ -2591,7 +2591,7 @@ const void * smiGetCompressionColumnLight( const void * aRow,
                                            UInt         aFlag,
                                            UInt       * aLength )
 {
-    smiColumn sColumn = { 0 };
+    smiColumn sColumn = {};
 
     sColumn.colSpace = aColSpace;
     sColumn.flag     = aFlag;
