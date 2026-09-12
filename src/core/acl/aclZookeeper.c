@@ -18,6 +18,10 @@
  * $Id$
  **********************************************************************/
 
+#ifndef THREADED
+#define THREADED 1
+#endif
+
 #include <aclZookeeper.h>
 #include <acp.h>
 

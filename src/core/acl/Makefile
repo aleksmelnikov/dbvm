@@ -35,5 +35,3 @@ endif
 INCLUDES += $(INC_OPT)$(CORE_EXT_DIR)/include
 
 include $(MAKEFILES_DIR)/rule.mk
-
-CC_FLAGS += -DTHREADED
