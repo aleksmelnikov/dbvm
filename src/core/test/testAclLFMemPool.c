@@ -154,7 +154,7 @@ void aclTestLFMemPoolAllocation(aclLFMemPoolTypes aType)
     acl_lockfree_mempool_t sMemPool;
     acp_sint32_t           i;
     acp_sint32_t           sReadValue;
-    acp_sint32_t           j;
+    acp_size_t             j;
     void                   *sPtr[ACL_TEST_LOCKFREE_MEMPOOL_ALLOC_COUNT];
 
     sRC = aclLFMemPoolCreate(&sMemPool,
@@ -209,7 +209,7 @@ static acp_sint32_t aclTestLFMemPoolWriteThr(void *aArg)
 {
     acp_rc_t     sRC;
     testMTArgs   *sArg = (testMTArgs *)aArg;
-    acp_sint32_t i;
+    acp_size_t   i;
 
     sRC = aclLFMemPoolAlloc(sArg->mMemPool, &sArg->mMem);
     ACT_CHECK_DESC(ACP_RC_IS_SUCCESS(sRC),
@@ -228,7 +228,7 @@ static acp_sint32_t aclTestLFMemPoolReadThr(void *aArg)
 {
     acp_rc_t               sRC;
     testMTArgs             *sArg = (testMTArgs *)aArg;
-    acp_sint32_t           i;
+    acp_size_t             i;
     acp_sint32_t           sReadValue;
 
     for (i = 0; i < sArg->mMemPool->mBlockSize / sizeof(sArg->mContent); i++)
