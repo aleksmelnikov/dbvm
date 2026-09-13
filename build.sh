@@ -21,7 +21,7 @@ readonly re2c_ver="1.0.1"
 #===============================================================================
 
 # Path definitions
-readonly current_directory="$(cd "$(dirname "$0")" && pwd)"
+readonly current_directory="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly thirdparty_directory="${current_directory}/3rdparty"
 readonly dep_build_directory="${current_directory}/target"
 readonly dep_install_directory="${current_directory}/target/dep"
