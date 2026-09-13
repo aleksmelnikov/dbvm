@@ -12,7 +12,7 @@
 - **fix**: Исправление багов или утечек ресурсов.
 - **init**: Первый коммит или инициализация.
 - **perf**: Оптимизация производительности или использования памяти.
-- **refact**: Рефакторинг и улучшение структуры кода.
+- **refactor**: Рефакторинг и улучшение структуры кода.
 - **research**: Техническое исследование, эксперименты, изучение новых подходов и решений.
 - **revert**: Откат изменений к прошлой версии.
 - **sec**: Работа с безопасностью и уязвимостями.
@@ -28,5 +28,5 @@
 - `feat: add command line arguments support -- main.cpp`
 - `fix(io): resolve null pointer dereference -- logger.h`
 - `build: link external threading library -- CMakeLists.txt`
-- `refact(parser): simplify state machine logic -- parser.cpp, parser.h`
+- `refactor(parser): simplify state machine logic -- parser.cpp, parser.h`
 - `style: apply clang-format -- /src/core/`

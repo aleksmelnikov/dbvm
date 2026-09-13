@@ -1,6 +1,6 @@
 # Commit Message Convention
 
-Сommit message format:
+Commit message format:
 `<type>(<scope>): <subject> -- <file_or_folder>`
 
 ### Types
@@ -12,7 +12,7 @@
 - **fix**: A bug fix or resource leak fix.
 - **init**: Initial commit or project initialization.
 - **perf**: A code change that improves performance or memory usage.
-- **refact**: Code change that neither fixes a bug nor adds a feature.
+- **refactor**: A code change that neither fixes a bug nor adds a feature.
 - **research**: Technical research, experiments, investigating new approaches and solutions.
 - **revert**: Reverts a previous commit.
 - **sec**: Security-related fixes or improvements.
@@ -28,6 +28,6 @@
 - `feat: add command line arguments support -- main.cpp`
 - `fix(io): resolve null pointer dereference -- logger.h`
 - `build: link external threading library -- CMakeLists.txt`
-- `refact(parser): simplify state machine logic -- parser.cpp, parser.h`
+- `refactor(parser): simplify state machine logic -- parser.cpp, parser.h`
 - `style: apply clang-format -- /src/core/`
 
