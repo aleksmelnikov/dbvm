@@ -8,30 +8,30 @@ Installing Build Toolchain
 
 Install the core C++ development tools:
 ```bash
-dnf install gcc14 gcc14-c++ make autoconf gawk cmake
+sudo dnf install gcc14 gcc14-c++ make autoconf gawk git cmake
 ```
 
 Register gcc/g++-14:
 ```bash
-update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 14
-update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 14
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 14
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 14
 ```
 
 Add Adoptium's repository (for Java 1.8):
 ```bash
-dnf install adoptium-temurin-java-repository
-fedora-third-party enable
+sudo dnf install adoptium-temurin-java-repository
+sudo fedora-third-party enable
 ```
 
 Install Java:
 ```bash
-dnf install temurin-8-jdk
+sudo dnf install temurin-8-jdk
 ```
 
 Install Library Dependencies
 ----------------------------
 
-Not needed. Because the specific `Flex, Bison, Re2c, Openssl, Ncurses` sources was added to the repository`/3rdparty`.
+Not needed. The `Flex, Bison, Re2c, Openssl, Ncurses` sources were added to the `repository/3rdparty` directory.
 
 Build and Installation Instructions
 -----------------------------------
@@ -59,12 +59,17 @@ source ./dbenv.sh
 
 Create the database configuration file:
 ```bash
-cp $ALTIBASE_HOME/conf/altibase.properties.release $ALTIBASE_HOME/conf/altibase.properties 
+cp $ALTIBASE_HOME/conf/altibase.properties.release $ALTIBASE_HOME/conf/altibase.properties
 ```
 
 Create a new database:
 ```bash
 $ALTIBASE_HOME/bin/server create UTF8 UTF8
+```
+
+Check that the server is not already running:
+```bash
+$ALTIBASE_HOME/bin/server status
 ```
 
 Start the server daemon:
@@ -89,6 +94,13 @@ Work
 
 Use the `ISQL` utility to connect to the server and execute a test query:
 ```bash
-$ALTIBASE_HOME/bin/is
+$ALTIBASE_HOME/bin/is -sysdba
 iSQL> select * from tab;
+```
+
+Stop the Database
+-----------------
+
+```bash
+$ALTIBASE_HOME/bin/server stop
 ```
