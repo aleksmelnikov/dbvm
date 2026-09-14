@@ -28,8 +28,7 @@ Install from Sources
 * **Fedora**: Detailed build instructions are available in [INSTALL.Fedora.md](INSTALL.Fedora.md).
 
 
-Lisence
-=======
+## Licensing
 
 This project is licensed under the terms specified in the [COPYING.readme](COPYING.readme) file.
 

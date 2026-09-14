@@ -5,9 +5,10 @@ DBMS Server: GNU AGPLv3
 
 DBMS Client: GNU LGPLv3
 
-Polygon Libraries: GPC or GNU AGPLv3
-    The libraries (GPC / Altibase CE) are interchangeable and can be selected in the DB config file.
-    As of 2020, the GPC license restrictions are no longer in effect.
+Polygon Libraries: GPC
+    GPC was discontinued by the author in 2020; per the former licensing
+    manager, copies obtained from other sources may be used without any
+    licensing requirements. The GitHub mirror is released under the MIT License.
     Sources: [Wikipedia](https://en.wikipedia.org/wiki/General_Polygon_Clipper) and
     [GitHub](https://github.com/rickbrew/GeneralPolygonClipper).
 
