@@ -6,7 +6,7 @@ By contributing to this repository, you agree that your contributions will be li
 
 *   **Server Code:** GNU AGPLv3
 *   **Client Code:** GNU LGPLv3
-*   **Polygon Libraries:** GPC / GNU AGPLv3
+*   **Polygon Libraries:** GPC - discontinued in 2020, usable without licensing requirements (see [COPYING.readme](COPYING.readme))
 
 No further restrictions (geographic, field-of-use, or otherwise) may be imposed on the source code. All contributions must comply strictly with the licenses mentioned above.
 
