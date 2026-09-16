@@ -40,6 +40,7 @@
 #include <acpDl.h>
 #include <acpEnv.h>
 #include <acpError.h>
+#include <acpFallthrough.h>
 #include <acpFile.h>
 #include <acpInet.h>
 #include <acpInit.h>

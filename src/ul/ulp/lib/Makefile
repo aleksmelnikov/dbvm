@@ -31,6 +31,7 @@ endif
 	$(COPY) ../include/ulpLibInterface.h $(ALTI_HOME)/include
 	$(COPY) ../include/ses.h $(ALTI_HOME)/include/ses.h
 	$(COPY) ../include/aprePredefinedTypes.h $(ALTI_HOME)/include
+	$(COPY) ../../../core/include/acpFallthrough.h $(ALTI_HOME)/include
 	@touch $@
 
 compile: $(ULP_STAMP)

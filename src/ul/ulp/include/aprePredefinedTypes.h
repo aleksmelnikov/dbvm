@@ -17,6 +17,8 @@
 #ifndef _APRE_PREDEFINED_TYPES_H_
 #define _APRE_PREDEFINED_TYPES_H_ 1
 
+#include <acpFallthrough.h>
+
 typedef unsigned int size_t;
 typedef int ssize_t;
 typedef unsigned int uint32_t;
