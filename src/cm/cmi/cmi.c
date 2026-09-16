@@ -19,6 +19,7 @@
 #include <aclLZ4.h>
 #include <aclCompression.h>
 #include <aciVersion.h>
+#include <acpFallthrough.h>
 
 extern cmpOpMap gCmpOpBaseMapClient[];
 extern cmpOpMap gCmpOpDBMapClient[];
@@ -722,10 +723,13 @@ ACI_RC cmiInitialize( acp_uint32_t  aCmMaxPendingList )
         {
             case 3:
                 cmbPoolFree( sPoolIPC );
+                ACP_FALLTHROUGH;
             case 2:
                 cmbPoolFree( sPoolLocal );
+                ACP_FALLTHROUGH;
             case 1:
                 acpThrMutexUnlock(&gCMInitMutexClient);
+                ACP_FALLTHROUGH;
             case 0:
             default:
                 break;
