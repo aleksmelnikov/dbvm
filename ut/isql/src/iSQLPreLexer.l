@@ -48,6 +48,7 @@
 %option prefix="iSQLPreLexer"
 
 %{
+#include <acpFallthrough.h>
 #include <idl.h>
 #include <iSQLProgOption.h>
 #include <iSQLCompiler.h>

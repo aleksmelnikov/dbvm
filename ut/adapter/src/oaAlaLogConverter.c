@@ -616,10 +616,11 @@ static ace_rc_t initializeUpdateLogRecord( oaContext            * aContext,
         case 2:
             finalizeLogRecordColumn( aLogRecord->mInitializedColumnCount,
                                      &(aLogRecord->mColumn) );
-
+            ACP_FALLTHROUGH;
         case 1:
             finalizeLogRecordColumn( aLogRecord->mPrimaryKeyCount,
                                      &(aLogRecord->mPrimaryKey) );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -725,8 +726,10 @@ static ace_rc_t initializeLogRecordBox( oaContext            * aContext,
     {
         case 2:
             finalizeUpdateLogRecord(&(aLogRecordBox->mUpdateLogRecord));
+            ACP_FALLTHROUGH;
         case 1:
             finalizeInsertLogRecord(&(aLogRecordBox->mInsertLogRecord));
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -841,12 +844,16 @@ ace_rc_t oaAlaLogConverterInitialize( oaContext                * aContext,
 
                 finalizeTableInfo( &(sHandle->mTableInfo[i - 1]) );
             }
+            ACP_FALLTHROUGH;
         case 3:
             acpMemFree(sHandle->mLogRecordBox);
+            ACP_FALLTHROUGH;
         case 2:
             acpMemFree(sHandle->mTableInfo);
+            ACP_FALLTHROUGH;
         case 1:
             acpMemFree(sHandle);
+            ACP_FALLTHROUGH;
         default:
             break;
     }

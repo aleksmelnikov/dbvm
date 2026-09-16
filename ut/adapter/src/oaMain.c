@@ -381,6 +381,7 @@ static ace_rc_t handleOption( oaContext  * aContext,
             case OPTION_VERSION :
                 (void)acpPrintf( (acp_char_t *)"%s\n", OA_VERSION );
                 acpProcExit( 0 ); /* just exit after print */
+                break;
 
             default :
                 acpProcExit( -1 );
@@ -481,14 +482,17 @@ static ace_rc_t doInitializeJob( oaContext                * aContext,
         case 3:
             oaAlaLogConverterFinalize( sLogConverterHandle );
             sLogConverterHandle = NULL;
+            ACP_FALLTHROUGH;
 
         case 2:
             finalizeApplier( sApplierHandle );
             sApplierHandle = NULL;
+            ACP_FALLTHROUGH;
 
         case 1:
             finalizeAlaReceiver( sAlaReceiverHandle );
             sAlaReceiverHandle = NULL;
+            ACP_FALLTHROUGH;
 
         default:
             break;

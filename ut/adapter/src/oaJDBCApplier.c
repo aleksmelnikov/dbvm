@@ -22,6 +22,7 @@
 #include <acl.h>
 #include <aciTypes.h>
 #include <acpCStr.h>
+#include <acpFallthrough.h>
 
 #include <alaAPI.h>
 
@@ -389,8 +390,10 @@ ace_rc_t initializeJDBCApplier( oaContext                 * aContext,
     {
         case 2 :
             oaJDBCApplierDisconnect( sApplierHandle );
+            ACP_FALLTHROUGH;
         case 1 :
             oaJDBCApplierFinalize( sApplierHandle );
+            ACP_FALLTHROUGH;
         default :
             break;
     }

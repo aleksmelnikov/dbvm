@@ -85,9 +85,8 @@ YACCFLAGS = -d -v
 .l.cpp:
 	$(LEX) $(LEXFLAGS) -o$*.cpp $*.l
 	$(SED) s,$(FLEX_REPLACE_BEFORE),$(FLEX_REPLACE_AFTER), < $*.cpp > $*.cpp.old
-	$(RM) -f $*.cpp
-	$(COPY) $*.cpp.old $*.cpp
-	$(RM) $*.cpp.old
+	$(SED) 's,/\*FALLTHROUGH\*/,ACP_FALLTHROUGH;,' < $*.cpp.old > $*.cpp
+	$(RM) -f $*.cpp.old
 
 all: compile
 

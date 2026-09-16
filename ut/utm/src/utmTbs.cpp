@@ -18,6 +18,7 @@
  * $Id$
  **********************************************************************/
 
+#include <acpFallthrough.h>
 #include <smDef.h>
 #include <utm.h>
 #include <utmExtern.h>
@@ -270,6 +271,7 @@ SQLRETURN getTBSInfo4UserMode( FILE  *aTbsFp,
                    "\nDROP TABLESPACE \"%s\" INCLUDING CONTENTS AND DATAFILES; \n",
                    sTbsName);
            }
+           ACP_FALLTHROUGH;
        case SMI_DISK_SYSTEM_DATA:
        case SMI_DISK_SYSTEM_TEMP:
        case SMI_DISK_SYSTEM_UNDO:

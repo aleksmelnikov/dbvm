@@ -18,6 +18,7 @@
  * $Id: audit.cpp 80540 2017-07-19 08:00:50Z daramix $
  ******************************************************************************/
 
+#include <acpFallthrough.h>
 #include <iduMemMgr.h>
 #include <mtcc.h>
 #include <uto.h>
@@ -98,22 +99,22 @@ int main( int argc, char **argv )
     {
         case 6:
             sTask->join();
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 5:
             sTask->finalize();
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 4:
             delete sTask;
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 3:
             prop.finalize();
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 2:
             mtcFinalizeForClient();
+            ACP_FALLTHROUGH;
         case 1:
             iduMemMgr::destroyStatic();
-            /* fall through */
-            break;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

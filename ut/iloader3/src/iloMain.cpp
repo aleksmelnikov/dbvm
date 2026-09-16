@@ -18,6 +18,7 @@
  * $Id: iloMain.cpp 88494 2020-09-04 04:29:31Z chkim $
  **********************************************************************/
 
+#include <acpFallthrough.h>
 #include <idp.h>
 #include <ilo.h>
 #ifdef USE_READLINE
@@ -511,22 +512,22 @@ exit_pos:
     {
         case 10:
             (void)DisconnectDB( sHandle->mSQLApi );
-            /* break */
+            ACP_FALLTHROUGH;
         case 9:
             delete sHandle->mDownLoad;
-            /* break */
+            ACP_FALLTHROUGH;
         case 8:
             delete sHandle->mLoad;
-            /* break */
+            ACP_FALLTHROUGH;
         case 7:
             delete sHandle->m_memmgr;
-            /* break */
+            ACP_FALLTHROUGH;
         case 6:
             delete sHandle->mFormDown;
-            /* break */
+            ACP_FALLTHROUGH;
         case 5:
             delete gCommandCompiler;
-            /* break */
+            ACP_FALLTHROUGH;
         case 4:
             /* BUG-21332 */
             if (uteGetErrorCODE(sHandle->mErrorMgr) == 0x91100) //utERR_ABORT_File_Lock_Error
@@ -535,16 +536,16 @@ exit_pos:
             }
 
             (void)idlOS::free( sHandle->mErrorMgr );
-            /* break */
+            ACP_FALLTHROUGH;
         case 3:
             delete sHandle->mSQLApi;
-            /* break */
+            ACP_FALLTHROUGH;
         case 2:
             delete sHandle->mProgOption;
-            /* break */
+            ACP_FALLTHROUGH;
         case 1:
             (void)idlOS::free( sHandle ); 
-            /* break */
+            ACP_FALLTHROUGH;
         default:
             break;
     }

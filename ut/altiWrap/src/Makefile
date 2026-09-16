@@ -48,8 +48,8 @@ $(TARGET_DIR)/ut/altiWrap/src/altiWrapParseMgr.$(OBJEXT): $(GENHEADERS)
 %.cpp: %.l
 	cd $(dir $<) && $(LEX) $(LEXFLAGS) -o$(notdir $@) $(notdir $<)
 	$(SED) s,$(FLEX_REPLACE_BEFORE),$(FLEX_REPLACE_AFTER), < $*.cpp > $*.cpp.old
-	$(RM) -f $*.cpp
-	mv $*.cpp.old $*.cpp
+	$(SED) 's,/\*FALLTHROUGH\*/,ACP_FALLTHROUGH;,' < $*.cpp.old > $*.cpp
+	$(RM) -f $*.cpp.old
 
 %.hpp %.cpp: %.y
 ifeq "$(BISON_ENV_NEEDED)" "yes"

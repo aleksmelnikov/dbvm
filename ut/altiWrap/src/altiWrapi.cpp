@@ -24,6 +24,7 @@
 #include <aciTypes.h>
 #include <altiWrapi.h>
 #include <altiWrapFileMgr.h>
+#include <acpFallthrough.h>
 
 
 
@@ -247,9 +248,11 @@ IDE_RC altiWrapi::parsingCommand( altiWrap     * aAltiWrap,
         case 2:
             idlOS::free( sOutPath );
             sOutPath = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             idlOS::free( sInPath );
             sInPath = NULL;
+            ACP_FALLTHROUGH;
         case 0:
             break;
         default:
@@ -322,15 +325,19 @@ IDE_RC altiWrapi::allocAltiWrap( altiWrap ** aAltiWrap )
         case 4:
             idlOS::free ( sAltiWrap->mErrorMgr );
             sAltiWrap->mErrorMgr = NULL;
+            ACP_FALLTHROUGH;
         case 3:
             idlOS::free ( sAltiWrap->mPlainText );
             sAltiWrap->mPlainText = NULL;
+            ACP_FALLTHROUGH;
         case 2:
             idlOS::free( sAltiWrap->mFilePathInfo );
             sAltiWrap->mFilePathInfo = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             idlOS::free( sAltiWrap );
             sAltiWrap = NULL;
+            ACP_FALLTHROUGH;
         case 0:
             break;
         default:

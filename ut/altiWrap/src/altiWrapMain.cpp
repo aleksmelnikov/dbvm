@@ -24,6 +24,7 @@
 #include <altiWrapFileMgr.h>
 #include <altiWrapParseMgr.h>
 #include <altiWrapEncrypt.h>
+#include <acpFallthrough.h>
 
 
 
@@ -191,11 +192,14 @@ acp_sint32_t main( acp_sint32_t aArgc, acp_char_t *aArgv[] )
         case 3:
             idlOS::free( sText );
             sText = NULL;
+            ACP_FALLTHROUGH;
         case 2:
             idlOS::free( gPreLexer );
             gPreLexer = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             altiWrapi::finalizeAltiWrap( sAltiWrap );
+            ACP_FALLTHROUGH;
         case 0:
             break;
         default:

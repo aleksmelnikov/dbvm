@@ -43,6 +43,7 @@
  *     ALA_LOG_FILE_SIZE = 10485760
  *     ALA_MAX_LOG_FILE_NUMBER = 10
  */
+#include <acpFallthrough.h>
 #include <oaContext.h>
 #include <oaConfig.h>
 #include <aciTypes.h>
@@ -2240,8 +2241,10 @@ ace_rc_t oaConfigLoad( oaContext *aContext,
     {
         case 2:
             oaConfigFinalizeHandle(sHandle);
+            ACP_FALLTHROUGH;
         case 1:
             acpMemFree(sHandle);
+            ACP_FALLTHROUGH;
         default:
             break;
     }

@@ -24,6 +24,7 @@
 %option prefix="iSQLParamLexer"
 
 %{
+#include <acpFallthrough.h>
 #include <idl.h>
 #include <idn.h>
 #include <uttMemory.h>

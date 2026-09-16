@@ -22,6 +22,7 @@
 #include <altiWrap.h>
 #include <altiWrapEncrypt.h>
 #include <idsAltiWrap.h>
+#include <acpFallthrough.h>
 
 
 
@@ -83,9 +84,11 @@ IDE_RC altiWrapEncrypt::setEncryptedText( altiWrap * aAltiWrap,
         case 2:
             idlOS::free( sNewNode );
             sNewNode = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             idlOS::free( sNewText );
             sNewText = NULL;
+            ACP_FALLTHROUGH;
         case 0:
             break;
         default:

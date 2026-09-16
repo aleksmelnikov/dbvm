@@ -17,6 +17,7 @@
 /*******************************************************************************
  * $Id: utScanner.cpp 91790 2021-10-05 01:14:45Z chkim $
  ******************************************************************************/
+#include <acpFallthrough.h>
 #include <mtcl.h>
 #include <uto.h>
 #include <utAtb.h>
@@ -989,6 +990,7 @@ IDE_RC utScanner::prepare( utProperties *aProp )
     {
         case DIFF :
             IDE_TEST(setModeDIFF(  true  )!=IDE_SUCCESS);
+            ACP_FALLTHROUGH;
 
         case SYNC :
             if( sDML[SI])
@@ -2182,6 +2184,7 @@ utaCSVTOKENTYPE utScanner::utaGetCSVTokenFromBuff( utaFileInfo *aFileInfo,
                     break;
                 }
                 sState = stCollect;
+                ACP_FALLTHROUGH;
             /* state of in the middle of reading a field  */    
             case stCollect :
                 if ( sInQuotes == ID_TRUE )

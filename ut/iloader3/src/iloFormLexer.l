@@ -47,6 +47,8 @@
 %}
 
 %{
+#include <acpFallthrough.h>
+
 /* This is Lex Source for lexical Analysis of iLoader Form file */
 //#define _ILOADER_DEBUG
 //#undef  _ILOADER_DEBUG

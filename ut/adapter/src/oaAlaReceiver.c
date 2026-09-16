@@ -188,11 +188,14 @@ ace_rc_t oaAlaReceiverInitialize(oaContext *aContext,
     {
         case 3:
             disableAlaLogging(sHandle);
+            ACP_FALLTHROUGH;
         case 2:
             (void)ALA_DestroyAPI(DO_NOT_USE_ODBC_DRIVER,
                                  &(sHandle->mAlaErrorMgr));
+            ACP_FALLTHROUGH;
         case 1:
             acpMemFree(sHandle);
+            ACP_FALLTHROUGH;
         default:
             break;
     }

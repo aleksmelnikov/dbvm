@@ -24,6 +24,7 @@
 %option prefix="iSQLConnectLexer"
 
 %{
+#include <acpFallthrough.h>
 #include <idl.h>
 #include <idn.h>
 #include <uttMemory.h>

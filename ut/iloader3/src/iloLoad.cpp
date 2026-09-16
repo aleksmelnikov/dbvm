@@ -18,6 +18,7 @@
  * $Id: iloLoad.cpp 90308 2021-03-24 08:32:25Z donlet $
  **********************************************************************/
 
+#include <acpFallthrough.h>
 #include <ilo.h>
 #include <iloLoadInsert.h>
 
@@ -271,15 +272,20 @@ SInt iloLoad::LoadwithPrepare( ALTIBASE_ILOADER_HANDLE aHandle )
     {
     case ConnSQLApi:
         (void)FiniStmts(sHandle);
+        ACP_FALLTHROUGH;
     case VarDone:
         (void)FiniVariables(sHandle);
+        ACP_FALLTHROUGH;
     case ExecDone:
         (void)m_pISPApi->StmtInit();
         (void)m_pISPApi->EndTran(ILO_FALSE);
+        ACP_FALLTHROUGH;
     case FileOpenDone:
         (void)FiniFiles(sHandle);
+        ACP_FALLTHROUGH;
     case GetTableInfoDone:
         (void)FiniTableInfo(sHandle);
+        ACP_FALLTHROUGH;
     case GetTableTreeDone:
         m_TableTree.FreeTree();
         break;

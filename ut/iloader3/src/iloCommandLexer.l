@@ -23,6 +23,8 @@
 %option prefix="iloCommandLexer"
 
 %{
+#include <acpFallthrough.h>
+
 /* This is Lex Source for lexical Analysis of iLoader Command */
 #define _ILOADER_DEBUG
 #undef  _ILOADER_DEBUG

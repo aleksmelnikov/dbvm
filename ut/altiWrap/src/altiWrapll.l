@@ -31,6 +31,7 @@
 %option yyclass="altiWraplLexer"
 
 %{
+#include <acpFallthrough.h>
 #include <idl.h>
 #include <idn.h>
 #include <altiWrap.h>

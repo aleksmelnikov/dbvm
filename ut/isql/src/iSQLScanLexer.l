@@ -44,6 +44,7 @@
 %option prefix="iSQLScanLexer"
 
 %{
+#include <acpFallthrough.h>
 #include <idl.h>
 #include <idn.h>
 #include <utString.h>

@@ -42,6 +42,7 @@
 %option prefix="iSQLLexer"
 
 %{
+#include <acpFallthrough.h>
 #include <idl.h>
 #include <idn.h>
 #include <uttMemory.h>

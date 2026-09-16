@@ -41,7 +41,7 @@ endif
 $(ILO_SRC_DIR)/iloCommandLexer.cpp: $(ILO_SRC_DIR)/iloCommandLexer.l
 	cd $(ILO_SRC_DIR) && $(LEX) $(LEXFLAGS) -oiloCommandLexer.cpp iloCommandLexer.l
 	$(SED) s,$(FLEX_REPLACE_BEFORE),$(FLEX_REPLACE_AFTER), < $(ILO_SRC_DIR)/iloCommandLexer.cpp > $(ILO_SRC_DIR)/iloCommandLexer.cpp.old
-	$(COPY) $(ILO_SRC_DIR)/iloCommandLexer.cpp.old $(ILO_SRC_DIR)/iloCommandLexer.cpp
+	$(SED) 's,/\*FALLTHROUGH\*/,ACP_FALLTHROUGH;,' < $(ILO_SRC_DIR)/iloCommandLexer.cpp.old > $(ILO_SRC_DIR)/iloCommandLexer.cpp
 	$(RM) $(ILO_SRC_DIR)/iloCommandLexer.cpp.old
 ifeq "$(OS_TARGET)" "INTEL_WINDOWS"
 	$(COPY) $(ILO_SRC_DIR)/iloFormParser.hpp $(ILO_SRC_DIR)/iloFormParser.cpp.h
@@ -64,5 +64,5 @@ endif
 $(ILO_SRC_DIR)/iloFormLexer.cpp: $(ILO_SRC_DIR)/iloFormLexer.l
 	cd $(ILO_SRC_DIR) && $(LEX) $(FORMLEXFLAGS) -oiloFormLexer.cpp iloFormLexer.l
 	$(SED) s,$(FLEX_REPLACE_BEFORE),$(FLEX_REPLACE_AFTER), < $(ILO_SRC_DIR)/iloFormLexer.cpp > $(ILO_SRC_DIR)/iloFormLexer.cpp.old
-	$(COPY) $(ILO_SRC_DIR)/iloFormLexer.cpp.old $(ILO_SRC_DIR)/iloFormLexer.cpp
+	$(SED) 's,/\*FALLTHROUGH\*/,ACP_FALLTHROUGH;,' < $(ILO_SRC_DIR)/iloFormLexer.cpp.old > $(ILO_SRC_DIR)/iloFormLexer.cpp
 	$(RM) $(ILO_SRC_DIR)/iloFormLexer.cpp.old

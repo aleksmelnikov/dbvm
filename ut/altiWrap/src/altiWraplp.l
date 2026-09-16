@@ -32,6 +32,7 @@
 %option prefix="altiWrapPreLexer"
 
 %{
+#include <acpFallthrough.h>
 #include <altiWrapParseMgr.h>
 
 #undef ECHO
