@@ -18,6 +18,7 @@
 #include <ulnPrivate.h>
 #include <ulnConv.h>
 #include <ulnConvNumeric.h>
+#include <acpFallthrough.h>
 
 /*
  * Note : 급조한 소스이므로 리팩토링 절실히 필요하다.
@@ -861,9 +862,13 @@ ulncConvResult ulncCharToNumeric(ulncNumeric       *aNumeric,
         {
             case '-':
                 sSign = 0;
+                ACP_FALLTHROUGH;
             case '+':
                 aString++;
                 ACI_TEST_RAISE( aString >= sFence, ERR_INVALID_LITERAL );
+                ACP_FALLTHROUGH;
+            default:
+                break;
         }
 
         aNumeric->mSign = sSign;
@@ -934,9 +939,13 @@ ulncConvResult ulncCharToNumeric(ulncNumeric       *aNumeric,
                 {
                  case '-':
                     sExponentSign = -1;
+                    ACP_FALLTHROUGH;
                  case '+':
                     aString++;
                     ACI_TEST_RAISE( aString >= sFence, ERR_INVALID_LITERAL );
+                    ACP_FALLTHROUGH;
+                 default:
+                    break;
                 }
                 if( sExponentSign > 0 )
                 {

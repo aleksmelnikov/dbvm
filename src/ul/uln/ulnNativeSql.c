@@ -18,6 +18,7 @@
 #include <ulnPrivate.h>
 #include <ulnEscape.h>
 #include <ulnCharSet.h>
+#include <acpFallthrough.h>
 
 ACI_RC ulnNativeSqlCheckArgs(ulnFnContext *aFnContext,
                              acp_char_t   *aInputStatement,
@@ -213,8 +214,10 @@ SQLRETURN ulnNativeSql(ulnDbc       *aDbc,
         case 2:
             ulnCharSetFinalize(&sCharSetIn);
             ulnCharSetFinalize(&sCharSetOut);
+            ACP_FALLTHROUGH;
         case 1:
             ulnEscapeFinalize(&sEscape);
+            ACP_FALLTHROUGH;
         default:
             break;
     }

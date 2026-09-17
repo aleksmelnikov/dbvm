@@ -27,6 +27,7 @@
 #include <ulsByteOrder.h>
 #include <ulaComm.h>
 #include <ulaXLogCollector.h>
+#include <acpFallthrough.h>
 
 #define ULA_TLSF_INITIAL_POOL_SIZE  (10 * 1024 * 1024)
 
@@ -841,28 +842,29 @@ ACI_RC ulaXLogCollectorInitialize(ulaXLogCollector  *aCollector,
     {
         case 10 :
             (void)acpThrMutexDestroy(&aCollector->mReceiveMutex);
-
+            ACP_FALLTHROUGH;
         case 9 :
             (void)acpThrMutexDestroy(&aCollector->mSendMutex);
-
+            ACP_FALLTHROUGH;
         case 8 :
             (void)acpThrMutexDestroy(&aCollector->mAuthInfoMutex);
-
+            ACP_FALLTHROUGH;
         case 7 :
 
         case 6 :
             (void)ulaTransTblDestroy(&aCollector->mTransTbl, NULL);
-
+            ACP_FALLTHROUGH;
         case 5 :
             (void)acpThrMutexDestroy(&aCollector->mXLogPoolMutex);
-
+            ACP_FALLTHROUGH;
         case 4 :
             aclMemPoolDestroy(&aCollector->mXLogPool);
-
+            ACP_FALLTHROUGH;
         case 3 :
 
         case 2 :
             (void)aclMemAllocFreeInstance( aCollector->mMemAllocator );
+            ACP_FALLTHROUGH;
         case 1 :
             ulaMetaDestroy( &aCollector->mMeta );
             break;
@@ -1006,16 +1008,16 @@ ACI_RC ulaXLogCollectorDestroy(ulaXLogCollector *aCollector,
     {
         case 0 :
             (void)acpThrMutexDestroy(&aCollector->mAuthInfoMutex);
-
+            ACP_FALLTHROUGH;
         case 1 :
             (void)ulaXLogCollectorFinishNetwork(aCollector, NULL);
-
+            ACP_FALLTHROUGH;
         case 2 :
             (void)acpThrMutexDestroy(&aCollector->mSendMutex);
-
+            ACP_FALLTHROUGH;
         case 3 :
             (void)acpThrMutexDestroy(&aCollector->mReceiveMutex);
-
+            ACP_FALLTHROUGH;
         case 4 :
             // PROJ-1663
             if (aCollector->mRemainedXLog != NULL)
@@ -1025,11 +1027,11 @@ ACI_RC ulaXLogCollectorDestroy(ulaXLogCollector *aCollector,
                                                      NULL);
                 aCollector->mRemainedXLog = NULL;
             }
-
+            ACP_FALLTHROUGH;
         case 5 :
             (void)ulaXLogCollectorFreeXLogFromLinkedList
                                     (aCollector, &aCollector->mXLogQueue, NULL);
-
+            ACP_FALLTHROUGH;
         case 6 :
 
         case 7 :
@@ -1046,16 +1048,17 @@ ACI_RC ulaXLogCollectorDestroy(ulaXLogCollector *aCollector,
                                                                  NULL);
                 }
             }
-
+            ACP_FALLTHROUGH;
         case 8 :
             (void)ulaTransTblDestroy(&aCollector->mTransTbl, NULL);
-
+            ACP_FALLTHROUGH;
         case 9 :
             aclMemPoolDestroy(&aCollector->mXLogPool);
             (void)aclMemAllocFreeInstance( aCollector->mMemAllocator );
-
+            ACP_FALLTHROUGH;
         case 10 :
             (void)acpThrMutexDestroy(&aCollector->mXLogPoolMutex);
+            ACP_FALLTHROUGH;
         case 11 :
             ulaMetaDestroy( &aCollector->mMeta );
             break;
@@ -1619,10 +1622,13 @@ ACI_RC ulaWakeupPeerSender( ulaXLogCollector * aCollector,
     {
         case 3:
             (void)cmiShutdownLink( sConnectLink, CMI_DIRECTION_RDWR );
+            ACP_FALLTHROUGH;
         case 2:
             (void)cmiFreeCmBlock( &sProtocolContext );
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFreeLink( sConnectLink );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

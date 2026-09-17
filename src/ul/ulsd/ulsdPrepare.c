@@ -29,6 +29,8 @@
 #include <ulsdRebuild.h>
 #include <ulsdFailover.h>
 
+#include <acpFallthrough.h>
+
 static ACI_RC ulsdReadShardValue( cmiProtocolContext        * aProtocolContext,
                                   ulnDbc                    * aDbc,
                                   acp_uint32_t                aValueType,
@@ -660,7 +662,7 @@ ACI_RC ulsdCallbackAnalyzeResult(cmiProtocolContext *aProtocolContext,
                     return ACI_FAILURE;
                 }
             }
-
+            ACP_FALLTHROUGH;
         case 1:
             for ( sShardSubValueIdx = sTryShardSubValueCnt; 
                   sShardSubValueIdx < sShardSubValueCnt; 
@@ -673,7 +675,7 @@ ACI_RC ulsdCallbackAnalyzeResult(cmiProtocolContext *aProtocolContext,
             }
 
             CMI_RD2(aProtocolContext, &sShardRangeInfoCnt);
-
+            ACP_FALLTHROUGH;
         case 2:
             for ( sShardRangeIdx = 0; sShardRangeIdx < sShardRangeInfoCnt; sShardRangeIdx++ )
             {

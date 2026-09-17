@@ -18,6 +18,7 @@
 #include <uln.h>
 #include <ulnPrepare.h>
 #include <ulnCache.h>
+#include <acpFallthrough.h>
 
 #define ULN_PREP_CHKERR_PREFIX_CSTR         "SELECT _PROWID,"
 #define ULN_PREP_CHKERR_PREFIX_CLEN         15
@@ -2113,8 +2114,10 @@ ACI_RC ulnPrepareCore(ulnFnContext *aFnContext,
     {
         case 2:
             ulnCharSetFinalize(&sCharSet);
+            ACP_FALLTHROUGH;
         case 1:
             ulnEscapeFinalize(&sEscape);
+            ACP_FALLTHROUGH;
         default:
             break;
     }

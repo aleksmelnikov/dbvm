@@ -17,6 +17,7 @@
 #include <uln.h>
 #include <ulnPrivate.h>
 #include <ulnCancel.h>
+#include <acpFallthrough.h>
 
 /**
  * ULN_SFID_03
@@ -224,9 +225,11 @@ ACI_RC ulnInitializeCancelContext(ulnFnContext *aFnContext,
     {
         case 3:
             cmiFreeCmBlock(&(aPtContext->mCmiPtContext));
+            ACP_FALLTHROUGH;
         case 2:
             ACE_ASSERT(cmiFreeLink(sCmiLink) == ACI_SUCCESS);
             aCmiSession->mLink = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             ACE_ASSERT(cmiRemoveSession(aCmiSession) == ACI_SUCCESS);
             break;
@@ -271,9 +274,11 @@ ACI_RC ulnFinalizeCancelContext(ulnFnContext *aFnContext,
     {
         case 3:
             (void)cmiFreeCmBlock(&(aPtContext->mCmiPtContext));
+            ACP_FALLTHROUGH;
         case 2:
             (void) cmiFreeLink((cmiLink *)aCmiSession->mLink);
             aCmiSession->mLink = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             (void) cmiRemoveSession(aCmiSession);
             break;

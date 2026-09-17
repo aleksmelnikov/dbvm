@@ -22,6 +22,7 @@
 #include <sqlcli.h>
 #include <ulxXaProtocol.h>
 #include <ulxMsgLog.h>
+#include <acpFallthrough.h>
 
 #define XA_RETURNCODE_STR(d) XA_RETURNSTR[(d)+9]
 
@@ -193,12 +194,16 @@ int ulxXaOpen(char *aXa_info, int aRmid, long aFlags)
     {
         case 4:
             ulnDisconnect(sConn->mDbc);
+            ACP_FALLTHROUGH;
         case 3:
             ulnFreeHandle(SQL_HANDLE_DBC, sConn->mDbc);
+            ACP_FALLTHROUGH;
         case 2:
             ulnFreeHandle(SQL_HANDLE_ENV, sConn->mEnv);
+            ACP_FALLTHROUGH;
         case 1:
             ulxDeleteConnection(aRmid);
+            ACP_FALLTHROUGH;
         default:
             break;
     }

@@ -20,6 +20,7 @@
 #include <ulnCache.h>
 #include <ulnConv.h>
 #include <ulsdnBindData.h>
+#include <acpFallthrough.h>
 
 /*
  * ===================================================================================
@@ -126,10 +127,13 @@ ACI_RC ulnCacheCreate(ulnCache **aCache)
     {
         case 3:
             aclHashDestroy( &sCache->mReadLobLocatorHash );
+            ACP_FALLTHROUGH;
         case 2:
             acpMemFree( sCache->mChunk );
+            ACP_FALLTHROUGH;
         case 1:
             acpMemFree( sCache );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

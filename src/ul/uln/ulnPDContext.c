@@ -17,6 +17,7 @@
 #include <uln.h>
 #include <ulnPrivate.h>
 #include <ulnPDContext.h>
+#include <acpFallthrough.h>
 
 /*
  * =========================
@@ -47,7 +48,7 @@ static ACI_RC ulnPDContextPrepareBufferALLOC(ulnPDContext *aPDContext, void *aAr
             {
                 acpMemFree(aPDContext->mBuffer);
             }
-
+            ACP_FALLTHROUGH;
         case ULN_PD_BUFFER_TYPE_USER:
             aPDContext->mBuffer = NULL;
             ACI_TEST(acpMemAlloc((void**)&aPDContext->mBuffer, ULN_PD_BUFFER_SIZE)

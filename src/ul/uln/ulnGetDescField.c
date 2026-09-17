@@ -16,6 +16,7 @@
 
 #include <uln.h>
 #include <ulnPrivate.h>
+#include <acpFallthrough.h>
 
 static ACI_RC ulnGetDescHeaderField(ulnFnContext *aFnContext,
                                     acp_sint16_t  aFieldIdentifier,
@@ -374,7 +375,7 @@ static ACI_RC ulnGetDescRecordField(ulnFnContext *aFnContext,
                                            aBufferLength,
                                            &sStringLength);
             *aStringLengthPtr = sStringLength;
-
+            ACP_FALLTHROUGH;
         case SQL_DESC_TABLE_NAME:
             ACI_TEST_RAISE(aBufferLength < 0, LABEL_INVALID_BUFFERSIZE);
 

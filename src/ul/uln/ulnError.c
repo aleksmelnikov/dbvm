@@ -29,6 +29,7 @@
 #include <qcuErrorClient.h>
 #include <ulsdDistTxInfo.h>
 #include <sdErrorCodeClient.h>
+#include <acpFallthrough.h>
 
 /*
  * Note: ODBC3 / ODBC2 매핑은 매번 일어나는 것이 아니라
@@ -786,7 +787,7 @@ ACI_RC ulnErrHandleCmError(ulnFnContext *aFnContext, ulnPtContext *aPtContext)
             {
                 /* do nothing */
             }
-
+            ACP_FALLTHROUGH;
         case cmERR_ABORT_CONNECT_ERROR:
         case cmERR_ABORT_IB_RCONNECT_ERROR:          /* PROJ-2681*/
         case cmERR_ABORT_CMN_ERR_FULL_IPC_CHANNEL:

@@ -17,6 +17,7 @@
 #include <uln.h>
 #include <ulnPrivate.h>
 #include <ulnSetStmtAttr.h>
+#include <acpFallthrough.h>
 
 static acp_bool_t ulnSetStmtAttrCheck2(acp_sint32_t sAttribute)
 {
@@ -300,7 +301,7 @@ ACI_RC ulnSetStmtAttrDoConcurrency(ulnFnContext *aFnContext, acp_uint32_t aValue
                      "SQL_ATTR_CONCURRENCY changed to SQL_CONCUR_ROWVER");
 
             /* continued .. */
-
+            ACP_FALLTHROUGH;
         case SQL_CONCUR_ROWVER:
             ulnStmtSetAttrConcurrency(sStmt, SQL_CONCUR_ROWVER);
 
@@ -557,7 +558,7 @@ ACI_RC ulnSetStmtAttrDoCursorType(ulnFnContext *aFnContext, acp_uint32_t aValue)
                      "SQL_ATTR_CURSOR_TYPE changed to SQL_CURSOR_KEYSET_DRIVEN");
 
             /* continued .. */
-
+            ACP_FALLTHROUGH;
         case SQL_CURSOR_KEYSET_DRIVEN:
             ulnStmtSetAttrCursorType(sStmt, SQL_CURSOR_KEYSET_DRIVEN);
 

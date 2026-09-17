@@ -18,6 +18,7 @@
 #include <ulnPrivate.h>
 #include <ulnPDContext.h>
 #include <ulnPutData.h>
+#include <acpFallthrough.h>
 
 /*
  * ULN_SFID_46
@@ -273,7 +274,7 @@ static ACI_RC ulnPutDataLob(ulnFnContext *aFnContext,
             ULN_FLAG_UP(sNeedFinPD);
 
             ulnPDContextSetState(sPDContext, ULN_PD_ST_ACCUMULATING_DATA);
-
+            ACP_FALLTHROUGH;
         case ULN_PD_ST_ACCUMULATING_DATA:
             /*
              * 연속되는 LOB SQLPutData()
@@ -402,7 +403,7 @@ static ACI_RC ulnPutDataVariable(ulnFnContext *aFnContext,
             ulnPDContextSetState(sPDContext, ULN_PD_ST_ACCUMULATING_DATA);
 
             ulnDescAddPDContext(aDescRecApd->mParentDesc, sPDContext);
-
+            ACP_FALLTHROUGH;
         case ULN_PD_ST_ACCUMULATING_DATA:
             /*
              * 연속되는 SQLPutData() 호출

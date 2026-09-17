@@ -28,6 +28,7 @@
 #include <ulpMacroTable.h>
 #include <ulpMacro.h>
 #include <ulpPreprocify.hpp>
+#include <acpFallthrough.h>
 
 #undef  YY_INPUT
 #define YY_INPUT(aBuf, aRtn, aMax) { aRtn = PPIF_yyinput(aBuf, aMax); }
@@ -159,6 +160,7 @@ IS          (u|U|l|L)*
                         break;
                     case '?' :
                         sTmp = (SInt) '\?';
+                        ACP_FALLTHROUGH;
                     default :
                         sTmp = (SInt) yytext[2];
                         break;

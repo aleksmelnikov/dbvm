@@ -18,6 +18,7 @@
 #include <ulnPrivate.h>
 #include <ulnCursor.h>
 #include <ulnKeyset.h>
+#include <acpFallthrough.h>
 
 /*
  * ================================================================
@@ -74,8 +75,10 @@ ACI_RC ulnKeysetCreate(ulnKeyset **aKeyset)
         case 2:
             aclMemAreaDestroy( sKeyset->mChunk );
             acpMemFree( sKeyset->mChunk );
+            ACP_FALLTHROUGH;
         case 1:
             acpMemFree( sKeyset );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

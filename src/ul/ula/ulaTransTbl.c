@@ -24,6 +24,7 @@
 #include <ace.h>
 
 #include <ulaTransTbl.h>
+#include <acpFallthrough.h>
 
 static acp_uint32_t ulaTransTblGetTransSlotID(ulaTransTbl *aTbl, ulaTID aTID)
 {
@@ -161,7 +162,7 @@ ACI_RC ulaTransTblInitialize(ulaTransTbl  *aTbl,
     {
         case 4 :
             (void)acpThrMutexDestroy(&aTbl->mTransTblNodeMutex);
-
+            ACP_FALLTHROUGH;
         case 3 :
         case 2 :
             for (sIndex--; sIndex >= 0; sIndex--)
@@ -169,7 +170,7 @@ ACI_RC ulaTransTblInitialize(ulaTransTbl  *aTbl,
                 (void)ulaXLogLinkedListDestroy
                             (&aTbl->mTransTbl[sIndex].mCollectionList, NULL);
             }
-
+            ACP_FALLTHROUGH;
         case 1 :
             if (aTbl->mTransTbl != NULL)
             {
@@ -249,7 +250,7 @@ ACI_RC ulaTransTblDestroy(ulaTransTbl *aTbl, ulaErrorMgr *aOutErrorMgr)
                 (void)ulaXLogLinkedListDestroy
                             (&aTbl->mTransTbl[sIndex].mCollectionList, NULL);
             }
-
+            ACP_FALLTHROUGH;
         case 2 :
             for (sIndex++; sIndex < aTbl->mTblSize; sIndex++)
             {
@@ -273,7 +274,7 @@ ACI_RC ulaTransTblDestroy(ulaTransTbl *aTbl, ulaErrorMgr *aOutErrorMgr)
             }
 
             (void)acpThrMutexDestroy(&aTbl->mTransTblNodeMutex);
-
+            ACP_FALLTHROUGH;
         case 3 :
             (void)acpThrMutexDestroy(&aTbl->mCollectionListMutex);
             break;

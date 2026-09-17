@@ -17,6 +17,7 @@
 #include <uln.h>
 #include <ulxXaConnection.h>
 #include <ulxDef.h>
+#include <acpFallthrough.h>
 
 
 ulxXaConnection *gUlxConnectionHeader = NULL;
@@ -231,8 +232,10 @@ ACI_RC ulxAddConnection(acp_sint32_t      rmid,
     {
         case 2:
             acpMemFree(sConn);
+            ACP_FALLTHROUGH;
         case 1:
             (void)acpThrMutexUnlock(sLockEnv);
+            ACP_FALLTHROUGH;
         default:
             break;
     }

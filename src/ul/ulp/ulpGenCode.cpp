@@ -16,6 +16,7 @@
 
 #include <ulpGenCode.h>
 #include <sqlcli.h>
+#include <acpFallthrough.h>
 
 extern ulpProgOption gUlpProgOption;
 extern int           COMPlineno; /* BUG-42357 */
@@ -706,6 +707,7 @@ void ulpCodeGen::ulpGenEmSQLFlush( ulpStmtType aStmtType, idBool aIsPrintQuery )
                 ulpGenPrintLineMacro();
                 ulpGenString ( (SChar *)"    ulpSqlstmt.sqlinfo = 0;\n" );
             }
+            ACP_FALLTHROUGH;
         case S_Disconnect:
             if( mEmSQLInfo.mNumofHostvar > 0 )
             {
