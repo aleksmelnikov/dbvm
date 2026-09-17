@@ -25,6 +25,7 @@
 #include <mtcdTypes.h>
 
 #include <acpSearch.h>
+#include <acpFallthrough.h>
 
 extern mtlModule mtclUTF8;
 extern mtlModule mtclUTF16;
@@ -325,9 +326,11 @@ ACI_RC mtlInitialize( acp_char_t   * aDefaultNls, acp_bool_t aIsClient )
         case 2:
             (void)acpMemFree(mtlModulesByName);
             mtlModulesByName = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             (void)acpMemFree(mtlModulesById);
             mtlModulesById = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

@@ -25,6 +25,7 @@
 #include <mtcl.h>
 
 #include <mtcdTypes.h>
+#include <acpFallthrough.h>
 
 extern mtdModule mtcdNumeric;
 extern mtdModule mtcdFloat;
@@ -237,9 +238,11 @@ ACI_RC mtdEstimate( acp_uint32_t* aColumnSize,
     {
         case 0:
             *aPrecision = MTD_NUMERIC_PRECISION_DEFAULT;
+            ACP_FALLTHROUGH;
         case 1:
             *aScale     = MTD_NUMERIC_SCALE_DEFAULT;
             *aArguments = 2;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

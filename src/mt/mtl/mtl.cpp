@@ -25,6 +25,7 @@
 #include <idnCharSet.h>
 #include <idnCaseConvMap.h>
 #include <mtlTerritory.h>
+#include <acpFallthrough.h>
 
 extern mtlModule mtlUTF8;
 extern mtlModule mtlUTF16;
@@ -6101,9 +6102,11 @@ IDE_RC mtl::initialize( SChar   * aDefaultNls, idBool aIsClient )
         case 2:
             (void)iduMemMgr::free(mtlModulesByName);
             mtlModulesByName = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free(mtlModulesById);
             mtlModulesById = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

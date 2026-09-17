@@ -26,6 +26,7 @@
 
 #include <mtcdTypes.h>
 #include <mtclCollate.h>
+#include <acpFallthrough.h>
 
 extern mtdModule mtcdBigint;
 extern mtdModule mtcdBinary;
@@ -430,9 +431,11 @@ ACI_RC mtdInitialize( mtdModule*** aExtTypeModuleGroup,
         case 2:
             acpMemFree(mtdModulesByName);
             mtdModulesByName = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             acpMemFree(mtdModulesById);
             mtdModulesById = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

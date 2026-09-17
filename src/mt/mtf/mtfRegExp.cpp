@@ -22,6 +22,7 @@
 #include <mte.h>
 #include <mtc.h>
 #include <mtfRegExp.h>
+#include <acpFallthrough.h>
 
 /**
  * create mtfRegExpNode and set default value type, left, right, next
@@ -216,6 +217,7 @@ IDE_RC mtfRegExp::charNode( mtfRegExpression *aExp,
                 {
                     /* Nothing to do */
                 }
+                ACP_FALLTHROUGH;
 
             default:
                 sNodeType = *aExp->p;

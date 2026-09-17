@@ -26,6 +26,7 @@
 #include <mtv.h>
 #include <mtuProperty.h>
 #include <mtl.h>
+#include <acpFallthrough.h>
 
 #if defined(SMALL_FOOTPRINT)
 #define MTF_COLUMN_MAXIMUM (64)
@@ -411,10 +412,12 @@ IDE_RC mtf::initializeComparisonTable( void )
      case 2:
          (void)iduMemMgr::free(comparisonTable[0]);
          comparisonTable[0] = NULL;
+         ACP_FALLTHROUGH;
          
      case 1:
          (void)iduMemMgr::free(comparisonTable);
          comparisonTable = NULL;
+         ACP_FALLTHROUGH;
      default:
         break;
     }
@@ -983,10 +986,12 @@ IDE_RC mtf::initializeComparisonTemplate(
         case 2:
          (void)iduMemMgr::free(sTable[0]);
          sTable[0] = NULL;
+         ACP_FALLTHROUGH;
          
         case 1:
          (void)iduMemMgr::free(sTable);
          sTable = NULL;
+         ACP_FALLTHROUGH;
 
         default:
             break;
@@ -1507,9 +1512,11 @@ IDE_RC mtf::initialize( mtfModule *** aExtFuncModuleGroup,
      case 2:
          (void)iduMemMgr::free(mtfModulesByName);
          mtfModulesByName = NULL;
+         ACP_FALLTHROUGH;
      case 1:
          (void)iduMemMgr::free(mExternalModule);
          mExternalModule = NULL;
+         ACP_FALLTHROUGH;
          
      default:
         break;

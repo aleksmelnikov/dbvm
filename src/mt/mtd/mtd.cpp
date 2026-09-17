@@ -29,6 +29,7 @@
 #include <mtuProperty.h>
 #include <mtlCollate.h>
 #include <smi.h>
+#include <acpFallthrough.h>
 
 extern mtdModule mtdBigint;
 extern mtdModule mtdBinary;
@@ -496,9 +497,11 @@ IDE_RC mtd::initialize( mtdModule *** aExtTypeModuleGroup,
         case 2:
             (void)iduMemMgr::free(mtdModulesByName);
             mtdModulesByName = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free(mtdModulesById);
             mtdModulesById = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

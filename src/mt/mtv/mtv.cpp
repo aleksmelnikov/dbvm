@@ -24,6 +24,7 @@
 #include <mtd.h>
 #include <mtl.h>
 #include <mtv.h>
+#include <acpFallthrough.h>
 
 mtvTable** mtv::table = NULL;
 
@@ -469,25 +470,31 @@ IDE_RC mtv::initialize( mtvModule *** aExtCvtModuleGroup,
                     }
                 }
             }
+            ACP_FALLTHROUGH;
         case 5:
             (void)iduMemMgr::free(sTarget[0]);
             sTarget[0] = NULL;
+            ACP_FALLTHROUGH;
 
         case 4:
             (void)iduMemMgr::free(sTarget);
             sTarget = NULL;
+            ACP_FALLTHROUGH;
 
         case 3:
             (void)iduMemMgr::free(table[0]);
             table[0] = NULL;
+            ACP_FALLTHROUGH;
 
         case 2:
             (void)iduMemMgr::free(table);
             table = NULL;
+            ACP_FALLTHROUGH;
 
         case 1:
             (void) iduMemMgr::free(mtv::mAllModule);
             mtv::mAllModule = NULL;
+            ACP_FALLTHROUGH;
 
         default:
             break;

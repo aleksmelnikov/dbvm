@@ -27,6 +27,7 @@
 #include <mtv.h>
 #include <mtk.h>
 #include <mtz.h>
+#include <acpFallthrough.h>
 #if defined (CYGWIN32)
 # include <pthread.h>
 #endif
@@ -723,9 +724,13 @@ IDE_RC mtc::makeNumeric( mtdNumericType* aNumeric,
         {
             case '-':
                 sSign = -1;
+                ACP_FALLTHROUGH;
             case '+':
                 sOffset++;
                 IDE_TEST_RAISE( sOffset >= aLength, ERR_INVALID_LITERAL );
+                ACP_FALLTHROUGH;
+            default:
+                break;
         }
         if( aString[sOffset] == '.' )
         {
@@ -786,9 +791,13 @@ IDE_RC mtc::makeNumeric( mtdNumericType* aNumeric,
                 {
                     case '-':
                         sExponentSign = -1;
+                        ACP_FALLTHROUGH;
                     case '+':
                         sOffset++;
                         IDE_TEST_RAISE( sOffset >= aLength, ERR_INVALID_LITERAL );
+                        ACP_FALLTHROUGH;
+                    default:
+                        break;
                 }
                 if( sExponentSign > 0 )
                 {

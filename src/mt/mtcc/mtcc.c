@@ -29,6 +29,7 @@
 #if defined (CYGWIN32)
 #include <pthread.h>
 #include <mtcdTypes.h>
+#include <acpFallthrough.h>
 #endif
 
 extern mtdModule mtdDouble;
@@ -437,9 +438,13 @@ ACI_RC mtcMakeNumeric( mtdNumericType*    aNumeric,
         {
             case '-':
                 sSign = -1;
+                ACP_FALLTHROUGH;
             case '+':
                 sOffset++;
                 ACI_TEST_RAISE( sOffset >= aLength, ERR_INVALID_LITERAL );
+                ACP_FALLTHROUGH;
+            default:
+                break;
         }
         if( aString[sOffset] == '.' )
         {
@@ -500,9 +505,13 @@ ACI_RC mtcMakeNumeric( mtdNumericType*    aNumeric,
                 {
                     case '-':
                         sExponentSign = -1;
+                        ACP_FALLTHROUGH;
                     case '+':
                         sOffset++;
                         ACI_TEST_RAISE( sOffset >= aLength, ERR_INVALID_LITERAL );
+                        ACP_FALLTHROUGH;
+                    default:
+                        break;
                 }
                 if( sExponentSign > 0 )
                 {
