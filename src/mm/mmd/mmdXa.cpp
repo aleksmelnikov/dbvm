@@ -23,6 +23,7 @@
 #include <mmuProperty.h>
 #include <mmtSessionManager.h>
 #include <dki.h>
+#include <acpFallthrough.h>
 
 #define FLAG_IS_SET(F, S)              (((F) & (S)) == (S))
 
@@ -937,6 +938,7 @@ void mmdXa::close(mmdXaContext *aXaContext)
         {
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, sXidValue, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }
@@ -1160,8 +1162,10 @@ reCheck:
         {
             case 2:
                 sXid->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }//switch
@@ -1322,8 +1326,10 @@ void mmdXa::end(mmdXaContext *aXaContext, ID_XID *aXid)
         {
             case 2:
                 sXid->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default:
                 break;
 
@@ -1432,8 +1438,10 @@ void mmdXa::heuristicEnd(mmcSession* aSession, ID_XID *aXid)
         {
             case 2:
                 sXid->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default:
                 break;
 
@@ -1569,8 +1577,10 @@ void mmdXa::prepare(mmdXaContext *aXaContext, ID_XID *aXid)
         {
             case 2:
                 sXid->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }//switch
@@ -1662,8 +1672,10 @@ void mmdXa::commit(mmdXaContext *aXaContext, ID_XID *aXid)
         {
             case 2:
                 sXid->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }//switch
@@ -1840,8 +1852,10 @@ void mmdXa::rollback(mmdXaContext *aXaContext, ID_XID *aXid)
         {
             case 2:
                 sXid->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default:
                 break;
 
@@ -1911,8 +1925,10 @@ void mmdXa::forget(mmdXaContext *aXaContext, ID_XID *aXid)
         {
             case 2:
                 sXid->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }//switch
@@ -2068,6 +2084,7 @@ void mmdXa::heuristicCompleted(mmdXaContext *aXaContext, ID_XID *aXid)
         {
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXid, aXid, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default:
                 break;
         }
@@ -2393,8 +2410,10 @@ IDE_RC mmdXa::commitForce( idvSQL   *aStatistics,
         {
             case 2:
                 sXidObj->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXidObj, &sXID, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }//switch
@@ -2508,8 +2527,10 @@ IDE_RC mmdXa::rollbackForce( idvSQL     *aStatistics,
         {
             case 2:
                 sXidObj->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXidObj, &sXID, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }//switch
@@ -2593,8 +2614,10 @@ IDE_RC mmdXa::removeHeuristicXid( idvSQL    *aStatistics,
         {
             case 2:
                 sXidObj->unlock();
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(mmdXa::unFix(sXidObj, &sXID, MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default :
                 break;
         }//switch

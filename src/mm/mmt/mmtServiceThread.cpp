@@ -25,6 +25,7 @@
 #include <mmuProperty.h>
 #include <mmm.h>
 #include <mmuAccessList.h>
+#include <acpFallthrough.h>
 
 #if defined(WRS_VXWORKS) 
 # define MMT_SERVICE_THREAD_MIN_POLL_TIMEOUT 100000
@@ -1531,12 +1532,16 @@ IDE_RC mmtServiceThread::getUserInfoFromDB( idvSQL      *aStatistics,
         {
             case 4:
                 qci::finalizeStatement(&sQciStmt);
+                ACP_FALLTHROUGH;
             case 3:
                 IDE_ASSERT(sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             case 2:
                 IDE_ASSERT(sTrans.commit() == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             case 1:
                 IDE_ASSERT(sTrans.destroy(NULL) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default:
                 break;
         }

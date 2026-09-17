@@ -25,6 +25,7 @@
 #include <mmcParentPCO.h>
 #include <mmcChildPCO.h>
 #include <mmcPlanCacheLRUList.h>
+#include <acpFallthrough.h>
 
 iduMemPool             mmcPlanCache::mPCBMemPool;
 iduMemPool             mmcPlanCache::mParentPCOMemPool;
@@ -302,18 +303,27 @@ IDE_RC  mmcPlanCache::tryInsertSQLText(idvSQL         *aStatistics,
         {
             case 7:
                 sChildPCO->finalize();
+                ACP_FALLTHROUGH;
             case 6:
                 (*aPCB)->finalize();
+                ACP_FALLTHROUGH;
             case 5:
                 sParentPCO->finalize();
+                ACP_FALLTHROUGH;
             case 4:
                 mChildPCOMemPool.memfree(sChildPCO);
+                ACP_FALLTHROUGH;
             case 3:
                 mPCBMemPool.memfree(*aPCB);
+                ACP_FALLTHROUGH;
             case 2:
                 mParentPCOMemPool.memfree(sParentPCO);
+                ACP_FALLTHROUGH;
             case 1:
                 mmcSQLTextHash::releaseBucketLatch(sBucket);
+                ACP_FALLTHROUGH;
+            default:
+                break;
         }
     }
     return IDE_FAILURE;
@@ -477,8 +487,10 @@ IDE_RC  mmcPlanCache::preventDupPlan(idvSQL               *aStatistics,
            while perform soft prepare.  */
             case 4:
                 sNewChildPCO->finalize();
+                ACP_FALLTHROUGH;
             case 3:
                 sNewPCB->finalize();
+                ACP_FALLTHROUGH;
             case 2:
                 IDE_ASSERT(mChildPCOMemPool.memfree(sNewChildPCO) == IDE_SUCCESS);
             case 1:
@@ -665,8 +677,10 @@ IDE_RC  mmcPlanCache::preventDupPlan(idvSQL                 *aStatistics,
            while perform soft prepare .*/
             case 4:
                 sNewChildPCO->finalize();
+                ACP_FALLTHROUGH;
             case 3:
                (*aNewPCB)->finalize();
+                ACP_FALLTHROUGH;
             case 2:
                 IDE_ASSERT(mChildPCOMemPool.memfree(sNewChildPCO) == IDE_SUCCESS);
             case 1:

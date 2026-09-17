@@ -16,6 +16,7 @@
 
 #include <mmcMutexPool.h>
 #include <mmuProperty.h>
+#include <acpFallthrough.h>
 
 /* PROJ-2109 : Remove the bottleneck of alloc/free stmts. */
 IDE_RC mmcMutexPool::initialize()
@@ -102,8 +103,10 @@ IDE_RC mmcMutexPool::initialize()
             }
         case 2:
             mListNodePool.destroy(ID_FALSE);
+            ACP_FALLTHROUGH;
         case 1:
             mMutexPool.destroy(ID_FALSE);
+            ACP_FALLTHROUGH;
         case 0:
         default:
             break;

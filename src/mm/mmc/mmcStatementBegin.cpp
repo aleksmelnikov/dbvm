@@ -25,6 +25,7 @@
 #include <mmuOS.h>
 #include <mmtAdminManager.h>
 #include <mmtSnapshotExportManager.h>
+#include <acpFallthrough.h>
 
 mmcStmtBeginFunc mmcStatement::mBeginFunc[] =
 {
@@ -590,7 +591,7 @@ IDE_RC mmcStatement::beginSP(mmcStatement *aStmt)
                 case SDI_SESSION_TYPE_USER:
                 {
                     qciMisc::setBeginSP( &(aStmt->getQciStmt()->statement) );
-                    /* fall through */
+                    ACP_FALLTHROUGH;
                 }
                 case SDI_SESSION_TYPE_LIB:
                 {

@@ -31,6 +31,7 @@
 #include <mtlTerritory.h>
 #include <rpi.h>
 #include <idmSNMP.h>
+#include <acpFallthrough.h>
 
 static void logIdleTimeout(mmcTask *aTask, mmcStatement *aStatement, UInt aTimeGap, UInt aTimeout);
 static void logQueryTimeout(mmcTask *aTask, mmcStatement *aStatement, UInt aTimeGap, UInt aTimeout);
@@ -637,12 +638,15 @@ IDE_RC mmtSessionManager::allocTask(mmcTask **aTask)
         {
             case 3:
                 unlock();
+                ACP_FALLTHROUGH;
 
             case 2:
                 IDE_ASSERT(sTask->finalize() == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
 
             case 1:
                 IDE_ASSERT(mTaskPool.memfree(sTask) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
 
             default:
                 break;
@@ -4480,7 +4484,7 @@ IDE_RC mmtSessionManager::allocInternalSession( mmcSession  ** aSession,
             unlock();
             
             (void)sSession->finalize();
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 4:
             if ( sISListNode != NULL )
             {
@@ -4490,7 +4494,7 @@ IDE_RC mmtSessionManager::allocInternalSession( mmcSession  ** aSession,
             {
                 // Nothing to do.
             }
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 3:
             if ( sSession != NULL )
             {
@@ -4500,6 +4504,7 @@ IDE_RC mmtSessionManager::allocInternalSession( mmcSession  ** aSession,
             {
                 // Nothing to do.
             }
+            ACP_FALLTHROUGH;
         case 2:
             if ( sTask != NULL )
             {
@@ -4509,6 +4514,7 @@ IDE_RC mmtSessionManager::allocInternalSession( mmcSession  ** aSession,
             {
                 // Nothing to do.
             }
+            ACP_FALLTHROUGH;
         case 1:
             if ( sLink != NULL )
             {
@@ -4518,6 +4524,7 @@ IDE_RC mmtSessionManager::allocInternalSession( mmcSession  ** aSession,
             {
                 // Nothing to do.
             }
+            ACP_FALLTHROUGH;
         default:
             break;
     }

@@ -36,6 +36,7 @@
 #include <mmuAccessList.h>
 
 #include <dki.h>
+#include <acpFallthrough.h>
 
 typedef IDE_RC (*mmcSessionSetFunc)(mmcSession *aSession, SChar *aValue);
 
@@ -5482,14 +5483,14 @@ IDE_RC mmcSession::setGlobalTransactionLevel( UInt aValue )
     switch ( sStep )
     {
         case 2 :
-            /* fall through */
             (void)sdi::setTransactionLevel( & mQciSession,
                                             aValue,
                                             mInfo.mGlobalTransactionLevel );
+            ACP_FALLTHROUGH;
         case 1 :
             (void) dkiSessionSetGlobalTransactionLevel( & mDatabaseLinkSession,
                                                         mInfo.mGlobalTransactionLevel );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default :
             break;
     }

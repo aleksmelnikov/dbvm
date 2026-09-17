@@ -25,6 +25,7 @@
 #include <mmuOS.h>
 #include <rpi.h>
 #include <sdiGlobalDDL.h>
+#include <acpFallthrough.h>
 
 mmcStmtExecFunc mmcStatement::mExecuteFunc[] =
 {
@@ -158,6 +159,7 @@ IDE_RC mmcStatement::executeDML(mmcStatement *aStmt, SLong *aAffectedRowCount, S
             {
                 // Nothing to do.
             }
+            ACP_FALLTHROUGH;
             
         default:
             IDE_TEST(qci::execute(sStatement, aStmt->getSmiStmt()) != IDE_SUCCESS);

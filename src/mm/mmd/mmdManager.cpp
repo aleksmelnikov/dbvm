@@ -21,6 +21,7 @@
 #include <mmdXidManager.h>
 #include <mmuProperty.h>
 #include <mmdDef.h>
+#include <acpFallthrough.h>
 
 idBool mmdManager::mInitFlag = ID_FALSE;
 
@@ -215,8 +216,10 @@ void mmdManager::checkXaTimeout()
         {
             case 2:
                 sXidObj->unlock();
+                ACP_FALLTHROUGH;
             case 1:
             IDE_ASSERT(mmdXa::unFix(sXidObj,&sXid,MMD_XA_NONE) == IDE_SUCCESS);
+                ACP_FALLTHROUGH;
             default:
                 break;
         }
@@ -371,10 +374,14 @@ IDE_RC mmdManager::loadHeuristicTrans( idvSQL                     *aStatistics,
         {
             case 3:
                 sStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+                ACP_FALLTHROUGH;
             case 2:
                 sTrans.rollback();
+                ACP_FALLTHROUGH;
             case 1:
                 sTrans.destroy(NULL);
+                break;
+            default:
                 break;
         }
     }
@@ -427,10 +434,14 @@ IDE_RC mmdManager::insertHeuristicTrans( idvSQL             *aStatistics,
         {
             case 3:
                 sStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+                ACP_FALLTHROUGH;
             case 2:
                 sTrans.rollback();
+                ACP_FALLTHROUGH;
             case 1:
                 sTrans.destroy(NULL);
+                break;
+            default:
                 break;
         }
     }
@@ -485,10 +496,14 @@ IDE_RC mmdManager::removeHeuristicTrans( idvSQL     *aStatistics,
         {
             case 3:
                 sStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+                ACP_FALLTHROUGH;
             case 2:
                 sTrans.rollback();
+                ACP_FALLTHROUGH;
             case 1:
                 sTrans.destroy(NULL);
+                break;
+            default:
                 break;
         }
     }

@@ -33,6 +33,7 @@
 #include <mmcPCB.h>
 #include <mmtAuditManager.h>
 #include <idmSNMP.h>
+#include <acpFallthrough.h>
 
 SChar  mmcStatement::mNoneSQLCacheTextID[] = "NO_SQL_CACHE_STMT";
 
@@ -3383,6 +3384,7 @@ IDE_RC mmcStatement::changeStmtState()
     {
         case MMC_STMT_BIND_NONE:
             setBindState(MMC_STMT_BIND_INFO);
+            ACP_FALLTHROUGH;
 
         case MMC_STMT_BIND_INFO:
             IDE_TEST(qci::setParamDataState(getQciStmt()) != IDE_SUCCESS);

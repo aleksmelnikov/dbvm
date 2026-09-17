@@ -20,6 +20,7 @@
 #include <mmuProperty.h>
 #include <sdi.h>
 #include <iduHashUtil.h>
+#include <acpFallthrough.h>
 
 iduMemPool          mmcSharedTrans::mPool;
 iduList             mmcSharedTrans::mFreeTransChain;
@@ -305,6 +306,7 @@ IDE_RC mmcSharedTrans::allocTrans( mmcTransObj ** aTrans, mmcSession * aSession 
         case 2:
             IDU_LIST_REMOVE( &sTransOut->mShareInfo->mListNode );
             free( sTransOut );
+            ACP_FALLTHROUGH;
         case 1:
             IDE_ASSERT( sBucket->mBucketLatch.unlock() == IDE_SUCCESS );
             break;

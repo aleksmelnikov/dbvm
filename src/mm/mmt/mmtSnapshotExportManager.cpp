@@ -21,6 +21,7 @@
 #include <mmm.h>
 #include <mmuProperty.h>
 #include <qci.h>
+#include <acpFallthrough.h>
 
 iduMutex                  mmtSnapshotExportManager::mMutex;
 mmtSnapshotExportThread * mmtSnapshotExportManager::mThread;
@@ -484,10 +485,13 @@ IDE_RC mmtSnapshotExportThread::beginSnapshot( ULong * aSCN )
         {
             case 3:
                 ( void )mSmiStmt.end( SMI_STATEMENT_RESULT_SUCCESS );
+                ACP_FALLTHROUGH;
             case 2:
                 ( void )mTrans.commit();
+                ACP_FALLTHROUGH;
             case 1:
                 ( void )mTrans.destroy( NULL );
+                ACP_FALLTHROUGH;
             default:
                 break;
         }
@@ -546,8 +550,10 @@ IDE_RC mmtSnapshotExportThread::endSnapshot( void )
         {
             case 2:
                 ( void )mTrans.commit();
+                ACP_FALLTHROUGH;
             case 1:
                 ( void )mTrans.destroy( NULL );
+                ACP_FALLTHROUGH;
             default:
                 break;
         }
