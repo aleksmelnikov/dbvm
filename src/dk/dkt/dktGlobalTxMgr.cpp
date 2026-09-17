@@ -24,6 +24,7 @@
 #include <iduCheckLicense.h>
 #include <dksSessionMgr.h>
 #include <smiMisc.h>
+#include <acpFallthrough.h>
 
 #define EPOCHTIME_20170101   ( 1483228800 ) /* ( ( ( ( (2017) - (1970) ) * 365 ) * 24 ) *3600 ) + a */
 
@@ -154,10 +155,13 @@ IDE_RC  dktGlobalTxMgr::initializeStatic()
 
                 IDU_LIST_INIT( &(mGlobalCoordinatorList[i].mHead) );
             }
+            ACP_FALLTHROUGH;
         case 2 :
             IDE_ASSERT( iduMemMgr::free(mGlobalCoordinatorList) == IDE_SUCCESS );
+            ACP_FALLTHROUGH;
         case 1 :
             IDE_ASSERT( mGlobalCoordinatorPool.destroy() == IDE_SUCCESS );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -267,9 +271,10 @@ IDE_RC  dktGlobalTxMgr::createGlobalCoordinator( dksDataSession        * aSessio
     {
         case 3:
             removeGlobalCoordinatorFromList( sGlobalCoordinator );
+            ACP_FALLTHROUGH;
         case 2:
             (void)sGlobalCoordinator->finalize();
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)mGlobalCoordinatorPool.memfree( sGlobalCoordinator );
             break;

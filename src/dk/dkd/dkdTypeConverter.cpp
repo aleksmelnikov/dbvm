@@ -25,6 +25,7 @@
 #include <mtc.h>
 
 #include <dkdTypeConverter.h>
+#include <acpFallthrough.h>
 
 struct dkdTypeConverter
 {
@@ -92,10 +93,13 @@ static IDE_RC allocTypeConveter( UInt aColumnCount,
     {
         case 3:
             (void)iduMemMgr::free( sConverter->mConvertedColumnArray );
+            ACP_FALLTHROUGH;
         case 2:
             (void)iduMemMgr::free( sConverter->mOriginalColumnArray );
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sConverter );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

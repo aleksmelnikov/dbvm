@@ -30,6 +30,7 @@
 #include <dkcUtil.h>
 
 #include <dkcParser.h>
+#include <acpFallthrough.h>
 
 /*
  *
@@ -72,8 +73,10 @@ IDE_RC dkcLoadDblinkConf( dkcDblinkConf ** aDblinkConf )
     {
         case 2:
             (void)dkcParserDestroy( sParser );
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sDblinkConf );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

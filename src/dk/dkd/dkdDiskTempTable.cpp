@@ -31,6 +31,7 @@
 #endif
 
 #include <dkdDiskTempTable.h>
+#include <acpFallthrough.h>
 
 struct dkdDiskTempTable
 {
@@ -113,10 +114,13 @@ static IDE_RC dkdTempTableAllocHandle( UInt aColumnCount,
     {
         case 3:
             (void)iduMemMgr::free( sHandle->mSmiColumnList );
+            ACP_FALLTHROUGH;
         case 2:
             (void)iduMemMgr::free( sHandle->mSmiValueRow );
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sHandle );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

@@ -30,6 +30,7 @@
 #include <dktNotifier.h>
 #include <dkuProperty.h>
 #include <dkm.h>
+#include <acpFallthrough.h>
 
 /************************************************************************
  * Description : Global coordinator 를 초기화한다.
@@ -2282,7 +2283,7 @@ IDE_RC  dktGlobalCoordinator::setSavepoint( const SChar   *aSavepointName )
         case 2:
             (void)iduMemMgr::free( sSavepoint );
             sSavepoint = NULL;
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 1:
             IDU_LIST_ITERATE( &mRTxList, sIterator )
             {

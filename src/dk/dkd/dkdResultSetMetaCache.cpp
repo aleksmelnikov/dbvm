@@ -27,6 +27,7 @@
 #include <dkpDef.h>
 
 #include <dkdResultSetMetaCache.h>
+#include <acpFallthrough.h>
 
 /*
  *
@@ -133,10 +134,13 @@ static IDE_RC allocRemoteQueryListNode( UInt aRemoteQueryLength,
     {
         case 3:
             (void)iduMemMgr::free( sNode->mSourceColumnArray );
+            ACP_FALLTHROUGH;
         case 2:
             (void)iduMemMgr::free( sNode->mRemoteQuery );
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sNode );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -331,6 +335,7 @@ static IDE_RC createDatabaseLinkListNode( SChar * aLinkName,
     {
         case 1:
             (void)iduMemMgr::free( sNode );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

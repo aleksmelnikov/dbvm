@@ -39,6 +39,7 @@
 #include <dktGlobalTxMgr.h>
 #include <dkdDataBufferMgr.h>
 #include <dkdResultSetMetaCache.h>
+#include <acpFallthrough.h>
 
 
 /************************************************************************
@@ -159,27 +160,27 @@ IDE_RC dkmInitialize()
     {
         case 8:
             (void)dkdResultSetMetaCacheFinalize();
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 7:
             (void)dkdDataBufferMgr::finalizeStatic();
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 6:
             (void)dktGlobalTxMgr::finalizeStatic();
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 5:
             (void)dksSessionMgr::finalizeStatic();
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 4:
             (void)dkoLinkObjMgr::finalizeStatic();
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 3:
             (void)dkpProtocolMgr::finalizeStatic();
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 2:
             (void)dkaLinkerProcessMgr::finalizeStatic();
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 1:
-            /* keep going */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -4836,8 +4837,10 @@ IDE_RC dkmGetColumnInfoFromCache( void              *aQcStatement,
         case 2:
             (void)iduMemMgr::free( sColInfoArr );
             sColInfoArr = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             (void)dkdResultSetMetaCacheRelese();
+            ACP_FALLTHROUGH;
         default:
             break;
     }

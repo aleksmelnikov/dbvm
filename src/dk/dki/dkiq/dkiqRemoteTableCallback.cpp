@@ -35,6 +35,7 @@
 
 #include <dkiSession.h>
 #include <dkiq.h>
+#include <acpFallthrough.h>
 
 /*
  *
@@ -100,8 +101,10 @@ static IDE_RC getRemoteTableMetaFromRemote(
     {
         case 2:
             (void)dkmFreeColumnInfo( sColumnInfoArray );
+            ACP_FALLTHROUGH;
         case 1:
             (void)dkmFreeQueryStatement( aSession, sStatementId );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

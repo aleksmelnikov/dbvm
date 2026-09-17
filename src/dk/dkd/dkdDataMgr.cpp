@@ -20,6 +20,7 @@
  **********************************************************************/
 
 #include <dkdDataMgr.h>
+#include <acpFallthrough.h>
 
 
 /***********************************************************************
@@ -627,14 +628,14 @@ IDE_RC  dkdDataMgr::createDiskTempTableMgr( void    *aQcStatement )
         case 3:
             (void)iduMemMgr::free( mRecord );
             mRecord = NULL;
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 2:
             (void)sDiskTempTableMgr->finalize();
             mDiskTempTableMgr = NULL;
-            /* keep going */
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sDiskTempTableMgr );
-            /* keep going */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
