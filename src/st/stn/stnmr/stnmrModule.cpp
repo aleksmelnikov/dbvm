@@ -39,6 +39,7 @@
 
 #include <smnReq.h>
 #include <stnmrDef.h>
+#include <acpFallthrough.h>
 #include <stErrorCode.h>
 #include <smnManager.h>
 #include <sgmManager.h>
@@ -779,10 +780,13 @@ IDE_RC stnmrRTree::create( idvSQL*               /*aStatistics*/,
     {
         case 3:
             (void) sHeader->mMutex.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void) iduMemMgr::free( sHeader->mColumns ) ;
+            ACP_FALLTHROUGH;
         case 1:
             (void) iduMemMgr::free( sHeader ) ;
+            ACP_FALLTHROUGH;
         default :
             break;
     }

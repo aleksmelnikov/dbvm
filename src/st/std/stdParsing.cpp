@@ -38,6 +38,7 @@
 #include <stdPrimitive.h>
 #include <stdParsing.h>
 #include <stcDef.h>
+#include <acpFallthrough.h>
 #include <stuProperty.h>
 
 // BUG-24357 WKB Endian
@@ -307,8 +308,10 @@ UChar* stdParsing::findSubObjFence(UChar** aPtr, UChar* aWKTFence)
         {
         case ',' :
             sLastComma = sPtr;
+            ACP_FALLTHROUGH;
         case ')' :
             sLastRParen = sPtr;
+            ACP_FALLTHROUGH;
         case 'p' :
         case 'P' :            
             if(idlOS::strncasecmp((SChar*)sPtr, STD_POINT_NAME, 
@@ -371,6 +374,7 @@ UChar* stdParsing::findSubObjFence(UChar** aPtr, UChar* aWKTFence)
                 }
                 sCnt++;
             }
+            ACP_FALLTHROUGH;
         default :
             break;
         }

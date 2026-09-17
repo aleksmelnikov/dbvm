@@ -36,6 +36,7 @@
 #include <smn.h>
 #include <sdnReq.h>
 #include <stndrBUBuild.h>
+#include <acpFallthrough.h>
 #include <smuQueueMgr.h>
 #include <sdnIndexCTL.h>
 #include <sdbMPRMgr.h>
@@ -1149,21 +1150,28 @@ IDE_RC stndrBUBuild::initialize( UInt             aTotalThreadCnt,
     {
         case 7:
             (void)mSortStack.destroy();
+            ACP_FALLTHROUGH;
         case 6:
             (void)smLayerCallback::freeTrans( mTrans );
             mTrans = NULL;
+            ACP_FALLTHROUGH;
         case 5:
             (void)mPartitionQueue.destroy();
+            ACP_FALLTHROUGH;
         case 4:
             (void)mRunQueue.destroy();
+            ACP_FALLTHROUGH;
         case 3:
             (void)mFreePage.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)iduMemMgr::free( mKeyBuffer );
             mKeyBuffer = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( mKeyMap );
             mKeyMap = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -2528,10 +2536,13 @@ IDE_RC stndrBUBuild::merge( UInt            aMergePageCount,
     {
         case 3:
             (void)sdrMiniTrans::rollback( &sMtx );
+            ACP_FALLTHROUGH;
         case 2:
             (void)iduMemMgr::free( sHeapMap );
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sRunInfo );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -3189,8 +3200,10 @@ IDE_RC stndrBUBuild::sortY( UInt          aMergePageCnt,
     {
         case 2:
             (void)iduMemMgr::free( sHeapMap );
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sRunInfo );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

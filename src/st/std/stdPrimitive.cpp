@@ -34,6 +34,7 @@
 #include <stdUtils.h>
 #include <stdParsing.h>
 #include <stdPrimitive.h>
+#include <acpFallthrough.h>
 #include <stdUtils.h>
 #include <stuProperty.h>
 
@@ -272,36 +273,42 @@ void stdPrimitive::cvtEndianGeoCollection2D( idBool aEqualEndian, stdGeoCollecti
         {
         case STD_POINT_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdPoint2DExtType*)sGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_POINT_2D_TYPE:
             cvtEndianPoint2D((stdPoint2DType*)sGeom);
             break;
             
         case STD_LINESTRING_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdLineString2DExtType*)sGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_LINESTRING_2D_TYPE:
             cvtEndianLineString2D( aEqualEndian, (stdLineString2DType*)sGeom);
             break;
             
         case STD_POLYGON_2D_EXT_TYPE :
             cvtEndianSRID( &(((stdPolygon2DExtType*)sGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_POLYGON_2D_TYPE :
             cvtEndianPolygon2D( aEqualEndian, (stdPolygon2DType*)sGeom);
             break;
             
         case STD_MULTIPOINT_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdMultiPoint2DExtType*)sGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_MULTIPOINT_2D_TYPE:
             cvtEndianMultiPoint2D( aEqualEndian, (stdMultiPoint2DType*)sGeom);
             break;
             
         case STD_MULTILINESTRING_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdMultiLineString2DExtType*)sGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_MULTILINESTRING_2D_TYPE:
             cvtEndianMultiLineString2D( aEqualEndian, (stdMultiLineString2DType*)sGeom);    
             break;
             
         case STD_MULTIPOLYGON_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdMultiPolygon2DExtType*)sGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_MULTIPOLYGON_2D_TYPE:
             cvtEndianMultiPolygon2D( aEqualEndian, (stdMultiPolygon2DType*)sGeom);    
             break;
@@ -372,42 +379,49 @@ IDE_RC stdPrimitive::cvtEndianGeom(stdGeometryHeader * aGeom)
             
         case STD_POINT_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdPoint2DExtType*)aGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_POINT_2D_TYPE:
             cvtEndianPoint2D( (stdPoint2DType*)aGeom);
             break;
             
         case STD_LINESTRING_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdLineString2DExtType*)aGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_LINESTRING_2D_TYPE:
             cvtEndianLineString2D( sEquiEndian, (stdLineString2DType*)aGeom);
             break;
             
         case STD_POLYGON_2D_EXT_TYPE :
             cvtEndianSRID( &(((stdPolygon2DExtType*)aGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_POLYGON_2D_TYPE :
             cvtEndianPolygon2D( sEquiEndian, (stdPolygon2DType*)aGeom);
             break;
 
         case STD_MULTIPOINT_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdMultiPoint2DExtType*)aGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_MULTIPOINT_2D_TYPE:
             cvtEndianMultiPoint2D( sEquiEndian, (stdMultiPoint2DType*)aGeom);
             break;
 
         case STD_MULTILINESTRING_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdMultiLineString2DExtType*)aGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_MULTILINESTRING_2D_TYPE:
             cvtEndianMultiLineString2D( sEquiEndian, (stdMultiLineString2DType*)aGeom);    
             break;
 
         case STD_MULTIPOLYGON_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdMultiPolygon2DExtType*)aGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_MULTIPOLYGON_2D_TYPE:
             cvtEndianMultiPolygon2D( sEquiEndian, (stdMultiPolygon2DType*)aGeom);    
             break;
             
         case STD_GEOCOLLECTION_2D_EXT_TYPE:
             cvtEndianSRID( &(((stdGeoCollection2DExtType*)aGeom)->mSRID) );
+            ACP_FALLTHROUGH;
         case STD_GEOCOLLECTION_2D_TYPE:
             cvtEndianGeoCollection2D( sEquiEndian, (stdGeoCollection2DType*)aGeom);
             break;

@@ -38,6 +38,7 @@
 #include <sdnReq.h>
 
 #include <smxTrans.h>
+#include <acpFallthrough.h>
 #include <sdrMiniTrans.h>
 #include <sdnManager.h>
 #include <sdnIndexCTL.h>
@@ -1293,7 +1294,7 @@ sdpTableSpace::getSegMgmtType(SC_MAKE_SPACE(aIndex->mIndexSegDesc)) : %u\n",
     {
         case 2:
             (void)iduMemMgr::free( (void*)sHeader->mFetchColumnListToMakeKey.column );
-            // no break
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sHeader );
             break;
