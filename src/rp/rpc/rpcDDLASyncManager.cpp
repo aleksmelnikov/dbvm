@@ -22,6 +22,7 @@
 #include <rpcDDLSyncManager.h>
 #include <rpcDDLASyncManager.h>
 #include <rpdCatalog.h>
+#include <acpFallthrough.h>
 
 IDE_RC rpcDDLASyncManager::ddlASynchronization( rpxSender * aSender,
                                                 smTID       aTID, 
@@ -514,7 +515,7 @@ IDE_RC rpcDDLASyncManager::runDDLNMetaRebuild( rpxReceiver * aReceiver,
     {
         case 3:
             (void)sStatement.end( SMI_STATEMENT_RESULT_FAILURE );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 2:
             if ( sAfterRun != ID_TRUE )
             {
@@ -535,9 +536,10 @@ IDE_RC rpcDDLASyncManager::runDDLNMetaRebuild( rpxReceiver * aReceiver,
                     IDE_ASSERT( sDDLTrans.rollback() == IDE_SUCCESS );
                 }
             }
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)sDDLTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

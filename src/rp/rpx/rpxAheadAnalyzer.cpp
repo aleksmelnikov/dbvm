@@ -24,6 +24,7 @@
 #include <rpcManager.h>
 #include <rpdReplicatedTransGroupNode.h>
 #include <rpxAheadAnalyzer.h>
+#include <acpFallthrough.h>
 
 #define RPX_AHEAD_ANALYZER_SLEEP_SEC    ( 5 )
 
@@ -99,12 +100,16 @@ IDE_RC rpxAheadAnalyzer::initialize( rpxSender      * aSender )
     {
         case 4:
             mReplicatedTransGroup.finalize();
+            ACP_FALLTHROUGH;
         case 3:
             mTransTable.finalize();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mCV.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mMutex.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -210,11 +215,14 @@ IDE_RC rpxAheadAnalyzer::initializeThread( void )
     {
         case 3:
             mMeta.finalize();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mChainedValuePool.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             mIsLogMgrInit = ID_FALSE;
             (void)mLogMgr.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -595,7 +603,7 @@ void rpxAheadAnalyzer::buildAnalyzingTable( smiLogRec     * aLog,
     {
         case SMI_LT_DDL:
             mTransTable.setDDLTrans( aTransID );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case SMI_LT_TABLE_META:
         case SMI_LT_SAVEPOINT_ABORT:
             mTransTable.setDisableToGroup( aTransID );
@@ -1185,9 +1193,11 @@ IDE_RC rpxAheadAnalyzer::applyTableMetaLog( smTID aTID )
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -1199,6 +1209,7 @@ IDE_RC rpxAheadAnalyzer::applyTableMetaLog( smTID aTID )
                 /* do nothing */
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

@@ -24,6 +24,7 @@
 #include <rpxReceiverApplier.h>
 
 #include <rpcManager.h>
+#include <acpFallthrough.h>
 
 #define RPX_RECEIVER_APPLIER_SLEEP_SEC      ( 5 )
 
@@ -180,18 +181,25 @@ IDE_RC rpxReceiverApplier::initializeThread( void )
     {
         case 7:
             mApply.finalizeInLocalMemory();
+            ACP_FALLTHROUGH;
         case 6:
             mQueue.destroy();
+            ACP_FALLTHROUGH;
         case 5:
             mApply.shutdown();
+            ACP_FALLTHROUGH;
         case 4:
             (void)mThreadJoinCV.destroy();
+            ACP_FALLTHROUGH;
         case 3:
             (void)mThreadJoinMutex.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mCV.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mMutex.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }

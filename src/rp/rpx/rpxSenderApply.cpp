@@ -30,6 +30,7 @@
 #include <rpuProperty.h>
 #include <rpcManager.h>
 #include <rpxSenderApply.h>
+#include <acpFallthrough.h>
 
 rpxSenderApply::rpxSenderApply() : idtBaseThread()
 {
@@ -404,6 +405,7 @@ IDE_RC rpxSenderApply::updateXSN(smSN aSN)
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -411,6 +413,7 @@ IDE_RC rpxSenderApply::updateXSN(smSN aSN)
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

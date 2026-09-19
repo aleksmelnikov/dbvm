@@ -28,6 +28,7 @@
 #include <rpuProperty.h>
 #include <rpcManager.h>
 #include <rpxSender.h>
+#include <acpFallthrough.h>
 
 
 
@@ -128,6 +129,7 @@ IDE_RC rpxSender::updateXSN(smSN aSN)
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -135,6 +137,7 @@ IDE_RC rpxSender::updateXSN(smSN aSN)
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -408,6 +411,7 @@ IDE_RC rpxSender::initXSN( smSN aReceiverXSN )
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -415,6 +419,7 @@ IDE_RC rpxSender::initXSN( smSN aReceiverXSN )
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

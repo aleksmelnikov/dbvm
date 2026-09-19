@@ -38,6 +38,7 @@
 #include <rpdConvertSQL.h>
 
 #include <dki.h>
+#include <acpFallthrough.h>
 
 #define RPX_INDEX_INIT      (-1)
 
@@ -881,8 +882,10 @@ IDE_RC rpxReceiver::initializeThread()
     {
         case 2:
             joinApplier();
+            ACP_FALLTHROUGH;
         case 1:
             finalizeParallelApplier();
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -891,7 +894,7 @@ IDE_RC rpxReceiver::initializeThread()
     {
         case 2 :
             (void)iduMemMgr::freeAllocator( mAllocator );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1 :
             (void)iduMemMgr::free( mAllocator );
             break;
@@ -1054,7 +1057,7 @@ void rpxReceiver::finalizeThread()
     {
         case 2 :
             (void)iduMemMgr::freeAllocator( mAllocator );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1 :
             (void)iduMemMgr::free( mAllocator );
             break;
@@ -2389,8 +2392,7 @@ IDE_RC rpxReceiver::buildRemoteMeta( rpdMeta * aMeta )
     {
         case RP_RECEIVER_XLOGFILE_FAILBACK_MASTER:
             mRestartSN = aMeta->mReplication.mXSN;
-            /* fall through */
-
+            ACP_FALLTHROUGH;
         case RP_RECEIVER_NORMAL:
         case RP_RECEIVER_USING_TRANSFER:
         case RP_RECEIVER_SYNC_CONDITIONAL:
@@ -2773,10 +2775,13 @@ IDE_RC rpxReceiver::checkConditionAndSendResult( )
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
+            ACP_FALLTHROUGH;
         case 1:
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -4807,9 +4812,11 @@ IDE_RC rpxReceiver::recoveryCondition( idBool aIsNeedToRebuildMeta )
     {
         case 3:
             (void)sStatement.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -4817,6 +4824,7 @@ IDE_RC rpxReceiver::recoveryCondition( idBool aIsNeedToRebuildMeta )
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -5162,8 +5170,10 @@ IDE_RC rpxReceiver::createAndInitializeXLogfileManager( smiStatement    * aState
     {
         case 2 :
             sXLogfileManager->finalize();
+            ACP_FALLTHROUGH;
         case 1 :
             (void)iduMemMgr::free( sXLogfileManager );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -5852,10 +5862,11 @@ IDE_RC rpxReceiver::initializeXLogfileContents( void )
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
-
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -5863,6 +5874,7 @@ IDE_RC rpxReceiver::initializeXLogfileContents( void )
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -6302,8 +6314,7 @@ IDE_RC rpxReceiver::readXLogfileAndMakePKList( rpdSenderInfo         * aSenderIn
                                                               aSNList )
                                   != IDE_SUCCESS );
                     }
-                    /* fall through */
-
+                    ACP_FALLTHROUGH;
                 case RP_X_ABORT:
                     sTransTbl->removeTrans( sXLog.mTID );
                     break;
@@ -6356,12 +6367,15 @@ IDE_RC rpxReceiver::readXLogfileAndMakePKList( rpdSenderInfo         * aSenderIn
     {
         case 3:
             rpdQueue::destroyXLog( &sXLog, mAllocator );
+            ACP_FALLTHROUGH;
         case 2:
             sTransTbl->rollbackAllATrans();
             sTransTbl->destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sTransTbl );
             sTransTbl = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

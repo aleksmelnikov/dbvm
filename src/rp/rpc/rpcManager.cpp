@@ -40,6 +40,7 @@
 #include <rpdLockTableManager.h>
 
 #include <dki.h>
+#include <acpFallthrough.h>
 
 extern void rpcMakeUniqueDBString(SChar *aUnique);
 
@@ -862,10 +863,11 @@ IDE_RC rpcManager::initREPLICATION()
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
-
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -873,6 +875,7 @@ IDE_RC rpcManager::initREPLICATION()
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -1415,12 +1418,16 @@ IDE_RC rpcManager::initialize(  SInt              aMax,
     {
         case 4:
             (void)mTempSenderListMutex.destroy();
+            ACP_FALLTHROUGH;
         case 3:
             (void)mOfflineStatusMutex.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mRecoveryMutex.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mSenderLatch.destroy(); /* PROJ-2453 */
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -4800,6 +4807,7 @@ IDE_RC rpcManager::waitUntilSenderFlush(SChar       *aRepName,
     {
         case RP_FLUSH_WAIT     :
             sWait  = (UInt)aTimeout * 40;
+            ACP_FALLTHROUGH;
         case RP_FLUSH_FLUSH    :
             sIsAll = ID_FALSE;
             /* For Parallel Logging: 현재까지 Write된 로그의 SN값을 가져온다. */
@@ -4808,6 +4816,7 @@ IDE_RC rpcManager::waitUntilSenderFlush(SChar       *aRepName,
 
         case RP_FLUSH_ALL_WAIT :
             sWait  = (UInt)aTimeout * 40;
+            ACP_FALLTHROUGH;
         case RP_FLUSH_ALL      :
             sIsAll = ID_TRUE;
             break;
@@ -8171,10 +8180,11 @@ IDE_RC rpcManager::startSenderThread( idvSQL        * aStatistics,
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
-
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -8182,6 +8192,7 @@ IDE_RC rpcManager::startSenderThread( idvSQL        * aStatistics,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -8677,7 +8688,7 @@ IDE_RC rpcManager::startSenderThread( idvSQL        * aStatistics,
                     /*do nothing*/
                 }
                 sSndr->destroy();
-                /* fall through */
+                ACP_FALLTHROUGH;
             case 1 :
                 (void)iduMemMgr::free( sSndr );
                 sSndr = NULL;
@@ -8863,6 +8874,7 @@ IDE_RC rpcManager::stopSenderThread( smiStatement * aSmiStmt,
             (void) aSmiStmt->begin(NULL, spRootStmt,
                                    SMI_STATEMENT_NORMAL |
                                    SMI_STATEMENT_MEMORY_CURSOR);
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -8954,6 +8966,7 @@ IDE_RC rpcManager::resetReplication(smiStatement * aSmiStmt,
         case 1:
             (void)aSmiStmt->begin(NULL, spRootStmt, SMI_STATEMENT_NORMAL |
                                               SMI_STATEMENT_MEMORY_CURSOR);
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -15648,8 +15661,10 @@ IDE_RC rpcManager::createAndInitializeReceiver(
     {
         case 2:
             (void)sStatement.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sReceiver );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -16018,9 +16033,11 @@ IDE_RC rpcManager::getMinimumSN( const UInt * aRestartRedoFileNo, // BUG-14898
     {
         case 3 :
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2 :
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1 :
             if(sIsTxBegin == ID_TRUE)
             {
@@ -16028,6 +16045,7 @@ IDE_RC rpcManager::getMinimumSN( const UInt * aRestartRedoFileNo, // BUG-14898
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -16469,9 +16487,11 @@ IDE_RC rpcManager::checkAndGiveupReplication( iduVarMemList   * aMemory,
     {
         case 3 :
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2 :
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1 :
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -16479,6 +16499,7 @@ IDE_RC rpcManager::checkAndGiveupReplication( iduVarMemList   * aMemory,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -16641,9 +16662,11 @@ IDE_RC rpcManager::checkAndGiveupRecovery( SChar           * aReplName,
     {
         case 3 :
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2 :
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1 :
             if(sIsTxBegin == ID_TRUE)
             {
@@ -16651,6 +16674,7 @@ IDE_RC rpcManager::checkAndGiveupRecovery( SChar           * aReplName,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -17252,10 +17276,11 @@ IDE_RC rpcManager::startRecoverySenderThread(SChar         * aReplName,
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
-
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -17263,6 +17288,7 @@ IDE_RC rpcManager::startRecoverySenderThread(SChar         * aReplName,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -17618,10 +17644,11 @@ IDE_RC rpcManager::loadRecoveryInfos(SChar* aRepName)
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
-
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -17629,6 +17656,7 @@ IDE_RC rpcManager::loadRecoveryInfos(SChar* aRepName)
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -17715,10 +17743,11 @@ IDE_RC rpcManager::saveAllRecoveryInfos()
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
-
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -17726,6 +17755,7 @@ IDE_RC rpcManager::saveAllRecoveryInfos()
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -17775,8 +17805,10 @@ IDE_RC rpcManager::updateInvalidRecoverys(rpdReplications * sReplications,
     {
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
+            ACP_FALLTHROUGH;
         case 1:
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -17859,10 +17891,13 @@ IDE_RC rpcManager::updateAllInvalidRecovery( SInt aValue )
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
+            ACP_FALLTHROUGH;
         case 1:
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -18017,10 +18052,11 @@ IDE_RC rpcManager::getMinRecoveryInfos(SChar* aRepName, smSN*  aMinSN)
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
-
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -18028,6 +18064,7 @@ IDE_RC rpcManager::getMinRecoveryInfos(SChar* aRepName, smSN*  aMinSN)
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -18270,9 +18307,11 @@ IDE_RC rpcManager::startNoHandshakeReceiverThread( void  * aQcStatement,
     {
         case 3:
             (void)sStatement.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -18280,6 +18319,7 @@ IDE_RC rpcManager::startNoHandshakeReceiverThread( void  * aQcStatement,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -20540,11 +20580,11 @@ IDE_RC rpcManager::ddlSyncBegin( qciStatement  * aQciStatement )
         case 2:
             sResourceMgr->finalize( &( mMyself->mDDLSyncManager ),
                                     sSmiStmt->getTrans() );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sResourceMgr );
             sResourceMgr = NULL;
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -20677,11 +20717,11 @@ IDE_RC rpcManager::ddlSyncBeginInternal( idvSQL              * aStatistics,
         case 2:
             sResourceMgr->finalize( &( mMyself->mDDLSyncManager ),
                                     aDDLTrans );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( sResourceMgr );
             sResourceMgr = NULL;
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -21038,10 +21078,13 @@ IDE_RC rpcManager::initRemoteData( SChar * aRepName )
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
+            ACP_FALLTHROUGH;
         case 1:
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -21904,10 +21947,13 @@ IDE_RC rpcManager::recoveryConditionSync( rpdReplications * aReplications,
     {
         case 3:
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
+            ACP_FALLTHROUGH;
         case 1:
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -22208,8 +22254,7 @@ IDE_RC rpcManager::startReceiverThread( cmiProtocolContext      * aProtocolConte
 
         case RP_RECEIVER_XLOGFILE_FAILBACK_MASTER:
             IDE_TEST( sReceiver->mMeta.checkItemReplaceHistoryAndSetTableOID() != IDE_SUCCESS );
-            /* fall through */
-
+            ACP_FALLTHROUGH;
         default:
             IDE_TEST( stopReceiverThread( aRepName, ID_TRUE, NULL )
                       != IDE_SUCCESS );
@@ -22320,9 +22365,11 @@ IDE_RC rpcManager::startReceiverThread( cmiProtocolContext      * aProtocolConte
     {
         case 3:
             (void)sStatement.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -22330,6 +22377,7 @@ IDE_RC rpcManager::startReceiverThread( cmiProtocolContext      * aProtocolConte
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

@@ -25,6 +25,7 @@
 #include <rpdTransSlotNode.h>
 #include <rpdAnalyzedTransTable.h>
 #include <rpuProperty.h>
+#include <acpFallthrough.h>
 
 #include <smiMisc.h>
 
@@ -83,9 +84,11 @@ IDE_RC rpdAnalyzedTransTable::initialize( void )
         case 2:
             (void)iduMemMgr::free( mLastAnalyzedTransTable );
             mLastAnalyzedTransTable = NULL;
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( mAnalyzedTransTable );
             mAnalyzedTransTable = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

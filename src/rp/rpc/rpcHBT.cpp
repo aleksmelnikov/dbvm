@@ -30,6 +30,7 @@
 #include <rpuProperty.h>
 #include <rpcHBT.h>
 #include <rpcManager.h>
+#include <acpFallthrough.h>
 
 rpcHBT    *rpcHBT::mSelf;
 iduMutex   rpcHBT::mMutex;
@@ -111,10 +112,13 @@ IDE_RC rpcHBT::initialize()
     {
         case 3:
             rpnPollFinalize( &mPoll );
+            ACP_FALLTHROUGH;
         case 2:
             (void)mCond.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mMutex.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -673,7 +677,7 @@ void rpcHBT::checkFaultFromHostRscList( void )
             case RP_HOST_STATUS_CONNECTING:
                 rpnPollRemoveSocket( &mPoll,
                                      &(sRsc->mSocket) );
-                /* fall through */
+                ACP_FALLTHROUGH;
             case RP_HOST_STATUS_INIT:
                 rpnSocketFinalize( &(sRsc->mSocket) );
                 ideLog::log( IDE_RP_0, RP_TRC_HBT_ERR_FAULT_DETECTED,
@@ -685,7 +689,7 @@ void rpcHBT::checkFaultFromHostRscList( void )
 
                 sRsc->mStatus = RP_HOST_STATUS_ERROR;
 
-                /* fall through */
+                ACP_FALLTHROUGH;
             case RP_HOST_STATUS_ERROR:
                 sRsc->mWaterMark++;
                 break;

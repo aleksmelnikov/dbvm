@@ -29,6 +29,7 @@
 #include <rpxAheadAnalyzer.h>
 
 #include <rpcDDLASyncManager.h>
+#include <acpFallthrough.h>
 
 /*
  *
@@ -174,8 +175,10 @@ IDE_RC rpxReplicator::initialize( iduMemAllocator   * aAllocator,
     {
         case 2:
             (void)mLogSwitchMtx.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mChainedValuePool.destroy( ID_FALSE );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -1398,7 +1401,7 @@ IDE_RC rpxReplicator::convertAllOIDToValue( rpdMetaItem    * aMetaItem,
             {
                 case RP_X_UPDATE: 
                     IDE_TEST( convertBeforeColDisk( aMetaItem, aLogAnlz ) != IDE_SUCCESS );
-                    /* fall through */
+                    ACP_FALLTHROUGH;
                 case RP_X_INSERT:
                     IDE_TEST( convertAfterColDisk( aMetaItem, aLogAnlz ) != IDE_SUCCESS );
                     break;
@@ -2032,9 +2035,11 @@ IDE_RC rpxReplicator::applyTableMetaLog( smTID aTID,
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -2042,6 +2047,7 @@ IDE_RC rpxReplicator::applyTableMetaLog( smTID aTID,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -2907,10 +2913,10 @@ IDE_RC rpxReplicator::insertDictionaryValue( smiLogRec  * aLog, smTID aTID )
     {
         case 3:
             (void)iduMemMgr::free( (void *)sDictValue->mValue.value, mAllocator );
-            /* fall through */ 
+            ACP_FALLTHROUGH;
         case 2:
             (void)iduMemMgr::free( sDictValue, mAllocator );
-            /* fall through */ 
+            ACP_FALLTHROUGH;
         case 1:
             sLogAnlz->resetVariables( ID_FALSE,
                                       1 /*aTableColCount*/ ); /*A dictionary table has only one column. */
@@ -4222,13 +4228,17 @@ IDE_RC rpxReplicator::startAheadAnalyzer( smSN  aInitSN )
         case 4:
             mAheadAnalyzer->shutdown();
             (void)mAheadAnalyzer->join();
+            ACP_FALLTHROUGH;
         case 3:
             mDelayedLogQueue.finalize();
+            ACP_FALLTHROUGH;
         case 2:
             mAheadAnalyzer->finalize();
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( mAheadAnalyzer );
             mAheadAnalyzer = NULL;
+            ACP_FALLTHROUGH;
         default:
             break;
     }

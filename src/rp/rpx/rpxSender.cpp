@@ -39,6 +39,7 @@
 
 /* PROJ-2240 */
 #include <rpdCatalog.h>
+#include <acpFallthrough.h>
 
 PDL_Time_Value rpxSender::mTvRetry;
 PDL_Time_Value rpxSender::mTvTimeOut;
@@ -947,7 +948,7 @@ IDE_RC rpxSender::initializeThread()
     {
         case 2:
             (void)iduMemMgr::freeAllocator( mAllocator );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( mAllocator );
             break;
@@ -978,7 +979,7 @@ void rpxSender::finalizeThread()
     {
         case 2:
             (void)iduMemMgr::freeAllocator( mAllocator );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)iduMemMgr::free( mAllocator );
             break;
@@ -2201,6 +2202,7 @@ rpxSender::getNextLastUsedHostNo( SInt *aIndex )
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -2208,6 +2210,7 @@ rpxSender::getNextLastUsedHostNo( SInt *aIndex )
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -2733,6 +2736,7 @@ IDE_RC rpxSender::updateInvalidRecovery(SChar* aRepName, SInt aValue)
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -2740,6 +2744,7 @@ IDE_RC rpxSender::updateInvalidRecovery(SChar* aRepName, SInt aValue)
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -3593,7 +3598,7 @@ IDE_RC rpxSender::createNStartChildren()
                     IDE_CALLBACK_FATAL("[Repl Parallel Child] Thread join error");
                 }
             }
-
+            ACP_FALLTHROUGH;
         case 1:
             for(sTmpIdx = 0; sTmpIdx < sChildInitIdx ; sTmpIdx++)
             {
@@ -3807,6 +3812,7 @@ IDE_RC rpxSender::updateRemoteFaultDetectTime()
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -3814,6 +3820,7 @@ IDE_RC rpxSender::updateRemoteFaultDetectTime()
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

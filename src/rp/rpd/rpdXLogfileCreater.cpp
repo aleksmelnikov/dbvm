@@ -23,6 +23,7 @@
 #include <rpdXLogfileMgr.h>
 #include <rpxReceiver.h>
 #include <rpuProperty.h>
+#include <acpFallthrough.h>
 
 /*********************************************************************
  * FUNCTION DESCRIPTION : rpdXLogfileCreater::initialize             *
@@ -125,10 +126,13 @@ IDE_RC rpdXLogfileCreater::initialize( SChar *          aReplName,
     {
         case 3:
             (void)mThreadWaitCV.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mThreadWaitMutex.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mFileCntMutex.destroy();
+            ACP_FALLTHROUGH;
         case 0:
         default:
             break;

@@ -37,6 +37,7 @@
 #include <rpuProperty.h>
 
 #include <rpdLockTableManager.h>
+#include <acpFallthrough.h>
 
 extern "C" int compareRpdMetaItemByTableOID( const void * aElem1,
                                              const void * aElem2 )
@@ -499,9 +500,11 @@ IDE_RC rpdLockTableManager::build( idvSQL                * aStatistics,
     {
         case 3:
             (void)sSmiStatement.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -509,6 +512,7 @@ IDE_RC rpdLockTableManager::build( idvSQL                * aStatistics,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

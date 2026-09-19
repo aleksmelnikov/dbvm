@@ -28,6 +28,7 @@
 #include <rpxPJChild.h>
 #include <rpxPJMgr.h>
 #include <rpxSender.h>
+#include <acpFallthrough.h>
 
 rpxPJMgr::rpxPJMgr() : idtBaseThread()
 {
@@ -173,10 +174,13 @@ IDE_RC rpxPJMgr::initialize( SChar        * aRepName,
     {
         case 3:
             (void)mMutex.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mMemPool.destroy( ID_FALSE );
+            ACP_FALLTHROUGH;
         case 1:
             (void)mJobMutex.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }

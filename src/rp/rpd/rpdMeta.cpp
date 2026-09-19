@@ -31,6 +31,7 @@
 
 /* PROJ-2240 */
 #include <rpdCatalog.h>
+#include <acpFallthrough.h>
 
 typedef struct processProtocolOperationType
 {
@@ -2655,9 +2656,11 @@ IDE_RC rpdMeta::buildWithNewTransaction( idvSQL             * aStatistics,
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -2665,6 +2668,7 @@ IDE_RC rpdMeta::buildWithNewTransaction( idvSQL             * aStatistics,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -2768,9 +2772,11 @@ IDE_RC rpdMeta::getPeerReplNameWithNewTransaction( SChar * aRepName,
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -2782,6 +2788,7 @@ IDE_RC rpdMeta::getPeerReplNameWithNewTransaction( SChar * aRepName,
                 /* Nothing to do */
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -9216,9 +9223,11 @@ IDE_RC rpdMeta::checkItemReplaceHistoryAndSetTableOID( )
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -9226,6 +9235,7 @@ IDE_RC rpdMeta::checkItemReplaceHistoryAndSetTableOID( )
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

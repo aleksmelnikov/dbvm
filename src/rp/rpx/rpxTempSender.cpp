@@ -35,6 +35,7 @@
 #include <rpuProperty.h>
 
 #include <rpxSync.h>
+#include <acpFallthrough.h>
 
 IDE_RC rpxTempSender::initialize( cmiProtocolContext * aProtocolContext, 
                                   rpdReplications    * aReplication,
@@ -105,10 +106,13 @@ IDE_RC rpxTempSender::initialize( cmiProtocolContext * aProtocolContext,
     {
         case 3:
             (void)mExitMutex.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mThreadJoinMutex.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mThreadJoinCV.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -354,10 +358,13 @@ void rpxTempSender::run()
 
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
+            ACP_FALLTHROUGH;
         case 1:
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

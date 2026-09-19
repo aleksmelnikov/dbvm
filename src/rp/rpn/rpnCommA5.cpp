@@ -26,6 +26,7 @@
 #include <rpuProperty.h>
 #include <rpcHBT.h>
 #include <rpnComm.h>
+#include <acpFallthrough.h>
 
 IDE_RC rpnComm::sendVersionA5( void               * /*aHBTResource*/,
                                cmiProtocolContext * aProtocolContext,
@@ -81,10 +82,10 @@ IDE_RC rpnComm::sendVersionA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -261,10 +262,10 @@ IDE_RC rpnComm::sendMetaReplA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -528,10 +529,10 @@ IDE_RC rpnComm::sendMetaReplTblA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -774,10 +775,10 @@ IDE_RC rpnComm::sendMetaReplColA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -961,10 +962,10 @@ IDE_RC rpnComm::sendMetaReplIdxA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -1109,10 +1110,10 @@ IDE_RC rpnComm::sendMetaReplIdxColA5( void                * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -1265,8 +1266,10 @@ IDE_RC rpnComm::sendHandshakeAckA5( cmiProtocolContext  * aProtocolContext,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -1617,10 +1620,10 @@ IDE_RC rpnComm::sendTrBeginA5( void                * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -1714,10 +1717,10 @@ IDE_RC rpnComm::sendTrCommitA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -1810,10 +1813,10 @@ IDE_RC rpnComm::sendTrAbortA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -1919,10 +1922,10 @@ IDE_RC rpnComm::sendSPSetA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
-            /* fall through */
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -2052,10 +2055,10 @@ IDE_RC rpnComm::sendSPAbortA5( void               * /*aHBTResource*/,
      {
          case 2:
              (void)cmiFinalizeProtocol( &sProtocol );
-             /* fall through */
+             ACP_FALLTHROUGH;
          case 1:
              (void)cmiFinalizeProtocolContext( &sProtocolContext );
-             /* fall through */
+             ACP_FALLTHROUGH;
          default:
              break;
      }
@@ -2194,7 +2197,7 @@ IDE_RC rpnComm::sendInsertA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -2506,7 +2509,7 @@ IDE_RC rpnComm::sendUpdateA5( void                * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -2768,7 +2771,7 @@ IDE_RC rpnComm::sendDeleteA5( void              * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -3475,7 +3478,7 @@ IDE_RC rpnComm::recvValueA5( iduMemAllocator    * aAllocator,
         case 2:
             (void)iduMemMgr::free( (void *)aValue->value, aAllocator );
             aValue->value = NULL;
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocol( &sProtocol );
             break;
@@ -3558,7 +3561,7 @@ IDE_RC rpnComm::sendStopA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -3664,7 +3667,7 @@ IDE_RC rpnComm::sendKeepAliveA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -3768,7 +3771,7 @@ IDE_RC rpnComm::sendFlushA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -3892,8 +3895,10 @@ IDE_RC rpnComm::sendAckA5( cmiProtocolContext * aProtocolContext,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -4089,7 +4094,7 @@ IDE_RC rpnComm::sendLobCursorOpenA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -4242,7 +4247,7 @@ IDE_RC rpnComm::sendLobCursorCloseA5( void                * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -4345,7 +4350,7 @@ IDE_RC rpnComm::sendLobPrepare4WriteA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -4469,7 +4474,7 @@ IDE_RC rpnComm::sendLobPartialWriteA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -4604,7 +4609,7 @@ IDE_RC rpnComm::sendLobFinish2WriteA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -4697,7 +4702,7 @@ IDE_RC rpnComm::sendHandshakeA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -4794,7 +4799,7 @@ IDE_RC rpnComm::sendSyncPKBeginA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -4906,7 +4911,7 @@ IDE_RC rpnComm::sendSyncPKA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -5043,7 +5048,7 @@ IDE_RC rpnComm::sendSyncPKEndA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;
@@ -5140,7 +5145,7 @@ IDE_RC rpnComm::sendFailbackEndA5( void               * /*aHBTResource*/,
     {
         case 2:
             (void)cmiFinalizeProtocol( &sProtocol );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)cmiFinalizeProtocolContext( &sProtocolContext );
             break;

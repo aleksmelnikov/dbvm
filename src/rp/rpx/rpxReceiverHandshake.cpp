@@ -31,6 +31,7 @@
 #include <rpcManager.h>
 #include <rpxReceiver.h>
 #include <mtc.h>
+#include <acpFallthrough.h>
 
 /* HDB V6's replication version number */
 #define REPLICATION_MAJOR_VERSION_HDB_V6       (6)
@@ -252,6 +253,7 @@ IDE_RC rpxReceiver::handshakeWithoutReconnect( rpdXLog *aXLog )
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if ( sIsTxBegin == ID_TRUE )
             {
@@ -259,6 +261,7 @@ IDE_RC rpxReceiver::handshakeWithoutReconnect( rpdXLog *aXLog )
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

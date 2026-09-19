@@ -22,6 +22,7 @@
 #include <mtc.h>
 #include <rpdXLogfileMgr.h>
 #include <rpuProperty.h>
+#include <acpFallthrough.h>
 
 /*********************************************************************
  * FUNCTION DESCRIPTION : rpdXLogfileMgr::initialize                 *
@@ -269,24 +270,33 @@ IDE_RC rpdXLogfileMgr::initialize( SChar *      aReplName,
             mXLFFlusher->mExitFlag = ID_TRUE;
             (void)mXLFFlusher->join();
             (void)mXLFFlusher->finalize();
+            ACP_FALLTHROUGH;
         case 8:
             (void)iduMemMgr::free( mXLFFlusher );
+            ACP_FALLTHROUGH;
         case 7:
             mXLFCreater->mExitFlag = ID_TRUE;
             (void)mXLFCreater->join();
             mXLFCreater->finalize();
+            ACP_FALLTHROUGH;
         case 6:
             (void)iduMemMgr::free( mXLFCreater );
+            ACP_FALLTHROUGH;
         case 5:
             (void)mWriteWaitMutex.destroy();
+            ACP_FALLTHROUGH;
         case 4:
             (void)mReadWaitMutex.destroy();
+            ACP_FALLTHROUGH;
         case 3:
             (void)mXLogfileListMutex.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mReadInfoMutex.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mWriteInfoMutex.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }

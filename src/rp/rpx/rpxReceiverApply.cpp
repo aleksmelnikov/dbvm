@@ -36,6 +36,7 @@
 #include <rpdConvertSQL.h>
 #include <rpsSQLExecutor.h>
 #include <qci.h>
+#include <acpFallthrough.h>
 
 #define RECEIVER_SQL_BUFFER_MAX         ( 64 * 1024 )
 
@@ -283,6 +284,7 @@ IDE_RC rpxReceiverApply::initializeInLocalMemory( void )
     {
         case 2:
             mSmExecutor.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             mTransTbl->destroy();
             break;
@@ -2067,8 +2069,10 @@ IDE_RC rpxReceiverApply::applyTrBegin(rpxReceiverApply *aApply, rpdXLog *aXLog)
         case 2:
             sTblNode = aApply->mTransTbl->getTrNode( aXLog->mTID );
             (void)sTblNode->mTrans.rollback( aXLog->mTID );
+            ACP_FALLTHROUGH;
         case 1:
             aApply->mTransTbl->removeTrans(aXLog->mTID);
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -2214,8 +2218,10 @@ IDE_RC rpxReceiverApply::applyTrCommit(rpxReceiverApply *aApply, rpdXLog *aXLog)
     {
         case 2:
             (void)aApply->abort( aXLog );
+            ACP_FALLTHROUGH;
         case 1:
             aApply->mTransTbl->removeTrans(aXLog->mTID);
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -2310,8 +2316,10 @@ IDE_RC rpxReceiverApply::applyTrAbort(rpxReceiverApply *aApply, rpdXLog *aXLog)
     {
         case 2:
             (void)aApply->abort( aXLog );
+            ACP_FALLTHROUGH;
         case 1:
             aApply->mTransTbl->removeTrans(aXLog->mTID);
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -3944,12 +3952,13 @@ IDE_RC rpxReceiverApply::applyUpdateConditionAct( rpxReceiverApply    * aApply,
     {
         case 3:
             (void)sStmt.end( SMI_STATEMENT_RESULT_FAILURE );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT( sTrans.rollback() == IDE_SUCCESS );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -4186,10 +4195,13 @@ IDE_RC rpxReceiverApply::applyRebuildIndices( rpxReceiverApply * aApply )
     {
         case 3:
             sStmt.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 2:
             sTrans.rollback();
+            ACP_FALLTHROUGH;
         case 1:
             sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }
@@ -5310,12 +5322,13 @@ IDE_RC rpxReceiverApply::executeTruncate( rpxReceiver      * aReceiver,
     {
         case 3:
             (void)sSmiStmt.end( SMI_STATEMENT_RESULT_FAILURE );
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sSmiTrans.rollback() == IDE_SUCCESS);
-            /* fall through */
+            ACP_FALLTHROUGH;
         case 1:
             (void)sSmiTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

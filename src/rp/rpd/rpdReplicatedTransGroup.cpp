@@ -25,6 +25,7 @@
 
 #include <rpdTransSlotNode.h>
 #include <rpdReplicatedTransGroup.h>
+#include <acpFallthrough.h>
 
 #include <smiMisc.h>
 
@@ -130,18 +131,25 @@ IDE_RC rpdReplicatedTransGroup::initialize( SChar   * aRepName,
     {
         case 7:
             mAnalyzingGroup->finalize();
+            ACP_FALLTHROUGH;
         case 6:
             (void)mReplicatedTransNodePool.memfree( mAnalyzingGroup );
+            ACP_FALLTHROUGH;
         case 5:
             mTransTable.finalize();
+            ACP_FALLTHROUGH;
         case 4:
             mHeadCompletedGroupList.finalize();
+            ACP_FALLTHROUGH;
         case 3:
             (void)mReplicatedTransPool.destroy( ID_FALSE );
+            ACP_FALLTHROUGH;
         case 2:
             (void)mSlotNodePool.destroy( ID_FALSE );
+            ACP_FALLTHROUGH;
         case 1:
             (void)mReplicatedTransNodePool.destroy( ID_FALSE );
+            ACP_FALLTHROUGH;
         default:
             break;
 

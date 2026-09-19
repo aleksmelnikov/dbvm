@@ -27,6 +27,7 @@
 #include <rpnComm.h>
 #include <rpdQueue.h>
 #include <rpxReceiver.h>
+#include <acpFallthrough.h>
 
 UInt         gStartXLogFileNumber = 0;
 idBool       gStartSet = ID_FALSE;
@@ -370,8 +371,10 @@ IDE_RC dumpXLog(SChar * aReplName)
     {
         case 2 :
             sXLogfileManager->finalize();
+            ACP_FALLTHROUGH;
         case 1 :
             (void)iduMemMgr::free( sXLogfileManager );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

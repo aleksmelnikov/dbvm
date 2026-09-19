@@ -22,6 +22,7 @@
 #include <rpdXLogfileFlusher.h>
 #include <rpdXLogfileMgr.h>
 #include <rpuProperty.h>
+#include <acpFallthrough.h>
 
 /*********************************************************************
  * FUNCTION DESCRIPTION : rpdXLogfileFlusher::initialize             *
@@ -90,10 +91,13 @@ IDE_RC rpdXLogfileFlusher::initialize( SChar *          aReplName,
     {
         case 3:
             (void)mThreadWaitCV.destroy();
+            ACP_FALLTHROUGH;
         case 2:
             (void)mThreadWaitMutex.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mFlushMutex.destroy();
+            ACP_FALLTHROUGH;
         case 0:
         default:
             break;

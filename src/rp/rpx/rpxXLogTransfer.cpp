@@ -21,6 +21,7 @@
 
 #include <rpnComm.h>
 #include <rpxXLogTransfer.h>
+#include <acpFallthrough.h>
 
 rpxXLogTransfer::rpxXLogTransfer() : idtBaseThread()
 {
@@ -87,8 +88,10 @@ IDE_RC rpxXLogTransfer::initialize( rpxReceiver * aReceiver, rpdXLogfileMgr * aX
     {
         case 2:
             (void)mWaitForReceiverProcessDoneCV.destroy();
+            ACP_FALLTHROUGH;
         case 1:
             (void)mWaitForReceiverProcessDoneMutex.destroy();
+            ACP_FALLTHROUGH;
         default:
             break;
     }

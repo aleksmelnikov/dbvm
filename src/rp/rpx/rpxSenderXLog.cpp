@@ -29,6 +29,7 @@
 #include <rpxSender.h>
 
 #include <rpxReplicator.h>
+#include <acpFallthrough.h>
 
 smSN rpxSender::getNextRestartSN()
 {
@@ -879,11 +880,14 @@ IDE_RC rpxSender::syncRow(rpdMetaItem *aMetaItem,
     {
         case 4 :
             (void)sCursor.close();
+            ACP_FALLTHROUGH;
         case 3 :
             (void)sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE);
+            ACP_FALLTHROUGH;
         case 2:
             IDE_ASSERT(sTrans.rollback() == IDE_SUCCESS);
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 1:
             if(sIsTxBegin == ID_TRUE)
             {
@@ -891,6 +895,7 @@ IDE_RC rpxSender::syncRow(rpdMetaItem *aMetaItem,
                 sIsTxBegin = ID_FALSE;
             }
             (void)sTrans.destroy( NULL );
+            ACP_FALLTHROUGH;
         default:
             break;
     }

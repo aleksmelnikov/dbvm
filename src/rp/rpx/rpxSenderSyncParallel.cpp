@@ -27,6 +27,7 @@
 #include <rpuProperty.h>
 #include <rpxSender.h>
 #include <rpxPJMgr.h>
+#include <acpFallthrough.h>
 
 IDE_RC
 rpxSender::syncParallel()
@@ -202,6 +203,7 @@ rpxSender::syncParallel()
                 IDE_ERRLOG(IDE_RP_0);
                 IDE_CALLBACK_FATAL("[Repl PJMgr] Thread join error");
             }
+            ACP_FALLTHROUGH;
         case 3:
             IDE_ASSERT( mSyncerMutex.lock( NULL ) == IDE_SUCCESS );
 
@@ -210,12 +212,14 @@ rpxSender::syncParallel()
             IDE_ASSERT( mSyncerMutex.unlock() == IDE_SUCCESS );
 
             sSyncer->destroy();
+            ACP_FALLTHROUGH;
         case 2:
             if ( sSyncer != NULL )
             {
                 (void)iduMemMgr::free( sSyncer );
                 sSyncer = NULL;
             }
+            ACP_FALLTHROUGH;
         case 1:
             destroySCN( sParallelStmts, sSyncParallelTrans );
 
@@ -352,17 +356,21 @@ rpxSender::allocSCN( smiStatement ** aParallelStatements,
     {
         case 4 :
             (void)sStmtForLock.end( SMI_STATEMENT_RESULT_FAILURE );
+            ACP_FALLTHROUGH;
         case 3 :
             IDE_ASSERT( sTransForLock->rollback() == IDE_SUCCESS );
             sIsTxBegin = ID_FALSE;
+            ACP_FALLTHROUGH;
         case 2 :
             if ( sIsTxBegin == ID_TRUE )
             {
                 IDE_ASSERT( sTransForLock->rollback() == IDE_SUCCESS );
             }
             (void)sTransForLock->destroy( NULL );
+            ACP_FALLTHROUGH;
         case 1 :
             (void)iduMemMgr::free( sTransForLock );
+            ACP_FALLTHROUGH;
         default :
             break;
     }

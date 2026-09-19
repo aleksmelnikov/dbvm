@@ -2443,7 +2443,6 @@ IDE_RC rpnComm::recvAck( iduMemAllocator    * /*aAllocator*/,
             break;
 
         case CMP_PACKET_TYPE_UNKNOWN:
-            /* fall through */
         default:
             IDE_RAISE( UNKNOWN_PACKET_TYPE );
             break;

@@ -32,6 +32,7 @@
 #include <rp.h>
 #include <rpDef.h>
 #include <rpdLogAnalyzer.h>
+#include <acpFallthrough.h>
 
 rpdAnalyzeLogFunc rpdLogAnalyzer::mAnalyzeFunc[] =
 {
@@ -420,7 +421,7 @@ IDE_RC rpdLogAnalyzer::analyze( smiLogRec *aLog,
     {
         case SMI_LT_TRANS_COMMIT :
             idlOS::memcpy( &mGlobalCommitSCN, aLog->getGlobalCommitSCN(), ID_SIZEOF(smSCN) );
-
+            ACP_FALLTHROUGH;
         case SMI_LT_TRANS_GROUPCOMMIT :
             IDE_TEST_RAISE(mIsCont == ID_TRUE, ERR_INVALID_CONT_FLAG);
             setXLogHdr(RP_X_COMMIT, sTID, sLogRecordSN);
@@ -455,7 +456,7 @@ IDE_RC rpdLogAnalyzer::analyze( smiLogRec *aLog,
             {
                 mImplSPDepth = aLog->getReplStmtDepth();
             }
-
+            ACP_FALLTHROUGH;
         case SMI_LT_LOB_FOR_REPL:
             *aIsDML = ID_TRUE;
             IDE_TEST(mAnalyzeFunc[aLog->getChangeType()](this,

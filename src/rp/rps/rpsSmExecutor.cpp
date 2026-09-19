@@ -33,6 +33,7 @@
 #include <rpxReceiver.h>
 #include <rpsSmExecutor.h>
 #include <rpdCatalog.h>
+#include <acpFallthrough.h>
 
 extern mtdModule mtdVarchar;
 
@@ -492,11 +493,13 @@ retryInsert:
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         case 1 :
             if(sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE) != IDE_SUCCESS)
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -1468,11 +1471,13 @@ retryUpdate:
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         case 1 :
             if(sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE) != IDE_SUCCESS)
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -1766,11 +1771,13 @@ retryDelete:
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         case 1 :
             if(sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE) != IDE_SUCCESS)
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -2630,11 +2637,13 @@ IDE_RC rpsSmExecutor::compareInsertImage( smiTrans         * aTrans,
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         case 1 :
             if(sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE) != IDE_SUCCESS)
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         default :
             break;
     }
@@ -2884,11 +2893,13 @@ IDE_RC rpsSmExecutor::openLOBCursor( smiTrans         * aTrans,
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         case 1 :
             if(sSmiStmt.end(SMI_STATEMENT_RESULT_FAILURE) != IDE_SUCCESS)
             {
                 IDE_ERRLOG(IDE_RP_0);
             }
+            ACP_FALLTHROUGH;
         default :
             break;
     }
